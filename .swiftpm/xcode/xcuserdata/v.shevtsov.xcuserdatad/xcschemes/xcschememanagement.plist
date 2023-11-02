@@ -17,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>DTOs</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>SharedModules</key>
 		<dict>
 			<key>primary</key>
