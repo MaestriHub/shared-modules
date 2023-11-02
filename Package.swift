@@ -7,10 +7,8 @@ let package = Package(
     name: "SharedModules",
     products: [
         .library(
-            name: "SharedModules",
-            targets: [
-                "DTOs"
-            ]
+            name: "DTOs",
+            targets: [ "DTOs" ]
         ),
     ],
     dependencies: [
