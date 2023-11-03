@@ -11,24 +11,24 @@ public enum Auth {
 public extension Auth.Parameters {
     
     struct AppleToken: Parametable {
-        let token: String
+        public let token: String
         
-        let firstName: String?
-        let lastName: String?
+        public let firstName: String?
+        public let lastName: String?
         
-        var email: String?
-        var emailVerified: Bool? = false
+        public var email: String?
+        public var emailVerified: Bool? = false
         
-        var phone: String?
-        var phoneVerified: Bool? = false
+        public var phone: String?
+        public var phoneVerified: Bool? = false
     }
     
     struct GoogleToken: Parametable {
 
-        let token: String
+        public let token: String
         
-        let firstName: String?
-        let lastName: String?
+        public let firstName: String?
+        public let lastName: String?
     }
 }
 

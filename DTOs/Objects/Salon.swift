@@ -6,6 +6,12 @@ public enum Salon {
     public enum Responses {}
 }
 
+public enum SalonType: String, Codable {
+    case individual = "individual"
+    case chain = "chain"
+    case master = "master"
+}
+
 //MARK: - Parameters -
 
 public extension Salon.Parameters {
@@ -18,7 +24,7 @@ public extension Salon.Parameters {
     /// Body Parameters который передаются для создания Salon
     struct Create: Parametable {
         var name: String
-        var type: String//Enum
+        var type: SalonType
         var logo: URL?
         var timetable: Timetable.Parameters.Create
         var address: Address.Parameters.Create
@@ -37,7 +43,7 @@ public extension Salon.Responses {
     struct Full: Responsable {
         var id: UUID?
         var name: String
-        var species: String
+        var type: SalonType
         var logo: String?
         var address: Address.Responses.Full
         var canEdit: Bool = false
@@ -50,7 +56,7 @@ public extension Salon.Responses {
     struct Partial: Responsable {
         var id: UUID?
         var name: String
-        var species: String
+        var type: SalonType
         var logo: String?
         var address: Address.Responses.Full//String просто address
         var canEdit: Bool = false

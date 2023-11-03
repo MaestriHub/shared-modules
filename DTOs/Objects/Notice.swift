@@ -10,9 +10,9 @@ public enum Notice {
 public extension Notice.Responses {
     
     struct Full: Codable {
-        var id: UUID?
-        var title: String
-        var body: String
-        var date: Date?
+        public var id: UUID?
+        public var title: String
+        public var body: String
+        public var date: Date?
     }
 }

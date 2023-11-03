@@ -9,7 +9,9 @@ public enum Employee {
 //MARK: - Parameters -
 
 public extension Employee.Parameters {
-
+    struct Create: Responsable {
+        
+    }
 }
 
 //MARK: - Responses -
@@ -17,12 +19,12 @@ public extension Employee.Parameters {
 public extension Employee.Responses {
     
     struct Full: Responsable {
-        var id: UUID?
-        var nickname: String
-        var avatar: String?
-        var contacts: [Contact.Responses.Full]
+        public var id: UUID?
+        public var nickname: String
+        public var avatar: String?
+        public var contacts: [Contact.Responses.Full]
         
-        var procedures: [Procedure.Responses.Full]?
+        public var procedures: [Procedure.Responses.Partial]?
     }
     
     struct Partial: Responsable {

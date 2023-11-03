@@ -10,6 +10,9 @@ public enum Customer {
 
 public extension Customer.Parameters {
 
+    struct Create: Responsable {
+        
+    }
 }
 
 //MARK: - Responses -

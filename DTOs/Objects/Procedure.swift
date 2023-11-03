@@ -10,12 +10,12 @@ public enum Procedure {
 
 public extension Procedure.Parameters {
     
-    /// Query Parameters который передаются для фильтрации  Salon
+    /// Query Parameters который передаются для фильтрации  Procedures
     struct Retrieve: Parametable {
         
     }
     
-    /// Body Parameters который передаются для создания Salon
+    /// Body Parameters который передаются для создания Procedure
     struct Create: Parametable {
         var name: String
         var type: String//Enum
@@ -24,6 +24,7 @@ public extension Procedure.Parameters {
         var address: Address.Parameters.Create
     }
 
+    /// Body Parameters который передаются для частичного обновления Procedure
     struct Patch: Parametable {
         var name: String?
         var logo: String?
@@ -36,24 +37,12 @@ public extension Procedure.Responses {
     
     struct Full: Responsable {
         var id: UUID?
-        var name: String
-        var species: String
-        var logo: String?
-        var address: Address.Responses.Full
-        var canEdit: Bool = false
-        var isFavorite: Bool = false
-        var timetable: Timetable.Responses.Full
-        var masters: [Employee.Responses.Full]?
+
         
     }
     
     struct Partial: Responsable {
         var id: UUID?
-        var name: String
-        var species: String
-        var logo: String?
-        var address: Address.Responses.Full//String просто address
-        var canEdit: Bool = false
-        var isFavorite: Bool = false
+
     }
 }

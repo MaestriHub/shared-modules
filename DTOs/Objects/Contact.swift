@@ -4,8 +4,6 @@ import Foundation
 public enum Contact {
     public enum Parameters {}
     public enum Responses {}
-    
-    
 }
 
 public enum ContactType: String, Codable {
