@@ -48,7 +48,7 @@ public extension Timetable.Responses {
 //        var saturday: DayTimetableBody
 //        
 //        var offtimes: [OfftimeBody]
-        var limit: IntervalDate?
+        var limit: Interval?
         
 //        init?(timetable: Timetable?, offtimes: [OfftimeBody]?) {
 //            guard let timetable else { return nil }

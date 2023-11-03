@@ -5,13 +5,15 @@ public enum Contact {
     public enum Parameters {}
     public enum Responses {}
     
-    public enum `Type`: String, Codable {
-        case phone
-        case email
-        case telegram
-        case whatsapp
-        case instagram
-    }
+    
+}
+
+public enum ContactType: String, Codable {
+    case phone = "phone"
+    case email = "email"
+    case telegram = "telegram"
+    case whatsapp = "whatsapp"
+    case instagram = "instagram"
 }
 
 //MARK: - Parameters -
@@ -20,7 +22,7 @@ public extension Contact.Parameters {
     
     struct Create: Parametable {
         public var value: String
-        public var type: Contact.Type
+        public var type: ContactType
     }
     
     struct Verify: Codable {
@@ -36,6 +38,6 @@ public extension Contact.Responses {
         public var id: UUID?
         public var value: String
         public var isVerify: Bool
-        public var type: Contact.Type
+        public var type: ContactType
     }
 }

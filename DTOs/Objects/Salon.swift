@@ -8,7 +8,7 @@ public enum Salon {
 
 //MARK: - Parameters -
 
-public extension Appointment.Parameters {
+public extension Salon.Parameters {
     
     /// Query Parameters который передаются для фильтрации  Salon
     struct Retrieve: Parametable {

@@ -46,7 +46,7 @@ public extension Appointment.Responses {
         public var salon: Salon.Responses.Full
         public var customer: Customer.Responses.Partial
         public var master: Employee.Responses.Partial
-        public var procedures: [ProcedureResponse]
+        public var procedures: [Procedure.Responses.Partial]
         public var time: Interval
         public var price: Price
         public var address: Address.Responses.Full

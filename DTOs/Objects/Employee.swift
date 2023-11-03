@@ -24,4 +24,10 @@ public extension Employee.Responses {
         
         var procedures: [Procedure.Responses.Full]?
     }
+    
+    struct Partial: Responsable {
+        public var id: UUID?
+        public var name: String
+        public var contacts: [Contact.Responses.Full]
+    }
 }

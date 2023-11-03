@@ -4,17 +4,17 @@ import Foundation
 public enum User {
     public enum Parameters {}
     public enum Responses {}
-    
-    public struct `Type`: OptionSet, Codable {
+}
 
-        public var rawValue: Int
-        
-        public static let customer = Type(rawValue: 1 << 0)
-        public static let professional = Type(rawValue: 1 << 1)
-        
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
+public struct UserOption: OptionSet, Codable {
+
+    public var rawValue: Int
+    
+    public static let customer = UserOption(rawValue: 1 << 0)
+    public static let professional = UserOption(rawValue: 1 << 1)
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
     }
 }
 
@@ -50,6 +50,6 @@ public extension User.Responses {
         public var avatar: String?
         public var nickname: String?
         public var contact: Contact.Responses.Full
-        public var type: User.Type
+        public var options: UserOption
     }
 }
