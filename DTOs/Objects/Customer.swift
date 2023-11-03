@@ -16,4 +16,9 @@ public extension Customer.Parameters {
 
 public extension Customer.Responses {
 
+    struct Partial: Responsable {
+        public var id: UUID?
+        public var name: String
+        public var contacts: [Contact.Responses.Full]
+    }
 }

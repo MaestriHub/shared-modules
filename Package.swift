@@ -20,7 +20,7 @@ let package = Package(
             dependencies: [
                 .product(name: "SwifCron", package: "SwifCron"),
             ],
-            path: "DTOs/Sources"
+            path: "DTOs"
         ),
     ]
 )

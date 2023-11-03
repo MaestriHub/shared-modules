@@ -10,7 +10,7 @@ public enum Auth {
 
 public extension Auth.Parameters {
     
-    struct AppleToken: Codable {
+    struct AppleToken: Parametable {
         let token: String
         
         let firstName: String?
@@ -23,7 +23,7 @@ public extension Auth.Parameters {
         var phoneVerified: Bool? = false
     }
     
-    struct GoogleToken: Codable {
+    struct GoogleToken: Parametable {
 
         let token: String
         
@@ -36,8 +36,12 @@ public extension Auth.Parameters {
 
 public extension Auth.Responses {
     
-    struct Session: Codable {
+    struct Full: Responsable {
         public let token: String
         public let user: User.Responses.Full
+    }
+    
+    struct Partial: Responsable {
+        public let token: String
     }
 }

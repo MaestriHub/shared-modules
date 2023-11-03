@@ -16,24 +16,12 @@ public extension Employee.Parameters {
 
 public extension Employee.Responses {
     
-    struct Full: Codable {
+    struct Full: Responsable {
         var id: UUID?
         var nickname: String
         var avatar: String?
-        var timetable: TimetableResponse?
         var contacts: [Contact.Responses.Full]
         
-        var procedures: [ProcedureResponse]?
-    }
-    
-    struct EmployeeCustomerResponse: Codable {
-        var id: UUID?
-        var name: String
-        var species: String
-        var logo: String?
-        var address: Address
-        var isFavorite: Bool
-        var timetable: TimetableResponse?
-        var masters: [Employee]?
+        var procedures: [Procedure.Responses.Full]?
     }
 }

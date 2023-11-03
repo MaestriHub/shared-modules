@@ -5,7 +5,7 @@ public enum Contact {
     public enum Parameters {}
     public enum Responses {}
     
-    public enum `Type`: String, Codable, CaseIterable {
+    public enum `Type`: String, Codable {
         case phone
         case email
         case telegram
@@ -18,7 +18,7 @@ public enum Contact {
 
 public extension Contact.Parameters {
     
-    struct Create: Codable {
+    struct Create: Parametable {
         public var value: String
         public var type: Contact.Type
     }
@@ -32,7 +32,7 @@ public extension Contact.Parameters {
 
 public extension Contact.Responses {
     
-    struct Full: Codable {
+    struct Full: Responsable {
         public var id: UUID?
         public var value: String
         public var isVerify: Bool
