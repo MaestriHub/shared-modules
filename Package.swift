@@ -12,13 +12,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/MihaelIsaev/SwifCron.git", .upToNextMajor(from: "2.0.0")),
     ],
     targets: [
         .target(
             name: "DTOs",
             dependencies: [
-                .product(name: "SwifCron", package: "SwifCron"),
             ],
             path: "DTOs"
         ),
