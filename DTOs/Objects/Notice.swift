@@ -1,8 +1,10 @@
 import Foundation
 
-/// Пространство имён для всех Data Transfer Objects (DTO), относящихся к уведомлениям.
+/// Пространство имен `Notice` содержит типы данных для работы с информацией о клиентах.
+///
+/// В него входят  модели ответов (`Responses`),
+/// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
 public enum Notice {
-    /// Пространство имён для структур ответов, связанных с уведомлениями.
     public enum Responses {}
 }
 
@@ -23,5 +25,17 @@ public extension Notice.Responses {
         public var title: String
         public var body: String
         public var date: Date?
+        
+        public init(
+            id: UUID,
+            title: String,
+            body: String,
+            date: Date? = nil
+        ) {
+            self.id = id
+            self.title = title
+            self.body = body
+            self.date = date
+        }
     }
 }

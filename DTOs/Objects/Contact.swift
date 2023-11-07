@@ -1,11 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех Data Transfer Objects (DTO), относящихся к контактам пользователя.
+/// Пространство имен `Contact` содержит типы данных для работы с записями на прием.
+///
+/// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
+/// которые используются для сериализации данных, отправляемых и получаемых от API.
 public enum Contact {
-    /// Пространство имён для параметров запросов, связанных с контактами.
     public enum Parameters {}
-
-    /// Пространство имён для структур ответов, связанных с контактами.
     public enum Responses {}
 }
 
@@ -34,8 +34,16 @@ public extension Contact.Parameters {
     /// - `value`: Значение контактного данных, например номер телефона или адрес электронной почты.
     /// - `type`: Тип контактного метода, определенный в ``ContactType``.
     struct Create: Parametable {
-        public var value: String
-        public var type: ContactType
+        public let value: String
+        public let type: ContactType
+        
+        public init(
+            value: String,
+            type: ContactType
+        ) {
+            self.value = value
+            self.type = type
+        }
     }
     
     /// Параметры для верификации контакта.
@@ -44,7 +52,11 @@ public extension Contact.Parameters {
     /// ### Properties:
     /// - `value`: Значение контактного метода, который необходимо верифицировать.
     struct Verify: Codable {
-        public var value: String
+        public let value: String
+        
+        public init(value: String) {
+            self.value = value
+        }
     }
 }
 
@@ -65,6 +77,18 @@ public extension Contact.Responses {
         public var value: String
         public var isVerify: Bool
         public var type: ContactType
+        
+        public init(
+            id: UUID,
+            value: String,
+            isVerify: Bool,
+            type: ContactType
+        ) {
+            self.id = id
+            self.value = value
+            self.isVerify = isVerify
+            self.type = type
+        }
     }
 }
 

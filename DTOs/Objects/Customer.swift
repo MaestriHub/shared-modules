@@ -20,8 +20,16 @@ public extension Customer.Parameters {
     /// - name: `String` - имя пользователя, которое будет использоваться в приглашении.
     /// - contact: `Contact.Parameters.Create` - контактные данные пользователя, необходимые для приглашения.
     struct Invite: Responsable {
-        public var name: String
-        public var contact: Contact.Parameters.Create
+        public let name: String
+        public let contact: Contact.Parameters.Create
+        
+        public init(
+            name: String,
+            contact: Contact.Parameters.Create
+        ) {
+            self.name = name
+            self.contact = contact
+        }
     }
 }
 
@@ -41,5 +49,17 @@ public extension Customer.Responses {
         public var name: String
         public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
+        
+        public init(
+            id: UUID,
+            name: String,
+            avatar: URL? = nil,
+            contacts: [Contact.Responses.Full]
+        ) {
+            self.id = id
+            self.name = name
+            self.avatar = avatar
+            self.contacts = contacts
+        }
     }
 }

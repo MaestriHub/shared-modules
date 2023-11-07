@@ -1,12 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех DTO (Data Transfer Objects), относящихся к аутентификации.
-/// Содержит определения параметров и структур ответов для аутентификационных процессов.
+/// Пространство имен `Auth` содержит типы данных для работы с записями на прием.
+///
+/// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
+/// которые используются для сериализации данных, отправляемых и получаемых от API.
 public enum Auth {
-    /// Пространство для параметров запросов аутентификации.
     public enum Parameters {}
-
-    /// Пространство для структур ответов аутентификации.
     public enum Responses {}
 }
 
@@ -27,8 +26,22 @@ public extension Auth.Parameters {
         public let token: String
         public let firstName: String?
         public let lastName: String?
-        public var email: String?
-        public var emailVerified: Bool
+        public let email: String?
+        public let emailVerified: Bool
+        
+        public init(
+            token: String,
+            firstName: String?,
+            lastName: String?,
+            email: String? = nil,
+            emailVerified: Bool = false
+        ) {
+            self.token = token
+            self.firstName = firstName
+            self.lastName = lastName
+            self.email = email
+            self.emailVerified = emailVerified
+        }
     }
     
     /// Параметры для аутентификации через Google.
@@ -42,6 +55,16 @@ public extension Auth.Parameters {
         public let token: String
         public let firstName: String?
         public let lastName: String?
+        
+        public init(
+            token: String,
+            firstName: String?,
+            lastName: String?
+        ) {
+            self.token = token
+            self.firstName = firstName
+            self.lastName = lastName
+        }
     }
 }
 
@@ -58,6 +81,14 @@ public extension Auth.Responses {
     struct Full: Responsable {
         public let token: String
         public let user: User.Responses.Full
+        
+        public init(
+            token: String,
+            user: User.Responses.Full
+        ) {
+            self.token = token
+            self.user = user
+        }
     }
     
     /// Частичный ответ аутентификации.
@@ -67,5 +98,9 @@ public extension Auth.Responses {
     ///   - token: Токен аутентификации.
     struct Partial: Responsable {
         public let token: String
+        
+        public init(token: String) {
+            self.token = token
+        }
     }
 }

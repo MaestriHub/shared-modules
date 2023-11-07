@@ -23,10 +23,23 @@ public extension Appointment.Parameters {
     ///  - salons: `[UUID]?` - необязательный массив идентификаторов салонов для фильтрации.
     /// Если массив не предоставлен, выборка осуществляется по всем сущностям.
     struct Retrieve: Parametable {
-        public var startDate: Date
-        public var endDate: Date
-        public var employees: [UUID]?
-        public var salons: [UUID]?
+        
+        public let startDate: Date
+        public let endDate: Date
+        public let employees: [UUID]?
+        public let salons: [UUID]?
+        
+        public init(
+            startDate: Date,
+            endDate: Date,
+            employees: [UUID]? = nil,
+            salons: [UUID]? = nil
+        ) {
+            self.startDate = startDate
+            self.endDate = endDate
+            self.employees = employees
+            self.salons = salons
+        }
     }
     
     /// `Create` описывает параметры тела запроса для создания новой записи на прием.
@@ -40,13 +53,31 @@ public extension Appointment.Parameters {
     ///  - price: `Price` - цена записи на прием.
     ///  - address: `UUID` - идентификатор адреса салона.
     struct Create: Parametable {
-        public var salon: UUID
-        public var master: UUID
-        public var customer: UUID
-        public var procedures: [UUID]
-        public var time: Interval
-        public var price: Price
-        public var address: UUID
+        public let salon: UUID
+        public let master: UUID
+        public let customer: UUID //Может не быть и нужно будет создать, а точнее пригласить
+        public let procedures: [UUID]
+        public let time: Interval
+        public let price: Price
+        public let address: UUID //
+        
+        public init(
+            salon: UUID,
+            master: UUID,
+            customer: UUID,
+            procedures: [UUID],
+            time: Interval,
+            price: Price,
+            address: UUID
+        ) {
+            self.salon = salon
+            self.master = master
+            self.customer = customer
+            self.procedures = procedures
+            self.time = time
+            self.price = price
+            self.address = address
+        }
     }
 
     /// `Patch` определяет параметры для частичного обновления данных записи на прием.
@@ -56,9 +87,19 @@ public extension Appointment.Parameters {
     ///  - price: `Price?` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        var time: Interval?
-        var price: Price?
-        var procedures: [UUID]?
+        public let time: Interval?
+        public let price: Price?
+        public let procedures: [UUID]?
+        
+        public init(
+            time: Interval? = nil,
+            price: Price? = nil,
+            procedures: [UUID]? = nil
+        ) {
+            self.time = time
+            self.price = price
+            self.procedures = procedures
+        }
     }
 }
 
@@ -86,6 +127,26 @@ public extension Appointment.Responses {
         public var time: Interval
         public var price: Price
         public var address: Address.Responses.Full
+        
+        public init(
+            id: UUID,
+            salon: Salon.Responses.Partial,
+            customer: Customer.Responses.Partial,
+            master: Employee.Responses.Partial,
+            procedures: [Procedure.Responses.Partial],
+            time: Interval,
+            price: Price,
+            address: Address.Responses.Full
+        ) {
+            self.id = id
+            self.salon = salon
+            self.customer = customer
+            self.master = master
+            self.procedures = procedures
+            self.time = time
+            self.price = price
+            self.address = address
+        }
     }
     
     /// `Partial` содержит частичную информацию о записи на прием, обычно используемую для списков и обзоров.
@@ -102,5 +163,19 @@ public extension Appointment.Responses {
         public var master: Employee.Responses.Partial
         public var time: Interval
         public var price: Price
+        
+        public init(
+            id: UUID,
+            customer: Customer.Responses.Partial,
+            master: Employee.Responses.Partial,
+            time: Interval,
+            price: Price
+        ) {
+            self.id = id
+            self.customer = customer
+            self.master = master
+            self.time = time
+            self.price = price
+        }
     }
 }

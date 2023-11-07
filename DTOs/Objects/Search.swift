@@ -1,7 +1,9 @@
 import Foundation
 
-/// Пространство имен `Search` включает в себя DTO (Data Transfer Objects),
-/// которые используются для поисковых запросов и ответов на них.
+/// Пространство имен `Search` содержит типы данных для взаимодействия с информацией о салонах красоты.
+///
+/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
+/// используемые для обработки данных о салонах в системе.
 public enum Search {
     public enum Parameters {}
     public enum Responses {}
@@ -23,12 +25,25 @@ public extension Search.Parameters {
     ///
     /// Эти параметры позволяют проводить поиск салонов в заданном радиусе относительно указанной точки на карте.
     struct Retrieve: Parametable {
-        let value: String
+        public let value: String
+        public let latitude: Double
+        public let longitude: Double
+        public let latitudeDelta: Double
+        public let longitudeDelta: Double
         
-        let latitude: Double
-        let longitude: Double
-        let latitudeDelta: Double
-        let longitudeDelta: Double
+        public init(
+            value: String,
+            latitude: Double,
+            longitude: Double,
+            latitudeDelta: Double,
+            longitudeDelta: Double
+        ) {
+            self.value = value
+            self.latitude = latitude
+            self.longitude = longitude
+            self.latitudeDelta = latitudeDelta
+            self.longitudeDelta = longitudeDelta
+        }
     }
 }
 
@@ -43,6 +58,10 @@ public extension Search.Responses {
     /// - value: Текст предложения, соответствующий части поискового запроса пользователя.
     struct Suggest: Responsable {
         public var value: String
+        
+        public init(value: String) {
+            self.value = value
+        }
     }
     
     /// Полный ответ на поисковый запрос, включающий предложения и результаты поиска.
@@ -53,5 +72,13 @@ public extension Search.Responses {
     struct Full: Responsable {
         public var suggests: [Suggest]
         public var salons: [Salon.Responses.Partial]
+        
+        public init(
+            suggests: [Suggest],
+            salons: [Salon.Responses.Partial]
+        ) {
+            self.suggests = suggests
+            self.salons = salons
+        }
     }
 }

@@ -1,5 +1,14 @@
 import Foundation
 
+/// Пространство имен `User` содержит типы данных для взаимодействия с информацией о салонах красоты.
+///
+/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
+/// используемые для обработки данных о салонах в системе.
+public enum User {
+    public enum Parameters {}
+    public enum Responses {}
+}
+
 /// Набор опций, представляющих различные роли пользователя в системе.
 ///
 /// Поддерживает:
@@ -18,14 +27,6 @@ public struct UserRole: OptionSet, Codable {
     }
 }
 
-/// Пространство имен для всех Data Transfer Objects (DTO), связанных с пользователями.
-public enum User {
-    /// Вложенное перечисление для параметров запросов.
-    public enum Parameters {}
-    /// Вложенное перечисление для ответов запросов.
-    public enum Responses {}
-}
-
 // MARK: - Parameters -
 
 public extension User.Parameters {
@@ -40,6 +41,16 @@ public extension User.Parameters {
         public var nickname: String
         public var avatar: String
         public var contact: Contact.Parameters.Create
+        
+        public init(
+            nickname: String,
+            avatar: String,
+            contact: Contact.Parameters.Create
+        ) {
+            self.nickname = nickname
+            self.avatar = avatar
+            self.contact = contact
+        }
     }
     
     /// Параметры, используемые при создании профиля клиента.
@@ -52,6 +63,16 @@ public extension User.Parameters {
         public var nickname: String
         public var avatar: String
         public var contact: [Contact.Parameters.Create]
+        
+        public init(
+            nickname: String,
+            avatar: String,
+            contact: [Contact.Parameters.Create]
+        ) {
+            self.nickname = nickname
+            self.avatar = avatar
+            self.contact = contact
+        }
     }
     
     /// Параметры для частичного обновления профиля пользователя.
@@ -62,6 +83,14 @@ public extension User.Parameters {
     struct Patch: Parametable {
         public var nickname: String?
         public var avatar: URL?
+        
+        public init(
+            nickname: String? = nil,
+            avatar: URL? = nil
+        ) {
+            self.nickname = nickname
+            self.avatar = avatar
+        }
     }
 }
 
@@ -83,6 +112,20 @@ public extension User.Responses {
         public var nickname: String
         public var contact: Contact.Responses.Full
         public var options: UserRole
+        
+        public init(
+            id: UUID,
+            avatar: String? = nil,
+            nickname: String,
+            contact: Contact.Responses.Full,
+            options: UserRole
+        ) {
+            self.id = id
+            self.avatar = avatar
+            self.nickname = nickname
+            self.contact = contact
+            self.options = options
+        }
     }
     
     /// Краткие данные о пользователе для отображения на главной странице.
@@ -95,5 +138,15 @@ public extension User.Responses {
         public var id: UUID
         public var avatar: String?
         public var nickname: String
+        
+        public init(
+            id: UUID,
+            avatar: String? = nil,
+            nickname: String
+        ) {
+            self.id = id
+            self.avatar = avatar
+            self.nickname = nickname
+        }
     }
 }

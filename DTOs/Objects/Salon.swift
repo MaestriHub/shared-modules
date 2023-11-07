@@ -30,11 +30,25 @@ public extension Salon.Parameters {
     /// - timetable: Параметры для создания расписания салона (`Timetable.Parameters.Create`).
     /// - address: Параметры для создания адреса салона (`Address.Parameters.Create`).
     struct Create: Parametable {
-        var name: String
-        var type: SalonType
-        var logo: URL?
-        var timetable: Timetable.Parameters.Create
-        var address: Address.Parameters.Create
+        public let name: String
+        public let type: SalonType
+        public let logo: URL?
+        public let timetable: Timetable.Parameters.Create
+        public let address: Address.Parameters.Create
+        
+        public init(
+            name: String, 
+            type: SalonType,
+            logo: URL? = nil,
+            timetable: Timetable.Parameters.Create,
+            address: Address.Parameters.Create
+        ) {
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.timetable = timetable
+            self.address = address
+        }
     }
 
     /// Параметры для обновления информации о салоне.
@@ -44,8 +58,16 @@ public extension Salon.Parameters {
     /// - name: Новое название салона, если требуется обновление.
     /// - logo: Новый URL адрес логотипа, если требуется обновление.
     struct Patch: Parametable {
-        var name: String?
-        var logo: String?
+        public let name: String?
+        public let logo: String?
+        
+        public init(
+            name: String? = nil,
+            logo: String? = nil
+        ) {
+            self.name = name
+            self.logo = logo
+        }
     }
 }
 
@@ -75,6 +97,28 @@ public extension Salon.Responses {
         public var isFavorite: Bool = false
         public var timetable: Timetable.Responses.Full
         public var masters: [Employee.Responses.Full]?
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: String? = nil,
+            address: Address.Responses.Full,
+            canEdit: Bool,
+            isFavorite: Bool,
+            timetable: Timetable.Responses.Full,
+            masters: [Employee.Responses.Full]? = nil
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.address = address
+            self.canEdit = canEdit
+            self.isFavorite = isFavorite
+            self.timetable = timetable
+            self.masters = masters
+        }
     }
     
     /// Упрощенная информация о салоне для краткого отображения.
@@ -91,8 +135,24 @@ public extension Salon.Responses {
         public var name: String
         public var type: SalonType
         public var logo: String?
-        public var address: Address.Responses.Full // В комментарии указано, что это строка, но тип указывает на полный объект адреса.
+        public var address: Address.Responses.Full // Может быть можно просто строку присылать
         public var isFavorite: Bool = false
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: String? = nil,
+            address: Address.Responses.Full,
+            isFavorite: Bool
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.address = address
+            self.isFavorite = isFavorite
+        }
     }
 }
 

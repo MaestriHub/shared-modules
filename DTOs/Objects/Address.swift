@@ -1,12 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех DTO (Data Transfer Objects), относящихся к адресам.
-/// Включает в себя структуры для параметров запросов и ответов, обеспечивающих стандартизированную передачу данных адресов.
+/// Пространство имен `Address` содержит типы данных для работы с записями на прием.
+///
+/// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
+/// которые используются для сериализации данных, отправляемых и получаемых от API.
 public enum Address {
-    /// Пространство имён для параметров запросов, связанных с адресами.
     public enum Parameters {}
-
-    /// Пространство имён для структур ответов, связанных с адресами.
     public enum Responses {}
 }
 
@@ -24,11 +23,25 @@ public extension Address.Parameters {
     ///  - latitude: Географическая широта адреса.
     ///  - longitude: Географическая долгота адреса.
     struct Create: Responsable {
-        public var address: String
-        public var city: String
-        public var country: String
-        public var latitude: Double
-        public var longitude: Double
+        public let address: String
+        public let city: String
+        public let country: String
+        public let latitude: Double
+        public let longitude: Double
+        
+        public init(
+            address: String,
+            city: String,
+            country: String,
+            latitude: Double,
+            longitude: Double
+        ) {
+            self.address = address
+            self.city = city
+            self.country = country
+            self.latitude = latitude
+            self.longitude = longitude
+        }
     }
 }
 
@@ -53,5 +66,21 @@ public extension Address.Responses {
         public var country: String
         public var latitude: Double
         public var longitude: Double
+        
+        public init(
+            id: UUID,
+            address: String,
+            city: String,
+            country: String,
+            latitude: Double,
+            longitude: Double
+        ) {
+            self.id = id
+            self.address = address
+            self.city = city
+            self.country = country
+            self.latitude = latitude
+            self.longitude = longitude
+        }
     }
 }

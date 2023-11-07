@@ -1,12 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех Data Transfer Objects (DTO), относящихся к расписаниям.
-/// Обеспечивает работу с данными, связанными с планированием времени работы салонов и специалистов.
+/// Пространство имен `Timetable` содержит типы данных для взаимодействия с информацией о салонах красоты.
+///
+/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
+/// используемые для обработки данных о салонах в системе.
 public enum Timetable {
-    /// Пространство имён для параметров запросов, связанных с расписаниями.
     public enum Parameters {}
-    
-    /// Пространство имён для структур ответов, предоставляющих данные о расписаниях.
     public enum Responses {}
 }
 
@@ -23,6 +22,14 @@ public extension Timetable.Parameters {
     struct SearchSlot: Parametable {
         public var timeZone: String
         public var procedures: [UUID]
+        
+        public init(
+            timeZone: String,
+            procedures: [UUID]
+        ) {
+            self.timeZone = timeZone
+            self.procedures = procedures
+        }
     }
     
     /// Параметры, передаваемые в теле запроса при создании нового расписания.
@@ -41,6 +48,26 @@ public extension Timetable.Parameters {
         public var friday: String
         public var saturday: String
         public var sunday: String
+        
+        public init(
+            timeZone: String,
+            monday: String,
+            tuesday: String,
+            wednesday: String,
+            thursday: String,
+            friday: String,
+            saturday: String,
+            sunday: String
+        ) {
+            self.timeZone = timeZone
+            self.monday = monday
+            self.tuesday = tuesday
+            self.wednesday = wednesday
+            self.thursday = thursday
+            self.friday = friday
+            self.saturday = saturday
+            self.sunday = sunday
+        }
     }
     
     /// Параметры для определения временных промежутков, когда услуги не будут доступны.
@@ -50,6 +77,10 @@ public extension Timetable.Parameters {
     /// - `interval`: Временной интервал, в течение которого услуги недоступны.
     struct Offtime: Parametable {
         public var interval: Interval
+        
+        public init(interval: Interval) {
+            self.interval = interval
+        }
     }
 }
 
@@ -76,6 +107,30 @@ public extension Timetable.Responses {
         public var friday: String
         public var saturday: String
         public var sunday: String
+        
+        public init(
+            id: UUID,
+            status: String? = nil,
+            timeZone: String,
+            monday: String,
+            tuesday: String,
+            wednesday: String,
+            thursday: String,
+            friday: String,
+            saturday: String,
+            sunday: String
+        ) {
+            self.id = id
+            self.status = status
+            self.timeZone = timeZone
+            self.monday = monday
+            self.tuesday = tuesday
+            self.wednesday = wednesday
+            self.thursday = thursday
+            self.friday = friday
+            self.saturday = saturday
+            self.sunday = sunday
+        }
     }
     
     /// Структура ответа, возвращающая доступные временные слоты.
@@ -85,5 +140,9 @@ public extension Timetable.Responses {
     /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
     struct Slot: Responsable {
         public var days: [Date: [Interval]]
+        
+        public init(days: [Date : [Interval]]) {
+            self.days = days
+        }
     }
 }

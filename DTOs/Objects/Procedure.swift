@@ -1,12 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех Data Transfer Objects (DTO), относящихся к процедурам.
-/// Управляет данными, связанными с определенными услугами, предоставляемыми салонами красоты и их сотрудниками.
+/// Пространство имен `Procedure` содержит типы данных для работы с информацией о сотрудниках.
+///
+/// Включает в себя параметры для запросов (`Parameters`) и модели ответов (`Responses`),
+/// которые применяются для обмена данными о сотрудниках между клиентскими приложениями и сервером.
 public enum Procedure {
-    /// Пространство имён для параметров запросов, связанных с процедурами.
     public enum Parameters {}
-    
-    /// Пространство имён для структур ответов, предоставляющих данные о процедурах.
     public enum Responses {}
 }
 
@@ -21,8 +20,16 @@ public extension Procedure.Parameters {
     /// - `salons`: Список идентификаторов салонов для фильтрации процедур.
     /// - `employees`: Список идентификаторов сотрудников для фильтрации процедур.
     struct Retrieve: Parametable {
-        public var salons: [UUID]?
-        public var employees: [UUID]?
+        public let salons: [UUID]?
+        public let employees: [UUID]?
+        
+        public init(
+            salons: [UUID]? = nil,
+            employees: [UUID]? = nil
+        ) {
+            self.salons = salons
+            self.employees = employees
+        }
     }
     
     /// Параметры, передаваемые в теле запроса при создании новой процедуры.
@@ -33,9 +40,19 @@ public extension Procedure.Parameters {
     /// - `duration`: Продолжительность процедуры в минутах.
     /// - `service`: Идентификатор услуги, к которой относится процедура.
     struct Create: Parametable {
-        public var price: Price
-        public var duration: Int
-        public var service: UUID
+        public let price: Price
+        public let duration: Int
+        public let service: UUID
+        
+        public init(
+            price: Price,
+            duration: Int,
+            service: UUID
+        ) {
+            self.price = price
+            self.duration = duration
+            self.service = service
+        }
     }
 
     /// Параметры, передаваемые в теле запроса для частичного обновления существующей процедуры.
@@ -45,8 +62,16 @@ public extension Procedure.Parameters {
     /// - `price`: Новая цена процедуры (опционально).
     /// - `duration`: Новая продолжительность процедуры в минутах (опционально).
     struct Patch: Parametable {
-        public var price: Price?
-        public var duration: Int?
+        public let price: Price?
+        public let duration: Int?
+        
+        public init(
+            price: Price? = nil,
+            duration: Int? = nil
+        ) {
+            self.price = price
+            self.duration = duration
+        }
     }
 }
 
@@ -67,6 +92,18 @@ public extension Procedure.Responses {
         public var price: Price
         public var duration: Int
         public var service: Service.Responses.Full
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            service: Service.Responses.Full
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.service = service
+        }
     }
     
     /// Упрощенная структура ответа для процедур.
@@ -82,5 +119,17 @@ public extension Procedure.Responses {
         public var price: Price
         public var duration: Int
         public var service: Service.Responses.Partial
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            service: Service.Responses.Partial
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.service = service
+        }
     }
 }

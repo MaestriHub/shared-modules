@@ -1,12 +1,11 @@
 import Foundation
 
-/// Пространство имён для всех Data Transfer Objects (DTO), относящихся к услугам (Procedure).
-/// Обеспечивает стандартизированный обмен информацией о процедурах и услугах в системе.
+/// Пространство имен `Service` содержит типы данных для взаимодействия с информацией о салонах красоты.
+///
+/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
+/// используемые для обработки данных о салонах в системе.
 public enum Service {
-    /// Пространство имён для параметров запросов, связанных с услугами.
     public enum Parameters {}
-    
-    /// Пространство имён для структур ответов, предоставляющих данные о услугах.
     public enum Responses {}
 }
 
@@ -29,6 +28,14 @@ public extension Service.Parameters {
     struct Create: Parametable {
         public var title: String
         public var description: String
+        
+        public init(
+            title: String,
+            description: String
+        ) {
+            self.title = title
+            self.description = description
+        }
     }
 
     /// Параметры, передаваемые в теле запроса для частичного обновления данных об услуге.
@@ -40,6 +47,14 @@ public extension Service.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var description: String?
+        
+        public init(
+            title: String? = nil,
+            description: String? = nil
+        ) {
+            self.title = title
+            self.description = description
+        }
     }
 }
 
@@ -58,6 +73,16 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
+        
+        public init(
+            id: UUID,
+            title: String,
+            description: String
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+        }
     }
     
     /// Упрощенная структура ответа для услуг.
@@ -71,6 +96,16 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
+        
+        public init(
+            id: UUID,
+            title: String,
+            description: String
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+        }
     }
 }
 
