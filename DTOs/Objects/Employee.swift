@@ -42,13 +42,13 @@ public extension Employee.Responses {
     /// ### Properties:
     /// - id: `UUID` - уникальный идентификатор сотрудника.
     /// - nickname: `String` - псевдоним сотрудника.
-    /// - avatar: `String?` - URL-адрес аватара сотрудника, может быть `nil`, если аватар отсутствует.
+    /// - avatar: `URL?` - URL-адрес аватара сотрудника, может быть `nil`, если аватар отсутствует.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
     /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
     struct Full: Responsable, Identifiable {
         public var id: UUID
         public var nickname: String
-        public var avatar: String?
+        public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
         
         public var procedures: [Procedure.Responses.Partial]?
@@ -56,7 +56,7 @@ public extension Employee.Responses {
         public init(
             id: UUID,
             nickname: String,
-            avatar: String? = nil,
+            avatar: URL? = nil,
             contacts: [Contact.Responses.Full],
             procedures: [Procedure.Responses.Partial]? = nil
         ) {

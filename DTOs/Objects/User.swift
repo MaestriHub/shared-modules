@@ -39,12 +39,12 @@ public extension User.Parameters {
     ///  - contact: Контактная информация пользователя, введенная при регистрации.
     struct CreateProfessional: Parametable {
         public var nickname: String
-        public var avatar: String
+        public var avatar: URL
         public var contact: Contact.Parameters.Create
         
         public init(
             nickname: String,
-            avatar: String,
+            avatar: URL,
             contact: Contact.Parameters.Create
         ) {
             self.nickname = nickname
@@ -61,12 +61,12 @@ public extension User.Parameters {
     ///  - contact: Массив контактной информации пользователя.
     struct CreateCustomer: Parametable {
         public var nickname: String
-        public var avatar: String
+        public var avatar: URL
         public var contact: [Contact.Parameters.Create]
         
         public init(
             nickname: String,
-            avatar: String,
+            avatar: URL,
             contact: [Contact.Parameters.Create]
         ) {
             self.nickname = nickname
@@ -108,14 +108,14 @@ public extension User.Responses {
     ///  - options: Роли пользователя, определенные в системе.
     struct Full: Responsable, Identifiable {
         public var id: UUID
-        public var avatar: String?
+        public var avatar: URL?
         public var nickname: String
         public var contact: Contact.Responses.Full
         public var options: UserRole
         
         public init(
             id: UUID,
-            avatar: String? = nil,
+            avatar: URL? = nil,
             nickname: String,
             contact: Contact.Responses.Full,
             options: UserRole
@@ -136,12 +136,12 @@ public extension User.Responses {
     ///  - nickname: Псевдоним пользователя для представления в пользовательском интерфейсе.
     struct Partial: Responsable, Identifiable {
         public var id: UUID
-        public var avatar: String?
+        public var avatar: URL?
         public var nickname: String
         
         public init(
             id: UUID,
-            avatar: String? = nil,
+            avatar: URL? = nil,
             nickname: String
         ) {
             self.id = id

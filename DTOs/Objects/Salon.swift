@@ -59,11 +59,11 @@ public extension Salon.Parameters {
     /// - logo: Новый URL адрес логотипа, если требуется обновление.
     struct Patch: Parametable {
         public let name: String?
-        public let logo: String?
+        public let logo: URL?
         
         public init(
             name: String? = nil,
-            logo: String? = nil
+            logo: URL? = nil
         ) {
             self.name = name
             self.logo = logo
@@ -91,7 +91,7 @@ public extension Salon.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
-        public var logo: String?
+        public var logo: URL?
         public var address: Address.Responses.Full
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
@@ -102,7 +102,7 @@ public extension Salon.Responses {
             id: UUID,
             name: String,
             type: SalonType,
-            logo: String? = nil,
+            logo: URL? = nil,
             address: Address.Responses.Full,
             canEdit: Bool,
             isFavorite: Bool,
@@ -134,7 +134,7 @@ public extension Salon.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
-        public var logo: String?
+        public var logo: URL?
         public var address: Address.Responses.Full // Может быть можно просто строку присылать
         public var isFavorite: Bool = false
         
@@ -142,7 +142,7 @@ public extension Salon.Responses {
             id: UUID,
             name: String,
             type: SalonType,
-            logo: String? = nil,
+            logo: URL? = nil,
             address: Address.Responses.Full,
             isFavorite: Bool
         ) {
