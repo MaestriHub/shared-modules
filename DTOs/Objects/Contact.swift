@@ -36,13 +36,16 @@ public extension Contact.Parameters {
     struct Create: Parametable {
         public let value: String
         public let type: ContactType
+        public let isVerify: Bool
         
         public init(
             value: String,
-            type: ContactType
+            type: ContactType,
+            isVerify: Bool
         ) {
             self.value = value
             self.type = type
+            self.isVerify = isVerify
         }
     }
     
