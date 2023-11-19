@@ -77,20 +77,16 @@ public extension Auth.Responses {
     ///
     /// ### Properties:
     ///   - token: Токен аутентификации.
-    ///  - isUnknown: Указывает на то что пользователь не зарегистрирован не в одной бизнес линии
     ///  - user: Полная информация о пользователе в формате `User.Responses.Full`.
     struct Full: Responsable {
         public let token: String
-        public let isUnknown: Bool
         public let user: User.Responses.Full
         
         public init(
             token: String,
-            isUnknown: Bool,
             user: User.Responses.Full
         ) {
             self.token = token
-            self.isUnknown = isUnknown
             self.user = user
         }
     }
