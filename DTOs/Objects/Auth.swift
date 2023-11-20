@@ -23,11 +23,11 @@ public extension Auth.Parameters {
     ///  - email: Электронная почта пользователя, если доступна.
     ///  - emailVerified: Флаг, указывающий, подтверждён ли email.
     struct AppleToken: Parametable {
-        public let token: String
-        public let firstName: String?
-        public let lastName: String?
-        public let email: String?
-        public let emailVerified: Bool
+        public var token: String
+        public var firstName: String?
+        public var lastName: String?
+        public var email: String?
+        public var emailVerified: Bool = false
         
         public init(
             token: String,
@@ -52,9 +52,9 @@ public extension Auth.Parameters {
     ///  - firstName: Имя пользователя, полученное от Google, если доступно.
     ///  - lastName: Фамилия пользователя, полученное от Google, если доступно.
     struct GoogleToken: Parametable {
-        public let token: String
-        public let firstName: String?
-        public let lastName: String?
+        public var token: String
+        public var firstName: String?
+        public var lastName: String?
         
         public init(
             token: String,
