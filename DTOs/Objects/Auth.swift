@@ -27,7 +27,7 @@ public extension Auth.Parameters {
         public var firstName: String?
         public var lastName: String?
         public var email: String?
-        public var emailVerified: Bool = false
+        public var emailVerified: Bool?
         
         public init(
             token: String,
