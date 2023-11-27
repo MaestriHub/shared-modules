@@ -62,16 +62,16 @@ public extension User.Parameters {
     struct CreateCustomer: Parametable {
         public var nickname: String
         public var avatar: URL
-        public var contact: [Contact.Parameters.Create]
+        public var contacts: [Contact.Parameters.Create]
         
         public init(
             nickname: String,
             avatar: URL,
-            contact: [Contact.Parameters.Create]
+            contacts: [Contact.Parameters.Create]
         ) {
             self.nickname = nickname
             self.avatar = avatar
-            self.contact = contact
+            self.contacts = contacts
         }
     }
     
