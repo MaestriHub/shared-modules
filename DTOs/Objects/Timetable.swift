@@ -41,23 +41,23 @@ public extension Timetable.Parameters {
     ///   Повторяется для каждого дня недели.
     struct Create: Parametable {
         public var timeZone: String
-        public var monday: String
-        public var tuesday: String
-        public var wednesday: String
-        public var thursday: String
-        public var friday: String
-        public var saturday: String
-        public var sunday: String
+        public var monday: String?
+        public var tuesday: String?
+        public var wednesday: String?
+        public var thursday: String?
+        public var friday: String?
+        public var saturday: String?
+        public var sunday: String?
         
         public init(
             timeZone: String,
-            monday: String,
-            tuesday: String,
-            wednesday: String,
-            thursday: String,
-            friday: String,
-            saturday: String,
-            sunday: String
+            monday: String?,
+            tuesday: String?,
+            wednesday: String?,
+            thursday: String?,
+            friday: String?,
+            saturday: String?,
+            sunday: String?
         ) {
             self.timeZone = timeZone
             self.monday = monday
@@ -100,25 +100,25 @@ public extension Timetable.Responses {
         public var id: UUID
         public var status: String?
         public var timeZone: String
-        public var monday: String
-        public var tuesday: String
-        public var wednesday: String
-        public var thursday: String
-        public var friday: String
-        public var saturday: String
-        public var sunday: String
+        public var monday: String?
+        public var tuesday: String?
+        public var wednesday: String?
+        public var thursday: String?
+        public var friday: String?
+        public var saturday: String?
+        public var sunday: String?
         
         public init(
             id: UUID,
             status: String? = nil,
             timeZone: String,
-            monday: String,
-            tuesday: String,
-            wednesday: String,
-            thursday: String,
-            friday: String,
-            saturday: String,
-            sunday: String
+            monday: String?,
+            tuesday: String?,
+            wednesday: String?,
+            thursday: String?,
+            friday: String?,
+            saturday: String?,
+            sunday: String?
         ) {
             self.id = id
             self.status = status

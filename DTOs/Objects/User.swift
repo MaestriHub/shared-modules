@@ -36,16 +36,16 @@ public extension User.Parameters {
     /// ### Properties:
     ///   - nickname: Псевдоним пользователя, используемый для взаимодействия в приложении.
     ///  - avatar: Ссылка на изображение аватара пользователя.
-    ///  - contact: Контактная информация пользователя, введенная при регистрации.
+    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
     struct CreateProfessional: Parametable {
-        public var nickname: String
-        public var avatar: URL
-        public var contact: Contact.Parameters.Create
+        public var nickname: String?
+        public var avatar: URL?
+        public var contact: Contact.Parameters.Create?
         
         public init(
-            nickname: String,
-            avatar: URL,
-            contact: Contact.Parameters.Create
+            nickname: String? = nil,
+            avatar: URL? = nil,
+            contact: Contact.Parameters.Create? = nil
         ) {
             self.nickname = nickname
             self.avatar = avatar
@@ -58,15 +58,18 @@ public extension User.Parameters {
     /// ### Properties:
     ///   - nickname: Псевдоним пользователя, используемый для взаимодействия в приложении.
     ///  - avatar: Ссылка на изображение аватара пользователя.
-    ///  - contact: Массив контактной информации пользователя.
+    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
+    ///  - contacts: Массив контактов через которые ему будет удобное связываться с мастером.
     struct CreateCustomer: Parametable {
-        public var nickname: String
-        public var avatar: URL
+        public var nickname: String?
+        public var avatar: URL?
+        public var contact: Contact.Parameters.Create?
         public var contacts: [Contact.Parameters.Create]
         
         public init(
-            nickname: String,
-            avatar: URL,
+            nickname: String? = nil,
+            avatar: URL? = nil,
+            contact: Contact.Parameters.Create? = nil,
             contacts: [Contact.Parameters.Create]
         ) {
             self.nickname = nickname
