@@ -18,6 +18,7 @@ public extension Search.Parameters {
     ///
     /// ### Properties:
     /// - value: Поисковый запрос пользователя в виде строки.
+    /// - salonType: Фильтр по типу салона
     /// - latitude: Широта центральной точки поиска.
     /// - longitude: Долгота центральной точки поиска.
     /// - latitudeDelta: Диапазон изменения широты от центральной точки.
@@ -25,7 +26,8 @@ public extension Search.Parameters {
     ///
     /// Эти параметры позволяют проводить поиск салонов в заданном радиусе относительно указанной точки на карте.
     struct Retrieve: Parametable {
-        public let value: String
+        public let value: String?
+        public let salonType: SalonType?
         public let latitude: Double
         public let longitude: Double
         public let latitudeDelta: Double
@@ -33,12 +35,14 @@ public extension Search.Parameters {
         
         public init(
             value: String,
+            salonType: SalonType?,
             latitude: Double,
             longitude: Double,
             latitudeDelta: Double,
             longitudeDelta: Double
         ) {
             self.value = value
+            self.salonType = salonType
             self.latitude = latitude
             self.longitude = longitude
             self.latitudeDelta = latitudeDelta
