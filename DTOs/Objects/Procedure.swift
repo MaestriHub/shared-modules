@@ -38,20 +38,24 @@ public extension Procedure.Parameters {
     /// ### Properties:
     /// - `price`: Цена процедуры.
     /// - `duration`: Продолжительность процедуры в минутах.
-    /// - `service`: Идентификатор услуги, к которой относится процедура.
+    /// - `serviceId`: Идентификатор услуги, к которой относится процедура.
+    /// - `employeeId`: Идентификатор работника, к которому привяжится процедура.
     struct Create: Parametable {
         public let price: Price
         public let duration: Int
-        public let service: UUID
+        public let serviceId: UUID
+        public let employeeId: UUID
         
         public init(
             price: Price,
             duration: Int,
-            service: UUID
+            serviceId: UUID,
+            employeeId: UUID
         ) {
             self.price = price
             self.duration = duration
-            self.service = service
+            self.serviceId = serviceId
+            self.employeeId = employeeId
         }
     }
 
