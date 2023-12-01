@@ -113,14 +113,14 @@ public extension User.Responses {
         public var id: UUID
         public var avatar: URL?
         public var nickname: String
-        public var contact: Contact.Responses.Full
+        public var contact: Contact.Responses.Full?
         public var options: UserRole
         
         public init(
             id: UUID,
             avatar: URL? = nil,
             nickname: String,
-            contact: Contact.Responses.Full,
+            contact: Contact.Responses.Full?,
             options: UserRole
         ) {
             self.id = id
