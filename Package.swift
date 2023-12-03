@@ -10,6 +10,10 @@ let package = Package(
             name: "DTOs",
             targets: [ "DTOs" ]
         ),
+        .library(
+            name: "Karte",
+            targets: [ "Karte" ]
+        ),
     ],
     dependencies: [
     ],
@@ -19,6 +23,12 @@ let package = Package(
             dependencies: [
             ],
             path: "DTOs"
+        ),
+        .target(
+            name: "Karte",
+            dependencies: [
+            ],
+            path: "Karte"
         ),
     ]
 )
