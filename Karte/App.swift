@@ -17,7 +17,8 @@ extension Karte {
         case navigon // http://www.navigon.com/portal/common/faq/files/NAVIGON_AppInteract.pdf
         case waze
         case dbnavigator
-        case yandex
+        case yandexNavigator
+        case yandexMaps
         case moovit
 
         @available(*, unavailable, renamed: "allCases")
@@ -36,7 +37,8 @@ extension Karte {
             case .navigon: return "navigon://"
             case .waze: return "waze://"
             case .dbnavigator: return "dbnavigator://"
-            case .yandex: return "yandexnavi://"
+            case .yandexNavigator: return "yandexnavi://"
+            case .yandexMaps: return "yandexmaps://"
             case .moovit: return "moovit://"
             }
         }
@@ -52,7 +54,8 @@ extension Karte {
             case .navigon: return "Navigon"
             case .waze: return "Waze"
             case .dbnavigator: return "DB Navigator"
-            case .yandex: return "Yandex.Navi"
+            case .yandexNavigator: return "Yandex Navigator"
+            case .yandexMaps: return "Yandex Maps"
             case .moovit: return "Moovit"
             }
         }
@@ -79,7 +82,9 @@ extension Karte {
                 return mode == .driving
             case .dbnavigator:
                 return mode == .transit
-            case .yandex:
+            case .yandexNavigator:
+                return true
+            case .yandexMaps:
                 return true
             case .moovit:
                 return true
@@ -168,7 +173,13 @@ extension Karte {
                 parameters.set("ZY", Int(destination.latitude * 1_000_000))
                 parameters.set("ZX", Int(destination.longitude * 1_000_000))
                 return "\(self.urlScheme)query?\(parameters.urlParameters)&start"
-            case .yandex:
+            case .yandexNavigator:
+                parameters.set("lat_from", origin?.latitude)
+                parameters.set("lon_from", origin?.longitude)
+                parameters.set("lat_to", destination.latitude)
+                parameters.set("lon_to", destination.longitude)
+                return "\(self.urlScheme)build_route_on_map?\(parameters.urlParameters)"
+            case .yandexMaps:
                 parameters.set("lat_from", origin?.latitude)
                 parameters.set("lon_from", origin?.longitude)
                 parameters.set("lat_to", destination.latitude)

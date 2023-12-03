@@ -56,7 +56,9 @@ extension Karte {
                 return nil
             case .dbnavigator:
                 return nil
-            case .yandex:
+            case .yandexNavigator:
+                return nil
+            case .yandexMaps:
                 return nil
             case .moovit:
                 return nil
