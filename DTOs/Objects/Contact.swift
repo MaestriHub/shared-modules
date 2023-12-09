@@ -111,10 +111,10 @@ public extension Contact.Responses {
     /// ### Properties:
     /// - isVeried: `Bool` - поле, обозначающее что контакт верифицирован
     struct Verify: Responsable {
-        public let isVeried: Bool
+        public let isVerified: Bool
         
-        public init(isVeried: Bool) {
-            self.isVeried = isVeried
+        public init(isVerified: Bool) {
+            self.isVerified = isVerified
         }
     }
 }
