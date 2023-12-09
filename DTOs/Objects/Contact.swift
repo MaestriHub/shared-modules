@@ -35,16 +35,30 @@ public extension Contact.Parameters {
         }
     }
     
-    /// Параметры для верификации контакта.
-    /// Используется для подтверждения контактной информации пользователя.
+    /// Параметры `SendCode` используются для отправки верификационного кода на значение контакта.
     ///
     /// ### Properties:
-    /// - `value`: Значение контактного метода, который необходимо верифицировать.
-    struct Verify: Codable {
+    /// - type: `ContactType` - тип контакта из списка возможных значений `[phone, email, telegram, whatsapp, instagram]`
+    /// - value: `String` - значение контакта
+    struct SendCode: Parametable {
+        public let type: ContactType
         public let value: String
         
-        public init(value: String) {
+        public init(type: ContactType, value: String) {
+            self.type = type
             self.value = value
+        }
+    }
+    
+    /// Параметры `SendCode` используются для отправки верификационного кода на значение контакта.
+    ///
+    /// ### Properties:
+    /// - code: `String` - код отправленный ранее на значение контакта
+    struct Verify: Parametable {
+        public let code: String
+        
+        public init(code: String) {
+            self.code = code
         }
     }
 }
@@ -77,6 +91,30 @@ public extension Contact.Responses {
             self.value = value
             self.isVerify = isVerify
             self.type = type
+        }
+    }
+    
+    /// `Send` возвращает информацию об отправке верификацонного кода на контакт пользователя
+    ///
+    /// ### Properties:
+    /// - redirectUrl: `String` - ссылка, куда нужно перенаправить пользователя, чтобы получить код при необходимости
+    struct Send: Responsable {
+        public let redirectUrl: String?
+        
+        public init(redirectUrl: String?) {
+            self.redirectUrl = redirectUrl
+        }
+    }
+    
+    /// `Verify` возвращает информацию о том, что контакт был верифицирован
+    ///
+    /// ### Properties:
+    /// - isVeried: `Bool` - поле, обозначающее что контакт верифицирован
+    struct Verify: Responsable {
+        public let isVeried: Bool
+        
+        public init(isVeried: Bool) {
+            self.isVeried = isVeried
         }
     }
 }
