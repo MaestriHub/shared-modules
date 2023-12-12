@@ -13,22 +13,18 @@ public enum Customer {
 
 public extension Customer.Parameters {
     
-    /// Параметры `Invite` используются для приглашения пользователя на сервис.
-    /// Доступ к этому методу имеют как профессиональные пользователи (Pro), так и обычные пользователи.
+    /// Параметры запроса для получения списка клиентов.
+    /// Позволяют фильтровать клиентов по определенным салонам.
     ///
     /// ### Properties:
-    /// - name: `String` - имя пользователя, которое будет использоваться в приглашении.
-    /// - contact: `Contact.Parameters.Create` - контактные данные пользователя, необходимые для приглашения.
-    struct Invite: Responsable {
-        public let name: String
-        public let contact: Contact.Parameters.Create
+    /// - `employees`: Список идентификаторов employees для фильтрации клиентов.
+    struct Retrieve: Parametable {
+        public let employees: [UUID]?
         
         public init(
-            name: String,
-            contact: Contact.Parameters.Create
+            employees: [UUID]? = nil
         ) {
-            self.name = name
-            self.contact = contact
+            self.employees = employees
         }
     }
 }

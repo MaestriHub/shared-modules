@@ -44,7 +44,10 @@ public extension Contact.Parameters {
         public let type: ContactType
         public let value: String
         
-        public init(type: ContactType, value: String) {
+        public init(
+            type: ContactType,
+            value: String
+        ) {
             self.type = type
             self.value = value
         }

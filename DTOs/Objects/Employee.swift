@@ -13,22 +13,18 @@ public enum Employee {
 
 public extension Employee.Parameters {
     
-    /// Параметры `Invite` используются для отправки приглашения сотрудникам присоединиться к сервису.
-    /// Доступ к этому функционалу предоставляется как профессиональным пользователям (Pro), так и обычным пользователям.
+    /// Параметры запроса для получения списка сотрудников.
+    /// Позволяют фильтровать сотрудников по определенным салонам.
     ///
     /// ### Properties:
-    /// - name: `String` - имя сотрудника, которое будет использоваться в приглашении.
-    /// - contact: `Contact.Parameters.Create` - контактные данные сотрудника, необходимые для отправки приглашения.
-    struct Invite: Responsable {
-        public let name: String
-        public let contact: Contact.Parameters.Create
+    /// - `salons`: Список идентификаторов салонов для фильтрации сотрудников.
+    struct Retrieve: Parametable {
+        public let salons: [UUID]?
         
         public init(
-            name: String,
-            contact: Contact.Parameters.Create
+            salons: [UUID]? = nil
         ) {
-            self.name = name
-            self.contact = contact
+            self.salons = salons
         }
     }
 }

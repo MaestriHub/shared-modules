@@ -9,24 +9,6 @@ public enum User {
     public enum Responses {}
 }
 
-/// Набор опций, представляющих различные роли пользователя в системе.
-///
-/// Поддерживает:
-/// - `customer` -  Опция, представляющая пользователя как клиента.
-/// - `professional` -  Опция, представляющая пользователя как профессионала.
-public struct UserRole: OptionSet, Codable {
-    
-    public static let customer = UserRole(rawValue: 1 << 0)
-    public static let professional = UserRole(rawValue: 1 << 1)
-    
-    public var rawValue: Int
-    
-    /// Инициализирует экземпляр с указанным сырым значением.
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-}
-
 // MARK: - Parameters -
 
 public extension User.Parameters {
@@ -114,14 +96,14 @@ public extension User.Responses {
         public var avatar: URL?
         public var nickname: String
         public var contact: Contact.Responses.Full?
-        public var options: UserRole
+        public var options: UserRoleSet
         
         public init(
             id: UUID,
             avatar: URL? = nil,
             nickname: String,
             contact: Contact.Responses.Full?,
-            options: UserRole
+            options: UserRoleSet
         ) {
             self.id = id
             self.avatar = avatar
