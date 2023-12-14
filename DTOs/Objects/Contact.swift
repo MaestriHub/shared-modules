@@ -22,16 +22,19 @@ public extension Contact.Parameters {
     struct Create: Parametable {
         public let value: String
         public let type: ContactType
-        public let isVerify: Bool
+        public let isVerify: Bool?
+        public let employeeId: UUID?
         
         public init(
             value: String,
             type: ContactType,
-            isVerify: Bool
+            isVerify: Bool?,
+            employeeId: UUID?
         ) {
             self.value = value
             self.type = type
             self.isVerify = isVerify
+            self.employeeId = employeeId
         }
     }
     
