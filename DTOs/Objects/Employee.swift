@@ -27,6 +27,28 @@ public extension Employee.Parameters {
             self.salons = salons
         }
     }
+    
+    /// Параметры для частичного обновления Employee.
+    ///
+    /// ### Properties:
+    ///  - contacts: Контактная информация Employee, для связи с ним
+    /// - timetable: Расписание времени работы
+    struct Patch: Parametable {
+        
+        public var roleSet: SalonRoleSet?
+        public var contacts: [Contact.Parameters.Create]?
+        public var timetable: Timetable.Parameters.Create?
+        
+        public init(
+            roleSet: SalonRoleSet?,
+            contacts: [Contact.Parameters.Create]?,
+            timetable: Timetable.Parameters.Create?
+        ) {
+            self.roleSet = roleSet
+            self.contacts = contacts
+            self.timetable = timetable
+        }
+    }
 }
 
 //MARK: - Responses -

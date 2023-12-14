@@ -13,49 +13,38 @@ public enum User {
 
 public extension User.Parameters {
     
+    /// Параметры, используемые при переключение профиля.
+    ///
+    /// ### Properties:
+    struct Switch: Parametable {
+        
+        public var role: UserRoleSet
+
+        public init(
+            role: UserRoleSet
+        ) {
+            self.role = role
+        }
+    }
+    
     /// Параметры, используемые при создании профиля профессионала.
     ///
     /// ### Properties:
-    ///   - nickname: Псевдоним пользователя, используемый для взаимодействия в приложении.
-    ///  - avatar: Ссылка на изображение аватара пользователя.
-    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
     struct CreateProfessional: Parametable {
-        public var nickname: String?
-        public var avatar: URL?
-        public var contact: Contact.Parameters.Create?
-        
-        public init(
-            nickname: String? = nil,
-            avatar: URL? = nil,
-            contact: Contact.Parameters.Create? = nil
-        ) {
-            self.nickname = nickname
-            self.avatar = avatar
-            self.contact = contact
-        }
+
+        public init() {}
     }
     
     /// Параметры, используемые при создании профиля клиента.
     ///
     /// ### Properties:
-    ///   - nickname: Псевдоним пользователя, используемый для взаимодействия в приложении.
-    ///  - avatar: Ссылка на изображение аватара пользователя.
-    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
     ///  - contacts: Массив контактов через которые ему будет удобное связываться с мастером.
     struct CreateCustomer: Parametable {
-        public var nickname: String?
-        public var avatar: URL?
-        public var contact: Contact.Parameters.Create?
         public var contacts: [Contact.Parameters.Create]
         
         public init(
-            nickname: String? = nil,
-            avatar: URL? = nil,
-            contact: Contact.Parameters.Create? = nil,
             contacts: [Contact.Parameters.Create]
         ) {
-            self.nickname = nickname
-            self.avatar = avatar
             self.contacts = contacts
         }
     }
@@ -65,9 +54,11 @@ public extension User.Parameters {
     /// ### Properties:
     ///   - nickname: Новый псевдоним пользователя, если требуется обновление.
     ///  - avatar: Новая ссылка на изображение аватара пользователя, если требуется обновление.
+    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
     struct Patch: Parametable {
         public var nickname: String?
         public var avatar: URL?
+        public var contact: Contact.Parameters.Create?
         
         public init(
             nickname: String? = nil,
