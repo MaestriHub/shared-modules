@@ -28,13 +28,26 @@ public extension Employee.Parameters {
         }
     }
     
+    /// Параметры, передаваемые в теле запроса при приглашение нового сотрудника.
+    ///
+    /// ### Properties:
+    /// - `salondId`: Идентификатор салона
+    struct Invite: Parametable {
+        public var salondId: UUID
+        
+        public init(
+            salondId: UUID,
+        ) {
+            self.salondId = salondId
+        }
+    }
+    
     /// Параметры для частичного обновления Employee.
     ///
     /// ### Properties:
     ///  - contacts: Контактная информация Employee, для связи с ним
     /// - timetable: Расписание времени работы
     struct Patch: Parametable {
-        
         public var roleSet: SalonRoleSet?
         public var contacts: [Contact.Parameters.Create]?
         public var timetable: Timetable.Parameters.Create?

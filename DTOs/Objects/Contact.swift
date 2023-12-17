@@ -41,24 +41,6 @@ public extension Contact.Parameters {
     /// Параметры `SendCode` используются для отправки верификационного кода на значение контакта.
     ///
     /// ### Properties:
-    /// - type: `ContactType` - тип контакта из списка возможных значений `[phone, email, telegram, whatsapp, instagram]`
-    /// - value: `String` - значение контакта
-    struct SendCode: Parametable {
-        public let type: ContactType
-        public let value: String
-        
-        public init(
-            type: ContactType,
-            value: String
-        ) {
-            self.type = type
-            self.value = value
-        }
-    }
-    
-    /// Параметры `SendCode` используются для отправки верификационного кода на значение контакта.
-    ///
-    /// ### Properties:
     /// - code: `String` - код отправленный ранее на значение контакта
     struct Verify: Parametable {
         public let code: String

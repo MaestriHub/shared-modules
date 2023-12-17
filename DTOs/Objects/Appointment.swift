@@ -23,7 +23,6 @@ public extension Appointment.Parameters {
     ///  - salons: `[UUID]?` - необязательный массив идентификаторов салонов для фильтрации.
     /// Если массив не предоставлен, выборка осуществляется по всем сущностям.
     struct Retrieve: Parametable {
-        
         public let startDate: Date?
         public let endDate: Date?
         public let employees: [UUID]?

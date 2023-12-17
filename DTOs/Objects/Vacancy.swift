@@ -20,7 +20,6 @@ public extension Vacancy.Parameters {
     /// - name: `String` - имя сотрудника, которое будет использоваться в приглашении.
     /// - salonId: `UUID` - идентификатор салона для связи нового сотрудника и салона
     struct Invite: Responsable {
-        
         public let name: String
         public let salonId: UUID
         
