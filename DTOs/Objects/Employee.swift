@@ -36,7 +36,7 @@ public extension Employee.Parameters {
         public var salondId: UUID
         
         public init(
-            salondId: UUID,
+            salondId: UUID
         ) {
             self.salondId = salondId
         }
