@@ -55,5 +55,27 @@ public extension Vacancy.Responses {
             self.url = url
         }
     }
+    
+    struct Full: Responsable, Identifiable {
+        public var id: UUID
+        public var description: String
+        public var salon: Salon.Responses.Partial
+        public var candidates: [Employee.Responses.Partial]
+        public var url: URL?
+        
+        public init(
+            id: UUID,
+            description: String,
+            salon: Salon.Responses.Partial,
+            candidates: [Employee.Responses.Partial],
+            url: URL? = nil
+        ) {
+            self.id = id
+            self.description = description
+            self.salon = salon
+            self.candidates = candidates
+            self.url = url
+        }
+    }
 }
 
