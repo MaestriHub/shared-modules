@@ -34,11 +34,14 @@ public extension Employee.Parameters {
     /// - `salondId`: Идентификатор салона
     struct Invite: Parametable {
         public var salondId: UUID
+        public var contacts: [Contact.Parameters.Create]
         
         public init(
-            salondId: UUID
+            salondId: UUID,
+            contacts: [Contact.Parameters.Create]
         ) {
             self.salondId = salondId
+            self.contacts = contacts
         }
     }
     
