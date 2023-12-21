@@ -109,15 +109,18 @@ public extension Employee.Responses {
         public var id: UUID
         public var name: String
         public var contacts: [Contact.Responses.Full]
+        public var url: URL?
         
         public init(
             id: UUID,
             name: String,
-            contacts: [Contact.Responses.Full]
+            contacts: [Contact.Responses.Full],
+            url: URL?
         ) {
             self.id = id
             self.name = name
             self.contacts = contacts
+            self.url = url
         }
     }
 }
