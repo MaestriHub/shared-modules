@@ -6,7 +6,7 @@ import Foundation
 /// - `telegram`: Идентификатор Telegram.
 /// - `whatsapp`: Идентификатор WhatsApp.
 /// - `instagram`: Идентификатор Instagram.
-public enum ContactType: String, Codable, CaseIterable {
+public enum ContactType: String, Codable, CaseIterable, Equatable {
     case phone
     case email
     case telegram

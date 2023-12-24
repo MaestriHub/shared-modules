@@ -54,7 +54,7 @@ public extension Customer.Responses {
     /// - name: `String` - имя клиента.
     /// - avatar: `URL?` - URL аватара клиента, может быть `nil`, если аватар отсутствует.
     /// - contacts: `[Contact.Responses.Full]` - массив полных контактных данных клиента.
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var name: String
         public var avatar: URL?

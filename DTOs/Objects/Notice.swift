@@ -20,7 +20,7 @@ public extension Notice.Responses {
     /// - `title`: Заголовок уведомления, предоставляющий краткую суть сообщения.
     /// - `body`: Основное содержимое уведомления, которое переносит детальную информацию.
     /// - `date`: Дата и время создания уведомления, может быть `nil`, если дата не предоставляется.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var title: String
         public var body: String

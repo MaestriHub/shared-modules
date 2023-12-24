@@ -43,7 +43,7 @@ public extension Vacancy.Responses {
     /// ### Properties:
     ///   - id: Уникальный идентификатор адреса.
     ///  - url: Ссылка которая отправляет сотруднику
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var url: URL
         
@@ -56,7 +56,7 @@ public extension Vacancy.Responses {
         }
     }
     
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var description: String
         public var salon: Salon.Responses.Partial

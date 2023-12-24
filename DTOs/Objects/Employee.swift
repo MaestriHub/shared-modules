@@ -79,7 +79,7 @@ public extension Employee.Responses {
     /// - avatar: `URL?` - URL-адрес аватара сотрудника, может быть `nil`, если аватар отсутствует.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
     /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var nickname: String
         public var avatar: URL?
@@ -108,7 +108,7 @@ public extension Employee.Responses {
     /// - id: `UUID` - уникальный идентификатор сотрудника.
     /// - name: `String` - имя сотрудника.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var name: String
         public var contacts: [Contact.Responses.Full]

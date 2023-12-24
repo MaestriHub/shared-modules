@@ -69,7 +69,7 @@ public extension Service.Responses {
     /// - `id`: Уникальный идентификатор услуги.
     /// - `title`: Название услуги.
     /// - `description`: Подробное описание услуги.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var title: String
         public var description: String
@@ -92,7 +92,7 @@ public extension Service.Responses {
     /// - `id`: Уникальный идентификатор услуги.
     /// - `title`: Название услуги.
     /// - `description`: Описание услуги, содержащее основные характеристики.
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var title: String
         public var description: String

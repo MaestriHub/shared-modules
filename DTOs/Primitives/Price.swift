@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Price: Parametable, Responsable {
+public struct Price: Parametable, Responsable, Equatable {
     
     public var amount: Decimal
     public var currency: String

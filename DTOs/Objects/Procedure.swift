@@ -91,7 +91,7 @@ public extension Procedure.Responses {
     /// - `price`: Цена процедуры.
     /// - `duration`: Продолжительность процедуры в минутах.
     /// - `service`: Полные данные о связанной услуге.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var price: Price
         public var duration: Int
@@ -118,7 +118,7 @@ public extension Procedure.Responses {
     /// - `price`: Цена процедуры.
     /// - `duration`: Продолжительность процедуры в минутах.
     /// - `service`: Краткие данные о связанной услуге.
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var price: Price
         public var duration: Int

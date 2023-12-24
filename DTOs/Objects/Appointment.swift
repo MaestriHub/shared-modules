@@ -118,7 +118,7 @@ public extension Appointment.Responses {
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var salon: Salon.Responses.Partial
         public var customer: AppointmentCustomer?
@@ -157,7 +157,7 @@ public extension Appointment.Responses {
     ///  - master: ``Employee.Responses.Partial`` - информация о мастере.
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
-    struct Partial: Responsable, Identifiable {
+    struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var customer: AppointmentCustomer?
         public var master: Employee.Responses.Partial

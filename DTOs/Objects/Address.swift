@@ -59,7 +59,7 @@ public extension Address.Responses {
     ///  - country: Название страны, где находится адрес.
     ///  - latitude: Географическая широта адреса.
     ///  - longitude: Географическая долгота адреса.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var address: String
         public var city: String

@@ -96,7 +96,7 @@ public extension Timetable.Responses {
     /// - `status`: Текущий статус работы ("Работает", "Скоро закроется", "Открыт", "Скоро откроется").
     /// - `timeZone`: Часовой пояс расписания.
     /// - `days`: Расписание в формате HH:MM-HH:MM.
-    struct Full: Responsable, Identifiable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var status: String?
         public var timeZone: String
