@@ -10,10 +10,6 @@ let package = Package(
             name: "DTOs",
             targets: [ "DTOs" ]
         ),
-		.library(
-            name: "Karte",
-            targets: [ "Karte" ]
-        ),
         .library(
             name: "SwifCron", 
             targets: [ "SwifCron" ]
@@ -31,11 +27,6 @@ let package = Package(
             name: "SwifCron",
             dependencies: [],
             path: "SwifCron/Sources"
-        ),
-		.target(
-            name: "Karte",
-            dependencies: [],
-            path: "Karte"
         ),
         .testTarget(
             name: "SwifCronTests",
