@@ -65,8 +65,6 @@ public extension Timetable.Parameters {
     }
 }
 
-
-
 // MARK: - Responses -
 
 public extension Timetable.Responses {
