@@ -41,32 +41,13 @@ public extension Timetable.Parameters {
     ///   Повторяется для каждого дня недели.
     struct Create: Parametable {
         public var timeZone: String
-        public var monday: String?
-        public var tuesday: String?
-        public var wednesday: String?
-        public var thursday: String?
-        public var friday: String?
-        public var saturday: String?
-        public var sunday: String?
+        public var offTimes: [Offtime]
+        public var schedule: Schedule.Week
         
-        public init(
-            timeZone: String,
-            monday: String?,
-            tuesday: String?,
-            wednesday: String?,
-            thursday: String?,
-            friday: String?,
-            saturday: String?,
-            sunday: String?
-        ) {
+        public init(timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
             self.timeZone = timeZone
-            self.monday = monday
-            self.tuesday = tuesday
-            self.wednesday = wednesday
-            self.thursday = thursday
-            self.friday = friday
-            self.saturday = saturday
-            self.sunday = sunday
+            self.offTimes = offTimes
+            self.schedule = schedule
         }
     }
     
@@ -100,36 +81,15 @@ public extension Timetable.Responses {
         public var id: UUID
         public var status: String?
         public var timeZone: String
-        public var monday: String?
-        public var tuesday: String?
-        public var wednesday: String?
-        public var thursday: String?
-        public var friday: String?
-        public var saturday: String?
-        public var sunday: String?
+        public var offTimes: [Offtime]
+        public var schedule: Schedule.Week
         
-        public init(
-            id: UUID,
-            status: String? = nil,
-            timeZone: String,
-            monday: String?,
-            tuesday: String?,
-            wednesday: String?,
-            thursday: String?,
-            friday: String?,
-            saturday: String?,
-            sunday: String?
-        ) {
+        public init(id: UUID, status: String? = nil, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
             self.id = id
             self.status = status
             self.timeZone = timeZone
-            self.monday = monday
-            self.tuesday = tuesday
-            self.wednesday = wednesday
-            self.thursday = thursday
-            self.friday = friday
-            self.saturday = saturday
-            self.sunday = sunday
+            self.offTimes = offTimes
+            self.schedule = schedule
         }
     }
     
@@ -145,4 +105,15 @@ public extension Timetable.Responses {
             self.days = days
         }
     }
+    
+    struct Offtime: Responsable, Equatable {
+        public var id: UUID
+        public var interval: Interval
+        
+        public init(id: UUID, interval: Interval) {
+            self.id = id
+            self.interval = interval
+        }
+    }
 }
+
