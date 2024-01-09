@@ -68,19 +68,6 @@ public extension User.Parameters {
             self.avatar = avatar
         }
     }
-    
-    struct RegisterPush: Codable {
-        public enum RegisterPushToken: Codable {
-            case apple(token: String)
-            case fcm(token: String)
-        }
-        
-        public let token: RegisterPushToken
-        
-        public init(token: RegisterPushToken) {
-            self.token = token
-        }
-    }
 }
 
 // MARK: - Responses -

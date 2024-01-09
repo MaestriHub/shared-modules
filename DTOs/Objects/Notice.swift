@@ -5,7 +5,23 @@ import Foundation
 /// В него входят  модели ответов (`Responses`),
 /// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
 public enum Notice {
+    public enum Parameters {}
     public enum Responses {}
+}
+
+public extension Notice.Parameters {
+    struct RegisterPush: Parametable {
+        public enum RegisterPushToken: Codable {
+            case apple(token: String)
+            case fcm(token: String)
+        }
+        
+        public let token: RegisterPushToken
+        
+        public init(token: RegisterPushToken) {
+            self.token = token
+        }
+    }
 }
 
 // MARK: - Responses -
