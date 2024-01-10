@@ -32,14 +32,27 @@ public extension Search.Parameters {
         public let longitude: Double
         public let latitudeDelta: Double
         public let longitudeDelta: Double
+        public let page: Int?
+        public let per: Int?
         
+        /// - Parameters:
+        ///    - value: Поисковый запрос пользователя в виде строки.
+        ///    - salonType: Фильтр по типу салона
+        ///    - latitude: Широта центральной точки поиска.
+        ///    - longitude: Долгота центральной точки поиска.
+        ///    - latitudeDelta: Диапазон изменения широты от центральной точки.
+        ///    - longitudeDelta: Диапазон изменения долготы от центральной точки.
+        ///    - page: Номер страницы для пагинации.
+        ///    - per: Количество элементов на странице для пагинации.
         public init(
             value: String,
             salonType: SalonType?,
             latitude: Double,
             longitude: Double,
             latitudeDelta: Double,
-            longitudeDelta: Double
+            longitudeDelta: Double,
+            page: Int?,
+            per: Int?
         ) {
             self.value = value
             self.salonType = salonType
@@ -47,6 +60,8 @@ public extension Search.Parameters {
             self.longitude = longitude
             self.latitudeDelta = latitudeDelta
             self.longitudeDelta = longitudeDelta
+            self.page = page
+            self.per = per
         }
     }
 }
