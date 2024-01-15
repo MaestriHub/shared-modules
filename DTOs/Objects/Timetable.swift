@@ -40,11 +40,15 @@ public extension Timetable.Parameters {
     /// - `days`: Расписание в формате HH:MM-HH:MM.
     ///   Повторяется для каждого дня недели.
     struct Create: Parametable {
+        public var salon: UUID?
+        public var employee: UUID?
         public var timeZone: String
         public var offTimes: [Offtime]
         public var schedule: Schedule.Week
-        
-        public init(timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
+
+        public init(salon: UUID?, employee: UUID?, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
+            self.salon = salon
+            self.employee = employee
             self.timeZone = timeZone
             self.offTimes = offTimes
             self.schedule = schedule
@@ -57,10 +61,16 @@ public extension Timetable.Parameters {
     /// ### Properties:
     /// - `interval`: Временной интервал, в течение которого услуги недоступны.
     struct Offtime: Parametable {
-        public var interval: Interval
-        
-        public init(interval: Interval) {
-            self.interval = interval
+        public var day: UInt,
+                   month: UInt,
+                   year: UInt?,
+                   intervals: [String]
+
+        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String]) {
+            self.day = day
+            self.month = month
+            self.year = year
+            self.intervals = intervals
         }
     }
 }
@@ -77,15 +87,13 @@ public extension Timetable.Responses {
     /// - `status`: Текущий статус работы ("Работает", "Скоро закроется", "Открыт", "Скоро откроется").
     /// - `timeZone`: Часовой пояс расписания.
     /// - `days`: Расписание в формате HH:MM-HH:MM.
-    struct Full: Responsable, Identifiable, Equatable {
-        public var id: UUID
+    struct Full: Responsable, Equatable {
         public var status: String?
         public var timeZone: String
         public var offTimes: [Offtime]
         public var schedule: Schedule.Week
         
-        public init(id: UUID, status: String? = nil, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
-            self.id = id
+        public init(status: String? = nil, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
             self.status = status
             self.timeZone = timeZone
             self.offTimes = offTimes
@@ -99,20 +107,24 @@ public extension Timetable.Responses {
     /// ### Properties:
     /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
     struct Slot: Responsable {
-        public var days: [Date: [Interval]]
-        
-        public init(days: [Date : [Interval]]) {
-            self.days = days
+        public var intervals: [Procedure.Responses.Partial: [Interval]]
+
+        public init(intervals: [Procedure.Responses.Partial: [Interval]]) {
+            self.intervals = intervals
         }
     }
     
     struct Offtime: Responsable, Equatable {
-        public var id: UUID
-        public var interval: Interval
-        
-        public init(id: UUID, interval: Interval) {
-            self.id = id
-            self.interval = interval
+        public var day: UInt,
+                   month: UInt,
+                   year: UInt?,
+                   intervals: [String]
+
+        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String]) {
+            self.day = day
+            self.month = month
+            self.year = year
+            self.intervals = intervals
         }
     }
 }
