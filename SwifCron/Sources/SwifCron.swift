@@ -71,20 +71,38 @@ public struct SwifCron {
      *
      * Supports only digit values yet
      **/
-    public func next(from date: Date = Date()) throws -> Date {
+    public func next(
+        from date: Date = Date(),
+        calendar: Calendar? = nil,
+        timeZone: TimeZone? = nil
+    ) throws -> Date {
         // Calendar with UTC-0 time zone
-        var calendar = Calendar(identifier: .gregorian)
-        guard let timeZone = TimeZone(secondsFromGMT: 0) else {
-            throw SwifCronError(reason: "Unable to get UTC+0 time zone")
+        var nonNilCalendar: Calendar
+        let nonNilTimeZone: TimeZone
+        switch (calendar, timeZone) {
+        case (let calendar?, let timeZone?):
+            nonNilCalendar = calendar
+            nonNilCalendar.timeZone = timeZone
+        case (let calendar?, nil):
+            nonNilCalendar = calendar
+            nonNilCalendar.timeZone = calendar.timeZone
+        case (nil, let timeZone?):
+            nonNilCalendar = Calendar(identifier: .gregorian)
+            nonNilCalendar.timeZone = timeZone
+        case (nil, nil):
+            nonNilCalendar = Calendar(identifier: .gregorian)
+            guard let timeZone = TimeZone(secondsFromGMT: 0) else {
+                throw SwifCronError(reason: "Unable to get UTC+0 time zone")
+            }
+            nonNilCalendar.timeZone = timeZone
         }
-        calendar.timeZone = timeZone
         
         // Value for `from` date
-        let currentDayOfMonth = calendar.component(.day, from: date)
-        let currentMonth = calendar.component(.month, from: date)
-        let currentDayOfWeek = calendar.component(.weekday, from: date) - 1
-        let currentWeekOfYear = calendar.component(.weekOfYear, from: date)
-        let currentYear = calendar.component(.year, from: date)
+        let currentDayOfMonth = nonNilCalendar.component(.day, from: date)
+        let currentMonth = nonNilCalendar.component(.month, from: date)
+        let currentDayOfWeek = nonNilCalendar.component(.weekday, from: date) - 1
+        let currentWeekOfYear = nonNilCalendar.component(.weekOfYear, from: date)
+        let currentYear = nonNilCalendar.component(.year, from: date)
         
         // Looking for the right next date
         let nextHour = (value: 0, offset: 0)
@@ -111,7 +129,7 @@ public struct SwifCron {
             return try Helper.getNextDateByDom(day: nextDayOfMonth.value,
                                                month: nextMonth.value,
                                                year: currentYear + nextMonth.offset,
-                                               calendar: calendar)
+                                               calendar: nonNilCalendar)
         case .exactDayOfWeekButAnyDom:
             return try Helper.getNextDateByDow(currentDow: currentDayOfWeek,
                                                availableDows: daysOfWeek,
@@ -120,7 +138,7 @@ public struct SwifCron {
                                                day: currentDayOfMonth,
                                                month: currentMonth,
                                                year: currentYear,
-                                               calendar: calendar,
+                                               calendar: nonNilCalendar,
                                                cron: self)
         case .mixed:
             let nextDateByDow = try Helper.getNextDateByDow(currentDow: currentDayOfWeek,
@@ -130,12 +148,12 @@ public struct SwifCron {
                                                             day: currentDayOfMonth,
                                                             month: currentMonth,
                                                             year: currentYear,
-                                                            calendar: calendar,
+                                                            calendar: nonNilCalendar,
                                                             cron: self)
             let nextDateByDom = try Helper.getNextDateByDom(day: nextDayOfMonth.value,
                                                             month: nextMonth.value,
                                                             year: currentYear + nextMonth.offset,
-                                                            calendar: calendar)
+                                                            calendar: nonNilCalendar)
             return nextDateByDow < nextDateByDom ? nextDateByDow : nextDateByDom
         }
     }
