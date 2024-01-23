@@ -76,17 +76,21 @@ public extension Auth.Responses {
     /// Структура `Full` предоставляет токен аутентификации и полную информацию о пользователе.
     ///
     /// ### Properties:
-    ///   - token: Токен аутентификации.
+    ///   - accessToken: Токен аутентификации.
+    ///  - refreshToken: Токен сессии.
     ///  - user: Полная информация о пользователе в формате `User.Responses.Full`.
     struct Full: Responsable {
-        public let token: String
+        public let accessToken: String
+        public let refreshToken: String
         public let user: User.Responses.Full
         
         public init(
-            token: String,
+            accessToken: String,
+            refreshToken: String,
             user: User.Responses.Full
         ) {
-            self.token = token
+            self.accessToken = accessToken
+            self.refreshToken = refreshToken
             self.user = user
         }
     }
@@ -95,12 +99,18 @@ public extension Auth.Responses {
     /// Структура `Partial` предоставляет токен аутентификации без дополнительных данных о пользователе.
     ///
     /// ### Properties:
-    ///   - token: Токен аутентификации.
+    ///   - accessToken: Токен аутентификации.
+    ///  - refreshToken: Токен сессии.
     struct Partial: Responsable {
-        public let token: String
+        public let accessToken: String
+        public let refreshToken: String?
         
-        public init(token: String) {
-            self.token = token
+        public init(
+            accessToken: String,
+            refreshToken: String?
+        ) {
+            self.accessToken = accessToken
+            self.refreshToken = refreshToken
         }
     }
 }
