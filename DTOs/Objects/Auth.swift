@@ -80,13 +80,13 @@ public extension Auth.Responses {
     ///  - refreshToken: Токен сессии.
     ///  - user: Полная информация о пользователе в формате `User.Responses.Full`.
     struct Full: Responsable {
-        public let accessToken: String
-        public let refreshToken: String
+        public let accessToken: Token
+        public let refreshToken: Token
         public let user: User.Responses.Full
         
         public init(
-            accessToken: String,
-            refreshToken: String,
+            accessToken: Token,
+            refreshToken: Token,
             user: User.Responses.Full
         ) {
             self.accessToken = accessToken
@@ -102,12 +102,12 @@ public extension Auth.Responses {
     ///   - accessToken: Токен аутентификации.
     ///  - refreshToken: Токен сессии.
     struct Partial: Responsable {
-        public let accessToken: String
-        public let refreshToken: String?
+        public let accessToken: Token
+        public let refreshToken: Token?
         
         public init(
-            accessToken: String,
-            refreshToken: String?
+            accessToken: Token,
+            refreshToken: Token?
         ) {
             self.accessToken = accessToken
             self.refreshToken = refreshToken
