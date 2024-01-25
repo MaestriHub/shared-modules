@@ -103,9 +103,11 @@ public extension Contact.Responses {
     /// - redirectUrl: `String` - ссылка, куда нужно перенаправить пользователя, чтобы получить код при необходимости
     struct Send: Responsable {
         public let redirectUrl: String?
+        public let sessionInfo: String?
         
-        public init(redirectUrl: String?) {
+        public init(redirectUrl: String?, sessionInfo: String?) {
             self.redirectUrl = redirectUrl
+            self.sessionInfo = sessionInfo
         }
     }
     
