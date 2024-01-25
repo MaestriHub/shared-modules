@@ -38,15 +38,30 @@ public extension Contact.Parameters {
         }
     }
     
-    /// Параметры `SendCode` используются для отправки верификационного кода на значение контакта.
+    /// Параметры для отправки OTP кода на указанный контакт
+    ///
+    /// ### Properties:
+    /// - recaptchaToken: `String?` - токен полученный от сайта с reCaptcha
+    struct SendCode: Parametable {
+        public let recaptchaToken: String?
+        
+        public init(recaptchaToken: String?) {
+            self.recaptchaToken = recaptchaToken
+        }
+    }
+    
+    /// Параметры `Verify` используются для отправки верификационного кода на значение контакта.
     ///
     /// ### Properties:
     /// - code: `String` - код отправленный ранее на значение контакта
+    /// - sessionInfo: `String` - сессия полученная от firebase
     struct Verify: Parametable {
         public let code: String
+        public let sessionInfo: String?
         
-        public init(code: String) {
+        public init(code: String, sessionInfo: String) {
             self.code = code
+            self.sessionInfo = sessionInfo
         }
     }
 }
