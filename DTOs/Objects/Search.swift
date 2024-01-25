@@ -28,10 +28,8 @@ public extension Search.Parameters {
     struct Retrieve: Parametable {
         public let value: String?
         public let salonType: SalonType?
-        public let latitude: Double
-        public let longitude: Double
-        public let latitudeDelta: Double
-        public let longitudeDelta: Double
+        public let latitude: Double?
+        public let longitude: Double?
         public let page: Int?
         public let per: Int?
         
@@ -40,17 +38,13 @@ public extension Search.Parameters {
         ///    - salonType: Фильтр по типу салона
         ///    - latitude: Широта центральной точки поиска.
         ///    - longitude: Долгота центральной точки поиска.
-        ///    - latitudeDelta: Диапазон изменения широты от центральной точки.
-        ///    - longitudeDelta: Диапазон изменения долготы от центральной точки.
         ///    - page: Номер страницы для пагинации.
         ///    - per: Количество элементов на странице для пагинации.
         public init(
-            value: String,
+            value: String?,
             salonType: SalonType?,
-            latitude: Double,
-            longitude: Double,
-            latitudeDelta: Double,
-            longitudeDelta: Double,
+            latitude: Double?,
+            longitude: Double?,
             page: Int?,
             per: Int?
         ) {
@@ -58,8 +52,6 @@ public extension Search.Parameters {
             self.salonType = salonType
             self.latitude = latitude
             self.longitude = longitude
-            self.latitudeDelta = latitudeDelta
-            self.longitudeDelta = longitudeDelta
             self.page = page
             self.per = per
         }
