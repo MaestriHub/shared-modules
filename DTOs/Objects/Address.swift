@@ -59,8 +59,7 @@ public extension Address.Responses {
     ///  - country: Название страны, где находится адрес.
     ///  - latitude: Географическая широта адреса.
     ///  - longitude: Географическая долгота адреса.
-    struct Full: Responsable, Identifiable, Equatable {
-        public var id: UUID
+    struct Full: Responsable, Equatable {
         public var address: String
         public var city: String
         public var country: String
@@ -68,14 +67,12 @@ public extension Address.Responses {
         public var longitude: Double
         
         public init(
-            id: UUID,
             address: String,
             city: String,
             country: String,
             latitude: Double,
             longitude: Double
         ) {
-            self.id = id
             self.address = address
             self.city = city
             self.country = country

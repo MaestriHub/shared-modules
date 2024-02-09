@@ -23,14 +23,14 @@ public extension Appointment.Parameters {
     ///  - salons: `[UUID]?` - необязательный массив идентификаторов салонов для фильтрации.
     /// Если массив не предоставлен, выборка осуществляется по всем сущностям.
     struct Retrieve: Parametable {
-        public let startDate: Date?
-        public let endDate: Date?
+        public let startDate: Date
+        public let endDate: Date
         public let employees: [UUID]?
         public let salons: [UUID]?
         
         public init(
-            startDate: Date?,
-            endDate: Date?,
+            startDate: Date,
+            endDate: Date,
             employees: [UUID]? = nil,
             salons: [UUID]? = nil
         ) {
@@ -52,30 +52,24 @@ public extension Appointment.Parameters {
     ///  - price: `Price` - цена записи на прием.
     ///  - address: `UUID` - идентификатор адреса салона.
     struct Create: Parametable {
-        public let salon: UUID
-        public let master: UUID
-        public let customer: UUID?
-        public let procedures: [UUID]
+        public let salonId: UUID
+        public let masterId: UUID
+        public let customerId: UUID?
+        public let proceduresId: [UUID]
         public let time: Interval
-        public let price: Price
-        public let address: UUID
         
         public init(
-            salon: UUID,
-            master: UUID,
-            customer: UUID?,
-            procedures: [UUID],
-            time: Interval,
-            price: Price,
-            address: UUID
+            salonId: UUID,
+            masterId: UUID,
+            customerId: UUID?,
+            proceduresId: [UUID],
+            time: Interval
         ) {
-            self.salon = salon
-            self.master = master
-            self.customer = customer
-            self.procedures = procedures
+            self.salonId = salonId
+            self.masterId = masterId
+            self.customerId = customerId
+            self.proceduresId = proceduresId
             self.time = time
-            self.price = price
-            self.address = address
         }
     }
 
@@ -88,16 +82,16 @@ public extension Appointment.Parameters {
     struct Patch: Parametable {
         public let time: Interval?
         public let price: Price?
-        public let procedures: [UUID]?
+        public let proceduresId: [UUID]?
         
         public init(
             time: Interval? = nil,
             price: Price? = nil,
-            procedures: [UUID]? = nil
+            proceduresId: [UUID]? = nil
         ) {
             self.time = time
             self.price = price
-            self.procedures = procedures
+            self.proceduresId = proceduresId
         }
     }
 }
@@ -120,6 +114,7 @@ public extension Appointment.Responses {
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
+        public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
         public var customer: AppointmentCustomer
         public var master: Employee.Responses.Partial
@@ -130,6 +125,7 @@ public extension Appointment.Responses {
         
         public init(
             id: UUID,
+            status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             customer: AppointmentCustomer,
             master: Employee.Responses.Partial,
@@ -139,6 +135,7 @@ public extension Appointment.Responses {
             address: Address.Responses.Full
         ) {
             self.id = id
+            self.status = status
             self.salon = salon
             self.customer = customer
             self.master = master
@@ -159,23 +156,29 @@ public extension Appointment.Responses {
     ///  - price: ``Price`` - цена записи.
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
+        public var status: AppointmentStatus
         public var customer: AppointmentCustomer
         public var master: Employee.Responses.Partial
         public var time: Interval
         public var price: Price
+        public var procedures: String
         
         public init(
             id: UUID,
+            status: AppointmentStatus,
             customer: AppointmentCustomer,
             master: Employee.Responses.Partial,
             time: Interval,
-            price: Price
+            price: Price,
+            procedures: String
         ) {
             self.id = id
+            self.status = status
             self.customer = customer
             self.master = master
             self.time = time
             self.price = price
+            self.procedures = procedures
         }
     }
 }
