@@ -19,11 +19,15 @@ public extension Customer.Parameters {
     /// ### Properties:
     /// - `employees`: Список идентификаторов employees для фильтрации клиентов.
     struct Retrieve: Parametable {
+        
+        public let salons: [UUID]?
         public let employees: [UUID]?
         
         public init(
+            salons: [UUID]? = nil,
             employees: [UUID]? = nil
         ) {
+            self.salons = salons
             self.employees = employees
         }
     }
