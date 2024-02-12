@@ -13,20 +13,6 @@ public enum User {
 
 public extension User.Parameters {
     
-    /// Параметры, используемые при переключение профиля.
-    ///
-    /// ### Properties:
-    struct Switch: Parametable {
-        
-        public var role: UserRoleSet
-
-        public init(
-            role: UserRoleSet
-        ) {
-            self.role = role
-        }
-    }
-    
     /// Параметры, используемые при создании профиля профессионала.
     ///
     /// ### Properties:

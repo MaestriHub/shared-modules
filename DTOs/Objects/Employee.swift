@@ -19,12 +19,12 @@ public extension Employee.Parameters {
     /// ### Properties:
     /// - `salons`: Список идентификаторов салонов для фильтрации сотрудников.
     struct Retrieve: Parametable {
-        public let salons: [UUID]?
+        public let salonsId: [UUID]
         
         public init(
-            salons: [UUID]? = nil
+            salonsId: [UUID]
         ) {
-            self.salons = salons
+            self.salonsId = salonsId
         }
     }
     
