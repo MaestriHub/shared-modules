@@ -1,9 +1,8 @@
 import Foundation
 
-public struct AppointmentApprovedSet: OptionSet, Codable {
+public struct ProPermissionSet: OptionSet, Codable {
     
-    public static let customer = AppointmentApprovedSet(rawValue: 1 << 0)
-    public static let professional = AppointmentApprovedSet(rawValue: 1 << 1)
+    public static let service = ProPermissionSet(rawValue: 1 << 0)
     
     public var rawValue: Int
     

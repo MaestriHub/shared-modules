@@ -16,7 +16,19 @@ public extension Service.Parameters {
     /// Параметры запроса для получения списка услуг.
     /// Могут включать фильтрацию и сортировку, но в данном примере не определены.
     struct Retrieve: Parametable {
-        // Здесь могут быть определены фильтры для запроса списка услуг, если это необходимо.
+        public let value: String?
+        public let page: Int
+        public let per: Int
+        
+        public init(
+            value: String?,
+            page: Int,
+            per: Int
+        ) {
+            self.value = value
+            self.page = page
+            self.per = per
+        }
     }
     
     /// Параметры, передаваемые в теле запроса при создании новой услуги.
