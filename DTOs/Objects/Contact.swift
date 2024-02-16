@@ -98,16 +98,11 @@ public extension Contact.Responses {
     ///
     /// ### Properties:
     /// - redirectUrl: `String` - ссылка, куда нужно перенаправить пользователя, чтобы получить код при необходимости
-    struct Send: Responsable {
-        public let redirectUrl: String?
-        public let sessionInfo: String?
-        
-        public init(redirectUrl: String?, sessionInfo: String?) {
-            self.redirectUrl = redirectUrl
-            self.sessionInfo = sessionInfo
-        }
+    enum SendPhoneVerification: Responsable {
+        case redirect(url: Redirect)
+        case session(info: String)
     }
-    
+
     /// `Verify` возвращает информацию о том, что контакт был верифицирован
     ///
     /// ### Properties:
