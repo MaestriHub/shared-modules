@@ -56,12 +56,12 @@ public extension Contact.Parameters {
     /// - code: `String` - код отправленный ранее на значение контакта
     /// - sessionInfo: `String` - сессия полученная от firebase
     struct Verify: Parametable {
+        public let value: String
         public let code: String
-        public let sessionInfo: String?
-        
-        public init(code: String, sessionInfo: String) {
+
+        public init(value: String, code: String) {
+            self.value = value
             self.code = code
-            self.sessionInfo = sessionInfo
         }
     }
 }
