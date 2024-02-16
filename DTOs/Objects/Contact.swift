@@ -56,7 +56,7 @@ public extension Contact.Parameters {
     /// - code: `String` - код отправленный ранее на значение контакта
     struct Verify: Parametable {
         public let code: String
-
+        
         public init(code: String) {
             self.code = code
         }
@@ -93,17 +93,18 @@ public extension Contact.Responses {
             self.type = type
         }
     }
-
+    
     // TODO: Vitalik убрать после мерджа Pull Request
     struct Send: Responsable {
         public let redirectUrl: String?
         public let sessionInfo: String?
-
+        
         public init(redirectUrl: String?, sessionInfo: String?) {
             self.redirectUrl = redirectUrl
             self.sessionInfo = sessionInfo
         }
-
+    }
+    
     /// `Send` возвращает информацию об отправке верификацонного кода на контакт пользователя
     ///
     /// ### Properties:
@@ -112,7 +113,7 @@ public extension Contact.Responses {
         case redirect(url: Redirect)
         case session(info: String)
     }
-
+    
     /// `Verify` возвращает информацию о том, что контакт был верифицирован
     ///
     /// ### Properties:
@@ -125,4 +126,3 @@ public extension Contact.Responses {
         }
     }
 }
-
