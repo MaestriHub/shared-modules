@@ -54,13 +54,10 @@ public extension Contact.Parameters {
     ///
     /// ### Properties:
     /// - code: `String` - код отправленный ранее на значение контакта
-    /// - sessionInfo: `String` - сессия полученная от firebase
     struct Verify: Parametable {
-        public let value: String
         public let code: String
 
-        public init(value: String, code: String) {
-            self.value = value
+        public init(code: String) {
             self.code = code
         }
     }
