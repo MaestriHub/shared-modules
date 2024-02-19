@@ -43,18 +43,28 @@ public extension Timetable.Parameters {
         public var salon: UUID?
         public var employee: UUID?
         public var timeZone: String
-        public var offTimes: [Offtime]
         public var schedule: Schedule.Week
 
-        public init(salon: UUID?, employee: UUID?, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
+        public init(salon: UUID?, employee: UUID?, timeZone: String, schedule: Schedule.Week) {
             self.salon = salon
             self.employee = employee
             self.timeZone = timeZone
-            self.offTimes = offTimes
             self.schedule = schedule
         }
     }
     
+    /// Параметры, передаваемые в теле запроса при запросе недельного расписания.
+    struct Get: Parametable {
+        /// День, с которого запрашиваем расписание
+        public let start: Date
+
+        /// id сотрудника
+        public let employee: UUID?
+
+        /// id салона
+        public let salon: UUID?
+    }
+
     /// Параметры для определения временных промежутков, когда услуги не будут доступны.
     /// Используется для учета периодов отгулов, отпусков и других нерабочих интервалов.
     ///
@@ -63,14 +73,42 @@ public extension Timetable.Parameters {
     struct Offtime: Parametable {
         public var day: UInt,
                    month: UInt,
-                   year: UInt?,
-                   intervals: [String]
+                   year: UInt?
+        public var intervals: [String]
 
-        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String]) {
+        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String] = [], salon: UUID? = nil, employee: UUID? = nil, timeZone: String? = nil) {
             self.day = day
             self.month = month
             self.year = year
-            self.intervals = intervals
+            switch intervals.isEmpty {
+            case true: self.intervals = ["00:00-23:59"]
+            case false: self.intervals = intervals
+            }
+        }
+    }
+
+    /// Параметры, передаваемые в теле запроса при запросе отгулов.
+    struct GetOfftimes: Parametable {
+        /// id сотрудника
+        public let employee: UUID?
+
+        /// id салона
+        public let salon: UUID?
+    }
+
+    typealias DeleteOfftimes = CreateOfftimes
+    struct CreateOfftimes: Parametable {
+
+        public var offtimes: [Offtime]
+        public var salon: UUID?
+        public var employee: UUID?
+        public var timeZone: String
+
+        public init(offtimes: [Offtime], salon: UUID?, employee: UUID?, timeZone: String) {
+            self.offtimes = offtimes
+            self.salon = salon
+            self.employee = employee
+            self.timeZone = timeZone
         }
     }
 }
@@ -84,17 +122,14 @@ public extension Timetable.Responses {
     ///
     /// ### Properties:
     /// - `id`: Уникальный идентификатор расписания.
-    /// - `status`: Текущий статус работы ("Работает", "Скоро закроется", "Открыт", "Скоро откроется").
     /// - `timeZone`: Часовой пояс расписания.
     /// - `days`: Расписание в формате HH:MM-HH:MM.
     struct Full: Responsable, Equatable {
-        public var status: String?
         public var timeZone: String
         public var offTimes: [Offtime]
         public var schedule: Schedule.Week
         
         public init(status: String? = nil, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
-            self.status = status
             self.timeZone = timeZone
             self.offTimes = offTimes
             self.schedule = schedule
@@ -107,9 +142,9 @@ public extension Timetable.Responses {
     /// ### Properties:
     /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
     struct Slot: Responsable {
-        public var intervals: [Procedure.Responses.Partial: [Interval]]
+        public var intervals: [Interval]
 
-        public init(intervals: [Procedure.Responses.Partial: [Interval]]) {
+        public init(intervals: [Interval]) {
             self.intervals = intervals
         }
     }
