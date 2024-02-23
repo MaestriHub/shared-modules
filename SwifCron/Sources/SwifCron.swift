@@ -17,8 +17,6 @@ public struct SwifCron {
     }
     let mode: ExpressionMode
     
-    let fiveValues: Bool = true // TODO: year implementation
-
     /// Parsed parts of cron expression
     let daysOfMonth, months, daysOfWeek, weeksOfYear: [Int]
 
@@ -29,6 +27,7 @@ public struct SwifCron {
        - month: expression string (doesn't support name of month, only digits)
        - dayOfWeek: expression string (sunday is 0, doesn't support name of day, so use only digits)
        - weeksOfYear: expression string
+        // TODO: year implementation
 
      Supported values:
      - *: for any value
@@ -78,7 +77,6 @@ public struct SwifCron {
     ) throws -> Date {
         // Calendar with UTC-0 time zone
         var nonNilCalendar: Calendar
-        let nonNilTimeZone: TimeZone
         switch (calendar, timeZone) {
         case (let calendar?, let timeZone?):
             nonNilCalendar = calendar

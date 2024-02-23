@@ -20,15 +20,15 @@ public extension Timetable.Parameters {
     /// - `timeZone`: Часовой пояс, в котором требуется искать доступные слоты.
     /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
     struct SearchSlot: Parametable {
-        public var timeZone: String
         public var procedures: [UUID]
+        public var timeZone: String
         
         public init(
-            timeZone: String,
-            procedures: [UUID]
+            procedures: [UUID],
+            timeZone: String
         ) {
-            self.timeZone = timeZone
             self.procedures = procedures
+            self.timeZone = timeZone
         }
     }
     
@@ -39,30 +39,25 @@ public extension Timetable.Parameters {
     /// - `timeZone`: Часовой пояс для расписания.
     /// - `days`: Расписание в формате HH:MM-HH:MM.
     ///   Повторяется для каждого дня недели.
-    struct Create: Parametable {
-        public var salon: UUID?
-        public var employee: UUID?
-        public var timeZone: String
+    struct CreateWeek: Parametable {
+        public var owner: TimetableOwner
         public var schedule: Schedule.Week
+        public var timeZone: String
 
-        public init(salon: UUID?, employee: UUID?, timeZone: String, schedule: Schedule.Week) {
-            self.salon = salon
-            self.employee = employee
-            self.timeZone = timeZone
+        public init(
+            owner: TimetableOwner,
+            schedule: Schedule.Week,
+            timeZone: String
+        ) {
+            self.owner = owner
             self.schedule = schedule
+            self.timeZone = timeZone
         }
     }
     
     /// Параметры, передаваемые в теле запроса при запросе недельного расписания.
     struct Get: Parametable {
-        /// День, с которого запрашиваем расписание
-        public let start: Date
-
-        /// id сотрудника
-        public let employee: UUID?
-
-        /// id салона
-        public let salon: UUID?
+        public var owner: TimetableOwner
     }
 
     /// Параметры для определения временных промежутков, когда услуги не будут доступны.
@@ -70,44 +65,21 @@ public extension Timetable.Parameters {
     ///
     /// ### Properties:
     /// - `interval`: Временной интервал, в течение которого услуги недоступны.
-    struct Offtime: Parametable {
-        public var day: UInt,
-                   month: UInt,
-                   year: UInt?
-        public var intervals: [String]
-
-        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String] = [], salon: UUID? = nil, employee: UUID? = nil, timeZone: String? = nil) {
-            self.day = day
-            self.month = month
-            self.year = year
-            switch intervals.isEmpty {
-            case true: self.intervals = ["00:00-23:59"]
-            case false: self.intervals = intervals
-            }
-        }
-    }
-
-    /// Параметры, передаваемые в теле запроса при запросе отгулов.
-    struct GetOfftimes: Parametable {
-        /// id сотрудника
-        public let employee: UUID?
-
-        /// id салона
-        public let salon: UUID?
-    }
-
-    typealias DeleteOfftimes = CreateOfftimes
-    struct CreateOfftimes: Parametable {
-
-        public var offtimes: [Offtime]
-        public var salon: UUID?
-        public var employee: UUID?
+    struct CreateOfftime: Parametable {
+        public var owner: TimetableOwner
+        public var interval: Interval
+        public var reason: String?
         public var timeZone: String
 
-        public init(offtimes: [Offtime], salon: UUID?, employee: UUID?, timeZone: String) {
-            self.offtimes = offtimes
-            self.salon = salon
-            self.employee = employee
+        public init(
+            owner: TimetableOwner,
+            interval: Interval,
+            reason: String?,
+            timeZone: String
+        ) {
+            self.owner = owner
+            self.interval = interval
+            self.reason = reason
             self.timeZone = timeZone
         }
     }
@@ -116,25 +88,6 @@ public extension Timetable.Parameters {
 // MARK: - Responses -
 
 public extension Timetable.Responses {
-    
-    /// Структура полного ответа, содержащая расписание работы на неделю.
-    /// Включает статус работы и расписание по дням недели в текстовом формате.
-    ///
-    /// ### Properties:
-    /// - `id`: Уникальный идентификатор расписания.
-    /// - `timeZone`: Часовой пояс расписания.
-    /// - `days`: Расписание в формате HH:MM-HH:MM.
-    struct Full: Responsable, Equatable {
-        public var timeZone: String
-        public var offTimes: [Offtime]
-        public var schedule: Schedule.Week
-        
-        public init(status: String? = nil, timeZone: String, offTimes: [Offtime], schedule: Schedule.Week) {
-            self.timeZone = timeZone
-            self.offTimes = offTimes
-            self.schedule = schedule
-        }
-    }
     
     /// Структура ответа, возвращающая доступные временные слоты.
     /// Представляет доступные интервалы для записи к мастеру или в салоне на ближайшие дни.
@@ -149,18 +102,42 @@ public extension Timetable.Responses {
         }
     }
     
+    /// Структура полного ответа, содержащая расписание работы на неделю.
+    /// Включает статус работы и расписание по дням недели в текстовом формате.
+    ///
+    /// ### Properties:
+    /// - `id`: Уникальный идентификатор расписания.
+    /// - `timeZone`: Часовой пояс расписания.
+    /// - `days`: Расписание в формате HH:MM-HH:MM.
+    struct WeekFull: Responsable, Equatable {
+        public var schedule: Schedule.Week
+        public var offTimes: [Offtime]
+        public var timeZone: String
+        
+        public init(
+            schedule: Schedule.Week,
+            offTimes: [Offtime],
+            timeZone: String
+        ) {
+            self.schedule = schedule
+            self.offTimes = offTimes
+            self.timeZone = timeZone
+        }
+    }
+    
     struct Offtime: Responsable, Equatable {
-        public var day: UInt,
-                   month: UInt,
-                   year: UInt?,
-                   intervals: [String]
+        public var id: UUID
+        public var interval: Interval
+        public var reason: String?
 
-        public init(day: UInt, month: UInt, year: UInt? = nil, intervals: [String]) {
-            self.day = day
-            self.month = month
-            self.year = year
-            self.intervals = intervals
+        public init(
+            id: UUID,
+            interval: Interval,
+            reason: String?
+        ) {
+            self.id = id
+            self.interval = interval
+            self.reason = reason
         }
     }
 }
-

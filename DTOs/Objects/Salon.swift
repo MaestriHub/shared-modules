@@ -26,14 +26,14 @@ public extension Salon.Parameters {
         public let name: String
         public let type: SalonType
         public let logo: URL?
-        public let timetable: Timetable.Parameters.Create
+        public let timetable: Timetable.Parameters.CreateWeek
         public let address: Address.Parameters.Create
         
         public init(
             name: String, 
             type: SalonType,
             logo: URL? = nil,
-            timetable: Timetable.Parameters.Create,
+            timetable: Timetable.Parameters.CreateWeek,
             address: Address.Parameters.Create
         ) {
             self.name = name
@@ -88,7 +88,7 @@ public extension Salon.Responses {
         public var address: Address.Responses.Full
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
-        public var timetable: Timetable.Responses.Full
+        public var timetable: Timetable.Responses.WeekFull
         public var masters: [Employee.Responses.Full]?
         
         public init(
@@ -99,7 +99,7 @@ public extension Salon.Responses {
             address: Address.Responses.Full,
             canEdit: Bool,
             isFavorite: Bool,
-            timetable: Timetable.Responses.Full,
+            timetable: Timetable.Responses.WeekFull,
             masters: [Employee.Responses.Full]? = nil
         ) {
             self.id = id

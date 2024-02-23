@@ -91,14 +91,16 @@ struct Helper {
     
     /// Returns day, month, yearOffset components
     /// to build a date from provided day of week
-    static func findComponentsByDayOfWeek(currentDow: Int,
-                                          availableDows: [Int],
-                                          currentWoy: Int,
-                                          availableWoys: [Int],
-                                          currentDay dom: Int,
-                                          currentMonth month: Int,
-                                          year: Int,
-                                          calendar: Calendar) throws -> (day: Int, month: Int, yearOffset: Int) {
+    static func findComponentsByDayOfWeek(
+        currentDow: Int,
+        availableDows: [Int],
+        currentWoy: Int,
+        availableWoys: [Int],
+        currentDay dom: Int,
+        currentMonth month: Int,
+        year: Int,
+        calendar: Calendar
+    ) throws -> (day: Int, month: Int, yearOffset: Int) {
         var nextWoy: (value: Int, offset: Int)
 
         if availableWoys.contains(currentWoy),
