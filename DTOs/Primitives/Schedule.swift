@@ -38,14 +38,12 @@ public struct Schedule {
     
     /// DaySchedule: модель одного дня в расписании
     public struct Day: Responsable, Equatable {
-        public var workTime: [String]
+        public var workTime: String
         public var offTime: [String]
-        //        public var isWeekend: Bool
         
-        public init(workTime: [String], offTime: [String]/*, isWeekend: Bool*/) {
+        public init(workTime: String, offTime: [String]) {
             self.workTime = workTime
             self.offTime = offTime
-            //            self.isWeekend = isWeekend
         }
     }
 }
