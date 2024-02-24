@@ -53,12 +53,12 @@ public extension Employee.Parameters {
     struct Patch: Parametable {
         public var roleSet: SalonRoleSet?
         public var contacts: [Contact.Parameters.Create]?
-        public var timetable: Timetable.Parameters.CreateWeek?
+        public var timetable: Timetable.Week?
         
         public init(
             roleSet: SalonRoleSet?,
             contacts: [Contact.Parameters.Create]?,
-            timetable: Timetable.Parameters.CreateWeek?
+            timetable: Timetable.Week?
         ) {
             self.roleSet = roleSet
             self.contacts = contacts

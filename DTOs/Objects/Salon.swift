@@ -26,15 +26,15 @@ public extension Salon.Parameters {
         public let name: String
         public let type: SalonType
         public let logo: URL?
-        public let timetable: Timetable.Parameters.CreateWeek
-        public let address: Address.Parameters.Create
+        public let timetable: Timetable.Week
+        public let address: Address
         
         public init(
             name: String, 
             type: SalonType,
             logo: URL? = nil,
-            timetable: Timetable.Parameters.CreateWeek,
-            address: Address.Parameters.Create
+            timetable: Timetable.Week,
+            address: Address
         ) {
             self.name = name
             self.type = type
@@ -85,10 +85,10 @@ public extension Salon.Responses {
         public var name: String
         public var type: SalonType
         public var logo: URL?
-        public var address: Address.Responses.Full
+        public var address: Address
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
-        public var timetable: Timetable.Responses.WeekFull
+        public var timetable: Timetable.Week
         public var masters: [Employee.Responses.Full]?
         
         public init(
@@ -96,10 +96,10 @@ public extension Salon.Responses {
             name: String,
             type: SalonType,
             logo: URL? = nil,
-            address: Address.Responses.Full,
+            address: Address,
             canEdit: Bool,
             isFavorite: Bool,
-            timetable: Timetable.Responses.WeekFull,
+            timetable: Timetable.Week,
             masters: [Employee.Responses.Full]? = nil
         ) {
             self.id = id
@@ -128,7 +128,7 @@ public extension Salon.Responses {
         public var name: String
         public var type: SalonType
         public var logo: URL?
-        public var address: Address.Responses.Full // Может быть можно просто строку присылать
+        public var address: Address // Может быть можно просто строку присылать
         public var isFavorite: Bool = false
         
         public init(
@@ -136,7 +136,7 @@ public extension Salon.Responses {
             name: String,
             type: SalonType,
             logo: URL? = nil,
-            address: Address.Responses.Full,
+            address: Address,
             isFavorite: Bool
         ) {
             self.id = id

@@ -7,12 +7,25 @@ import Foundation
 public enum Timetable {
     public enum Parameters {}
     public enum Responses {}
+    
+    public struct Week: Parametable, Responsable, Equatable {
+        public var schedule: Schedule.Week
+        public var timeZone: String
+
+        public init(
+            schedule: Schedule.Week,
+            timeZone: String
+        ) {
+            self.schedule = schedule
+            self.timeZone = timeZone
+        }
+    }
 }
 
 // MARK: - Parameters -
 
 public extension Timetable.Parameters {
-    
+        
     /// Параметры запроса для поиска доступных временных слотов для процедур.
     /// Учитывает часовой пояс и список запрашиваемых процедур.
     ///
@@ -28,58 +41,6 @@ public extension Timetable.Parameters {
             timeZone: String
         ) {
             self.procedures = procedures
-            self.timeZone = timeZone
-        }
-    }
-    
-    /// Параметры, передаваемые в теле запроса при создании нового расписания.
-    /// Описывают расписание работы по дням недели.
-    ///
-    /// ### Properties:
-    /// - `timeZone`: Часовой пояс для расписания.
-    /// - `days`: Расписание в формате HH:MM-HH:MM.
-    ///   Повторяется для каждого дня недели.
-    struct CreateWeek: Parametable {
-        public var owner: TimetableOwner
-        public var schedule: Schedule.Week
-        public var timeZone: String
-
-        public init(
-            owner: TimetableOwner,
-            schedule: Schedule.Week,
-            timeZone: String
-        ) {
-            self.owner = owner
-            self.schedule = schedule
-            self.timeZone = timeZone
-        }
-    }
-    
-    /// Параметры, передаваемые в теле запроса при запросе недельного расписания.
-    struct Get: Parametable {
-        public var owner: TimetableOwner
-    }
-
-    /// Параметры для определения временных промежутков, когда услуги не будут доступны.
-    /// Используется для учета периодов отгулов, отпусков и других нерабочих интервалов.
-    ///
-    /// ### Properties:
-    /// - `interval`: Временной интервал, в течение которого услуги недоступны.
-    struct CreateOfftime: Parametable {
-        public var owner: TimetableOwner
-        public var interval: Interval
-        public var reason: String?
-        public var timeZone: String
-
-        public init(
-            owner: TimetableOwner,
-            interval: Interval,
-            reason: String?,
-            timeZone: String
-        ) {
-            self.owner = owner
-            self.interval = interval
-            self.reason = reason
             self.timeZone = timeZone
         }
     }
@@ -99,45 +60,6 @@ public extension Timetable.Responses {
 
         public init(intervals: [Interval]) {
             self.intervals = intervals
-        }
-    }
-    
-    /// Структура полного ответа, содержащая расписание работы на неделю.
-    /// Включает статус работы и расписание по дням недели в текстовом формате.
-    ///
-    /// ### Properties:
-    /// - `id`: Уникальный идентификатор расписания.
-    /// - `timeZone`: Часовой пояс расписания.
-    /// - `days`: Расписание в формате HH:MM-HH:MM.
-    struct WeekFull: Responsable, Equatable {
-        public var schedule: Schedule.Week
-        public var offTimes: [Offtime]
-        public var timeZone: String
-        
-        public init(
-            schedule: Schedule.Week,
-            offTimes: [Offtime],
-            timeZone: String
-        ) {
-            self.schedule = schedule
-            self.offTimes = offTimes
-            self.timeZone = timeZone
-        }
-    }
-    
-    struct Offtime: Responsable, Equatable {
-        public var id: UUID
-        public var interval: Interval
-        public var reason: String?
-
-        public init(
-            id: UUID,
-            interval: Interval,
-            reason: String?
-        ) {
-            self.id = id
-            self.interval = interval
-            self.reason = reason
         }
     }
 }

@@ -121,7 +121,7 @@ public extension Appointment.Responses {
         public var procedures: [Procedure.Responses.Partial]
         public var time: Interval
         public var price: Price
-        public var address: Address.Responses.Full
+        public var address: Address
         
         public init(
             id: UUID,
@@ -132,7 +132,7 @@ public extension Appointment.Responses {
             procedures: [Procedure.Responses.Partial],
             time: Interval,
             price: Price,
-            address: Address.Responses.Full
+            address: Address
         ) {
             self.id = id
             self.status = status
