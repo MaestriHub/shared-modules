@@ -84,6 +84,7 @@ public extension Employee.Responses {
         public var nickname: String
         public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
+        public var timetable: Timetable.Week
         
         public var procedures: [Procedure.Responses.Partial]?
         
@@ -92,12 +93,14 @@ public extension Employee.Responses {
             nickname: String,
             avatar: URL? = nil,
             contacts: [Contact.Responses.Full],
+            timetable: Timetable.Week,
             procedures: [Procedure.Responses.Partial]? = nil
         ) {
             self.id = id
             self.nickname = nickname
             self.avatar = avatar
             self.contacts = contacts
+            self.timetable = timetable
             self.procedures = procedures
         }
     }
