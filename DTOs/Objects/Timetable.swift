@@ -7,8 +7,11 @@ import Foundation
 public enum Timetable {
     public enum Parameters {}
     public enum Responses {}
+}
+
+public extension Timetable {
     
-    public struct Week: Parametable, Responsable, Equatable {
+    struct Week: Parametable, Responsable, Equatable {
         public var schedule: Schedule.Week
         public var timeZone: String
 
