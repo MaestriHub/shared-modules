@@ -8,7 +8,7 @@ import Foundation
 public struct Schedule {
     
     /// WorkSchedule: расписание которое содержит в себе одну неделю
-    public struct Week: Responsable, Equatable {
+    public struct Week: Parametable, Responsable, Equatable {
         public var monday: Day?
         public var tuesday: Day?
         public var wednesday: Day?
@@ -18,13 +18,13 @@ public struct Schedule {
         public var sunday: Day?
         
         public init(
-            monday: Day?,
-            tuesday: Day?,
-            wednesday: Day?,
-            thursday: Day?,
-            friday: Day?,
-            saturday: Day?,
-            sunday: Day?
+            monday: Day? = nil,
+            tuesday: Day? = nil,
+            wednesday: Day? = nil,
+            thursday: Day? = nil,
+            friday: Day? = nil,
+            saturday: Day? = nil,
+            sunday: Day? = nil
         ) {
             self.monday = monday
             self.tuesday = tuesday
@@ -37,7 +37,7 @@ public struct Schedule {
     }
     
     /// DaySchedule: модель одного дня в расписании
-    public struct Day: Responsable, Equatable {
+    public struct Day: Parametable, Responsable, Equatable {
         public var workTime: String
         public var offTime: [String]
         

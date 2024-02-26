@@ -1,13 +1,12 @@
 //
-//  File.swift
-//  
-//
+//  Redirect.swift
 //  Created by Гаджиев Казим on 16.02.2024.
 //
 
 import Foundation
 
 public struct Redirect: Parametable, Responsable {
+    
     public let url: URL
     public let redirectCallback: String?
     public let content: RedirectContent
@@ -17,4 +16,10 @@ public struct Redirect: Parametable, Responsable {
         self.redirectCallback = redirectCallback
         self.content = content
     }
+}
+
+public enum RedirectContent: Parametable, Responsable {
+    case fullScreen
+    case push
+    case size(width: CGFloat, height: CGFloat)
 }
