@@ -53,13 +53,16 @@ public extension Salon.Parameters {
     struct Patch: Parametable {
         public let name: String?
         public let logo: URL?
+        public let timetable: Timetable.Week?
         
         public init(
             name: String? = nil,
-            logo: URL? = nil
+            logo: URL? = nil,
+            timetable: Timetable.Week? = nil
         ) {
             self.name = name
             self.logo = logo
+            self.timetable = timetable
         }
     }
 }
