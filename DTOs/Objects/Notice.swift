@@ -40,17 +40,20 @@ public extension Notice.Responses {
         public var id: UUID
         public var title: String
         public var body: String
+        public var isRead: Bool
         public var date: Date?
         
         public init(
             id: UUID,
             title: String,
             body: String,
+            isRead: Bool,
             date: Date? = nil
         ) {
             self.id = id
             self.title = title
             self.body = body
+            self.isRead = isRead
             self.date = date
         }
     }
