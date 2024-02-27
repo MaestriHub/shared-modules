@@ -13,13 +13,27 @@ public enum Customer {
 
 public extension Customer.Parameters {
     
+    
+    /// Параметры, используемые при создании профиля клиента.
+    ///
+    /// ### Properties:
+    ///  - contacts: Массив контактов через которые ему будет удобное связываться с мастером.
+    struct Create: Parametable {
+        public var contacts: [Contact.Parameters.Create]
+        
+        public init(
+            contacts: [Contact.Parameters.Create]
+        ) {
+            self.contacts = contacts
+        }
+    }
+    
     /// Параметры запроса для получения списка клиентов.
     /// Позволяют фильтровать клиентов по определенным салонам.
     ///
     /// ### Properties:
     /// - `employees`: Список идентификаторов employees для фильтрации клиентов.
     struct Retrieve: Parametable {
-        
         public let salons: [UUID]?
         public let employees: [UUID]?
         

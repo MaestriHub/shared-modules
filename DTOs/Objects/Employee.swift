@@ -84,8 +84,7 @@ public extension Employee.Responses {
     /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var nickname: String
-        public var avatar: URL?
+        public var user: ProfessionalEmployee
         public var canEdit: Bool = false
         public var contacts: [Contact.Responses.Full]
         public var timetable: Timetable.Week
@@ -94,16 +93,14 @@ public extension Employee.Responses {
         
         public init(
             id: UUID,
-            nickname: String,
-            avatar: URL? = nil,
+            user: ProfessionalEmployee,
             canEdit: Bool,
             contacts: [Contact.Responses.Full],
             timetable: Timetable.Week,
             procedures: [Procedure.Responses.Partial]? = nil
         ) {
             self.id = id
-            self.nickname = nickname
-            self.avatar = avatar
+            self.user = user
             self.canEdit = canEdit
             self.contacts = contacts
             self.timetable = timetable

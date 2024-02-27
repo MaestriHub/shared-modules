@@ -12,29 +12,7 @@ public enum User {
 // MARK: - Parameters -
 
 public extension User.Parameters {
-    
-    /// Параметры, используемые при создании профиля профессионала.
-    ///
-    /// ### Properties:
-    struct CreateProfessional: Parametable {
 
-        public init() {}
-    }
-    
-    /// Параметры, используемые при создании профиля клиента.
-    ///
-    /// ### Properties:
-    ///  - contacts: Массив контактов через которые ему будет удобное связываться с мастером.
-    struct CreateCustomer: Parametable {
-        public var contacts: [Contact.Parameters.Create]
-        
-        public init(
-            contacts: [Contact.Parameters.Create]
-        ) {
-            self.contacts = contacts
-        }
-    }
-    
     /// Параметры для частичного обновления профиля пользователя.
     ///
     /// ### Properties:
@@ -93,20 +71,17 @@ public extension User.Responses {
     /// Краткие данные о пользователе для отображения на главной странице.
     ///
     /// ### Properties:
-    ///   - id: Уникальный идентификатор пользователя в системе.
     ///  - avatar: Ссылка на изображение аватара пользователя, может быть не указана.
     ///  - nickname: Псевдоним пользователя для представления в пользовательском интерфейсе.
-    struct Partial: Responsable, Identifiable, Equatable {
-        public var id: UUID
+    struct Partial: Responsable, Equatable {
+        
         public var avatar: URL?
         public var nickname: String
         
         public init(
-            id: UUID,
             avatar: URL? = nil,
             nickname: String
         ) {
-            self.id = id
             self.avatar = avatar
             self.nickname = nickname
         }
