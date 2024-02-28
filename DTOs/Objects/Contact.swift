@@ -23,18 +23,15 @@ public extension Contact.Parameters {
         public let value: String
         public let type: ContactType
         public let isVerify: Bool?
-        public let employeeId: UUID?
         
         public init(
             value: String,
             type: ContactType,
-            isVerify: Bool?,
-            employeeId: UUID?
+            isVerify: Bool?
         ) {
             self.value = value
             self.type = type
             self.isVerify = isVerify
-            self.employeeId = employeeId
         }
     }
     
