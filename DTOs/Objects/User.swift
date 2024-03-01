@@ -52,19 +52,22 @@ public extension User.Responses {
         public var nickname: String
         public var contact: Contact.Responses.Full?
         public var options: UserRoleSet
+        public var permissions: ProPermissionSet
         
         public init(
             id: UUID,
             avatar: URL? = nil,
             nickname: String,
             contact: Contact.Responses.Full?,
-            options: UserRoleSet
+            options: UserRoleSet,
+            permissions: ProPermissionSet
         ) {
             self.id = id
             self.avatar = avatar
             self.nickname = nickname
             self.contact = contact
             self.options = options
+            self.permissions = permissions
         }
     }
     
@@ -74,7 +77,6 @@ public extension User.Responses {
     ///  - avatar: Ссылка на изображение аватара пользователя, может быть не указана.
     ///  - nickname: Псевдоним пользователя для представления в пользовательском интерфейсе.
     struct Partial: Responsable, Equatable {
-        
         public var avatar: URL?
         public var nickname: String
         
