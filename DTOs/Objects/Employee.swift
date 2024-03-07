@@ -116,20 +116,18 @@ public extension Employee.Responses {
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var name: String
+        public var user: ProfessionalEmployee
         public var contacts: [Contact.Responses.Full]
         public var url: URL?
         
         public init(
             id: UUID,
-            name: String,
-            contacts: [Contact.Responses.Full],
-            url: URL?
+            user: ProfessionalEmployee,
+            contacts: [Contact.Responses.Full]
         ) {
             self.id = id
-            self.name = name
+            self.user = user
             self.contacts = contacts
-            self.url = url
         }
     }
 }
