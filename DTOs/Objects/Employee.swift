@@ -117,19 +117,19 @@ public extension Employee.Responses {
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var name: String
+        public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
-        public var url: URL?
         
         public init(
             id: UUID,
             name: String,
-            contacts: [Contact.Responses.Full],
-            url: URL?
+            avatar: URL?,
+            contacts: [Contact.Responses.Full]
         ) {
             self.id = id
             self.name = name
+            self.avatar = avatar
             self.contacts = contacts
-            self.url = url
         }
     }
 }
