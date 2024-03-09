@@ -56,14 +56,14 @@ public extension Appointment.Parameters {
         public let masterId: UUID
         public let customerId: UUID?
         public let proceduresId: [UUID]
-        public let time: Interval
+        public let time: DateInterval
         
         public init(
             salonId: UUID,
             masterId: UUID,
             customerId: UUID?,
             proceduresId: [UUID],
-            time: Interval
+            time: DateInterval
         ) {
             self.salonId = salonId
             self.masterId = masterId
@@ -80,12 +80,12 @@ public extension Appointment.Parameters {
     ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        public let time: Interval?
+        public let time: DateInterval?
         public let price: Price?
         public let proceduresId: [UUID]?
         
         public init(
-            time: Interval? = nil,
+            time: DateInterval? = nil,
             price: Price? = nil,
             proceduresId: [UUID]? = nil
         ) {
@@ -119,7 +119,7 @@ public extension Appointment.Responses {
         public var customer: AppointmentCustomer
         public var master: Employee.Responses.Partial
         public var procedures: [Procedure.Responses.Partial]
-        public var time: Interval
+        public var time: DateInterval
         public var price: Price
         public var address: Address
         
@@ -130,7 +130,7 @@ public extension Appointment.Responses {
             customer: AppointmentCustomer,
             master: Employee.Responses.Partial,
             procedures: [Procedure.Responses.Partial],
-            time: Interval,
+            time: DateInterval,
             price: Price,
             address: Address
         ) {
@@ -159,7 +159,7 @@ public extension Appointment.Responses {
         public var status: AppointmentStatus
         public var customer: AppointmentCustomer
         public var master: Employee.Responses.Partial
-        public var time: Interval
+        public var time: DateInterval
         public var price: Price
         public var procedures: String
         
@@ -168,7 +168,7 @@ public extension Appointment.Responses {
             status: AppointmentStatus,
             customer: AppointmentCustomer,
             master: Employee.Responses.Partial,
-            time: Interval,
+            time: DateInterval,
             price: Price,
             procedures: String
         ) {

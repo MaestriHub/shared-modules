@@ -16,12 +16,12 @@ public extension Offtime.Parameters {
     /// Параметры для определения временных промежутков, когда услуги не будут доступны.
     /// Используется для учета периодов отгулов, отпусков и других нерабочих интервалов.
     struct Create: Parametable {
-        public var interval: Interval
+        public var interval: DateInterval
         public var reason: String?
         public var timeZone: String
 
         public init(
-            interval: Interval,
+            interval: DateInterval,
             reason: String?,
             timeZone: String
         ) {
@@ -40,13 +40,13 @@ public extension Offtime.Responses {
     /// Включает статус работы и расписание по дням недели в текстовом формате.
     struct Full: Responsable, Equatable {
         public var id: UUID
-        public var interval: Interval
+        public var interval: DateInterval
         public var reason: String?
         public var timeZone: String
 
         public init(
             id: UUID,
-            interval: Interval,
+            interval: DateInterval,
             reason: String?,
             timeZone: String
         ) {
@@ -59,11 +59,11 @@ public extension Offtime.Responses {
     
     struct Partial: Responsable, Equatable {
         public var id: UUID
-        public var interval: Interval
+        public var interval: DateInterval
 
         public init(
             id: UUID,
-            interval: Interval
+            interval: DateInterval
         ) {
             self.id = id
             self.interval = interval

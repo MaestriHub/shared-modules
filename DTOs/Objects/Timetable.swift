@@ -33,18 +33,14 @@ public extension Timetable.Parameters {
     /// Учитывает часовой пояс и список запрашиваемых процедур.
     ///
     /// ### Properties:
-    /// - `timeZone`: Часовой пояс, в котором требуется искать доступные слоты.
     /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
     struct SearchSlot: Parametable {
         public var procedures: [UUID]
-        public var timeZone: String
         
         public init(
-            procedures: [UUID],
-            timeZone: String
+            procedures: [UUID]
         ) {
             self.procedures = procedures
-            self.timeZone = timeZone
         }
     }
 }
@@ -59,10 +55,15 @@ public extension Timetable.Responses {
     /// ### Properties:
     /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
     struct Slot: Responsable {
-        public var intervals: [Interval]
+        public var intervals: [Date: [DateInterval]]
+        public var timeZone: String
 
-        public init(intervals: [Interval]) {
+        public init(
+            intervals: [Date: [DateInterval]],
+            timeZone: String
+        ) {
             self.intervals = intervals
+            self.timeZone = timeZone
         }
     }
 }

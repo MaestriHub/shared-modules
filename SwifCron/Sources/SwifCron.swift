@@ -13,12 +13,12 @@ public struct SwifCron {
     
     /// Internal expression mode
     enum ExpressionMode {
-        case exactDayOfMonthButAnyDayOfWeek, exactDayOfWeekButAnyDom, mixed
+        case exactDayOfMonthButAnyDayOfWeek, exactDayOfWeekButAnyDayOfMonth, mixed
     }
     let mode: ExpressionMode
     
     /// Parsed parts of cron expression
-    let daysOfMonth, months, daysOfWeek, weeksOfYear: [Int]
+    public let daysOfMonth, months, daysOfWeek, weeksOfYear: [Int]
 
     /**
      Supports only digit values yet
@@ -48,7 +48,7 @@ public struct SwifCron {
         if parts[offset + 2] == "*" && parts[offset + 3] == "*" {
             mode = .exactDayOfMonthButAnyDayOfWeek
         } else if parts[offset + 0] == "*" && parts[offset + 1] == "*" && (parts[offset + 2] != "*" || parts[offset + 3] != "*") {
-            mode = .exactDayOfWeekButAnyDom
+            mode = .exactDayOfWeekButAnyDayOfMonth
         } else {
             mode = .mixed
         }
@@ -124,34 +124,42 @@ public struct SwifCron {
         
         switch mode {
         case .exactDayOfMonthButAnyDayOfWeek:
-            return try Helper.getNextDateByDom(day: nextDayOfMonth.value,
-                                               month: nextMonth.value,
-                                               year: currentYear + nextMonth.offset,
-                                               calendar: nonNilCalendar)
-        case .exactDayOfWeekButAnyDom:
-            return try Helper.getNextDateByDow(currentDow: currentDayOfWeek,
-                                               availableDows: daysOfWeek,
-                                               currentWoy: currentWeekOfYear,
-                                               availableWoys: weeksOfYear,
-                                               day: currentDayOfMonth,
-                                               month: currentMonth,
-                                               year: currentYear,
-                                               calendar: nonNilCalendar,
-                                               cron: self)
+            return try Helper.getNextDateByDom(
+                day: nextDayOfMonth.value,
+                month: nextMonth.value,
+                year: currentYear + nextMonth.offset,
+                calendar: nonNilCalendar
+            )
+        case .exactDayOfWeekButAnyDayOfMonth:
+            return try Helper.getNextDateByDow(
+                currentDow: currentDayOfWeek,
+                availableDows: daysOfWeek,
+                currentWoy: currentWeekOfYear,
+                availableWoys: weeksOfYear,
+                day: currentDayOfMonth,
+                month: currentMonth,
+                year: currentYear,
+                calendar: nonNilCalendar,
+                cron: self
+            )
         case .mixed:
-            let nextDateByDow = try Helper.getNextDateByDow(currentDow: currentDayOfWeek,
-                                                            availableDows: daysOfWeek,
-                                                            currentWoy: currentWeekOfYear,
-                                                            availableWoys: weeksOfYear,
-                                                            day: currentDayOfMonth,
-                                                            month: currentMonth,
-                                                            year: currentYear,
-                                                            calendar: nonNilCalendar,
-                                                            cron: self)
-            let nextDateByDom = try Helper.getNextDateByDom(day: nextDayOfMonth.value,
-                                                            month: nextMonth.value,
-                                                            year: currentYear + nextMonth.offset,
-                                                            calendar: nonNilCalendar)
+            let nextDateByDow = try Helper.getNextDateByDow(
+                currentDow: currentDayOfWeek,
+                availableDows: daysOfWeek,
+                currentWoy: currentWeekOfYear,
+                availableWoys: weeksOfYear,
+                day: currentDayOfMonth,
+                month: currentMonth,
+                year: currentYear,
+                calendar: nonNilCalendar,
+                cron: self
+            )
+            let nextDateByDom = try Helper.getNextDateByDom(
+                day: nextDayOfMonth.value,
+                month: nextMonth.value,
+                year: currentYear + nextMonth.offset,
+                calendar: nonNilCalendar
+            )
             return nextDateByDow < nextDateByDom ? nextDateByDow : nextDateByDom
         }
     }
