@@ -88,6 +88,7 @@ public extension Employee.Responses {
         public var canEdit: Bool = false
         public var contacts: [Contact.Responses.Full]
         public var timetable: Timetable.Week
+        public var salonId: UUID
         
         public var procedures: [Procedure.Responses.Partial]?
         
@@ -97,6 +98,7 @@ public extension Employee.Responses {
             canEdit: Bool,
             contacts: [Contact.Responses.Full],
             timetable: Timetable.Week,
+            salonId: UUID,
             procedures: [Procedure.Responses.Partial]? = nil
         ) {
             self.id = id
@@ -104,6 +106,7 @@ public extension Employee.Responses {
             self.canEdit = canEdit
             self.contacts = contacts
             self.timetable = timetable
+            self.salonId = salonId
             self.procedures = procedures
         }
     }
