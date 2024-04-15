@@ -85,15 +85,18 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
+        public var category: ServiceCategory
         
         public init(
             id: UUID,
             title: String,
-            description: String
+            description: String,
+            category: ServiceCategory
         ) {
             self.id = id
             self.title = title
             self.description = description
+            self.category = category
         }
     }
     
@@ -108,15 +111,18 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
+        public var category: ServiceCategory
         
         public init(
             id: UUID,
             title: String,
-            description: String
+            description: String,
+            category: ServiceCategory
         ) {
             self.id = id
             self.title = title
             self.description = description
+            self.category = category
         }
     }
 }
