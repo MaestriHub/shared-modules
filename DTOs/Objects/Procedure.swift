@@ -43,17 +43,20 @@ public extension Procedure.Parameters {
     struct Create: Parametable {
         public let price: Price
         public let duration: Int
+        public var description: String
         public let serviceId: UUID
         public let employeeId: UUID
         
         public init(
             price: Price,
             duration: Int,
+            description: String,
             serviceId: UUID,
             employeeId: UUID
         ) {
             self.price = price
             self.duration = duration
+            self.description = description
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
@@ -68,13 +71,16 @@ public extension Procedure.Parameters {
     struct Patch: Parametable {
         public let price: Price?
         public let duration: Int?
+        public var description: String?
         
         public init(
             price: Price? = nil,
-            duration: Int? = nil
+            duration: Int? = nil,
+            description: String? = nil
         ) {
             self.price = price
             self.duration = duration
+            self.description = description
         }
     }
 }

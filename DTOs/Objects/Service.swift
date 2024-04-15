@@ -40,13 +40,16 @@ public extension Service.Parameters {
     struct Create: Parametable {
         public var title: String
         public var description: String
+        public var category: ServiceCategory
         
         public init(
             title: String,
-            description: String
+            description: String,
+            category: ServiceCategory
         ) {
             self.title = title
             self.description = description
+            self.category = category
         }
     }
 
@@ -59,13 +62,16 @@ public extension Service.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var description: String?
+        public var category: ServiceCategory?
         
         public init(
             title: String? = nil,
-            description: String? = nil
+            description: String? = nil,
+            category: ServiceCategory? = nil
         ) {
             self.title = title
             self.description = description
+            self.category = category
         }
     }
 }
