@@ -43,14 +43,14 @@ public extension Procedure.Parameters {
     struct Create: Parametable {
         public let price: Price
         public let duration: Int
-        public var description: String
+        public var description: String?
         public let serviceId: UUID
         public let employeeId: UUID
         
         public init(
             price: Price,
             duration: Int,
-            description: String,
+            description: String?,
             serviceId: UUID,
             employeeId: UUID
         ) {
