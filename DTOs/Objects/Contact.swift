@@ -72,7 +72,7 @@ public extension Contact.Responses {
     /// - `value`: Значение контактного метода.
     /// - `isVerify`: Статус верификации контакта.
     /// - `type`: Тип контактного метода, определенный в ``ContactType``.
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var value: String
         public var isVerify: Bool

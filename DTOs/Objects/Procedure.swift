@@ -102,20 +102,23 @@ public extension Procedure.Responses {
         public var price: Price
         public var duration: Int
         public var description: String
-        public var service: Service.Responses.Full
+        public var service: Service.Responses.Partial
+        public var master: Employee.Responses.Partial
         
         public init(
             id: UUID,
             price: Price,
             duration: Int,
             description: String,
-            service: Service.Responses.Full
+            service: Service.Responses.Partial,
+            master: Employee.Responses.Partial
         ) {
             self.id = id
             self.price = price
             self.duration = duration
             self.description = description
             self.service = service
+            self.master = master
         }
     }
     
@@ -133,19 +136,22 @@ public extension Procedure.Responses {
         public var duration: Int
         public var description: String
         public var service: Service.Responses.Partial
+        public var master: Employee.Responses.Partial
         
         public init(
             id: UUID,
             price: Price,
             duration: Int,
             description: String,
-            service: Service.Responses.Partial
+            service: Service.Responses.Partial,
+            master: Employee.Responses.Partial
         ) {
             self.id = id
             self.price = price
             self.duration = duration
             self.description = description
             self.service = service
+            self.master = master
         }
     }
 }

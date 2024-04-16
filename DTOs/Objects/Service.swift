@@ -16,18 +16,34 @@ public extension Service.Parameters {
     /// Параметры запроса для получения списка услуг.
     /// Могут включать фильтрацию и сортировку, но в данном примере не определены.
     struct Retrieve: Parametable {
+        public let salons: [UUID]?
+        public let employees: [UUID]?
         public let value: String?
         public let page: Int
         public let per: Int
         
         public init(
+            salons: [UUID]? = nil,
+            employees: [UUID]? = nil,
             value: String?,
             page: Int,
             per: Int
         ) {
+            self.salons = salons
+            self.employees = employees
             self.value = value
             self.page = page
             self.per = per
+        }
+    }
+    
+    struct RetrieveFull: Parametable {
+        public let salon: UUID?
+        
+        public init(
+            salon: UUID? = nil
+        ) {
+            self.salon = salon
         }
     }
     
@@ -92,17 +108,20 @@ public extension Service.Responses {
         public var title: String
         public var description: String
         public var category: ServiceCategory
+        public var procedures: [Procedure.Responses.Partial]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: ServiceCategory
+            category: ServiceCategory,
+            procedures: [Procedure.Responses.Partial]
         ) {
             self.id = id
             self.title = title
             self.description = description
             self.category = category
+            self.procedures = procedures
         }
     }
     

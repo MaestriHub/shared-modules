@@ -117,7 +117,7 @@ public extension Employee.Responses {
     /// - id: `UUID` - уникальный идентификатор сотрудника.
     /// - name: `String` - имя сотрудника.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
-    struct Partial: Responsable, Identifiable, Equatable {
+    struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var name: String
         public var avatar: URL?
