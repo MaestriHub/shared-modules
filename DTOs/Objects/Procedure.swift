@@ -101,7 +101,7 @@ public extension Procedure.Responses {
         public var id: UUID
         public var price: Price
         public var duration: Int
-        public var description: String
+        public var description: String?
         public var service: Service.Responses.Partial
         public var master: Employee.Responses.Partial
         
@@ -109,7 +109,7 @@ public extension Procedure.Responses {
             id: UUID,
             price: Price,
             duration: Int,
-            description: String,
+            description: String?,
             service: Service.Responses.Partial,
             master: Employee.Responses.Partial
         ) {
@@ -134,7 +134,7 @@ public extension Procedure.Responses {
         public var id: UUID
         public var price: Price
         public var duration: Int
-        public var description: String
+        public var description: String?
         public var service: Service.Responses.Partial
         public var master: Employee.Responses.Partial
         
@@ -142,7 +142,7 @@ public extension Procedure.Responses {
             id: UUID,
             price: Price,
             duration: Int,
-            description: String,
+            description: String?,
             service: Service.Responses.Partial,
             master: Employee.Responses.Partial
         ) {
