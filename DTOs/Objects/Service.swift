@@ -137,17 +137,23 @@ public extension Service.Responses {
         public var title: String
         public var description: String
         public var category: ServiceCategory
+        public var minPrice: Price?
+        public var minDuration: Int?
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: ServiceCategory
+            category: ServiceCategory,
+            minPrice: Price?,
+            minDuration: Int?
         ) {
             self.id = id
             self.title = title
             self.description = description
             self.category = category
+            self.minPrice = minPrice
+            self.minDuration = minDuration
         }
     }
 }
