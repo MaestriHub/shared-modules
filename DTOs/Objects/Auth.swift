@@ -22,25 +22,29 @@ public extension Auth.Parameters {
     ///  - lastName: Фамилия пользователя, полученное от Apple, если доступно.
     ///  - email: Электронная почта пользователя, если доступна.
     ///  - emailVerified: Флаг, указывающий, подтверждён ли email.
+    ///  - appBundleId: Bundle Id приложения, которое обращается к API
     struct AppleToken: Parametable {
         public var token: String
         public var firstName: String?
         public var lastName: String?
         public var email: String?
         public var emailVerified: Bool?
+        public let appBundleId: String?
         
         public init(
             token: String,
             firstName: String?,
             lastName: String?,
             email: String? = nil,
-            emailVerified: Bool = false
+            emailVerified: Bool = false,
+            appBundleId: String? = nil
         ) {
             self.token = token
             self.firstName = firstName
             self.lastName = lastName
             self.email = email
             self.emailVerified = emailVerified
+            self.appBundleId = appBundleId
         }
     }
     
