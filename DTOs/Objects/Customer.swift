@@ -13,17 +13,15 @@ public enum Customer {
 
 public extension Customer.Parameters {
     
-    
-    /// Параметры, используемые при создании профиля клиента.
-    ///
-    /// ### Properties:
-    ///  - contacts: Массив контактов через которые ему будет удобное связываться с мастером.
     struct Create: Parametable {
+        public var alias: String
         public var contacts: [Contact.Parameters.Create]
         
         public init(
+            alias: String,
             contacts: [Contact.Parameters.Create]
         ) {
+            self.alias = alias
             self.contacts = contacts
         }
     }
