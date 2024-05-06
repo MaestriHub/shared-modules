@@ -109,7 +109,7 @@ public extension Appointment.Responses {
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial

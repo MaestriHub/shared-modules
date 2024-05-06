@@ -9,7 +9,7 @@ import Foundation
 ///  - country: Название страны, где находится адрес.
 ///  - latitude: Географическая широта адреса.
 ///  - longitude: Географическая долгота адреса.
-public struct Address: Parametable, Responsable, Equatable {
+public struct Address: Parametable, Responsable, Hashable, Equatable {
     public var address: String
     public var city: String
     public var country: String

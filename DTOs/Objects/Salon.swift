@@ -126,7 +126,7 @@ public extension Salon.Responses {
     /// - logo: URL адрес логотипа салона, может быть `nil`.
     /// - address: Краткая информация об адресе или просто строка адреса.
     /// - isFavorite: Флаг, указывающий, отмечен ли салон как избранный у текущего пользователя.
-    struct Partial: Responsable, Identifiable, Equatable {
+    struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var name: String
         public var type: SalonType

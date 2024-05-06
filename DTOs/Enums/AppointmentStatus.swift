@@ -4,7 +4,7 @@ import Foundation
 ///
 /// Используется для понимание кто отклонил или подтвердил
 /// Так же отображает состояние успешно ли завершился или провалился
-public enum AppointmentStatus: String, Codable, Equatable {
+public enum AppointmentStatus: String, Codable, Hashable, Equatable {
 
     /// Этот статус ожидает подтверждения либо перехода по ссылки аттача customer и approve
     case requested
