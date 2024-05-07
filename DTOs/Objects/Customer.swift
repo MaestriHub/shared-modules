@@ -13,6 +13,14 @@ public enum Customer {
 
 public extension Customer.Parameters {
     
+    struct Registration: Parametable {
+        public var contacts: [Contact.Parameters.Create]
+        
+        public init(contacts: [Contact.Parameters.Create]) {
+            self.contacts = contacts
+        }
+    }
+    
     struct Create: Parametable {
         public var alias: String
         public var contacts: [Contact.Parameters.Create]
