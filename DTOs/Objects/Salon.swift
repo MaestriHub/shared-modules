@@ -89,6 +89,7 @@ public extension Salon.Responses {
         public var type: SalonType
         public var logo: URL?
         public var address: Address
+        public var isActive: Bool
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
         public var timetable: Timetable.Week
@@ -100,6 +101,7 @@ public extension Salon.Responses {
             type: SalonType,
             logo: URL? = nil,
             address: Address,
+            isActive: Bool,
             canEdit: Bool,
             isFavorite: Bool,
             timetable: Timetable.Week,
@@ -110,6 +112,7 @@ public extension Salon.Responses {
             self.type = type
             self.logo = logo
             self.address = address
+            self.isActive = isActive
             self.canEdit = canEdit
             self.isFavorite = isFavorite
             self.timetable = timetable
@@ -131,7 +134,7 @@ public extension Salon.Responses {
         public var name: String
         public var type: SalonType
         public var logo: URL?
-        public var address: Address // Может быть можно просто строку присылать
+        public var address: Address // Может быть можно просто строку присылать, но тогда не понятно как на карте отображать
         public var isFavorite: Bool = false
         
         public init(
