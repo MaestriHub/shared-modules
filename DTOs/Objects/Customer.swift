@@ -22,13 +22,16 @@ public extension Customer.Parameters {
     }
     
     struct Create: Parametable {
+        public var salonId: UUID?
         public var alias: String
         public var contacts: [Contact.Parameters.Create]
         
         public init(
+            salonId: UUID?,
             alias: String,
             contacts: [Contact.Parameters.Create]
         ) {
+            self.salonId = salonId
             self.alias = alias
             self.contacts = contacts
         }
