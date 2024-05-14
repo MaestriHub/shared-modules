@@ -71,13 +71,25 @@ public extension Customer.Parameters {
 
 public extension Customer.Responses {
     
-    /// `Partial` предоставляет сокращенную информацию о клиенте, используемую для списков и обзоров.
-    ///
-    /// ### Properties:
-    /// - id: `UUID` - уникальный идентификатор клиента.
-    /// - name: `String` - имя клиента.
-    /// - avatar: `URL?` - URL аватара клиента, может быть `nil`, если аватар отсутствует.
-    /// - contacts: `[Contact.Responses.Full]` - массив полных контактных данных клиента.
+    struct Full: Responsable, Identifiable, Hashable, Equatable {
+        public var id: UUID
+        public var name: String
+        public var avatar: URL?
+        public var contacts: [Contact.Responses.Full]
+        
+        public init(
+            id: UUID,
+            name: String,
+            avatar: URL? = nil,
+            contacts: [Contact.Responses.Full]
+        ) {
+            self.id = id
+            self.name = name
+            self.avatar = avatar
+            self.contacts = contacts
+        }
+    }
+    
     struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var name: String
