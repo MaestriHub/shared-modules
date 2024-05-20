@@ -24,7 +24,7 @@ public extension Notice.Responses {
         public var id: UUID
         public var titleKey: String
         public var messageKey: String
-        public var payload: String
+        public var payload: [String: String]
         public var type: NoticeType
         public var isRead: Bool
         public var date: Date?
@@ -33,7 +33,7 @@ public extension Notice.Responses {
             id: UUID,
             titleKey: String,
             messageKey: String,
-            payload: String,
+            payload: [String: String],
             type: NoticeType,
             isRead: Bool,
             date: Date? = nil
