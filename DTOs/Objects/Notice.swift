@@ -11,7 +11,7 @@ public enum Notice {
 // MARK: - Responses -
 
 public extension Notice.Responses {
-    
+
     /// Полная информация об уведомлении.
     /// Включает в себя всю необходимую информацию об уведомлении, которое может быть представлено пользователю.
     ///
@@ -25,16 +25,16 @@ public extension Notice.Responses {
         public var titleKey: String
         public var messageKey: String
         public var payload: [String: String]
-        public var type: NoticeType
+        public var category: NoticeCategory
         public var isRead: Bool
         public var date: Date?
-        
+
         public init(
             id: UUID,
             titleKey: String,
             messageKey: String,
             payload: [String: String],
-            type: NoticeType,
+            category: NoticeCategory,
             isRead: Bool,
             date: Date? = nil
         ) {
@@ -42,7 +42,7 @@ public extension Notice.Responses {
             self.titleKey = titleKey
             self.messageKey = messageKey
             self.payload = payload
-            self.type = type
+            self.category = category
             self.isRead = isRead
             self.date = date
         }
