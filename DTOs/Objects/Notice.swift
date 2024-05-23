@@ -11,7 +11,7 @@ public enum Notice {
 // MARK: - Responses -
 
 public extension Notice.Responses {
-    
+
     /// Полная информация об уведомлении.
     /// Включает в себя всю необходимую информацию об уведомлении, которое может быть представлено пользователю.
     ///
@@ -22,21 +22,27 @@ public extension Notice.Responses {
     /// - `date`: Дата и время создания уведомления, может быть `nil`, если дата не предоставляется.
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var title: String
-        public var body: String
+        public var titleKey: String
+        public var messageKey: String
+        public var payload: [String: String]
+        public var category: NoticeCategory
         public var isRead: Bool
         public var date: Date?
-        
+
         public init(
             id: UUID,
-            title: String,
-            body: String,
+            titleKey: String,
+            messageKey: String,
+            payload: [String: String],
+            category: NoticeCategory,
             isRead: Bool,
             date: Date? = nil
         ) {
             self.id = id
-            self.title = title
-            self.body = body
+            self.titleKey = titleKey
+            self.messageKey = messageKey
+            self.payload = payload
+            self.category = category
             self.isRead = isRead
             self.date = date
         }
