@@ -26,10 +26,12 @@ public extension User.Parameters {
         
         public init(
             nickname: String? = nil,
-            avatar: URL? = nil
+            avatar: URL? = nil,
+            contact: Contact.Parameters.Create? = nil
         ) {
             self.nickname = nickname
             self.avatar = avatar
+            self.contact = contact
         }
     }
 }
