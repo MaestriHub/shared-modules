@@ -14,8 +14,11 @@ public enum Professional {
 public extension Professional.Parameters {
     
     struct Create: Parametable {
+        public var contacts: [Contact.Parameters.Create]
 
-        public init() {}
+        public init(contacts: [Contact.Parameters.Create]) {
+            self.contacts = contacts
+        }
     }
 }
 
