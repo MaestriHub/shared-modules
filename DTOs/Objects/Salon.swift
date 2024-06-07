@@ -28,19 +28,22 @@ public extension Salon.Parameters {
         public let logo: URL?
         public let timetable: Timetable.Week
         public let address: Address
+        public var contacts: [Contact.Parameters.Create]
         
         public init(
             name: String, 
             type: SalonType,
             logo: URL? = nil,
             timetable: Timetable.Week,
-            address: Address
+            address: Address,
+            contacts: [Contact.Parameters.Create]
         ) {
             self.name = name
             self.type = type
             self.logo = logo
             self.timetable = timetable
             self.address = address
+            self.contacts = contacts
         }
     }
 
