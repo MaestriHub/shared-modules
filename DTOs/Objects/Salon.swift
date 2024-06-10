@@ -55,15 +55,18 @@ public extension Salon.Parameters {
     /// - logo: Новый URL адрес логотипа, если требуется обновление.
     struct Patch: Parametable {
         public let name: String?
+        public let type: SalonType?
         public let logo: URL?
         public let timetable: Timetable.Week?
         
         public init(
             name: String? = nil,
+            type: SalonType? = nil,
             logo: URL? = nil,
             timetable: Timetable.Week? = nil
         ) {
             self.name = name
+            self.type = type
             self.logo = logo
             self.timetable = timetable
         }
