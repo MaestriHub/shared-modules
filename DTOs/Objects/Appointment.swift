@@ -116,7 +116,7 @@ public extension Appointment.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
-        public var customer: AppointmentCustomer
+        public var customer: Customer.Responses.Partial
         public var master: Employee.Responses.Partial
         public var procedures: [Procedure.Responses.Partial]
         public var time: DateInterval
@@ -127,7 +127,7 @@ public extension Appointment.Responses {
             id: UUID,
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
-            customer: AppointmentCustomer,
+            customer: Customer.Responses.Partial,
             master: Employee.Responses.Partial,
             procedures: [Procedure.Responses.Partial],
             time: DateInterval,
@@ -157,7 +157,7 @@ public extension Appointment.Responses {
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var customer: AppointmentCustomer
+        public var customer: Customer.Responses.Partial
         public var master: Employee.Responses.Partial
         public var time: DateInterval
         public var price: Price
@@ -166,7 +166,7 @@ public extension Appointment.Responses {
         public init(
             id: UUID,
             status: AppointmentStatus,
-            customer: AppointmentCustomer,
+            customer: Customer.Responses.Partial,
             master: Employee.Responses.Partial,
             time: DateInterval,
             price: Price,
