@@ -36,15 +36,18 @@ public extension Employee.Parameters {
         public var salondId: UUID
         public var contacts: [Contact.Parameters.Create]
         public var timetable: Timetable.Week?
+        public var description: String?
         
         public init(
             salondId: UUID,
             contacts: [Contact.Parameters.Create],
-            timetable: Timetable.Week?
+            timetable: Timetable.Week?,
+            description: String?
         ) {
             self.salondId = salondId
             self.contacts = contacts
             self.timetable = timetable
+            self.description = description
         }
     }
     
@@ -57,15 +60,18 @@ public extension Employee.Parameters {
         public var roleSet: SalonRoleSet?
         public var contacts: [Contact.Parameters.Create]?
         public var timetable: Timetable.Week?
+        public var description: String?
         
         public init(
             roleSet: SalonRoleSet?,
             contacts: [Contact.Parameters.Create]?,
-            timetable: Timetable.Week?
+            timetable: Timetable.Week?,
+            description: String?
         ) {
             self.roleSet = roleSet
             self.contacts = contacts
             self.timetable = timetable
+            self.description = description
         }
     }
 }
@@ -85,6 +91,7 @@ public extension Employee.Responses {
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var user: ProfessionalEmployee
+        public var description: String?
         public var canEdit: Bool = false
         public var contacts: [Contact.Responses.Full]
         public var timetable: Timetable.Week
@@ -95,6 +102,7 @@ public extension Employee.Responses {
         public init(
             id: UUID,
             user: ProfessionalEmployee,
+            description: String? = nil,
             canEdit: Bool,
             contacts: [Contact.Responses.Full],
             timetable: Timetable.Week,
@@ -103,6 +111,7 @@ public extension Employee.Responses {
         ) {
             self.id = id
             self.user = user
+            self.description = description
             self.canEdit = canEdit
             self.contacts = contacts
             self.timetable = timetable

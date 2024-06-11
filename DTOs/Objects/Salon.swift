@@ -26,6 +26,7 @@ public extension Salon.Parameters {
         public let name: String
         public let type: SalonType
         public let logo: URL?
+        public let description: String?
         public let timetable: Timetable.Week
         public let address: Address
         public var contacts: [Contact.Parameters.Create]
@@ -34,6 +35,7 @@ public extension Salon.Parameters {
             name: String, 
             type: SalonType,
             logo: URL? = nil,
+            description: String?,
             timetable: Timetable.Week,
             address: Address,
             contacts: [Contact.Parameters.Create]
@@ -41,6 +43,7 @@ public extension Salon.Parameters {
             self.name = name
             self.type = type
             self.logo = logo
+            self.description = description
             self.timetable = timetable
             self.address = address
             self.contacts = contacts
@@ -56,17 +59,20 @@ public extension Salon.Parameters {
     struct Patch: Parametable {
         public let name: String?
         public let type: SalonType?
+        public let description: String?
         public let logo: URL?
         public let timetable: Timetable.Week?
         
         public init(
             name: String? = nil,
             type: SalonType? = nil,
+            description: String?,
             logo: URL? = nil,
             timetable: Timetable.Week? = nil
         ) {
             self.name = name
             self.type = type
+            self.description = description
             self.logo = logo
             self.timetable = timetable
         }
@@ -93,6 +99,7 @@ public extension Salon.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
+        public var description: String?
         public var logo: URL?
         public var address: Address
         public var isActive: Bool
@@ -105,6 +112,7 @@ public extension Salon.Responses {
             id: UUID,
             name: String,
             type: SalonType,
+            description: String?,
             logo: URL? = nil,
             address: Address,
             isActive: Bool,
@@ -116,6 +124,7 @@ public extension Salon.Responses {
             self.id = id
             self.name = name
             self.type = type
+            self.description = description
             self.logo = logo
             self.address = address
             self.isActive = isActive
