@@ -26,6 +26,7 @@ public extension Salon.Parameters {
         public let name: String
         public let type: SalonType
         public let logo: URL?
+        public let description: String?
         public let timetable: Timetable.Week
         public let address: Address
         public var contacts: [Contact.Parameters.Create]
@@ -34,6 +35,7 @@ public extension Salon.Parameters {
             name: String, 
             type: SalonType,
             logo: URL? = nil,
+            description: String?,
             timetable: Timetable.Week,
             address: Address,
             contacts: [Contact.Parameters.Create]
@@ -41,6 +43,7 @@ public extension Salon.Parameters {
             self.name = name
             self.type = type
             self.logo = logo
+            self.description = description
             self.timetable = timetable
             self.address = address
             self.contacts = contacts
