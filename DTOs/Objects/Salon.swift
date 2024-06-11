@@ -59,17 +59,20 @@ public extension Salon.Parameters {
     struct Patch: Parametable {
         public let name: String?
         public let type: SalonType?
+        public let description: String?
         public let logo: URL?
         public let timetable: Timetable.Week?
         
         public init(
             name: String? = nil,
             type: SalonType? = nil,
+            description: String?,
             logo: URL? = nil,
             timetable: Timetable.Week? = nil
         ) {
             self.name = name
             self.type = type
+            self.description = description
             self.logo = logo
             self.timetable = timetable
         }
