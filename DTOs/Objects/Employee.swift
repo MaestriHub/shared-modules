@@ -36,15 +36,18 @@ public extension Employee.Parameters {
         public var salondId: UUID
         public var contacts: [Contact.Parameters.Create]
         public var timetable: Timetable.Week?
+        public var description: String?
         
         public init(
             salondId: UUID,
             contacts: [Contact.Parameters.Create],
-            timetable: Timetable.Week?
+            timetable: Timetable.Week?,
+            description: String?
         ) {
             self.salondId = salondId
             self.contacts = contacts
             self.timetable = timetable
+            self.description = description
         }
     }
     
