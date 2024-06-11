@@ -27,13 +27,16 @@ public extension Professional.Responses {
         
         public var avatar: URL?
         public var nickname: String
+        public var description: String?
         
         public init(
             avatar: URL? = nil,
-            nickname: String
+            nickname: String,
+            description: String? = nil
         ) {
             self.avatar = avatar
             self.nickname = nickname
+            self.description = description
         }
     }
 }
