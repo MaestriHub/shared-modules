@@ -93,6 +93,7 @@ public extension Salon.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
+        public var description: String?
         public var logo: URL?
         public var address: Address
         public var isActive: Bool
@@ -105,6 +106,7 @@ public extension Salon.Responses {
             id: UUID,
             name: String,
             type: SalonType,
+            description: String?,
             logo: URL? = nil,
             address: Address,
             isActive: Bool,
@@ -116,6 +118,7 @@ public extension Salon.Responses {
             self.id = id
             self.name = name
             self.type = type
+            self.description = description
             self.logo = logo
             self.address = address
             self.isActive = isActive
