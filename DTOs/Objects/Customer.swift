@@ -76,38 +76,38 @@ public extension Customer.Responses {
     
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
-        public var name: String
-        public var avatar: URL?
+        public var user: CustomerUser
+        public var alias: String?
         public var contacts: [Contact.Responses.Full]
         
         public init(
             id: UUID,
-            name: String,
-            avatar: URL? = nil,
+            user: CustomerUser,
+            alias: String?,
             contacts: [Contact.Responses.Full]
         ) {
             self.id = id
-            self.name = name
-            self.avatar = avatar
+            self.user = user
+            self.alias = alias
             self.contacts = contacts
         }
     }
     
     struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
-        public var name: String
-        public var avatar: URL?
+        public var user: CustomerUser
+        public var alias: String?
         public var contacts: [Contact.Responses.Full]
         
         public init(
             id: UUID,
-            name: String,
-            avatar: URL? = nil,
+            user: CustomerUser,
+            alias: String?,
             contacts: [Contact.Responses.Full]
         ) {
             self.id = id
-            self.name = name
-            self.avatar = avatar
+            self.user = user
+            self.alias = alias
             self.contacts = contacts
         }
     }

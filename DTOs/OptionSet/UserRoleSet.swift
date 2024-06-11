@@ -5,7 +5,7 @@ import Foundation
 /// Поддерживает:
 /// - `customer` -  Опция, представляющая пользователя как клиента.
 /// - `professional` -  Опция, представляющая пользователя как профессионала.
-public struct UserRoleSet: OptionSet, Codable {
+public struct UserRoleSet: OptionSet, Codable, Hashable {
     
     public static let customer = UserRoleSet(rawValue: 1 << 0)
     public static let professional = UserRoleSet(rawValue: 1 << 1)
