@@ -15,17 +15,11 @@ public extension Salon.Parameters {
         
     /// Параметры для создания салона.
     /// Передаются в теле запроса при регистрации нового салона в системе.
-    ///
-    /// ### Properties:
-    /// - name: Название салона.
-    /// - type: Тип салона, определенный перечислением `SalonType`.
-    /// - logo: URL адрес логотипа салона, может быть опущен.
-    /// - timetable: Параметры для создания расписания салона (`Timetable.Parameters.Create`).
-    /// - address: Параметры для создания адреса салона (`Address.Parameters.Create`).
     struct Create: Parametable {
         public let name: String
         public let type: SalonType
         public let logo: URL?
+        public let timeZone: String
         public let description: String?
         public let timetable: Timetable.Week
         public let address: Address
@@ -35,6 +29,7 @@ public extension Salon.Parameters {
             name: String, 
             type: SalonType,
             logo: URL? = nil,
+            timeZone: String,
             description: String?,
             timetable: Timetable.Week,
             address: Address,
@@ -44,6 +39,7 @@ public extension Salon.Parameters {
             self.type = type
             self.logo = logo
             self.description = description
+            self.timeZone = timeZone
             self.timetable = timetable
             self.address = address
             self.contacts = contacts

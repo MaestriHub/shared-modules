@@ -13,14 +13,9 @@ public extension Timetable {
     
     struct Week: Parametable, Responsable, Equatable {
         public var schedule: Schedule.Week
-        public var timeZone: String
 
-        public init(
-            schedule: Schedule.Week,
-            timeZone: String
-        ) {
+        public init(schedule: Schedule.Week) {
             self.schedule = schedule
-            self.timeZone = timeZone
         }
     }
 }
