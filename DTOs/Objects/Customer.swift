@@ -68,6 +68,20 @@ public extension Customer.Parameters {
             self.contacts = contacts
         }
     }
+
+    /// Параметры для того, чтобы принять приглашение в приложение.
+    ///
+    /// ### Properties:
+    ///  - salonName: Название салона для поиска по ИМе
+    struct HandleInvite: Parametable {
+        public var salonName: UUID
+
+        public init(
+            salonName: UUID
+        ) {
+            self.salonName = salonName
+        }
+    }
 }
 
 //MARK: - Responses -
