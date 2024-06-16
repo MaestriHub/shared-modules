@@ -72,7 +72,7 @@ public extension Customer.Parameters {
     /// Параметры для того, чтобы принять приглашение в приложение.
     ///
     /// ### Properties:
-    ///  - salonName: Название салона для поиска по ИМе
+    ///  - salonName: Название салона для поиска по Имени
     struct HandleInvite: Parametable {
         public var salonName: UUID
 
