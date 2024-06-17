@@ -74,12 +74,12 @@ public extension Customer.Parameters {
     /// ### Properties:
     ///  - salonName: Название салона для поиска по Имени
     struct HandleInvite: Parametable {
-        public var salonName: UUID
+        public var specSymbols: String?
 
         public init(
-            salonName: UUID
+            specSymbols: String
         ) {
-            self.salonName = salonName
+            self.specSymbols = specSymbols
         }
     }
 }
