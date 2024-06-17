@@ -72,7 +72,7 @@ public extension Customer.Parameters {
     /// Параметры для того, чтобы принять приглашение в приложение.
     ///
     /// ### Properties:
-    ///  - salonName: Название салона для поиска по Имени
+    ///  - specSymbols: Специальные символы для верификации
     struct HandleInvite: Parametable {
         public var specSymbols: String?
 
