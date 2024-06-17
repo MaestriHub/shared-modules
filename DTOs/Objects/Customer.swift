@@ -77,7 +77,7 @@ public extension Customer.Parameters {
         public var specSymbols: String?
 
         public init(
-            specSymbols: String
+            specSymbols: String? = nil
         ) {
             self.specSymbols = specSymbols
         }
