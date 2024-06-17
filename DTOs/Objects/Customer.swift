@@ -68,6 +68,20 @@ public extension Customer.Parameters {
             self.contacts = contacts
         }
     }
+
+    /// Параметры для того, чтобы принять приглашение в приложение.
+    ///
+    /// ### Properties:
+    ///  - specSymbols: Специальные символы для верификации
+    struct HandleInvite: Parametable {
+        public var specSymbols: String?
+
+        public init(
+            specSymbols: String
+        ) {
+            self.specSymbols = specSymbols
+        }
+    }
 }
 
 //MARK: - Responses -
