@@ -72,14 +72,14 @@ public extension Customer.Parameters {
     /// Параметры для того, чтобы принять приглашение в приложение.
     ///
     /// ### Properties:
-    ///  - specSymbols: Специальные символы для верификации
+    ///  - contact: value Контакта для верификации
     struct HandleInvite: Parametable {
-        public var specSymbols: String?
+        public var contact: String?
 
         public init(
-            specSymbols: String? = nil
+            contact: String? = nil
         ) {
-            self.specSymbols = specSymbols
+            self.contact = contact
         }
     }
 }
