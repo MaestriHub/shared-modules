@@ -125,4 +125,14 @@ public extension Customer.Responses {
             self.contacts = contacts
         }
     }
+
+    struct Verify: Responsable, Hashable, Equatable {
+        public var contacts: [Contact.Responses.Full]
+
+        public init(
+            contacts: [Contact.Responses.Full]
+        ) {
+            self.contacts = contacts
+        }        
+    }
 }
