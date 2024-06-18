@@ -90,27 +90,7 @@ public extension Contact.Responses {
             self.type = type
         }
     }
-    
-    // TODO: Vitalik убрать после мерджа Pull Request
-    struct Send: Responsable {
-        public let redirectUrl: String?
-        public let sessionInfo: String?
         
-        public init(redirectUrl: String?, sessionInfo: String?) {
-            self.redirectUrl = redirectUrl
-            self.sessionInfo = sessionInfo
-        }
-    }
-    
-    /// `Send` возвращает информацию об отправке верификацонного кода на контакт пользователя
-    ///
-    /// ### Properties:
-    /// - redirectUrl: `String` - ссылка, куда нужно перенаправить пользователя, чтобы получить код при необходимости
-    enum SendPhoneVerification: Responsable {
-        case redirect(url: Redirect)
-        case session(info: String)
-    }
-    
     /// `Verify` возвращает информацию о том, что контакт был верифицирован
     ///
     /// ### Properties:
