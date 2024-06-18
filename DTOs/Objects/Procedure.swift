@@ -44,6 +44,7 @@ public extension Procedure.Parameters {
         public let price: Price
         public let duration: Int
         public var description: String?
+        public var alias: String?
         public let serviceId: UUID
         public let employeeId: UUID
         
@@ -51,12 +52,14 @@ public extension Procedure.Parameters {
             price: Price,
             duration: Int,
             description: String?,
+            alias: String?,
             serviceId: UUID,
             employeeId: UUID
         ) {
             self.price = price
             self.duration = duration
             self.description = description
+            self.alias = alias
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
@@ -72,15 +75,18 @@ public extension Procedure.Parameters {
         public let price: Price?
         public let duration: Int?
         public var description: String?
+        public var alias: String?
         
         public init(
             price: Price? = nil,
             duration: Int? = nil,
-            description: String? = nil
+            description: String? = nil,
+            alias: String? = nil
         ) {
             self.price = price
             self.duration = duration
             self.description = description
+            self.alias = alias
         }
     }
 }
@@ -102,6 +108,7 @@ public extension Procedure.Responses {
         public var price: Price
         public var duration: Int
         public var description: String?
+        public var alias: String?
         public var service: Service.Responses.Partial
         public var master: Employee.Responses.Partial
         
@@ -110,6 +117,7 @@ public extension Procedure.Responses {
             price: Price,
             duration: Int,
             description: String?,
+            alias: String?,
             service: Service.Responses.Partial,
             master: Employee.Responses.Partial
         ) {
@@ -117,6 +125,7 @@ public extension Procedure.Responses {
             self.price = price
             self.duration = duration
             self.description = description
+            self.alias = alias
             self.service = service
             self.master = master
         }
@@ -135,6 +144,7 @@ public extension Procedure.Responses {
         public var price: Price
         public var duration: Int
         public var description: String?
+        public var alias: String?
         public var service: Service.Responses.Partial
         public var master: Employee.Responses.Partial
         
@@ -143,6 +153,7 @@ public extension Procedure.Responses {
             price: Price,
             duration: Int,
             description: String?,
+            alias: String?,
             service: Service.Responses.Partial,
             master: Employee.Responses.Partial
         ) {
@@ -150,6 +161,7 @@ public extension Procedure.Responses {
             self.price = price
             self.duration = duration
             self.description = description
+            self.alias = alias
             self.service = service
             self.master = master
         }
