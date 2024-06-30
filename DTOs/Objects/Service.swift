@@ -84,13 +84,13 @@ public extension Service.Parameters {
         public var title: String?
         public var description: String?
         public var category: ServiceCategory?
-        public var languague: String?
+        public var languague: String
         
         public init(
             title: String? = nil,
             description: String? = nil,
             category: ServiceCategory? = nil,
-            languague: String? = nil
+            languague: String
         ) {
             self.title = title
             self.description = description
