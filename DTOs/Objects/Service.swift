@@ -53,19 +53,23 @@ public extension Service.Parameters {
     /// ### Properties:
     /// - `title`: Название услуги.
     /// - `description`: Описание услуги, детализирующее предоставляемую процедуру.
+    /// - 'languague': Язык в стиле Access Languague
     struct Create: Parametable {
         public var title: String
         public var description: String
         public var category: ServiceCategory
+        public var languague: String
         
         public init(
             title: String,
             description: String,
-            category: ServiceCategory
+            category: ServiceCategory,
+            languague: String
         ) {
             self.title = title
             self.description = description
             self.category = category
+            self.languague = languague
         }
     }
 
@@ -75,19 +79,23 @@ public extension Service.Parameters {
     /// ### Properties:
     /// - `title`: Новое название услуги (опционально).
     /// - `description`: Новое описание услуги (опционально).
+    /// - 'languague': Язык в стиле Access Languague (требуется для обновления title || description)
     struct Patch: Parametable {
         public var title: String?
         public var description: String?
         public var category: ServiceCategory?
+        public var languague: String
         
         public init(
             title: String? = nil,
             description: String? = nil,
-            category: ServiceCategory? = nil
+            category: ServiceCategory? = nil,
+            languague: String
         ) {
             self.title = title
             self.description = description
             self.category = category
+            self.languague = languague
         }
     }
 }
