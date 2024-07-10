@@ -4,14 +4,14 @@ import Foundation
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-public enum Finance {
+public enum Operation {
     public enum Parameters {}
     public enum Responses {}
 }
 
 //MARK: - Parameters -
 
-public extension Finance.Parameters {
+public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
         public var info: [String : String]
@@ -26,7 +26,7 @@ public extension Finance.Parameters {
 
 //MARK: - Responses -
 
-public extension Finance.Responses {
+public extension Operation.Responses {
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
     }
