@@ -15,19 +15,31 @@ public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
         public var info: [String : String]
+
+        init(
+            price: Price,
+            info: [String : String]
+        ){
+            self.price = price
+            self.info = info
+        }
     }
 
     struct Patch: Parametable {
         public var price: Price?
         public var info: [String : String]?
+
+        init(
+            price: Price? = nil,
+            info: [String : String]? = nil
+        ){
+            self.price = price
+            self.info = info
+        }
     }
 }
 
 
 //MARK: - Responses -
 
-public extension Operation.Responses {
-    struct Full: Responsable, Identifiable, Hashable, Equatable {
-        public var id: UUID
-    }
-}
+public extension Operation.Responses {}
