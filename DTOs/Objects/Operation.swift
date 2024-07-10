@@ -15,13 +15,16 @@ public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
         public var info: [String : String]
+        public var saveBoxId: UUID
 
         init(
             price: Price,
-            info: [String : String]
+            info: [String : String],
+            saveBoxId: UUID
         ){
             self.price = price
             self.info = info
+            self.saveBoxId = saveBoxId
         }
     }
 
