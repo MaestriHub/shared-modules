@@ -17,7 +17,7 @@ public extension Operation.Parameters {
         public var info: [String : String]
         public var saveBoxId: UUID
 
-        init(
+        public init(
             price: Price,
             info: [String : String],
             saveBoxId: UUID
@@ -32,7 +32,7 @@ public extension Operation.Parameters {
         public var price: Price?
         public var info: [String : String]?
 
-        init(
+        public init(
             price: Price? = nil,
             info: [String : String]? = nil
         ){
@@ -50,7 +50,7 @@ public extension Operation.Responses {
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
 
-        init(
+        public init(
             id: UUID
         ){
             self.id = id
