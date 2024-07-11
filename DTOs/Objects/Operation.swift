@@ -45,4 +45,15 @@ public extension Operation.Parameters {
 
 //MARK: - Responses -
 
-public extension Operation.Responses {}
+public extension Operation.Responses {
+
+    struct Full: Responsable, Identifiable, Hashable, Equatable {
+        public var id: UUID
+
+        init(
+            id: UUID
+        ){
+            self.id = id
+        }
+    }
+}
