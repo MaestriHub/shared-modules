@@ -1,9 +1,5 @@
 import Foundation
 
-/// Пространство имен `Appointment` содержит типы данных для работы с записями на прием.
-///
-/// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
-/// которые используются для сериализации данных, отправляемых и получаемых от API.
 public enum Operation {
     public enum Parameters {}
     public enum Responses {}
@@ -15,16 +11,16 @@ public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
         public var info: [String : String]
-        public var saveBoxId: UUID
+        public var salonId: UUID
 
         public init(
             price: Price,
             info: [String : String],
-            saveBoxId: UUID
+            salonId: UUID
         ){
             self.price = price
             self.info = info
-            self.saveBoxId = saveBoxId
+            self.salonId = salonId
         }
     }
 
