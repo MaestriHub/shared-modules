@@ -12,8 +12,6 @@ public extension Cashbox.Parameters {
         public var salonId: UUID
 
         public init(
-            price: Price,
-            info: [String : String],
             salonId: UUID
         ){
             self.salonId = salonId
