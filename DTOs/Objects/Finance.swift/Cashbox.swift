@@ -9,27 +9,14 @@ public enum Cashbox {
 
 public extension Cashbox.Parameters {
     struct Create: Parametable {
-        public var salonId: UUID
+        public var paymentType: PaymentType
 
         public init(
-            salonId: UUID
+            paymentType: PaymentType
         ){
-            self.salonId = salonId
+            self.paymentType = paymentType
         }
     }
-
-    // struct Patch: Parametable {
-    //     public var price: Price?
-    //     public var info: [String : String]?
-
-    //     public init(
-    //         price: Price? = nil,
-    //         info: [String : String]? = nil
-    //     ){
-    //         self.price = price
-    //         self.info = info
-    //     }
-    // }
 }
 
 

@@ -10,30 +10,27 @@ public enum Operation {
 public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
-        public var info: [String : String]
-        public var salonId: UUID
+        public var infoType: OperationType
+        public var paymentType: PaymentType
 
         public init(
             price: Price,
-            info: [String : String],
-            salonId: UUID
+            infoType: OperationType,
+            paymentType: PaymentType
         ){
             self.price = price
-            self.info = info
-            self.salonId = salonId
+            self.infoType = infoType
+            self.paymentType = paymentType
         }
     }
-
+    
     struct Patch: Parametable {
-        public var price: Price?
-        public var info: [String : String]?
+        public var price: Price
 
         public init(
-            price: Price? = nil,
-            info: [String : String]? = nil
+            price: Price
         ){
             self.price = price
-            self.info = info
         }
     }
 }
