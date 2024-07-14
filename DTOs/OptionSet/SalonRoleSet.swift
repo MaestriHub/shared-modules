@@ -7,10 +7,12 @@ import Foundation
 /// - `admin` -  Опция, представляющая пользователя как admin.
 /// - `owner` -  Опция, представляющая пользователя как владелец.
 public struct SalonRoleSet: OptionSet, Codable {
-    
+
     public static let master = SalonRoleSet(rawValue: 1 << 0)
     public static let admin = SalonRoleSet(rawValue: 1 << 1)
     public static let owner = SalonRoleSet(rawValue: 1 << 2)
+    //public static let neowner = SalonRoleSet([.admin, .master])
+    //public static let foo = SalonRoleSet(rawValue: 1 << 3)
     
     public var rawValue: Int
     
