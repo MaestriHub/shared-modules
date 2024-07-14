@@ -45,11 +45,17 @@ public extension Cashbox.Responses {
 
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
+        public var createDate: Date
+        public var paymentType: PaymentType
 
         public init(
-            id: UUID
+            id: UUID,
+            createDate: Date,
+            paymentType: PaymentType
         ){
             self.id = id
+            self.createDate = createDate
+            self.paymentType = paymentType
         }
     }
 }
