@@ -10,27 +10,39 @@ public enum Operation {
 public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
-        public var infoType: OperationType
+        public var OperationType: OperationType
         public var paymentType: PaymentType
+        public var salonId: UUID
 
         public init(
             price: Price,
-            infoType: OperationType,
-            paymentType: PaymentType
+            OperationType: OperationType,
+            paymentType: PaymentType,
+            salonId: UUID
         ){
             self.price = price
-            self.infoType = infoType
+            self.OperationType = OperationType
             self.paymentType = paymentType
+            self.salonId = salonId
         }
     }
-    
-    struct Patch: Parametable {
-        public var price: Price
 
+    struct Retrieve: Parametable {
+        public var startDate: Date?
+        public var endDate: Date?
+        public var paymentType: PaymentType?
+        public var cashboxIds: [UUID]?
+        
         public init(
-            price: Price
-        ){
-            self.price = price
+            startDate: Date?,
+            endDate: Date?,
+            paymentType: PaymentType?,
+            cashboxIds: [UUID]?
+        ) {
+            self.startDate = startDate
+            self.endDate = endDate
+            self.paymentType = paymentType
+            self.cashboxIds = cashboxIds
         }
     }
 }
@@ -42,11 +54,20 @@ public extension Operation.Responses {
 
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
+        public var createDate: Date
+        public var price: Price
+        public var paymentType: PaymentType
 
         public init(
-            id: UUID
+            id: UUID,
+            createDate: Date,
+            price: Price,
+            paymentType: PaymentType
         ){
             self.id = id
+            self.createDate = createDate
+            self.price = price
+            self.paymentType = paymentType
         }
     }
 }

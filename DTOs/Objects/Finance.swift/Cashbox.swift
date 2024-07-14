@@ -9,11 +9,30 @@ public enum Cashbox {
 
 public extension Cashbox.Parameters {
     struct Create: Parametable {
+        public var salonId: UUID
         public var paymentType: PaymentType
 
         public init(
+            salonId: UUID,
             paymentType: PaymentType
         ){
+            self.salonId = salonId
+            self.paymentType = paymentType
+        }
+    }
+
+    struct Retrieve: Parametable {
+        public var paymentType: PaymentType?
+        public var startDate: Date?
+        public var endDate: Date?
+        
+        public init(
+            startDate: Date?,
+            endDate: Date?,
+            paymentType: PaymentType?
+        ) {
+            self.startDate = startDate
+            self.endDate = endDate
             self.paymentType = paymentType
         }
     }
