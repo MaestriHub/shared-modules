@@ -8,9 +8,21 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
     public static let employee = PermissionSet(rawValue: 1 << 3)
     public static let timetable = PermissionSet(rawValue: 1 << 4)
     public static let notifications = PermissionSet(rawValue: 1 << 5)
-    public static let user = PermissionSet(rawValue: 1 << 6)
+    public static let salon = PermissionSet(rawValue: 1 << 6)
     public static let operations = PermissionSet(rawValue: 1 << 7)
-    public static let owner = PermissionSet([])// лучше создавать или нет такого? (как будто так будет удобно его отличать)
+    public static let procedure = PermissionSet(rawValue: 1 << 8)
+    
+    public static let owner = PermissionSet([
+        .none,
+        .appointments, 
+        .statistic, 
+        .employee, 
+        .timetable, 
+        .notifications,
+        .salon, 
+        .operations,
+        .procedure
+    ])
 
     // all
     public var rawValue: Int
@@ -19,8 +31,4 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-}
-
-extension PermissionSet {
-    public static let master = PermissionSet(rawValue: 1<<4)
 }

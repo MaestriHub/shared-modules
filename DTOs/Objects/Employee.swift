@@ -60,18 +60,18 @@ public extension Employee.Parameters {
     ///  - contacts: Контактная информация Employee, для связи с ним
     /// - timetable: Расписание времени работы
     struct Patch: Parametable {
-        public var roleSet: SalonRoleSet?
+        public var jobPostId: UUID?
         public var contacts: [Contact.Parameters.Create]?
         public var timetable: Timetable.Week?
         public var description: String?
         
         public init(
-            roleSet: SalonRoleSet?,
+            jobPostId: UUID,
             contacts: [Contact.Parameters.Create]?,
             timetable: Timetable.Week?,
             description: String?
         ) {
-            self.roleSet = roleSet
+            self.jobPostId = jobPostId
             self.contacts = contacts
             self.timetable = timetable
             self.description = description
