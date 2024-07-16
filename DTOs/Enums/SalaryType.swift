@@ -9,7 +9,7 @@ public enum SalaryType: Codable, Hashable, Equatable {
 
     public enum PaymentType: Codable, Hashable {
         case procent(procent: UInt)
-        case value(value: Decimal)
+        case value(value: Price)
     } 
 
     case procent(UInt)
