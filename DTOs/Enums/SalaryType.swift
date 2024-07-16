@@ -8,11 +8,11 @@ public enum SalaryType: Codable, Hashable, Equatable {
     }
 
     public enum PaymentType: Codable, Hashable {
-        case procent(procent: Decimal)
+        case procent(procent: UInt)
         case value(value: Decimal)
     } 
 
-    case procent(Decimal)
+    case procent(UInt)
     case grid(proceduresMap: [UUID : PaymentType])
     case wage(price: Price, period: PaymentPeriod)
     case none
