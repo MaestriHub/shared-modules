@@ -10,7 +10,7 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
     public static let timetable = PermissionSet(rawValue: 1 << 4)
     public static let notifications = PermissionSet(rawValue: 1 << 5)
     public static let salon = PermissionSet(rawValue: 1 << 6)
-    public static let operations = PermissionSet(rawValue: 1 << 7)
+    public static let finance = PermissionSet(rawValue: 1 << 7)
     public static let procedure = PermissionSet(rawValue: 1 << 8)
     public static let contact = PermissionSet(rawValue: 1 << 9)
 
@@ -22,7 +22,7 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
         .timetable, 
         .notifications,
         .salon, 
-        .operations,
+        .finance,
         .procedure
     ])
 

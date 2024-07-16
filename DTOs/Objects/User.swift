@@ -54,7 +54,7 @@ public extension User.Responses {
         public var nickname: String
         public var contact: Contact.Responses.Full?
         public var options: UserRoleSet
-        public var permissions: ProPermissionSet
+        public var permissions: MaestriPermissionSet
         
         public init(
             id: UUID,
@@ -62,7 +62,7 @@ public extension User.Responses {
             nickname: String,
             contact: Contact.Responses.Full?,
             options: UserRoleSet,
-            permissions: ProPermissionSet
+            permissions: MaestriPermissionSet
         ) {
             self.id = id
             self.avatar = avatar
