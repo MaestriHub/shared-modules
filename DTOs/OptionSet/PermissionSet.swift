@@ -23,7 +23,8 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
         .notifications,
         .salon, 
         .finance,
-        .procedure
+        .procedure,
+        .contact
     ])
 
     public var rawValue: Int
