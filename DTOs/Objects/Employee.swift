@@ -34,17 +34,20 @@ public extension Employee.Parameters {
     /// - `salondId`: Идентификатор салона
     struct Invite: Parametable {
         public var salondId: UUID
+        public var positionId: UUID
         public var contacts: [Contact.Parameters.Create]
         public var timetable: Timetable.Week?
         public var description: String?
         
         public init(
             salondId: UUID,
+            positionId: UUID,
             contacts: [Contact.Parameters.Create],
             timetable: Timetable.Week?,
             description: String?
         ) {
             self.salondId = salondId
+            self.positionId = positionId
             self.contacts = contacts
             self.timetable = timetable
             self.description = description
@@ -57,18 +60,18 @@ public extension Employee.Parameters {
     ///  - contacts: Контактная информация Employee, для связи с ним
     /// - timetable: Расписание времени работы
     struct Patch: Parametable {
-        public var roleSet: SalonRoleSet?
+        public var positionId: UUID?
         public var contacts: [Contact.Parameters.Create]?
         public var timetable: Timetable.Week?
         public var description: String?
         
         public init(
-            roleSet: SalonRoleSet?,
+            positionId: UUID,
             contacts: [Contact.Parameters.Create]?,
             timetable: Timetable.Week?,
             description: String?
         ) {
-            self.roleSet = roleSet
+            self.positionId = positionId
             self.contacts = contacts
             self.timetable = timetable
             self.description = description
@@ -87,6 +90,7 @@ public extension Employee.Responses {
     /// - nickname: `String` - псевдоним сотрудника.
     /// - avatar: `URL?` - URL-адрес аватара сотрудника, может быть `nil`, если аватар отсутствует.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
+    /// - position: Position.Responses.Full - полная информация о дожности
     /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
@@ -96,7 +100,7 @@ public extension Employee.Responses {
         public var contacts: [Contact.Responses.Full]
         public var timetable: Timetable.Week
         public var salonId: UUID
-        
+        public var position: Position.Responses.Full
         public var procedures: [Procedure.Responses.Partial]?
         
         public init(
@@ -107,6 +111,7 @@ public extension Employee.Responses {
             contacts: [Contact.Responses.Full],
             timetable: Timetable.Week,
             salonId: UUID,
+            position: Position.Responses.Full,
             procedures: [Procedure.Responses.Partial]? = nil
         ) {
             self.id = id
@@ -116,6 +121,7 @@ public extension Employee.Responses {
             self.contacts = contacts
             self.timetable = timetable
             self.salonId = salonId
+            self.position = position
             self.procedures = procedures
         }
     }
