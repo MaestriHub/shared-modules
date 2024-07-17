@@ -9,6 +9,43 @@ public enum Position {
     public enum Responses {}
 }
 
+
+//MARK: - Parameters -
+
+public extension Position.Parameters {
+    struct Create: Parametable {
+        public var title: String
+        public var permissions: PermissionSet
+        public var salary: SalaryType
+
+        public init(
+            title: String,
+            permissions: PermissionSet,
+            salary: SalaryType
+        ){
+            self.title = title
+            self.permissions = permissions
+            self.salary = salary
+        }
+    }
+
+    struct Patch: Parametable {
+        public var title: String?
+        public var permissions: PermissionSet?
+        public var salary: SalaryType?
+
+        public init(
+            title: String?,
+            permissions: PermissionSet?,
+            salary: SalaryType?
+        ){
+            self.title = title
+            self.permissions = permissions
+            self.salary = salary
+        }
+    }
+}
+
 //MARK: - Responses -
 
 public extension Position.Responses {
