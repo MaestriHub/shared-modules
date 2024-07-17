@@ -13,6 +13,7 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
     public static let finance = PermissionSet(rawValue: 1 << 7)
     public static let procedure = PermissionSet(rawValue: 1 << 8)
     public static let contact = PermissionSet(rawValue: 1 << 9)
+    public static let position = PermissionSet(rawValue: 1 << 10)
 
     public static let none = PermissionSet([])
     public static let all = PermissionSet([
