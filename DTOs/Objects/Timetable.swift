@@ -13,9 +13,14 @@ public extension Timetable {
     
     struct Week: Parametable, Responsable, Equatable {
         public var schedule: Schedule.Week
+        public var timeZone: String
 
-        public init(schedule: Schedule.Week) {
+        public init(
+            schedule: Schedule.Week,
+            timeZone: String
+        ) {
             self.schedule = schedule
+            self.timeZone = timeZone
         }
     }
 }
@@ -31,6 +36,8 @@ public extension Timetable.Parameters {
     /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
     struct SearchSlot: Parametable {
         public var procedures: [UUID]
+        
+        //public var customerId: UUID
         
         public init(
             procedures: [UUID]
