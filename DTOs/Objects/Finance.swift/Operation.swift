@@ -10,18 +10,18 @@ public enum Operation {
 public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
-        public var OperationType: OperationType
+        public var operationType: OperationType
         public var paymentType: PaymentType
         public var salonId: UUID
 
         public init(
             price: Price,
-            OperationType: OperationType,
+            operationType: OperationType,
             paymentType: PaymentType,
             salonId: UUID
         ){
             self.price = price
-            self.OperationType = OperationType
+            self.operationType = operationType
             self.paymentType = paymentType
             self.salonId = salonId
         }

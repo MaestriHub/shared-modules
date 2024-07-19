@@ -6,4 +6,6 @@ public enum NoticeCategory: String, Codable, Hashable, Equatable {
 
     case appointment
     case employee
+    case position
+    case salary
 }

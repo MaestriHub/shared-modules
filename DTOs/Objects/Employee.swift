@@ -77,6 +77,19 @@ public extension Employee.Parameters {
             self.description = description
         }
     }
+
+    struct Salary: Parametable {
+        public var paymentType: PaymentType
+        public var salonId: UUID
+
+        public init(
+            paymentType: PaymentType,
+            salonId: UUID
+        ){
+            self.paymentType = paymentType
+            self.salonId = salonId
+        }
+    }
 }
 
 //MARK: - Responses -
