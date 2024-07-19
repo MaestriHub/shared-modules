@@ -15,7 +15,7 @@ struct ExpressionParser {
             switch self {
             case .daysOfMonth: return Array(1...31)
             case .months: return Array(1...12)
-            case .daysOfWeek: return Array(0...6)
+            case .daysOfWeek: return Array(1...7)
             case .weeksOfYear: return Array(1...53)
             }
         }
