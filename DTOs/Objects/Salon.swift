@@ -21,7 +21,7 @@ public extension Salon.Parameters {
         public let logo: URL?
         public let timeZone: String
         public let description: String?
-        public let timetable: Timetable.Week
+        public let timetable: Schedule.Week
         public let address: Address
         public var contacts: [Contact.Parameters.Create]
         
@@ -31,7 +31,7 @@ public extension Salon.Parameters {
             logo: URL? = nil,
             timeZone: String,
             description: String?,
-            timetable: Timetable.Week,
+            timetable: Schedule.Week,
             address: Address,
             contacts: [Contact.Parameters.Create]
         ) {
@@ -57,14 +57,14 @@ public extension Salon.Parameters {
         public let type: SalonType?
         public let description: String?
         public let logo: URL?
-        public let timetable: Timetable.Week?
+        public let timetable: Schedule.Week?
         
         public init(
             name: String? = nil,
             type: SalonType? = nil,
             description: String?,
             logo: URL? = nil,
-            timetable: Timetable.Week? = nil
+            timetable: Schedule.Week? = nil
         ) {
             self.name = name
             self.type = type
@@ -101,7 +101,7 @@ public extension Salon.Responses {
         public var isActive: Bool
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
-        public var timetable: Timetable.Week
+        public var timetable: Timetable.Responses.Week
         public var masters: [Employee.Responses.Full]?
         
         public init(
@@ -114,7 +114,7 @@ public extension Salon.Responses {
             isActive: Bool,
             canEdit: Bool,
             isFavorite: Bool,
-            timetable: Timetable.Week,
+            timetable: Timetable.Responses.Week,
             masters: [Employee.Responses.Full]? = nil
         ) {
             self.id = id

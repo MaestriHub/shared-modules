@@ -15,9 +15,9 @@ public struct PermissionSet: OptionSet, Codable, Hashable {
     public static let contact = PermissionSet(rawValue: 1 << 9)
     public static let position = PermissionSet(rawValue: 1 << 10)
 
-    public static let none = PermissionSet([])
-    public static let all = PermissionSet([
-        .appointments, 
+    public static let none: PermissionSet = []
+    public static let all: PermissionSet = [
+        .appointments,
         .statistic, 
         .employee, 
         .timetable, 
