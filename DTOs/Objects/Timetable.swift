@@ -9,22 +9,6 @@ public enum Timetable {
     public enum Responses {}
 }
 
-public extension Timetable {
-    
-    struct Week: Parametable, Responsable, Equatable {
-        public var schedule: Schedule.Week
-        public var timeZone: String
-
-        public init(
-            schedule: Schedule.Week,
-            timeZone: String
-        ) {
-            self.schedule = schedule
-            self.timeZone = timeZone
-        }
-    }
-}
-
 // MARK: - Parameters -
 
 public extension Timetable.Parameters {
@@ -65,6 +49,19 @@ public extension Timetable.Responses {
             timeZone: String
         ) {
             self.intervals = intervals
+            self.timeZone = timeZone
+        }
+    }
+    
+    struct Week: Parametable, Responsable, Equatable {
+        public var schedule: Schedule.Week
+        public var timeZone: String
+
+        public init(
+            schedule: Schedule.Week,
+            timeZone: String
+        ) {
+            self.schedule = schedule
             self.timeZone = timeZone
         }
     }
