@@ -81,16 +81,13 @@ public extension Employee.Parameters {
     struct Salary: Parametable {
         public var paymentType: PaymentType
         public var salonId: UUID
-        public let paymentPeriod: DateInterval
 
         public init(
             paymentType: PaymentType,
-            salonId: UUID,
-            paymentPeriod: DateInterval
+            salonId: UUID
         ){
             self.paymentType = paymentType
             self.salonId = salonId
-            self.paymentPeriod = paymentPeriod
         }
     }
 }
