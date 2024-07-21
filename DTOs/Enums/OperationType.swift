@@ -5,5 +5,5 @@ public enum OperationType: String, Codable, Hashable, Equatable {
     case unrecorded // неучтенка
     case bonus // премия
     case salary // зарплата
-    case appointment //
+    case appointment // 
 }
