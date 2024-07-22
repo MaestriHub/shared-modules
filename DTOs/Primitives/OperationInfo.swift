@@ -6,7 +6,7 @@ public struct AppointmentOperation: Codable, Hashable {
     public var appointmentId: UUID
 
     public init(
-        realizerId: UUID,
+        realizerId: UUID, //employeeId
         appointmentId: UUID
     ) {
         self.realizerId = realizerId
@@ -20,8 +20,8 @@ public struct SalaryOperation: Codable, Hashable {
     public var receiverId: UUID
 
     public init(
-        initiatorId: UUID,
-        receiverId: UUID
+        initiatorId: UUID, //employeeId
+        receiverId: UUID //employeeId
     ) {
         self.initiatorId = initiatorId
         self.receiverId = receiverId
@@ -31,14 +31,14 @@ public struct SalaryOperation: Codable, Hashable {
 public struct OtherOperation: Codable, Hashable {
     
     public var realizerId: UUID
-    public var info: String
+    public var description: String
 
     public init(
         realizerId: UUID,
-        info: String
+        description: String
     ) {
         self.realizerId = realizerId
-        self.info = info
+        self.description = description
     }
 }
 
@@ -50,21 +50,21 @@ public struct OperationInfo: Codable, Hashable {
         case other(OtherOperation)
     }
 
-    public var info: Keys
+    public var value: Keys
 
     public init(
         appointmentInfo: AppointmentOperation
     ) {
-        info = .appointment(appointmentInfo)
+        value = .appointment(appointmentInfo)
     }
     public init(
         salaryInfo: SalaryOperation
     ) {
-        info = .salary(salaryInfo)
+        value = .salary(salaryInfo)
     }
     public init(
         otherInfo: OtherOperation
     ) {
-        info = .other(otherInfo)
+        value = .other(otherInfo)
     }
 }

@@ -3,7 +3,7 @@ import Foundation
 public struct SalaryType: Codable, Hashable {
 
     public enum PaymentType: Codable, Hashable {
-        case procent(procent: UInt)
+        case procent(procent: Int)
         case value(value: Price)
     }
     
@@ -39,4 +39,5 @@ public struct SalaryType: Codable, Hashable {
         self.grid = grid
         self.wage = wage
     }
+    
 }
