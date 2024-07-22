@@ -1,7 +1,5 @@
 import Foundation
 
-protocol Info: Decodable, Encodable, Codable {}
-
 public struct AppointmentOperation: Codable, Hashable {
     
     public var realizerId: UUID
@@ -44,7 +42,7 @@ public struct OtherOperation: Codable, Hashable {
     }
 }
 
-public struct OperationInfo: Codable, Hashable, Info {
+public struct OperationInfo: Codable, Hashable {
     
     public enum Keys: Codable, Hashable {
         case appointment(AppointmentOperation)
