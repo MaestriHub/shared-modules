@@ -18,13 +18,16 @@ public struct SalaryOperation: Codable, Hashable {
     
     public var initiatorId: UUID
     public var receiverId: UUID
+    public var dateTo: Date
 
     public init(
         initiatorId: UUID, //employeeId
-        receiverId: UUID //employeeId
+        receiverId: UUID, //employeeId
+        dateTo: Date // Дата, дальше которой все оплачено этой зарплатой
     ) {
         self.initiatorId = initiatorId
         self.receiverId = receiverId
+        self.dateTo = dateTo
     }
 }
 

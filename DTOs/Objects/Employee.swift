@@ -81,16 +81,16 @@ public extension Employee.Parameters {
     struct Salary: Parametable {
         public var paymentType: PaymentType
         public var salonId: UUID
-        public var currency: String
+        public var dateTo: Date
 
         public init(
             paymentType: PaymentType,
             salonId: UUID,
-            currency: String
+            dateTo: Date = Date.now
         ){
             self.paymentType = paymentType
             self.salonId = salonId
-            self.currency = currency
+            self.dateTo = dateTo
         }
     }
 }
@@ -169,16 +169,16 @@ public extension Employee.Responses {
 
     struct Salary: Responsable, Hashable, Equatable {
 
-        public var wage: Price
-        public var grid: Price
-        public var procent: Price
-        public var sum: Price
+        public var wage: Price?
+        public var grid: [Price]?
+        public var procent: [Price]?
+        public var sum: [Price]
 
         public init(
-            wage: Price,
-            grid: Price,
-            procent: Price,
-            sum: Price
+            wage: Price?,
+            grid: [Price]?,
+            procent: [Price]?,
+            sum: [Price]
         ) {
             self.wage = wage
             self.grid = grid
