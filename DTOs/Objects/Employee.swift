@@ -86,7 +86,7 @@ public extension Employee.Parameters {
         public init(
             paymentType: PaymentType,
             salonId: UUID,
-            dateTo: Date = Date.now
+            dateTo: Date = Date()
         ){
             self.paymentType = paymentType
             self.salonId = salonId
