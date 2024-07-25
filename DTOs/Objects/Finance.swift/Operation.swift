@@ -10,19 +10,47 @@ public enum Operation {
 public extension Operation.Parameters {
     struct Create: Parametable {
         public var price: Price
-        public var operationType: OperationType
         public var paymentType: PaymentType
         public var salonId: UUID
+        public var appointment: AppointmentOperation?
+        public var salary: SalaryOperation?
+        public var other: OtherOperation?
+        
 
-        public init(
+        public init (
             price: Price,
-            operationType: OperationType,
             paymentType: PaymentType,
+            appointment: AppointmentOperation,
             salonId: UUID
-        ){
+        ) {
             self.price = price
-            self.operationType = operationType
             self.paymentType = paymentType
+            self.appointment = appointment
+            self.salonId = salonId
+        }
+
+        public init (
+            price: Price,
+            paymentType: PaymentType,
+            salary: SalaryOperation,
+            salonId: UUID
+        ) {
+            self.price = price
+            self.paymentType = paymentType
+            self.salary = salary
+            self.salonId = salonId
+        }
+
+        // вообще лучше не other а дописать для всех, пока просто тестчу
+        public init (
+            price: Price,
+            paymentType: PaymentType,
+            other: OtherOperation,
+            salonId: UUID
+        ) {
+            self.price = price
+            self.paymentType = paymentType
+            self.other = other 
             self.salonId = salonId
         }
     }
