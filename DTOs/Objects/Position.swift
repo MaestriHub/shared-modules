@@ -13,6 +13,7 @@ public enum Position {
 //MARK: - Parameters -
 
 public extension Position.Parameters {
+    
     struct Create: Parametable {
         public var title: String
         public var permissions: PermissionSet
