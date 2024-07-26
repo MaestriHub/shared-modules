@@ -58,13 +58,13 @@ public extension Service.Parameters {
         public var title: String
         public var description: String
         public var category: ServiceCategory
-        public var language: String
+        public var language: String?
         
         public init(
             title: String,
             description: String,
             category: ServiceCategory,
-            language: String
+            language: String?
         ) {
             self.title = title
             self.description = description
@@ -84,13 +84,13 @@ public extension Service.Parameters {
         public var title: String?
         public var description: String?
         public var category: ServiceCategory?
-        public var language: String
+        public var language: String?
         
         public init(
             title: String? = nil,
             description: String? = nil,
             category: ServiceCategory? = nil,
-            language: String
+            language: String? = nil
         ) {
             self.title = title
             self.description = description
