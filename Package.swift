@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SharedModules",
+    name: "shared-modules",
     products: [
         .library(
             name: "DTOs",
