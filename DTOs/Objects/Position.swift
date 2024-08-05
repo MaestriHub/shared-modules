@@ -33,7 +33,7 @@ public extension Position.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var permissions: PermissionSet?
-        public var salary: Salary.Parameters.Create
+        public var salary: Salary.Parameters.Create?
 
         public init(
             title: String?,
