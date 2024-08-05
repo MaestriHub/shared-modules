@@ -13,12 +13,12 @@ public enum Salary {
 
 public extension Salary.Parameters {
     
-    /// Параметры для создания контакта.
-    /// Включает в себя информацию, необходимую для регистрации нового контактного метода.
+    /// Параметры для создания зарплаты.
     ///
     /// ### Properties:
-    /// - `value`: Значение контактного данных, например номер телефона или адрес электронной почты.
-    /// - `type`: Тип контактного метода, определенный в ``ContactType``.
+    /// - `procent`: Процент от прибыли.
+    /// - `grid`: Сдельная оплата за конкретную услугу.
+    /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     struct Create: Parametable {
         public var procent: Int?
         public var grid: [UUID : PaymentType]?
@@ -64,10 +64,5 @@ public extension Salary.Responses {
             self.grid = grid
             self.wage = wage
         }
-    }
-    
-    enum PaymentType: Codable, Hashable {
-        case procent(procent: Int)
-        case value(value: Price)
     }
 }
