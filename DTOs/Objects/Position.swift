@@ -38,7 +38,7 @@ public extension Position.Parameters {
         public init(
             title: String?,
             permissions: PermissionSet?,
-            salary: Salary.Parameters.Create
+            salary: Salary.Parameters.Create?
         ){
             self.title = title
             self.permissions = permissions
