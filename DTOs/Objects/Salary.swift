@@ -21,12 +21,12 @@ public extension Salary.Parameters {
     /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     struct Create: Parametable {
         public var procent: Int?
-        public var grid: [UUID : PaymentType]?
+        public var grid: [UUID : SalaryPaymentType]?
         public var wage: Wage?
         
         public init(
             procent: Int?,
-            grid: [UUID : PaymentType]?,
+            grid: [UUID : SalaryPaymentType]?,
             wage: Wage?
         ) {
             self.procent = procent
@@ -50,13 +50,13 @@ public extension Salary.Responses {
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var procent: Int?
-        public var grid: [Service.Responses.Partial : PaymentType]?
+        public var grid: [Service.Responses.Partial : SalaryPaymentType]?
         public var wage: Wage?
         
         public init(
             id: UUID,
             procent: Int?,
-            grid: [Service.Responses.Partial : PaymentType]?,
+            grid: [Service.Responses.Partial : SalaryPaymentType]?,
             wage: Wage?
         ) {
             self.id = id
