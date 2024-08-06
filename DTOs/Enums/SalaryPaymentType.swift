@@ -6,6 +6,6 @@
 import Foundation
 
 public enum SalaryPaymentType: Codable, Hashable {
-    case procent(procent: Int)
+    case percent(percent: Int)
     case value(value: Price)
 }

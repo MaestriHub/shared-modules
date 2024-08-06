@@ -77,22 +77,6 @@ public extension Employee.Parameters {
             self.description = description
         }
     }
-
-    struct Salary: Parametable {
-        public var paymentType: PaymentType
-        public var salonId: UUID
-        public var dateTo: Date
-
-        public init(
-            paymentType: PaymentType,
-            salonId: UUID,
-            dateTo: Date = Date()
-        ){
-            self.paymentType = paymentType
-            self.salonId = salonId
-            self.dateTo = dateTo
-        }
-    }
 }
 
 //MARK: - Responses -
@@ -164,26 +148,6 @@ public extension Employee.Responses {
             self.name = name
             self.avatar = avatar
             self.contacts = contacts
-        }
-    }
-
-    struct Salary: Responsable, Hashable, Equatable {
-
-        public var wage: Price?
-        public var grid: [Price]?
-        public var procent: [Price]?
-        public var sum: [Price]
-
-        public init(
-            wage: Price?,
-            grid: [Price]?,
-            procent: [Price]?,
-            sum: [Price]
-        ) {
-            self.wage = wage
-            self.grid = grid
-            self.procent = procent
-            self.sum = sum
         }
     }
 }

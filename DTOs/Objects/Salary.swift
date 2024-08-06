@@ -16,20 +16,20 @@ public extension Salary.Parameters {
     /// Параметры для создания зарплаты.
     ///
     /// ### Properties:
-    /// - `procent`: Процент от прибыли.
+    /// - `percent`: Процент от прибыли.
     /// - `grid`: Сдельная оплата за конкретную услугу.
     /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     struct Create: Parametable {
-        public var procent: Int?
+        public var percent: Int?
         public var grid: [UUID : SalaryPaymentType]?
         public var wage: Wage?
         
         public init(
-            procent: Int?,
+            percent: Int?,
             grid: [UUID : SalaryPaymentType]?,
             wage: Wage?
         ) {
-            self.procent = procent
+            self.percent = percent
             self.grid = grid
             self.wage = wage
         }
@@ -44,23 +44,23 @@ public extension Salary.Responses {
     ///
     /// ### Properties:
     /// - `id`: Уникальный идентификатор контакта.
-    /// - `procent`: Процент от прибыли.
+    /// - `percent`: Процент от прибыли.
     /// - `grid`: Сдельная оплата за конкретную услугу.
     /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
-        public var procent: Int?
+        public var percent: Int?
         public var grid: [Service.Responses.Partial : SalaryPaymentType]?
         public var wage: Wage?
         
         public init(
             id: UUID,
-            procent: Int?,
+            percent: Int?,
             grid: [Service.Responses.Partial : SalaryPaymentType]?,
             wage: Wage?
         ) {
             self.id = id
-            self.procent = procent
+            self.percent = percent
             self.grid = grid
             self.wage = wage
         }
