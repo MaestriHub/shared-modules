@@ -10,18 +10,18 @@ public enum Salary {
 }
 
 public extension Salary.Responses {
-    enum Description {}
+    enum Rules {}
     enum Actions {}
 }
 
 public extension Salary.Parameters {
-    enum Description {}
+    enum Rules {}
     enum Actions {}
 }
 
 // MARK: - Parameters -
 
-public extension Salary.Parameters.Description {
+public extension Salary.Parameters.Rules {
     /// Параметры для создания зарплаты.
     ///
     /// ### Properties:
@@ -81,7 +81,7 @@ public extension Salary.Parameters.Actions {
 
 // MARK: - Responses -
 
-public extension Salary.Responses.Description {
+public extension Salary.Responses.Rules {
     
     /// Полная информация о зарплате.
     ///
