@@ -11,12 +11,12 @@ public enum Salary {
 
 public extension Salary.Responses {
     enum Rules {}
-    enum Actions {}
+    enum Balance {}
 }
 
 public extension Salary.Parameters {
     enum Rules {}
-    enum Actions {}
+    enum Balance {}
 }
 
 // MARK: - Parameters -
@@ -45,13 +45,13 @@ public extension Salary.Parameters.Rules {
     }
 }
 
-public extension Salary.Parameters.Actions {
+public extension Salary.Parameters.Balance {
     /// Параметры для выдачи зарплаты.
     ///
     /// ### Properties:
     /// - `paymentType`: Тип денежной операции.
     /// - `dateTo`: День, до которого выдать зарплату
-    struct Pay: Parametable {
+    struct Payout: Parametable {
         public var paymentType: PaymentType
         public var dateTo: Date
 
@@ -68,7 +68,7 @@ public extension Salary.Parameters.Actions {
     ///
     /// ### Properties:
     /// - `dateTo`: День, до которого посчитать баланс
-    struct Balance: Parametable {
+    struct Calculate: Parametable {
         public var dateTo: Date
 
          public init(
@@ -106,7 +106,7 @@ public extension Salary.Responses.Rules {
     }
 }
 
-public extension Salary.Responses.Actions {
+public extension Salary.Responses.Balance {
 
     /// Все деньги за определенный период / Может возвращаться как с запроса баланса так и с выплаты зарплаты.
     ///
