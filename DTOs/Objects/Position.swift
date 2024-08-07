@@ -17,12 +17,12 @@ public extension Position.Parameters {
     struct Create: Parametable {
         public var title: String
         public var permissions: PermissionSet
-        public var salary: SalaryType
+        public var salary: Salary.Parameters.Create
 
         public init(
             title: String,
             permissions: PermissionSet,
-            salary: SalaryType
+            salary: Salary.Parameters.Create
         ){
             self.title = title
             self.permissions = permissions
@@ -33,12 +33,12 @@ public extension Position.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var permissions: PermissionSet?
-        public var salary: SalaryType?
+        public var salary: Salary.Parameters.Create?
 
         public init(
             title: String?,
             permissions: PermissionSet?,
-            salary: SalaryType?
+            salary: Salary.Parameters.Create?
         ){
             self.title = title
             self.permissions = permissions
@@ -55,13 +55,13 @@ public extension Position.Responses {
         public var id: UUID
         public var title: String
         public var permissions: PermissionSet
-        public var salary: SalaryType
+        public var salary: Salary.Responses.Full
 
         public init(
             id: UUID,
             title: String,
             permissions: PermissionSet,
-            salary: SalaryType
+            salary: Salary.Responses.Full
         ) {
             self.id = id
             self.title = title
