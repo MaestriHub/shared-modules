@@ -18,16 +18,13 @@ public extension Offtime.Parameters {
     struct Create: Parametable {
         public var interval: DateInterval
         public var reason: String?
-        public var timeZone: String
 
         public init(
             interval: DateInterval,
-            reason: String?,
-            timeZone: String
+            reason: String?
         ) {
             self.interval = interval
             self.reason = reason
-            self.timeZone = timeZone
         }
     }
 }
