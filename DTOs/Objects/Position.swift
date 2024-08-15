@@ -70,4 +70,16 @@ public extension Position.Responses {
         }
     }
 
+    struct Partial: Responsable, Identifiable, Hashable, Equatable {
+        public var id: UUID
+        public var title: String
+
+        public init(
+            id: UUID,
+            title: String
+        ) {
+            self.id = id
+            self.title = title
+        }
+    }
 }
