@@ -132,22 +132,26 @@ public extension Employee.Responses {
     /// - id: `UUID` - уникальный идентификатор сотрудника.
     /// - name: `String` - имя сотрудника.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
+    /// - position: Position.Responses.Full - полная информация о дожности.
     struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var name: String
         public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
+        public var position: Position.Responses.Partial
         
         public init(
             id: UUID,
             name: String,
             avatar: URL?,
-            contacts: [Contact.Responses.Full]
+            contacts: [Contact.Responses.Full],
+            position: Position.Responses.Partial
         ) {
             self.id = id
             self.name = name
             self.avatar = avatar
             self.contacts = contacts
+            self.position = position
         }
     }
 }
