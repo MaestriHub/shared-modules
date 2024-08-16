@@ -19,7 +19,7 @@ public extension Salon.Parameters {
         public let name: String
         public let type: SalonType
         public let logo: URL?
-        public let timeZone: String
+        public let localeIdentifare: String
         public let description: String?
         public let timetable: Schedule.Week
         public let address: Address
@@ -29,7 +29,7 @@ public extension Salon.Parameters {
             name: String, 
             type: SalonType,
             logo: URL? = nil,
-            timeZone: String,
+            localeIdentifare: String,
             description: String?,
             timetable: Schedule.Week,
             address: Address,
@@ -39,7 +39,7 @@ public extension Salon.Parameters {
             self.type = type
             self.logo = logo
             self.description = description
-            self.timeZone = timeZone
+            self.localeIdentifare = localeIdentifare
             self.timetable = timetable
             self.address = address
             self.contacts = contacts
