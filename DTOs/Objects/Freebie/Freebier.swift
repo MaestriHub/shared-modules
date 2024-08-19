@@ -16,19 +16,19 @@ public extension Freebier.Parameters {
         // public let salons: [UUID]?
         // public let customer: UUID?
         
-        // public init(
+        public init(
         //     startDate: Date?,
         //     endDate: Date?,
         //     employees: [UUID]? = nil,
         //     salons: [UUID]? = nil,
         //     customer: UUID? = nil
-        // ) {
+        ) {
         //     self.startDate = startDate
         //     self.endDate = endDate
         //     self.employees = employees
         //     self.salons = salons
         //     self.customer = customer
-        // }
+        }
     }
     
     struct Patch: Parametable {
@@ -37,17 +37,17 @@ public extension Freebier.Parameters {
         // public let proceduresId: [UUID]
         // public let time: DateInterval
         
-        // public init(
+        public init(
         //     masterId: UUID,
         //     customerId: UUID?,
         //     proceduresId: [UUID],
         //     time: DateInterval
-        // ) {
+        ) {
         //     self.masterId = masterId
         //     self.customerId = customerId
         //     self.proceduresId = proceduresId
         //     self.time = time
-        // }
+        }
     }
 }
 
@@ -66,8 +66,8 @@ public extension Freebier.Responses {
         // public var price: Price
         // public var address: Address
         
-        // public init(
-        //     id: UUID,
+        public init(
+            id: UUID
         //     status: AppointmentStatus,
         //     salon: Salon.Responses.Partial,
         //     customer: Customer.Responses.Partial,
@@ -76,8 +76,8 @@ public extension Freebier.Responses {
         //     time: DateInterval,
         //     price: Price,
         //     address: Address
-        // ) {
-        //     self.id = id
+        ) {
+            self.id = id
         //     self.status = status
         //     self.salon = salon
         //     self.customer = customer
@@ -86,7 +86,7 @@ public extension Freebier.Responses {
         //     self.time = time
         //     self.price = price
         //     self.address = address
-        // }
+        }
     }
     
     struct Partial: Responsable, Identifiable, Equatable {
