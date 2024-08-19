@@ -56,7 +56,7 @@ public extension Freebier.Parameters {
 public extension Freebier.Responses {
     
     struct Full: Responsable, Identifiable, Hashable, Equatable {
-        // public var id: UUID
+        public var id: UUID
         // public var status: AppointmentStatus
         // public var salon: Salon.Responses.Partial
         // public var customer: Customer.Responses.Partial
@@ -90,7 +90,7 @@ public extension Freebier.Responses {
     }
     
     struct Partial: Responsable, Identifiable, Equatable {
-        // public var id: UUID
+        public var id: UUID
         // public var status: AppointmentStatus
         // public var customer: Customer.Responses.Partial
         // public var master: Employee.Responses.Partial
