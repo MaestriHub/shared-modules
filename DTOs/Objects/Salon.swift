@@ -106,6 +106,7 @@ public extension Salon.Responses {
         public var isFavorite: Bool = false
         public var timetable: Timetable.Responses.Week
         public var masters: [Employee.Responses.Full]?
+        public var localeId: String
         
         public init(
             id: UUID,
@@ -118,7 +119,8 @@ public extension Salon.Responses {
             canEdit: Bool,
             isFavorite: Bool,
             timetable: Timetable.Responses.Week,
-            masters: [Employee.Responses.Full]? = nil
+            masters: [Employee.Responses.Full]? = nil,
+            localeId: String
         ) {
             self.id = id
             self.name = name
@@ -131,6 +133,7 @@ public extension Salon.Responses {
             self.isFavorite = isFavorite
             self.timetable = timetable
             self.masters = masters
+            self.localeId = localeId
         }
     }
     
