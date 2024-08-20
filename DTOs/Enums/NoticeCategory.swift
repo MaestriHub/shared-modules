@@ -8,4 +8,5 @@ public enum NoticeCategory: String, Codable, Hashable, Equatable {
     case employee
     case position
     case salary
+    case suggest
 }
