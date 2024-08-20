@@ -98,22 +98,22 @@ public extension Freebier.Responses {
         // public var price: Price
         // public var procedures: String
         
-        // public init(
-        //     id: UUID,
+        public init(
+            id: UUID
         //     status: AppointmentStatus,
         //     customer: Customer.Responses.Partial,
         //     master: Employee.Responses.Partial,
         //     time: DateInterval,
         //     price: Price,
         //     procedures: String
-        // ) {
-        //     self.id = id
+        ) {
+            self.id = id
         //     self.status = status
         //     self.customer = customer
         //     self.master = master
         //     self.time = time
         //     self.price = price
         //     self.procedures = procedures
-        // }
+        }
     }
 }
