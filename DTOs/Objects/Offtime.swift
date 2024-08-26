@@ -18,13 +18,16 @@ public extension Offtime.Parameters {
     struct Create: Parametable {
         public var interval: DateInterval
         public var reason: String?
+        public var coefficient: Float
 
         public init(
             interval: DateInterval,
-            reason: String?
+            reason: String?,
+            coefficient: Float
         ) {
             self.interval = interval
             self.reason = reason
+            self.coefficient = coefficient
         }
     }
 }
@@ -40,17 +43,20 @@ public extension Offtime.Responses {
         public var interval: DateInterval
         public var reason: String?
         public var timeZone: String
+        public var coefficient: Float
 
         public init(
             id: UUID,
             interval: DateInterval,
             reason: String?,
-            timeZone: String
+            timeZone: String,
+            coefficient: Float
         ) {
             self.id = id
             self.interval = interval
             self.reason = reason
             self.timeZone = timeZone
+            self.coefficient = coefficient
         }
     }
     
