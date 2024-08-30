@@ -54,20 +54,6 @@ public extension Customer.Parameters {
             self.employees = employees
         }
     }
-    
-    /// Параметры для частичного обновления профиля пользователя.
-    ///
-    /// ### Properties:
-    ///  - contacts: Контактная информация Customer, для связи с ним
-    struct Patch: Parametable {
-        public var contacts: [Contact.Parameters.Create]
-        
-        public init(
-            contacts: [Contact.Parameters.Create]
-        ) {
-            self.contacts = contacts
-        }
-    }
 
     /// Параметры для того, чтобы принять приглашение в приложение.
     ///
