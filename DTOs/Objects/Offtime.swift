@@ -39,18 +39,18 @@ public extension Offtime.Responses {
         public var id: UUID
         public var interval: DateInterval
         public var reason: String?
-        public var timeZone: String
+        public var timeZoneId: String
 
         public init(
             id: UUID,
             interval: DateInterval,
             reason: String?,
-            timeZone: String
+            timeZoneId: String
         ) {
             self.id = id
             self.interval = interval
             self.reason = reason
-            self.timeZone = timeZone
+            self.timeZoneId = timeZoneId
         }
     }
     

@@ -45,27 +45,27 @@ public extension Timetable.Responses {
     /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
     struct Slot: Responsable {
         public var intervals: [Date: [DateInterval]]
-        public var timeZone: String
+        public var timeZoneId: String
 
         public init(
             intervals: [Date: [DateInterval]],
-            timeZone: String
+            timeZoneId: String
         ) {
             self.intervals = intervals
-            self.timeZone = timeZone
+            self.timeZoneId = timeZoneId
         }
     }
     
     struct Week: Parametable, Responsable, Equatable {
         public var schedule: Schedule.Week
-        public var timeZone: String
+        public var timeZoneId: String
 
         public init(
             schedule: Schedule.Week,
-            timeZone: String
+            timeZoneId: String
         ) {
             self.schedule = schedule
-            self.timeZone = timeZone
+            self.timeZoneId = timeZoneId
         }
     }
 }

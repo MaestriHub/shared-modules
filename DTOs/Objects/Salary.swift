@@ -57,7 +57,7 @@ public extension Salary.Parameters.Balance {
 
         public init(
             paymentType: PaymentType,
-            dateTo: Date = Date()
+            dateTo: Date
         ){
             self.paymentType = paymentType
             self.dateTo = dateTo
@@ -72,7 +72,7 @@ public extension Salary.Parameters.Balance {
         public var dateTo: Date
 
          public init(
-            dateTo: Date = Date()
+            dateTo: Date
         ){
             self.dateTo = dateTo
         }
