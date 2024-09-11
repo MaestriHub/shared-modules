@@ -105,7 +105,6 @@ public extension Salon.Responses {
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
         public var timetable: Timetable.Responses.Week
-        public var masters: [Employee.Responses.Full]?
         public var localeId: String
         
         public init(
@@ -119,7 +118,6 @@ public extension Salon.Responses {
             canEdit: Bool,
             isFavorite: Bool,
             timetable: Timetable.Responses.Week,
-            masters: [Employee.Responses.Full]? = nil,
             localeId: String
         ) {
             self.id = id
@@ -132,7 +130,6 @@ public extension Salon.Responses {
             self.canEdit = canEdit
             self.isFavorite = isFavorite
             self.timetable = timetable
-            self.masters = masters
             self.localeId = localeId
         }
     }
