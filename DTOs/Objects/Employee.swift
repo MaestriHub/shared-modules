@@ -101,7 +101,6 @@ public extension Employee.Responses {
         public var timetable: Timetable.Responses.Week
         public var salonId: UUID
         public var position: Position.Responses.Full
-        public var procedures: [Procedure.Responses.Partial]?
         
         public init(
             id: UUID,
@@ -111,8 +110,7 @@ public extension Employee.Responses {
             contacts: [Contact.Responses.Full],
             timetable: Timetable.Responses.Week,
             salonId: UUID,
-            position: Position.Responses.Full,
-            procedures: [Procedure.Responses.Partial]? = nil
+            position: Position.Responses.Full
         ) {
             self.id = id
             self.user = user
@@ -122,7 +120,6 @@ public extension Employee.Responses {
             self.timetable = timetable
             self.salonId = salonId
             self.position = position
-            self.procedures = procedures
         }
     }
     
