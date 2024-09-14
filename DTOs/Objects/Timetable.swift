@@ -57,13 +57,16 @@ public extension Timetable.Responses {
     }
     
     struct Week: Parametable, Responsable, Equatable {
+        public var owner: TimetableOwner
         public var schedule: Schedule.Week
         public var timeZoneId: String
 
         public init(
+            owner: TimetableOwner,
             schedule: Schedule.Week,
             timeZoneId: String
         ) {
+            self.owner = owner
             self.schedule = schedule
             self.timeZoneId = timeZoneId
         }

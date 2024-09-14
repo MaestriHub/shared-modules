@@ -60,20 +60,17 @@ public extension Salon.Parameters {
         public let type: SalonType?
         public let description: String?
         public let logo: URL?
-        public let timetable: Schedule.Week?
         
         public init(
             name: String? = nil,
             type: SalonType? = nil,
             description: String?,
-            logo: URL? = nil,
-            timetable: Schedule.Week? = nil
+            logo: URL? = nil
         ) {
             self.name = name
             self.type = type
             self.description = description
             self.logo = logo
-            self.timetable = timetable
         }
     }
 }
