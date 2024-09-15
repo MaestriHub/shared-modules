@@ -62,18 +62,15 @@ public extension Employee.Parameters {
     struct Patch: Parametable {
         public var positionId: UUID?
         public var contacts: [Contact.Parameters.Create]?
-        public var timetable: Schedule.Week?
         public var description: String?
         
         public init(
             positionId: UUID,
             contacts: [Contact.Parameters.Create]?,
-            timetable: Schedule.Week?,
             description: String?
         ) {
             self.positionId = positionId
             self.contacts = contacts
-            self.timetable = timetable
             self.description = description
         }
     }
