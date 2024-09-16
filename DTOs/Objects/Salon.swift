@@ -101,10 +101,7 @@ public extension Salon.Responses {
         public var isActive: Bool
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
-        public var timetable: Timetable.Responses.Week
         public var localeId: String
-        //TODO: Надо будет удалить и получать через отдельный endpoint
-        public var masters: [Employee.Responses.Full]?
         
         public init(
             id: UUID,
@@ -116,9 +113,7 @@ public extension Salon.Responses {
             isActive: Bool,
             canEdit: Bool,
             isFavorite: Bool,
-            timetable: Timetable.Responses.Week,
-            localeId: String,
-            masters: [Employee.Responses.Full]? = nil
+            localeId: String
         ) {
             self.id = id
             self.name = name
@@ -129,9 +124,7 @@ public extension Salon.Responses {
             self.isActive = isActive
             self.canEdit = canEdit
             self.isFavorite = isFavorite
-            self.timetable = timetable
             self.localeId = localeId
-            self.masters = masters
         }
     }
     
