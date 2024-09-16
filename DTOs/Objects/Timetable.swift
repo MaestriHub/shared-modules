@@ -32,6 +32,14 @@ public extension Timetable.Parameters {
             self.customerId = customerId
         }
     }
+    
+    struct Retrieve: Parametable {
+        public var owners: [TimetableOwner]
+        
+        public init(owners: [TimetableOwner]) {
+            self.owners = owners
+        }
+    }
 }
 
 // MARK: - Responses -
