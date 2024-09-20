@@ -57,21 +57,13 @@ public extension Employee.Parameters {
     /// Параметры для частичного обновления Employee.
     ///
     /// ### Properties:
-    ///  - contacts: Контактная информация Employee, для связи с ним
-    /// - timetable: Расписание времени работы
     struct Patch: Parametable {
         public var positionId: UUID?
-        public var contacts: [Contact.Parameters.Create]?
-        public var description: String?
         
         public init(
-            positionId: UUID,
-            contacts: [Contact.Parameters.Create]?,
-            description: String?
+            positionId: UUID
         ) {
             self.positionId = positionId
-            self.contacts = contacts
-            self.description = description
         }
     }
 }
@@ -95,7 +87,6 @@ public extension Employee.Responses {
         public var description: String?
         public var canEdit: Bool = false
         public var contacts: [Contact.Responses.Full]
-        public var timetable: Timetable.Responses.Week
         public var salonId: UUID
         public var position: Position.Responses.Full
         
@@ -105,7 +96,6 @@ public extension Employee.Responses {
             description: String? = nil,
             canEdit: Bool,
             contacts: [Contact.Responses.Full],
-            timetable: Timetable.Responses.Week,
             salonId: UUID,
             position: Position.Responses.Full
         ) {
@@ -114,7 +104,6 @@ public extension Employee.Responses {
             self.description = description
             self.canEdit = canEdit
             self.contacts = contacts
-            self.timetable = timetable
             self.salonId = salonId
             self.position = position
         }
