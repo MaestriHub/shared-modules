@@ -129,21 +129,18 @@ public extension Employee.Responses {
     /// - position: Position.Responses.Full - полная информация о дожности.
     struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
-        public var name: String
-        public var avatar: URL?
+        public var user: User.Responses.Partial
         public var contacts: [Contact.Responses.Full]
         public var position: Position.Responses.Partial
         
         public init(
             id: UUID,
-            name: String,
-            avatar: URL?,
+            user: User.Responses.Partial,
             contacts: [Contact.Responses.Full],
             position: Position.Responses.Partial
         ) {
             self.id = id
-            self.name = name
-            self.avatar = avatar
+            self.user = user
             self.contacts = contacts
             self.position = position
         }

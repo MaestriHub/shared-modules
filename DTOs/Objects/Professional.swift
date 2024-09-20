@@ -25,15 +25,12 @@ public extension Professional.Responses {
     
     struct Partial: Responsable, Equatable {
         
-        public var avatar: URL?
-        public var nickname: String
+        public var user: User.Responses.Partial
         
         public init(
-            avatar: URL? = nil,
-            nickname: String
+            user: User.Responses.Partial
         ) {
-            self.avatar = avatar
-            self.nickname = nickname
+            self.user = user
         }
     }
 }
