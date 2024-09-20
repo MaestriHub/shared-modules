@@ -129,13 +129,13 @@ public extension Employee.Responses {
     /// - position: Position.Responses.Full - полная информация о дожности.
     struct Partial: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
-        public var user: User.Responses.Partial
+        public var user: User.Responses.Partial?
         public var contacts: [Contact.Responses.Full]
         public var position: Position.Responses.Partial
         
         public init(
             id: UUID,
-            user: User.Responses.Partial,
+            user: User.Responses.Partial?,
             contacts: [Contact.Responses.Full],
             position: Position.Responses.Partial
         ) {
