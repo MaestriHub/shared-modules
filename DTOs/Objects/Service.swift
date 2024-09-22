@@ -116,14 +116,14 @@ public extension Service.Responses {
         public var title: String
         public var description: String
         public var category: ServiceCategory
-        public var procedures: [Procedure.Responses.Partial]
+        public var procedures: [Procedure.Responses.Full]
         
         public init(
             id: UUID,
             title: String,
             description: String,
             category: ServiceCategory,
-            procedures: [Procedure.Responses.Partial]
+            procedures: [Procedure.Responses.Full]
         ) {
             self.id = id
             self.title = title
@@ -164,5 +164,22 @@ public extension Service.Responses {
             self.minDuration = minDuration
         }
     }
+
+    struct Micro: Responsable, Identifiable, Hashable, Equatable {
+        public var id: UUID
+        public var title: String
+        public var description: String
+        
+        public init(
+            id: UUID,
+            title: String,
+            description: String        
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+        }
+    }
+
 }
 
