@@ -1,17 +1,17 @@
 import Foundation
 
-/// Пространство имен `EmployeeAppointment` содержит типы данных для работы с записями на прием.
+/// Пространство имен `AppointmentEmployee` содержит типы данных для работы с записями на прием.
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-public enum EmployeeAppointment {
+public enum AppointmentEmployee {
     public enum Parameters {}
     public enum Responses {}
 }
 
 //MARK: - Parameters -
 
-public extension EmployeeAppointment.Parameters {
+public extension AppointmentEmployee.Parameters {
     
     
     // ???
@@ -94,7 +94,7 @@ public extension EmployeeAppointment.Parameters {
 
 //MARK: - Responses -
 
-public extension EmployeeAppointment.Responses {
+public extension AppointmentEmployee.Responses {
     
     /// `Full` представляет полную информацию о записи на прием, включая все связанные данные.
     ///

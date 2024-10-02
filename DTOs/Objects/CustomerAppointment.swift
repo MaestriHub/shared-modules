@@ -1,17 +1,17 @@
 import Foundation
 
-/// Пространство имен `CustomerAppointment` содержит типы данных для работы с записями на прием.
+/// Пространство имен `AppointmentCustomer` содержит типы данных для работы с записями на прием.
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-public enum CustomerAppointment {
+public enum AppointmentCustomer {
     public enum Parameters {}
     public enum Responses {}
 }
 
 //MARK: - Parameters -
 
-public extension CustomerAppointment.Parameters {
+public extension AppointmentCustomer.Parameters {
     
     /// Параметры запроса `Retrieve` определяют фильтры для получения записей на прием
     /// за определенный временной интервал с возможной фильтрацией по сотрудникам и салонам.
@@ -93,7 +93,7 @@ public extension CustomerAppointment.Parameters {
 
 //MARK: - Responses -
 
-public extension CustomerAppointment.Responses {
+public extension AppointmentCustomer.Responses {
     
     /// `Full` представляет полную информацию о записи на прием, включая все связанные данные.
     ///
