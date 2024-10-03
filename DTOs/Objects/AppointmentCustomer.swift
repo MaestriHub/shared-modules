@@ -55,14 +55,17 @@ public extension AppointmentCustomer.Parameters {
     ///  - price: `Price` - цена записи на прием.
     ///  - address: `UUID` - идентификатор адреса салона.
     struct Create: Parametable {
-        public let proceduresId: [UUID]
+        public let proceduresIds: [UUID]
+        public let complexesIds: [UUID]
         public let time: DateInterval
         
         public init(
-            proceduresId: [UUID],
+            proceduresIds: [UUID],
+            complexesIds: [UUID],
             time: DateInterval
         ) {
-            self.proceduresId = proceduresId
+            self.proceduresIds = proceduresIds
+            self.complexesIds = complexesIds
             self.time = time
         }
     }

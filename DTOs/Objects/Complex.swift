@@ -70,24 +70,24 @@ public extension Complex.Parameters {
     /// - `duration`: Новая продолжительность процедуры в минутах (опционально).
     
     // depreceted
-//    struct Patch: Parametable {
-//        public let price: Price?
-//        public let duration: Int?
-//        public var description: String?
-//        public var alias: String?
-//        
-//        public init(
-//            price: Price? = nil,
-//            duration: Int? = nil,
-//            description: String? = nil,
-//            alias: String? = nil
-//        ) {
-//            self.price = price
-//            self.duration = duration
-//            self.description = description
-//            self.alias = alias
-//        }
-//    }
+    struct Patch: Parametable {
+        public let price: Price?
+        public let duration: Int?
+        public var description: String?
+        public var alias: String?
+        
+        public init(
+            price: Price? = nil,
+            duration: Int? = nil,
+            description: String? = nil,
+            alias: String? = nil
+        ) {
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+        }
+    }
 }
 
 // MARK: - Responses -
