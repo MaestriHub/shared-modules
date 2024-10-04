@@ -14,6 +14,10 @@ let package = Package(
             name: "SwifCron", 
             targets: [ "SwifCron" ]
         ),
+        .library(
+            name: "Aborts",
+            targets: [ "Aborts" ]
+        )
     ],
     dependencies: [
     ],
@@ -27,6 +31,11 @@ let package = Package(
             name: "SwifCron",
             dependencies: [],
             path: "SwifCron/Sources"
+        ),
+        .target(
+            name: "Aborts",
+            dependencies: [],
+            path: "Aborts"
         ),
         .testTarget(
             name: "SwifCronTests",
