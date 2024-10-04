@@ -79,17 +79,11 @@ public extension AppointmentCustomer.Parameters {
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
         public let time: DateInterval?
-        public let price: Price?
-        public let proceduresId: [UUID]?
         
         public init(
-            time: DateInterval? = nil,
-            price: Price? = nil,
-            proceduresId: [UUID]? = nil
+            time: DateInterval? = nil
         ) {
             self.time = time
-            self.price = price
-            self.proceduresId = proceduresId
         }
     }
 }
