@@ -76,10 +76,10 @@ public extension AppointmentEmployee.Parameters {
     ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        public let time: DateInterval?
+        public let time: DateInterval
         
         public init(
-            time: DateInterval? = nil
+            time: DateInterval
         ) {
             self.time = time
         }
