@@ -54,16 +54,16 @@ public extension AppointmentEmployee.Parameters {
     ///  - time: `Interval` - временной интервал записи на прием.
     struct Create: Parametable {
         public let customerId: UUID
-        public let procedureId: UUID
+        public let type: AppointmentType
         public let time: DateInterval
         
         public init(
             customerId: UUID,
-            proceduresId: UUID,
+            type: AppointmentType,
             time: DateInterval
         ) {
             self.customerId = customerId
-            self.procedureId = proceduresId
+            self.type = type
             self.time = time
         }
     }
