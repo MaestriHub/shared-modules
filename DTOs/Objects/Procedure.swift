@@ -72,21 +72,27 @@ public extension Procedure.Parameters {
     /// - `price`: Новая цена процедуры (опционально).
     /// - `duration`: Новая продолжительность процедуры в минутах (опционально).
     struct Patch: Parametable {
-        public let price: Price?
-        public let duration: Int?
+        public let price: Price
+        public let duration: Int
         public var description: String?
         public var alias: String?
+        public let serviceId: UUID
+        public let employeeId: UUID
         
         public init(
-            price: Price? = nil,
-            duration: Int? = nil,
-            description: String? = nil,
-            alias: String? = nil
+            price: Price,
+            duration: Int,
+            description: String?,
+            alias: String?,
+            serviceId: UUID,
+            employeeId: UUID
         ) {
             self.price = price
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.serviceId = serviceId
+            self.employeeId = employeeId
         }
     }
 }
