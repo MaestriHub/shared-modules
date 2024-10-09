@@ -27,20 +27,17 @@ public extension AppointmentCustomer.Parameters {
         public let endDate: Date?
         public let employees: [UUID]?
         public let salons: [UUID]?
-        public let customer: UUID?
         
         public init(
             startDate: Date?,
             endDate: Date?,
             employees: [UUID]? = nil,
-            salons: [UUID]? = nil,
-            customer: UUID? = nil
+            salons: [UUID]? = nil
         ) {
             self.startDate = startDate
             self.endDate = endDate
             self.employees = employees
             self.salons = salons
-            self.customer = customer
         }
     }
     
