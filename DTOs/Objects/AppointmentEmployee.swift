@@ -116,7 +116,7 @@ public extension AppointmentEmployee.Responses {
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             customer: Customer.Responses.Partial,
-            procedure: [Procedure.Responses.Partial],
+            procedures: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price,
             address: Address
@@ -125,7 +125,7 @@ public extension AppointmentEmployee.Responses {
             self.status = status
             self.salon = salon
             self.customer = customer
-            self.procedure = procedure
+            self.procedures = procedures
             self.time = time
             self.price = price
             self.address = address
@@ -144,7 +144,7 @@ public extension AppointmentEmployee.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var customer: Customer.Responses.Partial
-        public var procedure: [Procedure.Responses.Partial]
+        public var procedures: [Procedure.Responses.Partial]
         public var time: DateInterval
         public var price: Price
         
@@ -152,14 +152,14 @@ public extension AppointmentEmployee.Responses {
             id: UUID,
             status: AppointmentStatus,
             customer: Customer.Responses.Partial,
-            procedure: [Procedure.Responses.Partial],
+            procedures: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price
         ) {
             self.id = id
             self.status = status
             self.customer = customer
-            self.procedure = procedure
+            self.procedures = procedures
             self.time = time
             self.price = price
         }
