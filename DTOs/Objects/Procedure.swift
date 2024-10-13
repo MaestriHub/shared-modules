@@ -125,6 +125,7 @@ public extension Procedure.Responses {
             description: String?,
             alias: String?,
             service: Service.Responses.Micro,
+
             master: Employee.Responses.Partial
         ) {
             self.id = id
@@ -152,6 +153,7 @@ public extension Procedure.Responses {
         public var description: String?
         public var alias: String?
         public var service: Service.Responses.Micro
+        public var master: Employee.Responses.Partial
         
         public init(
             id: UUID,
@@ -159,7 +161,8 @@ public extension Procedure.Responses {
             duration: Int,
             description: String?,
             alias: String?,
-            service: Service.Responses.Micro
+            service: Service.Responses.Micro,
+            master: Employee.Responses.Partial
         ) {
             self.id = id
             self.price = price
@@ -167,6 +170,7 @@ public extension Procedure.Responses {
             self.description = description
             self.alias = alias
             self.service = service
+            self.master = master
         }
     }
 }

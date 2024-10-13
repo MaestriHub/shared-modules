@@ -110,7 +110,6 @@ public extension Complex.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
-        public var employees: [Employee.Responses.Partial]
         public var procedures: [Procedure.Responses.Partial]
         
         public init(
@@ -119,7 +118,6 @@ public extension Complex.Responses {
             duration: Int,
             description: String?,
             alias: String?,
-            employees: [Employee.Responses.Partial],
             procedures: [Procedure.Responses.Partial]
         ) {
             self.id = id
@@ -128,7 +126,6 @@ public extension Complex.Responses {
             self.description = description
             self.alias = alias
             self.procedures = procedures
-            self.employees = employees
         }
     }
     
@@ -146,7 +143,7 @@ public extension Complex.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
-        public var services: [Service.Responses.Micro]
+        public var procedures: [Procedure.Responses.Partial]
         
         public init(
             id: UUID,
@@ -154,14 +151,14 @@ public extension Complex.Responses {
             duration: Int,
             description: String?,
             alias: String?,
-            services: [Service.Responses.Micro]
+            procedures: [Procedure.Responses.Partial]
         ) {
             self.id = id
             self.price = price
             self.duration = duration
             self.description = description
             self.alias = alias
-            self.services = services
+            self.procedures = procedures
         }
     }
 }

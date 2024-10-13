@@ -102,8 +102,7 @@ public extension AppointmentCustomer.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
-        public var masters: [Employee.Responses.Partial]
-        public var services: [Service.Responses.Micro]
+        public var procedures: [Procedure.Responses.Partial]
         public var time: DateInterval
         public var price: Price
         public var address: Address
@@ -112,8 +111,7 @@ public extension AppointmentCustomer.Responses {
             id: UUID,
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
-            masters: [Employee.Responses.Partial],
-            services: [Service.Responses.Micro],
+            procedures: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price,
             address: Address
@@ -121,8 +119,7 @@ public extension AppointmentCustomer.Responses {
             self.id = id
             self.status = status
             self.salon = salon
-            self.masters = masters
-            self.services = services
+            self.procedures = procedures
             self.time = time
             self.price = price
             self.address = address
@@ -140,25 +137,22 @@ public extension AppointmentCustomer.Responses {
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var masters: [Employee.Responses.Partial]
         public var time: DateInterval
         public var price: Price
-        public var services: [Service.Responses.Micro]
+        public var procedures: [Procedure.Responses.Partial]
         
         public init(
             id: UUID,
             status: AppointmentStatus,
-            masters: [Employee.Responses.Partial],
             time: DateInterval,
             price: Price,
-            services: [Service.Responses.Micro]
+            procedures: [Procedure.Responses.Partial]
         ) {
             self.id = id
             self.status = status
-            self.masters = masters
             self.time = time
             self.price = price
-            self.services = services
+            self.procedures = procedures
         }
     }
 }
