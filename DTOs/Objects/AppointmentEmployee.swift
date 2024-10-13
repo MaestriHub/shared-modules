@@ -106,7 +106,7 @@ public extension AppointmentEmployee.Responses {
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
         public var customer: Customer.Responses.Partial
-        public var procedure: Procedure.Responses.Partial
+        public var procedures: [Procedure.Responses.Partial] // одно значение либо все в customerAppointmente (если админ)
         public var time: DateInterval
         public var price: Price
         public var address: Address
@@ -116,7 +116,7 @@ public extension AppointmentEmployee.Responses {
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             customer: Customer.Responses.Partial,
-            procedure: Procedure.Responses.Partial,
+            procedure: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price,
             address: Address
@@ -144,7 +144,7 @@ public extension AppointmentEmployee.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var customer: Customer.Responses.Partial
-        public var procedure: Procedure.Responses.Partial
+        public var procedure: [Procedure.Responses.Partial]
         public var time: DateInterval
         public var price: Price
         
@@ -152,7 +152,7 @@ public extension AppointmentEmployee.Responses {
             id: UUID,
             status: AppointmentStatus,
             customer: Customer.Responses.Partial,
-            procedure: Procedure.Responses.Partial,
+            procedure: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price
         ) {
