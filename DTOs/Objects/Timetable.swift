@@ -13,9 +13,9 @@ public enum Timetable {
 
 public extension Timetable.Parameters {
 
-    struct Create{
+    struct Create {
 
-        public struct Pattern: Parametable, Responsable, Equatable {
+        public struct Pattern: Parametable, Equatable {
             public var owner: TimetableOwner
             public var schedule: Schedule.Pattern
             public var startAt: Date
@@ -35,7 +35,7 @@ public extension Timetable.Parameters {
         }
         
 
-        public struct Flexible: Parametable, Responsable, Equatable {
+        public struct Flexible: Parametable, Equatable {
             public var workDays: Dictionary<Date, Schedule.Day>
 
             public init(workDays: Dictionary<Date, Schedule.Day>) {

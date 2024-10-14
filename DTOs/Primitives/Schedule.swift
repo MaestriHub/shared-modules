@@ -8,9 +8,9 @@ import Foundation
 public struct Schedule {
 
     public enum Pattern: Equatable, Decodable, Encodable{ 
-        case week(week: Schedule.Week)
+        case weekly(week: Schedule.Week)
         case shift(shift: Schedule.Shift)
-        case daily(daily: Schedule.Daily)
+        case daily(daily: Schedule.Day)
     }
     
     /// WorkSchedule: расписание которое содержит в себе одну неделю
@@ -54,17 +54,8 @@ public struct Schedule {
         }
     }
 
-    public struct Daily: Parametable, Responsable, Equatable {
-        public var day: Day
 
-        public init(day: Day) {
-            self.day = day
-        }
-    }
-
-
-    
-    /// DaySchedule: модель одного дня в расписании
+     /// DaySchedule: модель одного дня в расписании
     public struct Day: Parametable, Responsable, Equatable {
         public var workTime: String
         public var offTime: [String]
