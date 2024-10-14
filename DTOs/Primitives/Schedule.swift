@@ -35,6 +35,28 @@ public struct Schedule {
             self.sunday = sunday
         }
     }
+
+    public struct Shift: Parametable, Responsable, Equatable {
+        public var startDay: Date
+        public var workDays: Dictionary<Int, Day>
+        public var restDays: Int
+
+        public init(startDay: Date, workDays: Dictionary<Int, Day>, restDays: Int) {
+            self.startDay = startDay
+            self.workDays = workDays
+            self.restDays = restDays
+        }
+    }
+
+    public struct Flexible: Parametable, Responsable, Equatable {
+        public var workDays: Dictionary<Date, Day>
+
+        public init(workDays: Dictionary<Date, Day>) {
+            self.workDays = workDays
+        }
+    }
+
+
     
     /// DaySchedule: модель одного дня в расписании
     public struct Day: Parametable, Responsable, Equatable {
