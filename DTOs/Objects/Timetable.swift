@@ -13,22 +13,34 @@ public enum Timetable {
 
 public extension Timetable.Parameters {
 
-    struct Create: Parametable {
-        public var owner: TimetableOwner
-        public var schedule: SchedulePattern
-        public var startAt: Date
-        public var endAt: Date?
+    struct Create{
 
-        public init(
-            owner: TimetableOwner,
-            schedule: SchedulePattern,
-            startAt: Date,
-            endAt: Date?
-        ) {
-            self.owner = owner
-            self.schedule = schedule
-            self.startAt = startAt
-            self.endAt = endAt 
+        public struct Pattern: Parametable, Responsable, Equatable {
+            public var owner: TimetableOwner
+            public var schedule: Schedule.Pattern
+            public var startAt: Date
+            public var endAt: Date?
+
+            public init(
+                owner: TimetableOwner,
+                schedule: Schedule.Pattern,
+                startAt: Date,
+                endAt: Date?
+            ) {
+                self.owner = owner
+                self.schedule = schedule
+                self.startAt = startAt
+                self.endAt = endAt 
+            }
+        }
+        
+
+        public struct Flexible: Parametable, Responsable, Equatable {
+            public var workDays: Dictionary<Date, Schedule.Day>
+
+            public init(workDays: Dictionary<Date, Schedule.Day>) {
+                self.workDays = workDays
+            }
         }
     }
         
