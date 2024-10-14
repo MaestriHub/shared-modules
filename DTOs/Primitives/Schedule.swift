@@ -10,7 +10,7 @@ public struct Schedule {
     public enum Pattern: Equatable, Decodable, Encodable{ 
         case weekly(week: Schedule.Week)
         case shift(shift: Schedule.Shift)
-        case daily(daily: Schedule.Day)
+        case daily(day: Schedule.Day)
     }
     
     /// WorkSchedule: расписание которое содержит в себе одну неделю
