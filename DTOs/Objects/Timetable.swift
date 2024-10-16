@@ -12,6 +12,37 @@ public enum Timetable {
 // MARK: - Parameters -
 
 public extension Timetable.Parameters {
+
+    struct Create {
+
+        public struct Pattern: Parametable, Equatable {
+            public var owner: TimetableOwner
+            public var schedule: Schedule.Pattern
+            public var startAt: Date
+            public var endAt: Date?
+
+            public init(
+                owner: TimetableOwner,
+                schedule: Schedule.Pattern,
+                startAt: Date,
+                endAt: Date?
+            ) {
+                self.owner = owner
+                self.schedule = schedule
+                self.startAt = startAt
+                self.endAt = endAt 
+            }
+        }
+        
+
+        public struct Flexible: Parametable, Equatable {
+            public var workDays: Dictionary<Date, Schedule.Day>
+
+            public init(workDays: Dictionary<Date, Schedule.Day>) {
+                self.workDays = workDays
+            }
+        }
+    }
         
     /// Параметры запроса для поиска доступных временных слотов для процедур.
     /// Учитывает часовой пояс и список запрашиваемых процедур.
