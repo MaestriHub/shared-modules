@@ -67,8 +67,17 @@ public extension AppointmentEmployee.Parameters {
             self.time = time
         }
     }
+    
+    struct Approve: Parametable {
+        public let appointmentsEmployeeId: [UUID]
+        
+        public init (
+            ids: [UUID]
+        ) {
+            self.appointmentsEmployeeId = ids
+        }
+    }
 
-    // ???
     /// `Patch` определяет параметры для частичного обновления данных записи на прием.
     ///
     /// ### Properties:
