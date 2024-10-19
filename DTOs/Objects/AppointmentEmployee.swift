@@ -110,8 +110,7 @@ public extension AppointmentEmployee.Responses {
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
-    struct Full: Responsable, Identifiable, Equatable {
-        public var id: UUID
+    struct Full: Responsable, Equatable {
         public var salon: Salon.Responses.Partial
         public var customer: Customer.Responses.Partial
         public var address: Address
@@ -119,14 +118,12 @@ public extension AppointmentEmployee.Responses {
         public var isComplex: Bool
         
         public init(
-            id: UUID,
             salon: Salon.Responses.Partial,
             customer: Customer.Responses.Partial,
             address: Address,
             associative: [Base],
             isComplex: Bool
         ) {
-            self.id = id
             self.salon = salon
             self.customer = customer
             self.address = address
@@ -143,19 +140,16 @@ public extension AppointmentEmployee.Responses {
     ///  - master: ``Employee.Responses.Partial`` - информация о мастере.
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
-    struct Partial: Responsable, Identifiable, Equatable {
-        public var id: UUID
+    struct Partial: Responsable, Equatable {
         public var customer: Customer.Responses.Partial
         public var associative: [Base]
         public var isComplex: Bool
         
         public init(
-            id: UUID,
             customer: Customer.Responses.Partial,
             associative: [Base],
             isComplex: Bool
         ) {
-            self.id = id
             self.customer = customer
             self.associative = associative
             self.isComplex = isComplex
