@@ -110,34 +110,28 @@ public extension AppointmentEmployee.Responses {
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
-    struct Full: Responsable, Identifiable, Hashable, Equatable {
+    struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
         public var customer: Customer.Responses.Partial
-        public var procedure: Procedure.Responses.Partial
-        public var time: DateInterval
-        public var price: Price
         public var address: Address
+        public var associative: [Base]
+        public var isComplex: Bool
         
         public init(
             id: UUID,
-            status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             customer: Customer.Responses.Partial,
-            procedure: Procedure.Responses.Partial,
-            time: DateInterval,
-            price: Price,
-            address: Address
+            address: Address,
+            associative: [Base],
+            isComplex: Bool
         ) {
             self.id = id
-            self.status = status
             self.salon = salon
             self.customer = customer
-            self.procedure = procedure
-            self.time = time
-            self.price = price
             self.address = address
+            self.associative = associative
+            self.isComplex = isComplex
         }
     }
     
@@ -151,8 +145,26 @@ public extension AppointmentEmployee.Responses {
     ///  - price: ``Price`` - цена записи.
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var status: AppointmentStatus
         public var customer: Customer.Responses.Partial
+        public var associative: [Base]
+        public var isComplex: Bool
+        
+        public init(
+            id: UUID,
+            customer: Customer.Responses.Partial,
+            associative: [Base],
+            isComplex: Bool
+        ) {
+            self.id = id
+            self.customer = customer
+            self.associative = associative
+            self.isComplex = isComplex
+        }
+    }
+    
+    struct Base: Responsable, Identifiable, Equatable {
+        public var id: UUID
+        public var status: AppointmentStatus
         public var procedure: Procedure.Responses.Partial
         public var time: DateInterval
         public var price: Price
@@ -160,14 +172,12 @@ public extension AppointmentEmployee.Responses {
         public init(
             id: UUID,
             status: AppointmentStatus,
-            customer: Customer.Responses.Partial,
             procedure: Procedure.Responses.Partial,
             time: DateInterval,
             price: Price
         ) {
             self.id = id
             self.status = status
-            self.customer = customer
             self.procedure = procedure
             self.time = time
             self.price = price
