@@ -1,17 +1,17 @@
 import Foundation
 
-/// Пространство имен `Appointment` содержит типы данных для работы с записями на прием.
+/// Пространство имен `AppointmentCustomer` содержит типы данных для работы с записями на прием.
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-public enum Appointment {
+public enum AppointmentCustomer {
     public enum Parameters {}
     public enum Responses {}
 }
 
 //MARK: - Parameters -
 
-public extension Appointment.Parameters {
+public extension AppointmentCustomer.Parameters {
     
     /// Параметры запроса `Retrieve` определяют фильтры для получения записей на прием
     /// за определенный временной интервал с возможной фильтрацией по сотрудникам и салонам.
@@ -27,20 +27,17 @@ public extension Appointment.Parameters {
         public let endDate: Date?
         public let employees: [UUID]?
         public let salons: [UUID]?
-        public let customer: UUID?
         
         public init(
             startDate: Date?,
             endDate: Date?,
             employees: [UUID]? = nil,
-            salons: [UUID]? = nil,
-            customer: UUID? = nil
+            salons: [UUID]? = nil
         ) {
             self.startDate = startDate
             self.endDate = endDate
             self.employees = employees
             self.salons = salons
-            self.customer = customer
         }
     }
     
@@ -55,24 +52,19 @@ public extension Appointment.Parameters {
     ///  - price: `Price` - цена записи на прием.
     ///  - address: `UUID` - идентификатор адреса салона.
     struct Create: Parametable {
-        public let masterId: UUID
-        public let customerId: UUID?
-        public let proceduresId: [UUID]
+        public let type: AppointmentType
         public let time: DateInterval
         
         public init(
-            masterId: UUID,
-            customerId: UUID?,
-            proceduresId: [UUID],
+            type: AppointmentType,
             time: DateInterval
         ) {
-            self.masterId = masterId
-            self.customerId = customerId
-            self.proceduresId = proceduresId
+            self.type = type
             self.time = time
         }
     }
 
+    /// ???
     /// `Patch` определяет параметры для частичного обновления данных записи на прием.
     ///
     /// ### Properties:
@@ -80,25 +72,19 @@ public extension Appointment.Parameters {
     ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        public let time: DateInterval?
-        public let price: Price?
-        public let proceduresId: [UUID]?
+        public let time: DateInterval
         
         public init(
-            time: DateInterval? = nil,
-            price: Price? = nil,
-            proceduresId: [UUID]? = nil
+            time: DateInterval
         ) {
             self.time = time
-            self.price = price
-            self.proceduresId = proceduresId
         }
     }
 }
 
 //MARK: - Responses -
 
-public extension Appointment.Responses {
+public extension AppointmentCustomer.Responses {
     
     /// `Full` представляет полную информацию о записи на прием, включая все связанные данные.
     ///
@@ -116,8 +102,6 @@ public extension Appointment.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
-        public var customer: Customer.Responses.Partial
-        public var master: Employee.Responses.Partial
         public var procedures: [Procedure.Responses.Partial]
         public var time: DateInterval
         public var price: Price
@@ -127,8 +111,6 @@ public extension Appointment.Responses {
             id: UUID,
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
-            customer: Customer.Responses.Partial,
-            master: Employee.Responses.Partial,
             procedures: [Procedure.Responses.Partial],
             time: DateInterval,
             price: Price,
@@ -137,8 +119,6 @@ public extension Appointment.Responses {
             self.id = id
             self.status = status
             self.salon = salon
-            self.customer = customer
-            self.master = master
             self.procedures = procedures
             self.time = time
             self.price = price
@@ -157,28 +137,23 @@ public extension Appointment.Responses {
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var customer: Customer.Responses.Partial
-        public var master: Employee.Responses.Partial
         public var time: DateInterval
         public var price: Price
-        public var procedures: String
+        public var procedures: [Procedure.Responses.Partial]
         
         public init(
             id: UUID,
             status: AppointmentStatus,
-            customer: Customer.Responses.Partial,
-            master: Employee.Responses.Partial,
             time: DateInterval,
             price: Price,
-            procedures: String
+            procedures: [Procedure.Responses.Partial]
         ) {
             self.id = id
             self.status = status
-            self.customer = customer
-            self.master = master
             self.time = time
             self.price = price
             self.procedures = procedures
         }
     }
 }
+
