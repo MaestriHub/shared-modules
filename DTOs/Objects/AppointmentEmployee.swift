@@ -115,20 +115,17 @@ public extension AppointmentEmployee.Responses {
         public var customer: Customer.Responses.Partial
         public var address: Address
         public var associative: [Base]
-        public var isComplex: Bool
         
         public init(
             salon: Salon.Responses.Partial,
             customer: Customer.Responses.Partial,
             address: Address,
-            associative: [Base],
-            isComplex: Bool
+            associative: [Base]
         ) {
             self.salon = salon
             self.customer = customer
             self.address = address
             self.associative = associative
-            self.isComplex = isComplex
         }
     }
     
@@ -142,17 +139,14 @@ public extension AppointmentEmployee.Responses {
     ///  - price: ``Price`` - цена записи.
     struct Partial: Responsable, Equatable {
         public var customer: Customer.Responses.Partial
-        public var associative: [Base]
-        public var isComplex: Bool
+        public var associative: [UUID] // AppointmentEmployee.IDValue
         
         public init(
             customer: Customer.Responses.Partial,
-            associative: [Base],
-            isComplex: Bool
+            associative: [UUID]
         ) {
             self.customer = customer
             self.associative = associative
-            self.isComplex = isComplex
         }
     }
     
