@@ -139,11 +139,11 @@ public extension AppointmentEmployee.Responses {
     ///  - price: ``Price`` - цена записи.
     struct Partial: Responsable, Equatable {
         public var customer: Customer.Responses.Partial
-        public var associative: [UUID] // AppointmentEmployee.IDValue
+        public var associative: [Base]
         
         public init(
             customer: Customer.Responses.Partial,
-            associative: [UUID]
+            associative: [Base]
         ) {
             self.customer = customer
             self.associative = associative
