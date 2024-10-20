@@ -9,7 +9,7 @@ public struct Schedule {
 
     public enum Pattern: Equatable, Decodable, Encodable { 
         case weekly(week: Schedule.Week)
-        case shift(shift: Schedule.Shift)
+        case сycled(cycle: Schedule.Cycled)
         case daily(day: Schedule.Day)
     }
     
@@ -42,7 +42,8 @@ public struct Schedule {
         }
     }
 
-    public struct Shift: Parametable, Responsable, Equatable {
+    public struct Cycled: Parametable, Responsable, Equatable {
+
         public var startDay: Date
         public var workDays: Dictionary<Int, Day>
         public var restDays: Int
