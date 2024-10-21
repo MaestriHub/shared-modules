@@ -6,6 +6,12 @@
 import Foundation
 
 public struct Schedule {
+
+    public enum Pattern: Equatable, Decodable, Encodable { 
+        case weekly(week: Schedule.Week)
+        case сycled(cycle: Schedule.Cycled)
+        case daily(day: Schedule.Day)
+    }
     
     /// WorkSchedule: расписание которое содержит в себе одну неделю
     public struct Week: Parametable, Responsable, Equatable {
@@ -35,8 +41,22 @@ public struct Schedule {
             self.sunday = sunday
         }
     }
-    
-    /// DaySchedule: модель одного дня в расписании
+
+    public struct Cycled: Parametable, Responsable, Equatable {
+
+        public var startDay: Date
+        public var workDays: Dictionary<Int, Day>
+        public var restDays: Int
+
+        public init(startDay: Date, workDays: Dictionary<Int, Day>, restDays: Int) {
+            self.startDay = startDay
+            self.workDays = workDays
+            self.restDays = restDays
+        }
+    }
+
+
+     /// DaySchedule: модель одного дня в расписании
     public struct Day: Parametable, Responsable, Equatable {
         public var workTime: String
         public var offTime: [String]
