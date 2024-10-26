@@ -30,6 +30,20 @@ public extension Offtime.Parameters {
             self.coefficient = coefficient
         }
     }
+    
+    struct Retrieve: Parametable {
+        public var owners: [TimetableOwner]
+        //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
+        public var period: DateInterval
+        
+        public init(
+            owners: [TimetableOwner],
+            period: DateInterval
+        ) {
+            self.owners = owners
+            self.period = period
+        }
+    }
 }
 
 // MARK: - Responses -

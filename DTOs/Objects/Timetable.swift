@@ -65,10 +65,16 @@ public extension Timetable.Parameters {
     }
     
     struct Retrieve: Parametable {
-        public var owner: TimetableOwner
+        public var owners: [TimetableOwner]
+        //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
+        public var period: DateInterval
         
-        public init(owner: TimetableOwner) {
-            self.owner = owner
+        public init(
+            owners: [TimetableOwner],
+            period: DateInterval
+        ) {
+            self.owners = owners
+            self.period = period
         }
     }
 }
@@ -81,11 +87,11 @@ public extension Timetable.Responses {
 
     /// Используется для возвращение найденых слотов на которые можно записаться
     struct Slots: Responsable {
-        public var intervals: [Date: Intervals]
+        public var intervals: Intervals
         public var timeZoneId: String
 
         public init(
-            intervals: [Date: Intervals],
+            intervals: Intervals,
             timeZoneId: String
         ) {
             self.intervals = intervals
@@ -99,12 +105,12 @@ public extension Timetable.Responses {
     struct Schedule: Responsable, Equatable {
         public var owner: TimetableOwner
         // Для недели 7 дней для месяца 28-31
-        public var intervals: [Date: Intervals]
+        public var intervals: Intervals
         public var timeZoneId: String
 
         public init(
             owner: TimetableOwner,
-            intervals: [Date: Intervals],
+            intervals: Intervals,
             timeZoneId: String
         ) {
             self.owner = owner
