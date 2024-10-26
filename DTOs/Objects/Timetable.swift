@@ -65,10 +65,10 @@ public extension Timetable.Parameters {
     }
     
     struct Retrieve: Parametable {
-        public var owner: TimetableOwner
+        public var owners: [TimetableOwner]
         
-        public init(owner: TimetableOwner) {
-            self.owner = owner
+        public init(owners: [TimetableOwner]) {
+            self.owners = owners
         }
     }
 }
@@ -77,15 +77,17 @@ public extension Timetable.Parameters {
 
 public extension Timetable.Responses {
     
-    typealias Intervals = [DateInterval]
-
-    /// Используется для возвращение найденых слотов на которые можно записаться
-    struct Slots: Responsable {
-        public var intervals: [Date: Intervals]
+    /// Структура ответа, возвращающая доступные временные слоты.
+    /// Представляет доступные интервалы для записи к мастеру или в салоне на ближайшие дни.
+    ///
+    /// ### Properties:
+    /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
+    struct Slot: Responsable {
+        public var intervals: [Date: [DateInterval]]
         public var timeZoneId: String
 
         public init(
-            intervals: [Date: Intervals],
+            intervals: [Date: [DateInterval]],
             timeZoneId: String
         ) {
             self.intervals = intervals
@@ -93,22 +95,18 @@ public extension Timetable.Responses {
         }
     }
     
-    /// Используется для возвращение расписания
-    /// Если нужно будет вернуть для salon и для всех его employees
-    /// То возвращать [Schedule] 
-    struct Schedule: Responsable, Equatable {
+    struct Week: Parametable, Responsable, Equatable {
         public var owner: TimetableOwner
-        // Для недели 7 дней для месяца 28-31
-        public var intervals: [Date: Intervals]
+        public var schedule: Schedule.Week
         public var timeZoneId: String
 
         public init(
             owner: TimetableOwner,
-            intervals: [Date: Intervals],
+            schedule: Schedule.Week,
             timeZoneId: String
         ) {
             self.owner = owner
-            self.intervals = intervals
+            self.schedule = schedule
             self.timeZoneId = timeZoneId
         }
     }
