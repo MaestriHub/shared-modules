@@ -22,7 +22,7 @@ public extension Salon.Parameters {
         public let timeZoneId: String
         public let localeId: String
         public let description: String?
-        public let timetable: Schedule.Week
+        public let timetable: Timetable.Parameters.Create.Pattern
         public let address: Address
         public var contacts: [Contact.Parameters.Create]
         
@@ -33,7 +33,7 @@ public extension Salon.Parameters {
             timeZoneId: String,
             localeId: String,
             description: String?,
-            timetable: Schedule.Week,
+            timetable: Timetable.Parameters.Create.Pattern,
             address: Address,
             contacts: [Contact.Parameters.Create]
         ) {
