@@ -50,16 +50,14 @@ public extension Timetable.Parameters {
     /// ### Properties:
     /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
     struct SearchSlot: Parametable {
-        public var procedures: [UUID]
+        public var appointmentType: AppointmentType
         public var customerId: UUID?
         
-        //public var customerId: UUID
-        
         public init(
-            procedures: [UUID],
+            appointmentType: AppointmentType,
             customerId: UUID?
         ) {
-            self.procedures = procedures
+            self.appointmentType = appointmentType
             self.customerId = customerId
         }
     }
