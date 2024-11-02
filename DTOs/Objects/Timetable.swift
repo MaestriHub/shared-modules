@@ -16,18 +16,15 @@ public extension Timetable.Parameters {
     struct Create {
 
         public struct Pattern: Parametable, Equatable {
-            public var owner: TimetableOwner
             public var schedule: Schedule.Pattern
             public var startAt: Date
             public var endAt: Date?
 
             public init(
-                owner: TimetableOwner,
                 schedule: Schedule.Pattern,
                 startAt: Date,
                 endAt: Date?
             ) {
-                self.owner = owner
                 self.schedule = schedule
                 self.startAt = startAt
                 self.endAt = endAt 
