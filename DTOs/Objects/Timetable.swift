@@ -94,7 +94,7 @@ public extension Timetable.Responses {
         }
     }
     
-    struct Week: Parametable, Responsable, Equatable {
+    struct Schedule: Parametable, Responsable, Equatable {
         public var owner: TimetableOwner
         // Для недели 7 дней для месяца 28-31
         public var intervals: Intervals
