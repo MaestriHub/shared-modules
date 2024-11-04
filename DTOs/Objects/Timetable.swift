@@ -94,10 +94,7 @@ public extension Timetable.Responses {
         }
     }
     
-    /// Используется для возвращение расписания
-    /// Если нужно будет вернуть для salon и для всех его employees
-    /// То возвращать [Schedule] 
-    struct Schedule: Responsable, Equatable {
+    struct Week: Parametable, Responsable, Equatable {
         public var owner: TimetableOwner
         // Для недели 7 дней для месяца 28-31
         public var intervals: Intervals
@@ -109,7 +106,7 @@ public extension Timetable.Responses {
             timeZoneId: String
         ) {
             self.owner = owner
-            self.intervals = intervals
+            self.schedule = schedule
             self.timeZoneId = timeZoneId
         }
     }
