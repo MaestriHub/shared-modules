@@ -16,18 +16,15 @@ public extension Timetable.Parameters {
     struct Create {
 
         public struct Pattern: Parametable, Equatable {
-            public var owner: TimetableOwner
             public var schedule: Schedule.Pattern
             public var startAt: Date
             public var endAt: Date?
 
             public init(
-                owner: TimetableOwner,
                 schedule: Schedule.Pattern,
                 startAt: Date,
                 endAt: Date?
             ) {
-                self.owner = owner
                 self.schedule = schedule
                 self.startAt = startAt
                 self.endAt = endAt 
@@ -50,25 +47,29 @@ public extension Timetable.Parameters {
     /// ### Properties:
     /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
     struct SearchSlot: Parametable {
-        public var procedures: [UUID]
+        public var appointmentType: AppointmentType
         public var customerId: UUID?
         
-        //public var customerId: UUID
-        
         public init(
-            procedures: [UUID],
+            appointmentType: AppointmentType,
             customerId: UUID?
         ) {
-            self.procedures = procedures
+            self.appointmentType = appointmentType
             self.customerId = customerId
         }
     }
     
     struct Retrieve: Parametable {
         public var owners: [TimetableOwner]
+        //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
+        public var period: DateInterval
         
-        public init(owners: [TimetableOwner]) {
+        public init(
+            owners: [TimetableOwner],
+            period: DateInterval
+        ) {
             self.owners = owners
+            self.period = period
         }
     }
 }
@@ -77,17 +78,15 @@ public extension Timetable.Parameters {
 
 public extension Timetable.Responses {
     
-    /// Структура ответа, возвращающая доступные временные слоты.
-    /// Представляет доступные интервалы для записи к мастеру или в салоне на ближайшие дни.
-    ///
-    /// ### Properties:
-    /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
-    struct Slot: Responsable {
-        public var intervals: [Date: [DateInterval]]
+    typealias Intervals = [DateInterval]
+
+    /// Используется для возвращение найденых слотов на которые можно записаться
+    struct Slots: Responsable {
+        public var intervals: Intervals
         public var timeZoneId: String
 
         public init(
-            intervals: [Date: [DateInterval]],
+            intervals: Intervals,
             timeZoneId: String
         ) {
             self.intervals = intervals
@@ -97,12 +96,13 @@ public extension Timetable.Responses {
     
     struct Week: Parametable, Responsable, Equatable {
         public var owner: TimetableOwner
-        public var schedule: Schedule.Week
+        // Для недели 7 дней для месяца 28-31
+        public var intervals: Intervals
         public var timeZoneId: String
 
         public init(
             owner: TimetableOwner,
-            schedule: Schedule.Week,
+            intervals: Intervals,
             timeZoneId: String
         ) {
             self.owner = owner
