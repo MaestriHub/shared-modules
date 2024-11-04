@@ -106,7 +106,7 @@ public extension Timetable.Responses {
             timeZoneId: String
         ) {
             self.owner = owner
-            self.schedule = schedule
+            self.intervals = intervals
             self.timeZoneId = timeZoneId
         }
     }
