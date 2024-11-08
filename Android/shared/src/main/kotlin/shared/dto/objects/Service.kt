@@ -3,9 +3,9 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import com.maestri.sdk.sources.shared.dto.enums.`ServiceCategory ✅`
-import com.maestri.sdk.sources.shared.dto.primitives.Price
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -27,12 +27,12 @@ object Service {
             val value: String?,
             val page: Int,
             val per: Int,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         @Serializable
         data class RetrieveFull(
             val salon: UUID?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса при создании новой услуги.
         /// Требуют указания обязательных полей для регистрации услуги в системе.
@@ -47,7 +47,7 @@ object Service {
             val description: String,
             val category: `ServiceCategory ✅`,
             val languageval: String,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса для частичного обновления данных об услуге.
         /// Позволяют изменить название и/или описание существующей услуги.
@@ -62,7 +62,7 @@ object Service {
             val description: String?,
             val category: `ServiceCategory ✅`?,
             val language: String,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -82,7 +82,7 @@ object Service {
             val description: String,
             val category: `ServiceCategory ✅`,
             val procedures: List<Procedure.Responses.Partial>,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Упрощенная структура ответа для услуг.
         /// Может использоваться для передачи краткой информации об услугах в списках или при кратком обзоре.
@@ -97,8 +97,8 @@ object Service {
             val title: String,
             val description: String,
             val category: `ServiceCategory ✅`,
-            val minPrice: Price?,
+            val minPrice: `Price ✅`?,
             val minDuration: Int?,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

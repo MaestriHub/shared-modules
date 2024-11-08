@@ -2,9 +2,9 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.primitives.Price
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -29,7 +29,7 @@ object Procedure {
         data class Retrieve(
             val salons: List<UUID>?,
             val employees: List<UUID>?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса при создании новой процедуры.
         /// Требуют указания всех необходимых атрибутов процедуры.
@@ -41,13 +41,13 @@ object Procedure {
         /// - `employeeId`: Идентификатор работника, к которому привяжится процедура.
         @Serializable
         data class Create(
-            val price: Price,
+            val price: `Price ✅`,
             val duration: Int,
             val description: String?,
             val alias: String?,
             val serviceId: UUID,
             val employeeId: UUID,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса для частичного обновления существующей процедуры.
         /// Позволяют изменить цену и/или продолжительность процедуры.
@@ -57,11 +57,11 @@ object Procedure {
         /// - `duration`: Новая продолжительность процедуры в минутах (опционально).
         @Serializable
         data class Patch(
-            val priceval: Price?,
+            val priceval: `Price ✅`?,
             val durationval: Int?,
             val description: String?,
             val alias: String?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -78,13 +78,13 @@ object Procedure {
         @Serializable
         data class Full(
             val id: UUID,
-            val price: Price,
+            val price: `Price ✅`,
             val duration: Int,
             val description: String?,
             val alias: String?,
             val service: Service.Responses.Partial,
             val master: Employee.Responses.Partial,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Упрощенная структура ответа для процедур.
         /// Может использоваться для передачи краткой информации о процедуре, включая основные данные связанной услуги.
@@ -97,12 +97,12 @@ object Procedure {
         @Serializable
         data class Partial(
             val id: UUID,
-            val price: Price,
+            val price: `Price ✅`,
             val duration: Int,
             val description: String?,
             val alias: String?,
             val service: Service.Responses.Partial,
             val master: Employee.Responses.Partial,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

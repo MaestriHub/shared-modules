@@ -2,12 +2,12 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import DTOs.objects.Timetable
+import shared.dto.objects.Timetable
 import shared.dto.enums.`PaymentType ✅`
 import shared.dto.enums.ProfessionalEmployee
-import com.maestri.sdk.sources.shared.dto.primitives.Schedule
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import shared.dto.primitives.Schedule
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -32,7 +32,7 @@ object Employee {
         @Serializable
         data class Retrieve(
             val salonsId: List<UUID>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса при приглашение нового сотрудника.
         ///
@@ -45,7 +45,7 @@ object Employee {
             val contacts: List<Contact.Parameters.Create>,
             val timetable: Schedule.Week?,
             val description: String?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры для частичного обновления Employee.
         ///
@@ -59,13 +59,13 @@ object Employee {
             val timetable: Schedule.Week?,
             val description: String?,
 
-            ) : Parametable()
+            ) : `Parametable ✅`()
 
         @Serializable
         data class Salary(
             val paymentType: `PaymentType ✅`,
             val salonId: UUID,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -90,7 +90,7 @@ object Employee {
             val salonId: UUID,
             val position: Position.Responses.Full,
             val procedures: List<Procedure.Responses.Partial>?,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// `Partial` возвращает упрощенную информацию о сотруднике для использования в списках или кратких обзорах.
         ///
@@ -104,6 +104,6 @@ object Employee {
             val name: String,
             val avatar: URI?,
             val contacts: List<Contact.Responses.Full>,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

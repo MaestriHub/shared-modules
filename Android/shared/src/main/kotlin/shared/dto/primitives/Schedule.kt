@@ -1,10 +1,17 @@
-package com.maestri.sdk.sources.shared.dto.primitives
+@file:UseSerializers(DateSerializer::class)
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+package shared.dto.primitives
+
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
+import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import java.util.*
 
 object Schedule {
+
+    // добавить Pattern
 
     /// WorkSchedule: расписание которое содержит в себе одну неделю
     @Serializable
@@ -16,12 +23,19 @@ object Schedule {
         val friday: Day? = null,
         val saturday: Day? = null,
         val sunday: Day? = null,
-    ) : Parametable(), Responsable
+    ) : `Parametable ✅`(), `Responsable ✅`
+
+    @Serializable
+    data class Cycled(
+        val startDay: Date,
+        val workDays: Dictionary<Int, Day>, //добавить сериализатор или разобраться
+        val restDays: Int,
+    ) : `Parametable ✅`(), `Responsable ✅`
 
     /// DaySchedule: модель одного дня в расписании
     @Serializable
     data class Day(
         val workTime: String,
         val offTime: List<String>,
-    ) : Parametable(), Responsable
+    ) : `Parametable ✅`(), `Responsable ✅`
 }

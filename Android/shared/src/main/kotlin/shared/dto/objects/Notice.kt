@@ -3,7 +3,7 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.enums.`NoticeCategory ✅`
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -35,6 +35,6 @@ object Notice {
             val category: `NoticeCategory ✅`,
             val isRead: Boolean,
             val date: Date?,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

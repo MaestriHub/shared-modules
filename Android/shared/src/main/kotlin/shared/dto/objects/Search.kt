@@ -1,8 +1,8 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.enums.`SalonType ✅`
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import kotlinx.serialization.Serializable
 
 /// Пространство имен `Search` содержит типы данных для взаимодействия с информацией о салонах красоты.
@@ -39,7 +39,7 @@ object Search {
             val longitude: Double?,
             val page: Int?,
             val per: Int?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -53,7 +53,7 @@ object Search {
         @Serializable
         data class Suggest(
             val value: String,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Полный ответ на поисковый запрос, включающий предложения и результаты поиска.
         ///
@@ -63,7 +63,7 @@ object Search {
         data class Full(
             val suggests: List<Suggest>,
             val salons: List<Salon.Responses.Partial>,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }
 

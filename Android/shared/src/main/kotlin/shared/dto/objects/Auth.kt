@@ -1,8 +1,8 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.primitives.Token
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import shared.dto.primitives.`Token ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import kotlinx.serialization.Serializable
 
 /// Пространство имен `Auth` содержит типы данных для работы с записями на прием.
@@ -28,7 +28,7 @@ object Auth {
             val lastName: String?,
             val email: String?,
             val emailVerified: Boolean? = false,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры для аутентификации через Google.
         /// Структура `GoogleToken` содержит данные, полученные от Google при аутентификации пользователя.
@@ -42,7 +42,7 @@ object Auth {
             val token: String,
             val firstName: String?,
             val lastName: String?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -56,10 +56,10 @@ object Auth {
         ///  - user: Полная информация о пользователе в формате `User.Responses.Full`.
         @Serializable
         data class Full(
-            val accessToken: Token,
-            val refreshToken: Token,
+            val accessToken: `Token ✅`,
+            val refreshToken: `Token ✅`,
             val user: User.Responses.Full,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Частичный ответ аутентификации.
         /// Структура `Partial` предоставляет токен аутентификации без дополнительных данных о пользователе.
@@ -69,8 +69,8 @@ object Auth {
         ///  - refreshToken: Токен сессии.
         @Serializable
         data class Partial(
-            val accessToken: Token,
-            val refreshToken: Token?,
-        ) : Responsable
+            val accessToken: `Token ✅`,
+            val refreshToken: `Token ✅`?,
+        ) : `Responsable ✅`
     }
 }

@@ -3,7 +3,7 @@
 package shared.dto.enums
 
 import com.maestri.sdk.sources.shared.dto.objects.User
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
@@ -14,7 +14,7 @@ import kotlinx.serialization.json.jsonObject
 import java.net.URI
 
 @Serializable(CustomerUser.Serializer::class)
-sealed class CustomerUser : Responsable {
+sealed class CustomerUser : `Responsable ✅` {
 
     @Serializable
     data class Link(

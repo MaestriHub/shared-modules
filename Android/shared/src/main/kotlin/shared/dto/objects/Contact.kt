@@ -4,8 +4,8 @@ package com.maestri.sdk.sources.shared.dto.objects
 
 
 import shared.dto.enums.`ContactType ✅`
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -29,7 +29,7 @@ object Contact {
             val value: String,
             val type: `ContactType ✅`,
             val isVerify: Boolean?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры для отправки OTP кода на указанный контакт
         ///
@@ -38,7 +38,7 @@ object Contact {
         @Serializable
         data class SendCode(
             val recaptchaToken: String?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры `Verify` используются для отправки верификационного кода на значение контакта.
         ///
@@ -47,7 +47,7 @@ object Contact {
         @Serializable
         data class Verify(
             val code: String,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -66,7 +66,7 @@ object Contact {
             val value: String,
             val isVerify: Boolean,
             val type: `ContactType ✅`,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// `Verify` возвращает информацию о том, что контакт был верифицирован
         ///
@@ -75,6 +75,6 @@ object Contact {
         @Serializable
         data class Verify(
             val isVerified: Boolean,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

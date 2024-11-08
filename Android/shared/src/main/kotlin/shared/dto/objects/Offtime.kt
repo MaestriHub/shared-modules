@@ -2,8 +2,8 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -23,7 +23,7 @@ object Offtime {
             val interval: DateInterval,
             val reason: String?,
             val timeZone: String,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -37,12 +37,12 @@ object Offtime {
             val interval: DateInterval,
             val reason: String?,
             val timeZone: String,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         @Serializable
         data class Partial(
             val id: UUID,
             val interval: DateInterval,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

@@ -3,10 +3,10 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.enums.`AppointmentStatus ✅`
-import com.maestri.sdk.sources.shared.dto.primitives.Address
-import com.maestri.sdk.sources.shared.dto.primitives.Price
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.primitives.`Address ✅`
+import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -38,7 +38,7 @@ object Appointment {
             val employees: List<UUID>?,
             val salons: List<UUID>?,
             val customer: UUID?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// `Create` описывает параметры тела запроса для создания новой записи на прием.
         ///
@@ -56,7 +56,7 @@ object Appointment {
             val customerId: UUID?,
             val proceduresId: List<UUID>,
             val time: DateInterval,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// `Patch` определяет параметры для частичного обновления данных записи на прием.
         ///
@@ -67,9 +67,9 @@ object Appointment {
         @Serializable
         data class Patch(
             val time: DateInterval? = null,
-            val price: Price? = null,
+            val price: `Price ✅`? = null,
             val proceduresId: List<UUID>? = null,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -95,9 +95,9 @@ object Appointment {
             val master: Employee.Responses.Partial,
             val procedures: List<Procedure.Responses.Partial>,
             val time: DateInterval,
-            val price: Price,
-            val address: Address,
-        ) : Responsable
+            val price: `Price ✅`,
+            val address: `Address ✅`,
+        ) : `Responsable ✅`
 
         /// `Partial` содержит частичную информацию о записи на прием, обычно используемую для списков и обзоров.
         ///
@@ -115,8 +115,8 @@ object Appointment {
             val customer: Customer.Responses.Partial,
             val master: Employee.Responses.Partial,
             val time: DateInterval,
-            val price: Price,
+            val price: `Price ✅`,
             val procedures: String,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

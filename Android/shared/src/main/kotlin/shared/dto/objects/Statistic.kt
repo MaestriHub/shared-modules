@@ -2,9 +2,9 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.primitives.Price
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -33,7 +33,7 @@ object Statistic {
             val endDate: Date,
             val employees: List<UUID>?,
             val salons: List<UUID>?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -47,8 +47,8 @@ object Statistic {
         /// - `count`: Общее количество записей на прием в заданном временном диапазоне и согласно указанным фильтрам.
         @Serializable
         data class Appointments(
-            val price: Price,
+            val price: `Price ✅`,
             val count: Int,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

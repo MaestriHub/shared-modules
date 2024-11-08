@@ -19,7 +19,7 @@ package com.maestri.sdk.sources.shared.dto.protocols
 ///
 /// Примеры использования включают определение моделей запросов для получения данных от клиентов,
 /// а также моделей ответов для отправки данных обратно клиентам.
-interface Responsable
+interface `Responsable ✅`
 
 /// Пример интеграции:
 /// ```

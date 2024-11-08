@@ -1,0 +1,54 @@
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/protocols/Parametable ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Salon.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/Schedule.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/SalaryType.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/SalonType ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/ContactType ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/OperationType ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/Wage ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/URISerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/MembershipState ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/AppointmentType.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/finance/Operation.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/optionSet/UserRoleSet.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/UUIDSerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/Address ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Offtime.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Customer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/Price ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/optionSet/MaestriPermissionSet.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/DateSerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/finance/Cashbox.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/User.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Service.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/ServiceCategory ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/MaestriPermissionSetSerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/PaymentPeriod.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Notice.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/ProfessionalEmployee.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Appointment.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Timetable.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/HandleInvite.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/SalaryPaymentType.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/Token ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/AppointmentStatus ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Procedure.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Contact.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/PaymentType ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Search.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/UserRoleSetSerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Professional.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/protocols/Responsable ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/serializers/PermissionSetSerializer.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/optionSet/PermissionSet.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/DateInterval.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Auth.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/utils/ParamsEncodeUtils ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/primitives/OperationInfo.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Statistic.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Employee.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/CustomerUser.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/TimetableOwner.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/enums/NoticeCategory ✅.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Device.kt
+/Users/misha/Desktop/Maestri/shared-modules/Android/shared/src/main/kotlin/shared/dto/objects/Position.kt

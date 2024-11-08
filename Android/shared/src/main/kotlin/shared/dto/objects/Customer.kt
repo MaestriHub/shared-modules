@@ -3,8 +3,8 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.enums.CustomerUser
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -21,14 +21,14 @@ object Customer {
         @Serializable
         data class Registration(
             var contacts: List<Contact.Parameters.Create>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         @Serializable
         data class Create(
             var salonId: UUID?,
             var alias: String,
             var contacts: List<Contact.Parameters.Create>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры запроса для получения списка клиентов.
         /// Позволяют фильтровать клиентов по определенным салонам.
@@ -39,7 +39,7 @@ object Customer {
         data class Retrieve(
             val salons: List<UUID>?,
             val employees: List<UUID>?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
 
         /// Параметры для частичного обновления профиля пользователя.
@@ -49,7 +49,7 @@ object Customer {
         @Serializable
         data class Patch(
             var contacts: List<Contact.Parameters.Create>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры для того, чтобы принять приглашение в приложение.
         ///
@@ -58,7 +58,7 @@ object Customer {
         @Serializable
         data class HandleInvite(
             var contact: String?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -69,7 +69,7 @@ object Customer {
             var user: CustomerUser,
             var alias: String?,
             var contacts: List<Contact.Responses.Full>,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         @Serializable
         data class Partial(
@@ -77,11 +77,11 @@ object Customer {
             var user: CustomerUser,
             var alias: String?,
             var contacts: List<Contact.Responses.Full>,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         @Serializable
         data class Verify(
             var contacts: List<Contact.Responses.Full>,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

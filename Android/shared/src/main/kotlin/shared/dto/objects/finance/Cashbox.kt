@@ -3,8 +3,8 @@
 package com.maestri.sdk.sources.shared.dto.objects.finance
 
 import shared.dto.enums.`PaymentType ✅`
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -20,14 +20,14 @@ object Cashbox {
         data class Create(
             val salonId: UUID,
             val paymentType: `PaymentType ✅`,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         @Serializable
         data class Retrieve(
             val paymentType: `PaymentType ✅`?,
             val startDate: Date?,
             val endDate: Date?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -37,6 +37,6 @@ object Cashbox {
             val id: UUID,
             val createDate: Date,
             val paymentType: `PaymentType ✅`,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

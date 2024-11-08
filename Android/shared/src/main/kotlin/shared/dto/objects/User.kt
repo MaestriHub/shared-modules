@@ -4,8 +4,8 @@ package com.maestri.sdk.sources.shared.dto.objects
 
 import com.maestri.sdk.sources.shared.dto.optionSet.MaestriPermissionSet
 import com.maestri.sdk.sources.shared.dto.optionSet.UserRoleSet
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -32,7 +32,7 @@ object User {
             val nickname: String?,
             val avatar: URI?,
             val contact: Contact.Parameters.Create?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -53,7 +53,7 @@ object User {
             val contact: Contact.Responses.Full?,
             val options: UserRoleSet,
             val permissions: MaestriPermissionSet,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Краткие данные о пользователе для отображения на главной странице.
         ///
@@ -64,7 +64,7 @@ object User {
         data class Partial(
             val avatar: URI? = null,
             val nickname: String,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }
 

@@ -2,12 +2,12 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import DTOs.objects.Timetable
+import shared.dto.objects.Timetable
 import shared.dto.enums.`SalonType ✅`
-import com.maestri.sdk.sources.shared.dto.primitives.Address
-import com.maestri.sdk.sources.shared.dto.primitives.Schedule
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.primitives.`Address ✅`
+import shared.dto.primitives.Schedule
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -32,9 +32,9 @@ object Salon {
             val timeZone: String,
             val description: String?,
             val timetable: Schedule.Week,
-            val address: Address,
+            val address: `Address ✅`,
             var contacts: List<Contact.Parameters.Create>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         /// Параметры для обновления информации о салоне.
         /// Передаются в теле запроса при изменении данных салона.
@@ -49,7 +49,7 @@ object Salon {
             val description: String?,
             val logo: URI?,
             val timetable: Schedule.Week?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -74,13 +74,13 @@ object Salon {
             var type: `SalonType ✅`,
             var description: String?,
             var logo: URI? = null,
-            var address: Address,
+            var address: `Address ✅`,
             var isActive: Boolean,
             var canEdit: Boolean = false,
             var isFavorite: Boolean = false,
             var timetable: Timetable.Responses.Week,
             var masters: List<Employee.Responses.Full>?,
-        ) : Responsable
+        ) : `Responsable ✅`
 
         /// Упрощенная информация о салоне для краткого отображения.
         ///
@@ -97,9 +97,9 @@ object Salon {
             var name: String,
             var type: `SalonType ✅`,
             var logo: URI? = null,
-            var address: Address, // Может быть можно просто строку присылать, но тогда не понятно как на карте отображать
+            var address: `Address ✅`, // Может быть можно просто строку присылать, но тогда не понятно как на карте отображать
             var isFavorite: Boolean = false,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }
 

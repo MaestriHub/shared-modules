@@ -2,7 +2,7 @@
 
 package shared.dto.enums
 
-import com.maestri.sdk.sources.shared.dto.primitives.Price
+import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
@@ -18,7 +18,7 @@ sealed class SalaryPaymentType {
     data class Procent(val procent: UInt) : SalaryPaymentType()
 
     @Serializable
-    data class Value(val value: Price) : SalaryPaymentType()
+    data class Value(val value: `Price ✅`) : SalaryPaymentType()
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<SalaryPaymentType>(SalaryPaymentType::class) {
@@ -46,7 +46,7 @@ sealed class SalaryType {
 
     @Serializable
     data class Wage(
-        val price: Price,
+        val price: `Price ✅`,
         val period: PaymentPeriod,
     ) : SalaryType()
 

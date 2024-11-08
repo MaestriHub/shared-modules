@@ -1,7 +1,7 @@
 package shared.dto.enums
 
 import com.maestri.sdk.sources.shared.dto.objects.Customer
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 
 @Serializable(HandleInvite.Serializer::class)
-sealed class HandleInvite : Responsable {
+sealed class HandleInvite : `Responsable ✅` {
     @Serializable
     data class Success(
         val customer: Customer.Responses.Full,

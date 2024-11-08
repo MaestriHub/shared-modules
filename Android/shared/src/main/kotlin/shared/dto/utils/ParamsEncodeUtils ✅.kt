@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 
-object ParamsEncodeUtils {
+object `ParamsEncodeUtils ✅` {
     fun Map<String, Any?>.toStringValues() = StringValues.build {
         forEach { append(it.key, it.value.toString()) }
     }

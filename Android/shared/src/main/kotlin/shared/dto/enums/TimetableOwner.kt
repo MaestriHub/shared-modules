@@ -2,8 +2,8 @@
 
 package com.maestri.sdk.sources.shared.dto.enums
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +12,7 @@ import java.util.UUID
 
 //Тут явно нужено свой сериализатор
 @Serializable
-sealed class TimetableOwner : Parametable(), Responsable {
+sealed class TimetableOwner : `Parametable ✅`(), `Responsable ✅` {
     val description: String
         get() = when (this) {
             is Employee -> "employee:$id"

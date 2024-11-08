@@ -1,7 +1,7 @@
 package com.maestri.sdk.sources.shared.dto.primitives
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import kotlinx.serialization.Serializable
 
 /// Полные данные об адресе для ответа.
@@ -14,10 +14,10 @@ import kotlinx.serialization.Serializable
 ///  - latitude: Географическая широта адреса.
 ///  - longitude: Географическая долгота адреса.
 @Serializable
-data class Address(
+data class `Address ✅`(
     val address: String,
     val city: String,
     val country: String,
     val latitude: Double,
     val longitude: Double,
-) : Parametable(), Responsable
+) : `Parametable ✅`(), `Responsable ✅`

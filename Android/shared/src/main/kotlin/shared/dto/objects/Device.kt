@@ -3,8 +3,8 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,12 +20,12 @@ object Device {
     data object Parameters {
 
         @Serializable
-        /* data */ class Create : Parametable()
+        /* data */ class Create : `Parametable ✅`()
 
         @Serializable
         data class RegisterPush(
             val token: Token,
-        ) : Parametable() {
+        ) : `Parametable ✅`() {
             @Serializable
             sealed class Token {
                 @Serializable
@@ -48,7 +48,7 @@ object Device {
         @Serializable
         data class Full(
             val id: UUID,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }
 

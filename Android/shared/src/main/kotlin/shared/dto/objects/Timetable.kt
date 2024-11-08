@@ -1,11 +1,11 @@
 @file:UseSerializers(UUIDSerializer::class, DateSerializer::class)
 
-package DTOs.objects
+package shared.dto.objects
 
 import com.maestri.sdk.sources.shared.dto.objects.DateInterval
-import com.maestri.sdk.sources.shared.dto.primitives.Schedule
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import shared.dto.primitives.Schedule
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
@@ -28,7 +28,7 @@ object Timetable {
         @Serializable
         data class SearchSlot(
             val procedures: List<UUID>,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
@@ -42,13 +42,13 @@ object Timetable {
         data class Slot(
             val intervals: Map<Date, List<DateInterval>>,
             val timeZone: String,
-        ) : Responsable
+        ) : `Responsable ✅`
 
 
         @Serializable
         data class Week(
             val schedule: Schedule.Week,
             val timeZone: String,
-        ) : Parametable(), Responsable
+        ) : `Parametable ✅`(), `Responsable ✅`
     }
 }

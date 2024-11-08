@@ -1,6 +1,6 @@
 package com.maestri.sdk.sources.shared.dto.protocols
 
-import com.maestri.sdk.sources.shared.dto.utils.ParamsEncodeUtils
+import com.maestri.sdk.sources.shared.dto.utils.`ParamsEncodeUtils ✅`
 import io.ktor.util.StringValues
 
 
@@ -23,9 +23,9 @@ import io.ktor.util.StringValues
 ///
 /// Примеры использования включают определение моделей запросов для получения данных от клиентов,
 /// а также моделей ответов для отправки данных обратно клиентам.
-abstract class Parametable {
+abstract class `Parametable ✅` {
     fun toStringValues(): StringValues = StringValues.build {
-        ParamsEncodeUtils.encodeToMap(this@Parametable).forEach { (key, value) ->
+        `ParamsEncodeUtils ✅`.encodeToMap(this@`Parametable ✅`).forEach { (key, value) ->
             append(key, value.toString())
         }
     }

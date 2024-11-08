@@ -4,8 +4,8 @@ package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.enums.SalaryType
 import com.maestri.sdk.sources.shared.dto.optionSet.PermissionSet
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -23,14 +23,14 @@ object Position {
             val title: String,
             val permissions: PermissionSet,
             val salary: SalaryType,
-        ) : Parametable()
+        ) : `Parametable ✅`()
 
         @Serializable
         data class Patch(
             val title: String?,
             val permissions: PermissionSet?,
             val salary: SalaryType?,
-        ) : Parametable()
+        ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -41,6 +41,6 @@ object Position {
             val title: String,
             val permissions: PermissionSet,
             val salary: SalaryType,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }

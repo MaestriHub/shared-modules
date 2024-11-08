@@ -2,8 +2,8 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.protocols.Parametable
-import com.maestri.sdk.sources.shared.dto.protocols.Responsable
+import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
+import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -17,7 +17,7 @@ object Professional {
     //MARK: - Parameters -
     data object Parameters {
         @Serializable
-        /* data */ class Create : Parametable()
+        /* data */ class Create : `Parametable ✅`()
     }
 
     //MARK: - Responses -
@@ -26,6 +26,6 @@ object Professional {
         data class Partial(
             val avatar: URI?,
             val nickname: String,
-        ) : Responsable
+        ) : `Responsable ✅`
     }
 }
