@@ -1,6 +1,6 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.SalonType
+import shared.dto.enums.`SalonType ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
 import kotlinx.serialization.Serializable
@@ -34,7 +34,7 @@ object Search {
         @Serializable
         data class Retrieve(
             val value: String?,
-            val salonType: SalonType?,
+            val salonType: `SalonType ✅`?,
             val latitude: Double?,
             val longitude: Double?,
             val page: Int?,

@@ -3,7 +3,7 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 
-import com.maestri.sdk.sources.shared.dto.enums.ContactType
+import shared.dto.enums.`ContactType ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
@@ -27,7 +27,7 @@ object Contact {
         @Serializable
         data class Create(
             val value: String,
-            val type: ContactType,
+            val type: `ContactType ✅`,
             val isVerify: Boolean?,
         ) : Parametable()
 
@@ -65,7 +65,7 @@ object Contact {
             val id: UUID,
             val value: String,
             val isVerify: Boolean,
-            val type: ContactType,
+            val type: `ContactType ✅`,
         ) : Responsable
 
         /// `Verify` возвращает информацию о том, что контакт был верифицирован

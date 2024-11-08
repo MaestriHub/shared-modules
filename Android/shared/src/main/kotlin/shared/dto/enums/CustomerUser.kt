@@ -1,6 +1,6 @@
 @file:UseSerializers(URISerializer::class)
 
-package com.maestri.sdk.sources.shared.dto.enums
+package shared.dto.enums
 
 import com.maestri.sdk.sources.shared.dto.objects.User
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
@@ -22,7 +22,9 @@ sealed class CustomerUser : Responsable {
     ) : CustomerUser()
 
     @Serializable
-    data class Value(val customer: User.Responses.Partial) : CustomerUser()
+    data class Value(
+        val customer: User.Responses.Partial,
+    ) : CustomerUser()
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<CustomerUser>(CustomerUser::class) {

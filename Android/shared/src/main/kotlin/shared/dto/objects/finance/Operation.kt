@@ -2,8 +2,8 @@
 
 package com.maestri.sdk.sources.shared.dto.objects.finance
 
-import shared.dto.enums.OperationType
-import com.maestri.sdk.sources.shared.dto.enums.PaymentType
+import shared.dto.enums.`OperationType ✅`
+import shared.dto.enums.`PaymentType ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.Price
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
@@ -20,8 +20,8 @@ object Operation {
         @Serializable
         data class Create(
             val price: Price,
-            val operationType: OperationType,
-            val paymentType: PaymentType,
+            val operationType: `OperationType ✅`,
+            val paymentType: `PaymentType ✅`,
             val salonId: UUID,
         ) : Parametable()
 
@@ -29,7 +29,7 @@ object Operation {
         data class Retrieve(
             @Serializable(DateSerializer::class) val startDate: Date?,
             @Serializable(DateSerializer::class) val endDate: Date?,
-            val paymentType: PaymentType?,
+            val paymentType: `PaymentType ✅`?,
             val cashboxIds: List<UUID>?,
         ) : Parametable()
     }
@@ -41,7 +41,7 @@ object Operation {
             val id: UUID,
             val createDate: Date,
             val price: Price,
-            val paymentType: PaymentType,
+            val paymentType: `PaymentType ✅`,
         ) : Responsable
     }
 }

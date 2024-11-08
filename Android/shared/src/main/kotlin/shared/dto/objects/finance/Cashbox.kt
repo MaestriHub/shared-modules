@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects.finance
 
-import com.maestri.sdk.sources.shared.dto.enums.PaymentType
+import shared.dto.enums.`PaymentType ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
@@ -19,12 +19,12 @@ object Cashbox {
         @Serializable
         data class Create(
             val salonId: UUID,
-            val paymentType: PaymentType,
+            val paymentType: `PaymentType ✅`,
         ) : Parametable()
 
         @Serializable
         data class Retrieve(
-            val paymentType: PaymentType?,
+            val paymentType: `PaymentType ✅`?,
             val startDate: Date?,
             val endDate: Date?,
         ) : Parametable()
@@ -36,7 +36,7 @@ object Cashbox {
         data class Full(
             val id: UUID,
             val createDate: Date,
-            val paymentType: PaymentType,
+            val paymentType: `PaymentType ✅`,
         ) : Responsable
     }
 }

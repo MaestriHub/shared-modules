@@ -3,8 +3,8 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import DTOs.objects.Timetable
-import com.maestri.sdk.sources.shared.dto.enums.PaymentType
-import com.maestri.sdk.sources.shared.dto.enums.ProfessionalEmployee
+import shared.dto.enums.`PaymentType ✅`
+import shared.dto.enums.ProfessionalEmployee
 import com.maestri.sdk.sources.shared.dto.primitives.Schedule
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
@@ -63,7 +63,7 @@ object Employee {
 
         @Serializable
         data class Salary(
-            val paymentType: PaymentType,
+            val paymentType: `PaymentType ✅`,
             val salonId: UUID,
         ) : Parametable()
     }

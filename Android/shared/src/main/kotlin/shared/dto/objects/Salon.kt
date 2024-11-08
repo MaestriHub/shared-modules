@@ -3,7 +3,7 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import DTOs.objects.Timetable
-import com.maestri.sdk.sources.shared.dto.enums.SalonType
+import shared.dto.enums.`SalonType ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.Address
 import com.maestri.sdk.sources.shared.dto.primitives.Schedule
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
@@ -27,7 +27,7 @@ object Salon {
         @Serializable
         data class Create(
             val name: String,
-            val type: SalonType,
+            val type: `SalonType ✅`,
             val logo: URI?,
             val timeZone: String,
             val description: String?,
@@ -45,7 +45,7 @@ object Salon {
         @Serializable
         data class Patch(
             val name: String?,
-            val type: SalonType?,
+            val type: `SalonType ✅`?,
             val description: String?,
             val logo: URI?,
             val timetable: Schedule.Week?,
@@ -71,7 +71,7 @@ object Salon {
         data class Full(
             var id: UUID,
             var name: String,
-            var type: SalonType,
+            var type: `SalonType ✅`,
             var description: String?,
             var logo: URI? = null,
             var address: Address,
@@ -95,7 +95,7 @@ object Salon {
         data class Partial(
             var id: UUID,
             var name: String,
-            var type: SalonType,
+            var type: `SalonType ✅`,
             var logo: URI? = null,
             var address: Address, // Может быть можно просто строку присылать, но тогда не понятно как на карте отображать
             var isFavorite: Boolean = false,

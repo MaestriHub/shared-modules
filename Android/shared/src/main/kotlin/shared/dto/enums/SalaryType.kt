@@ -1,6 +1,6 @@
 @file:UseSerializers(UUIDSerializer::class)
 
-package com.maestri.sdk.sources.shared.dto.enums
+package shared.dto.enums
 
 import com.maestri.sdk.sources.shared.dto.primitives.Price
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
@@ -11,12 +11,6 @@ import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import java.util.UUID
-
-enum class PaymentPeriod {
-    DAY,
-    MONTH,
-    HOUR
-}
 
 @Serializable(SalaryPaymentType.Serializer::class)
 sealed class SalaryPaymentType {

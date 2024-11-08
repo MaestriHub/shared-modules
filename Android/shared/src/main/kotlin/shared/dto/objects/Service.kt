@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.ServiceCategory
+import com.maestri.sdk.sources.shared.dto.enums.`ServiceCategory ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.Price
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
@@ -45,7 +45,7 @@ object Service {
         data class Create(
             val title: String,
             val description: String,
-            val category: ServiceCategory,
+            val category: `ServiceCategory ✅`,
             val languageval: String,
         ) : Parametable()
 
@@ -60,7 +60,7 @@ object Service {
         data class Patch(
             val title: String?,
             val description: String?,
-            val category: ServiceCategory?,
+            val category: `ServiceCategory ✅`?,
             val language: String,
         ) : Parametable()
     }
@@ -80,7 +80,7 @@ object Service {
             val id: UUID,
             val title: String,
             val description: String,
-            val category: ServiceCategory,
+            val category: `ServiceCategory ✅`,
             val procedures: List<Procedure.Responses.Partial>,
         ) : Responsable
 
@@ -96,7 +96,7 @@ object Service {
             val id: UUID,
             val title: String,
             val description: String,
-            val category: ServiceCategory,
+            val category: `ServiceCategory ✅`,
             val minPrice: Price?,
             val minDuration: Int?,
         ) : Responsable

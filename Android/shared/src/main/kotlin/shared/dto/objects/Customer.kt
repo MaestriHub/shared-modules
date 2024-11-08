@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.CustomerUser
+import shared.dto.enums.CustomerUser
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer

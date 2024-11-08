@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import shared.dto.enums.`AppointmentStatus✅`
+import shared.dto.enums.`AppointmentStatus ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.Address
 import com.maestri.sdk.sources.shared.dto.primitives.Price
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
@@ -89,7 +89,7 @@ object Appointment {
         @Serializable
         data class Full(
             val id: UUID,
-            val status: `AppointmentStatus✅`,
+            val status: `AppointmentStatus ✅`,
             val salon: Salon.Responses.Partial,
             val customer: Customer.Responses.Partial,
             val master: Employee.Responses.Partial,
@@ -111,7 +111,7 @@ object Appointment {
         @Serializable
         data class Partial(
             val id: UUID,
-            val status: `AppointmentStatus✅`,
+            val status: `AppointmentStatus ✅`,
             val customer: Customer.Responses.Partial,
             val master: Employee.Responses.Partial,
             val time: DateInterval,

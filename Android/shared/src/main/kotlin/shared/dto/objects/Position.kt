@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.SalaryType
+import shared.dto.enums.SalaryType
 import com.maestri.sdk.sources.shared.dto.optionSet.PermissionSet
 import com.maestri.sdk.sources.shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable

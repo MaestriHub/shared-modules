@@ -1,4 +1,4 @@
-package com.maestri.sdk.sources.shared.dto.enums
+package shared.dto.enums
 
 import com.maestri.sdk.sources.shared.dto.objects.Customer
 import com.maestri.sdk.sources.shared.dto.protocols.Responsable
