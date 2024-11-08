@@ -15,7 +15,7 @@ public enum Device {
 }
 
 public extension Device.Parameters {
-    
+
     struct Create: Parametable {
         
         public init() {}
@@ -41,11 +41,17 @@ public extension Device.Responses {
     
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
+        public var OSVersion: VersionType
+        public var appVersion: VersionType
         
         public init(
-            id: UUID
+            id: UUID,
+            OSVersion: VersionType,
+            appVersion: VersionType
         ) {
             self.id = id
+            self.OSVersion = OSVersion
+            self.appVersion = appVersion
         }
     }
 }
