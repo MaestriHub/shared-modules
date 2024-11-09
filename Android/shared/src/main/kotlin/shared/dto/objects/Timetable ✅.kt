@@ -2,7 +2,7 @@
 
 package shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.TimetableOwner
+import com.maestri.sdk.sources.shared.dto.enums.`TimetableOwner ✅`
 import shared.dto.primitives.`Schedule ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
@@ -10,7 +10,7 @@ import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.enums.AppointmentType
+import shared.dto.enums.`AppointmentType ✅`
 import java.util.Date
 import java.util.UUID
 
@@ -39,13 +39,13 @@ object `Timetable ✅` {
 
         @Serializable
         data class SearchSlot(
-            val appointmentType: AppointmentType,
+            val appointmentType: `AppointmentType ✅`,
             val customerId: UUID?,
         ) : `Parametable ✅`()
 
         @Serializable
         data class Retrieve(
-            val owners: List<TimetableOwner>,
+            val owners: List<`TimetableOwner ✅`>,
             //Идеально отправлять в salon time zone с 00:00-00:00 чтобы были только дни
             val period: `DateInterval ✅`,
         ) : `Parametable ✅`()
@@ -62,7 +62,7 @@ object `Timetable ✅` {
 
         @Serializable
         data class Schedule(
-            val owner: TimetableOwner,
+            val owner: `TimetableOwner ✅`,
             //для недели 7 дней для месяца 28-31
             val intervals: Intervals,
             val timeZoneId: String,

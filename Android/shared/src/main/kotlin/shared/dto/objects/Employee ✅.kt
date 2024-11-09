@@ -3,7 +3,7 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.objects.`Timetable ✅`
-import shared.dto.enums.ProfessionalEmployee
+import shared.dto.enums.`ProfessionalEmployee ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
@@ -69,7 +69,7 @@ object `Employee ✅` {
         @Serializable
         data class Full(
             val id: UUID,
-            val user: ProfessionalEmployee,
+            val user: `ProfessionalEmployee ✅`,
             val description: String?,
             val canEdit: Boolean = false,
             val contacts: List<`Contact ✅`.Responses.Full>,

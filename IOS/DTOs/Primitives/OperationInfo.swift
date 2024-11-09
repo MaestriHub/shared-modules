@@ -48,9 +48,9 @@ public struct OtherOperation: Codable, Hashable {
 public struct OperationInfo: Codable, Hashable {
     
     public enum Keys: Codable, Hashable {
-        case appointment(AppointmentOperation)
-        case salary(SalaryOperation)
-        case other(OtherOperation)
+        case appointment(appointment: AppointmentOperation)
+        case salary(salary: SalaryOperation)
+        case other(other: OtherOperation)
     }
 
     public var value: Keys
@@ -58,16 +58,16 @@ public struct OperationInfo: Codable, Hashable {
     public init(
         appointmentInfo: AppointmentOperation
     ) {
-        value = .appointment(appointmentInfo)
+        value = .appointment(appointment: appointmentInfo)
     }
     public init(
         salaryInfo: SalaryOperation
     ) {
-        value = .salary(salaryInfo)
+        value = .salary(salary: salaryInfo)
     }
     public init(
         otherInfo: OtherOperation
     ) {
-        value = .other(otherInfo)
+        value = .other(other: otherInfo)
     }
 }

@@ -12,7 +12,7 @@ import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.enums.AppointmentType
+import shared.dto.enums.`AppointmentType ✅`
 import java.util.Date
 import java.util.UUID
 
@@ -44,7 +44,7 @@ object `AppointmentCustomer ✅` {
         ///  - time: `Interval` - временной интервал записи на прием.
         @Serializable
         data class Create(
-            val type: AppointmentType,
+            val type: `AppointmentType ✅`,
             val time: `DateInterval ✅`,
         ) : `Parametable ✅`()
 

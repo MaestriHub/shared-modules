@@ -9,7 +9,7 @@ import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.`PaymentType ✅`
-import shared.dto.enums.SalaryPaymentType
+import shared.dto.enums.`SalaryPaymentType ✅`
 import shared.dto.enums.SalaryType
 import java.util.Date
 import java.util.UUID
@@ -22,7 +22,7 @@ object `Salary ✅` {
             @Serializable
             data class Create(
                 val percent: Int?,
-                val grid: Map<UUID, SalaryPaymentType>?,
+                val grid: Map<UUID, `SalaryPaymentType ✅`>?,
                 val wage: SalaryType.Wage?,
             ) : `Parametable ✅`()
         }
@@ -48,7 +48,7 @@ object `Salary ✅` {
             @Serializable
             data class Full(
                 val percent: Int?,
-                val grid: Map<UUID, SalaryPaymentType>?,
+                val grid: Map<UUID, `SalaryPaymentType ✅`>?,
                 val wage: SalaryType.Wage?,
             ) : `Parametable ✅`()
         }

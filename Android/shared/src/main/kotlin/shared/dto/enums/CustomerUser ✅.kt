@@ -13,22 +13,22 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import java.net.URI
 
-@Serializable(CustomerUser.Serializer::class)
-sealed class CustomerUser : `Responsable ✅` {
+@Serializable(`CustomerUser ✅`.Serializer::class)
+sealed class `CustomerUser ✅` : `Responsable ✅` {
 
     @Serializable
     data class Link(
         val url: URI,
-    ) : CustomerUser()
+    ) : `CustomerUser ✅`()
 
     @Serializable
     data class Value(
         val customer: `User ✅`.Responses.Partial,
-    ) : CustomerUser()
+    ) : `CustomerUser ✅`()
 
     internal object Serializer :
-        JsonContentPolymorphicSerializer<CustomerUser>(CustomerUser::class) {
-        override fun selectDeserializer(element: JsonElement): DeserializationStrategy<CustomerUser> {
+        JsonContentPolymorphicSerializer<`CustomerUser ✅`>(`CustomerUser ✅`::class) {
+        override fun selectDeserializer(element: JsonElement): DeserializationStrategy<`CustomerUser ✅`> {
             return when (element.jsonObject.contains("url")) {
                 true -> Link.serializer()
                 false -> Value.serializer()

@@ -10,9 +10,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.util.UUID
 
-// Тут явно нужено свой десериализатор
 @Serializable
-sealed class TimetableOwner : `Parametable ✅`(), `Responsable ✅` {
+sealed class `TimetableOwner ✅` : `Parametable ✅`(), `Responsable ✅` {
     val description: String
         get() = when (this) {
             is Employee -> "employee:$id"
@@ -23,11 +22,11 @@ sealed class TimetableOwner : `Parametable ✅`(), `Responsable ✅` {
     @SerialName("salon")
     data class Salon(
         val id: UUID,
-    ) : TimetableOwner()
+    ) : `TimetableOwner ✅`()
 
     @Serializable
     @SerialName("employee")
     data class Employee(
         val id: UUID,
-    ) : TimetableOwner()
+    ) : `TimetableOwner ✅`()
 }

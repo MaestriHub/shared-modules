@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.enums.TimetableOwner
+import com.maestri.sdk.sources.shared.dto.enums.`TimetableOwner ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
@@ -29,7 +29,7 @@ object `Offtime ✅` {
 
         @Serializable
         data class Retrieve(
-            val owners: List<TimetableOwner>,
+            val owners: List<`TimetableOwner ✅`>,
             //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
             val period: `DateInterval ✅`,
         )

@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import shared.dto.enums.CustomerUser
+import shared.dto.enums.`CustomerUser ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
@@ -57,7 +57,7 @@ object `Customer ✅` {
         @Serializable
         data class Full(
             var id: UUID,
-            var user: CustomerUser,
+            var user: `CustomerUser ✅`,
             var alias: String?,
             var contacts: List<`Contact ✅`.Responses.Full>,
         ) : `Responsable ✅`
@@ -65,7 +65,7 @@ object `Customer ✅` {
         @Serializable
         data class Partial(
             @Serializable(with = UUIDSerializer::class) var id: UUID,
-            var user: CustomerUser,
+            var user: `CustomerUser ✅`,
             var alias: String?,
             var contacts: List<`Contact ✅`.Responses.Full>,
         ) : `Responsable ✅`
