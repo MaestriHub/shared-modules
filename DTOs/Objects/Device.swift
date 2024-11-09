@@ -17,44 +17,28 @@ public enum Device {
 public extension Device.Parameters {
 
     struct Create: Parametable {
-        public enum Token: Codable {
-            case apple(token: String)
-            case fcm(token: String)
-        }
         
-        public let token: Token?
         public var manufacturer : String?
         public var model: String?
         public var system: SystemType?
         public var appVersion: String?
         public var country: String?
+        public let fcmToken: String?
+        
         public init(
             manufacturer: String? = nil,
             model: String? = nil,
             system: SystemType? = nil,
             appVersion: String? = nil,
             country: String? = nil,
-            token: Token? = nil
+            fcmToken: String? = nil
         ) {
             self.manufacturer = manufacturer
             self.model = model
             self.system = system
             self.appVersion = appVersion
             self.country = country
-            self.token = token
-        }
-    }
-    
-    struct RegisterPush: Parametable {
-        public enum Token: Codable {
-            case apple(token: String)
-            case fcm(token: String)
-        }
-        
-        public let token: Token
-        
-        public init(token: Token) {
-            self.token = token
+            self.fcmToken = fcmToken
         }
     }
 }
