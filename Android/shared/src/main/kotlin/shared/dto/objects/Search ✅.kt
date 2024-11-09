@@ -4,6 +4,7 @@ import shared.dto.enums.`SalonType ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import kotlinx.serialization.Serializable
+import shared.dto.objects.`Salon ✅`
 
 /// Пространство имен `Search` содержит типы данных для взаимодействия с информацией о салонах красоты.
 ///

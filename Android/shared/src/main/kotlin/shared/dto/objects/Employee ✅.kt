@@ -74,7 +74,7 @@ object `Employee ✅` {
             val canEdit: Boolean = false,
             val contacts: List<`Contact ✅`.Responses.Full>,
             val salonId: UUID,
-            val position: Position.Responses.Full,
+            val position: `Position ✅`.Responses.Full,
         ) : `Responsable ✅`
 
         @Serializable
@@ -82,7 +82,7 @@ object `Employee ✅` {
             val id: UUID,
             val user: `User ✅`.Responses.Partial?,
             val contacts: List<`Contact ✅`.Responses.Full>,
-            val position: Position.Responses.Partial,
+            val position: `Position ✅`.Responses.Partial,
         ) : `Responsable ✅`
     }
 }

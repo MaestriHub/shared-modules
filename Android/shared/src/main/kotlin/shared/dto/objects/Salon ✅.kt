@@ -1,8 +1,8 @@
 @file:UseSerializers(UUIDSerializer::class, URISerializer::class)
 
-package com.maestri.sdk.sources.shared.dto.objects
+package shared.dto.objects
 
-import shared.dto.objects.`Timetable ✅`
+import com.maestri.sdk.sources.shared.dto.objects.`Contact ✅`
 import shared.dto.enums.`SalonType ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.`Address ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
