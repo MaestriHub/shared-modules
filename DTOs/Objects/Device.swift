@@ -17,8 +17,27 @@ public enum Device {
 public extension Device.Parameters {
 
     struct Create: Parametable {
-        
-        public init() {}
+        public var manufacturer : String?
+        public var model: String?
+        public var operatingSystem: String?
+        public var operatingSystemVersion: String?
+        public var appVersion: String?
+        public var country: String?
+        public init(
+            manufacturer: String? = nil,
+            model: String? = nil,
+            operatingSystem: String? = nil,
+            operatingSystemVersion: String? = nil,
+            appVersion: String? = nil,
+            country: String? = nil
+        ) {
+            self.manufacturer = manufacturer
+            self.model = model
+            self.operatingSystem = operatingSystem
+            self.operatingSystemVersion = operatingSystemVersion
+            self.appVersion = appVersion
+            self.country = country
+        }
     }
     
     struct RegisterPush: Parametable {
@@ -41,16 +60,16 @@ public extension Device.Responses {
     
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var OSVersion: VersionType
-        public var appVersion: VersionType
+        public var operatingSystemVersion: VersionType?
+        public var appVersion: VersionType?
         
         public init(
             id: UUID,
-            OSVersion: VersionType,
-            appVersion: VersionType
+            operatingSystemVersion: VersionType? = nil,
+            appVersion: VersionType? = nil
         ) {
             self.id = id
-            self.OSVersion = OSVersion
+            self.operatingSystemVersion = operatingSystemVersion
             self.appVersion = appVersion
         }
     }
