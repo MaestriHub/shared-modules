@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object Search {
+object `Search ✅` {
     //MARK: - Parameters -
     data object Parameters {
         /// Параметры запроса для фильтрации списка салонов.

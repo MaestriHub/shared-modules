@@ -15,7 +15,7 @@ import java.util.UUID
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-object Contact {
+object `Contact ✅` {
     // MARK: - Parameters -
     data object Parameters {
         /// Параметры для создания контакта.

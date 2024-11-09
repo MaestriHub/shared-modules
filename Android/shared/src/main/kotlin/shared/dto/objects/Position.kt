@@ -2,8 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import shared.dto.enums.SalaryType
-import com.maestri.sdk.sources.shared.dto.optionSet.PermissionSet
+import com.maestri.sdk.sources.shared.dto.optionSet.`PermissionSet ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
@@ -21,15 +20,15 @@ object Position {
         @Serializable
         data class Create(
             val title: String,
-            val permissions: PermissionSet,
-            val salary: SalaryType,
+            val permissions: `PermissionSet ✅`,
+            val salary: Salary.Parameters.Rules.Create,
         ) : `Parametable ✅`()
 
         @Serializable
         data class Patch(
             val title: String?,
-            val permissions: PermissionSet?,
-            val salary: SalaryType?,
+            val permissions: `PermissionSet ✅`?,
+            val salary: Salary.Parameters.Rules.Create?,
         ) : `Parametable ✅`()
     }
 
@@ -39,8 +38,14 @@ object Position {
         data class Full(
             val id: UUID,
             val title: String,
-            val permissions: PermissionSet,
-            val salary: SalaryType,
+            val permissions: `PermissionSet ✅`,
+            val salary: Salary.Responses.Rules.Full,
+        ) : `Responsable ✅`
+
+        @Serializable
+        data class Partial(
+            val id: UUID,
+            val title: String,
         ) : `Responsable ✅`
     }
 }

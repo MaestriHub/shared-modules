@@ -2,8 +2,8 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.optionSet.MaestriPermissionSet
-import com.maestri.sdk.sources.shared.dto.optionSet.UserRoleSet
+import shared.dto.optionSet.`MaestriPermissionSet ✅`
+import com.maestri.sdk.sources.shared.dto.optionSet.`UserRoleSet ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
@@ -18,7 +18,7 @@ import java.util.UUID
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object User {
+object `User ✅` {
     // MARK: - Parameters -
     data object Parameters {
         /// Параметры для частичного обновления профиля пользователя.
@@ -31,7 +31,7 @@ object User {
         data class Patch(
             val nickname: String?,
             val avatar: URI?,
-            val contact: Contact.Parameters.Create?,
+            val contact: `Contact ✅`.Parameters.Create?,
         ) : `Parametable ✅`()
     }
 
@@ -50,9 +50,9 @@ object User {
             val id: UUID,
             val avatar: URI?,
             val nickname: String,
-            val contact: Contact.Responses.Full?,
-            val options: UserRoleSet,
-            val permissions: MaestriPermissionSet,
+            val contact: `Contact ✅`.Responses.Full?,
+            val options: `UserRoleSet ✅`,
+            val permissions: `MaestriPermissionSet ✅`,
         ) : `Responsable ✅`
 
         /// Краткие данные о пользователе для отображения на главной странице.

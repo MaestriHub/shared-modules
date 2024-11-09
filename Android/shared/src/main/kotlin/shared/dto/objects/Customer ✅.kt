@@ -14,20 +14,20 @@ import java.util.UUID
 ///
 /// В него входят параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
-object Customer {
+object `Customer ✅` {
     //MARK: - Parameters -
     data object Parameters {
 
         @Serializable
         data class Registration(
-            var contacts: List<Contact.Parameters.Create>,
+            var contacts: List<`Contact ✅`.Parameters.Create>,
         ) : `Parametable ✅`()
 
         @Serializable
         data class Create(
             var salonId: UUID?,
             var alias: String,
-            var contacts: List<Contact.Parameters.Create>,
+            var contacts: List<`Contact ✅`.Parameters.Create>,
         ) : `Parametable ✅`()
 
         /// Параметры запроса для получения списка клиентов.
@@ -41,15 +41,6 @@ object Customer {
             val employees: List<UUID>?,
         ) : `Parametable ✅`()
 
-
-        /// Параметры для частичного обновления профиля пользователя.
-        ///
-        /// ### Properties:
-        ///  - contacts: Контактная информация Customer, для связи с ним
-        @Serializable
-        data class Patch(
-            var contacts: List<Contact.Parameters.Create>,
-        ) : `Parametable ✅`()
 
         /// Параметры для того, чтобы принять приглашение в приложение.
         ///
@@ -68,7 +59,7 @@ object Customer {
             var id: UUID,
             var user: CustomerUser,
             var alias: String?,
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<`Contact ✅`.Responses.Full>,
         ) : `Responsable ✅`
 
         @Serializable
@@ -76,12 +67,12 @@ object Customer {
             @Serializable(with = UUIDSerializer::class) var id: UUID,
             var user: CustomerUser,
             var alias: String?,
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<`Contact ✅`.Responses.Full>,
         ) : `Responsable ✅`
 
         @Serializable
         data class Verify(
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<`Contact ✅`.Responses.Full>,
         ) : `Responsable ✅`
     }
 }

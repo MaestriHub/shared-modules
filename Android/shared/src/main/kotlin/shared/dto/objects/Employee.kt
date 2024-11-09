@@ -3,16 +3,13 @@
 package com.maestri.sdk.sources.shared.dto.objects
 
 import shared.dto.objects.Timetable
-import shared.dto.enums.`PaymentType ✅`
 import shared.dto.enums.ProfessionalEmployee
-import shared.dto.primitives.Schedule
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.net.URI
 import java.util.UUID
 
 
@@ -42,8 +39,8 @@ object Employee {
         data class Invite(
             val salondId: UUID,
             val positionId: UUID,
-            val contacts: List<Contact.Parameters.Create>,
-            val timetable: Schedule.Week?,
+            val contacts: List<`Contact ✅`.Parameters.Create>,
+            val timetable: Timetable.Parameters.Create.Pattern?,
             val description: String?,
         ) : `Parametable ✅`()
 
@@ -55,16 +52,6 @@ object Employee {
         @Serializable
         data class Patch(
             val positionId: UUID?,
-            val contacts: List<Contact.Parameters.Create>?,
-            val timetable: Schedule.Week?,
-            val description: String?,
-
-            ) : `Parametable ✅`()
-
-        @Serializable
-        data class Salary(
-            val paymentType: `PaymentType ✅`,
-            val salonId: UUID,
         ) : `Parametable ✅`()
     }
 
@@ -77,7 +64,7 @@ object Employee {
         /// - nickname: `String` - псевдоним сотрудника.
         /// - avatar: `URL?` - URL-адрес аватара сотрудника, может быть `nil`, если аватар отсутствует.
         /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
-        /// - position: Position.Responses.Full - полная информация о дожности
+        /// - salonId: UUID - айдишник салона
         /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
         @Serializable
         data class Full(
@@ -85,25 +72,17 @@ object Employee {
             val user: ProfessionalEmployee,
             val description: String?,
             val canEdit: Boolean = false,
-            val contacts: List<Contact.Responses.Full>,
-            val timetable: Timetable.Responses.Week,
+            val contacts: List<`Contact ✅`.Responses.Full>,
             val salonId: UUID,
             val position: Position.Responses.Full,
-            val procedures: List<Procedure.Responses.Partial>?,
         ) : `Responsable ✅`
 
-        /// `Partial` возвращает упрощенную информацию о сотруднике для использования в списках или кратких обзорах.
-        ///
-        /// ### Properties:
-        /// - id: `UUID` - уникальный идентификатор сотрудника.
-        /// - name: `String` - имя сотрудника.
-        /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
         @Serializable
         data class Partial(
             val id: UUID,
-            val name: String,
-            val avatar: URI?,
-            val contacts: List<Contact.Responses.Full>,
+            val user: `User ✅`.Responses.Partial?,
+            val contacts: List<`Contact ✅`.Responses.Full>,
+            val position: Position.Responses.Partial,
         ) : `Responsable ✅`
     }
 }

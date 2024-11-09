@@ -1,5 +1,6 @@
-package com.maestri.sdk.sources.shared.dto.objects
+package shared.dto.objects
 
+import com.maestri.sdk.sources.shared.dto.objects.`User ✅`
 import shared.dto.primitives.`Token ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
@@ -9,7 +10,7 @@ import kotlinx.serialization.Serializable
 ///
 /// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
 /// которые используются для сериализации данных, отправляемых и получаемых от API.
-object Auth {
+object `Auth ✅` {
     // MARK: - Parameters -
     data object Parameters {
         /// Параметры для аутентификации через Apple.
@@ -58,7 +59,7 @@ object Auth {
         data class Full(
             val accessToken: `Token ✅`,
             val refreshToken: `Token ✅`,
-            val user: User.Responses.Full,
+            val user: `User ✅`.Responses.Full,
         ) : `Responsable ✅`
 
         /// Частичный ответ аутентификации.

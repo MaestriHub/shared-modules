@@ -2,7 +2,7 @@
 
 package shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.objects.DateInterval
+import com.maestri.sdk.sources.shared.dto.enums.TimetableOwner
 import shared.dto.primitives.Schedule
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
@@ -10,8 +10,12 @@ import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.enums.AppointmentType
+import shared.dto.enums.PaymentPeriod
 import java.util.Date
 import java.util.UUID
+
+typealias Intervals = List<`DateInterval ✅`>
 
 /// Пространство имен `Timetable` содержит типы данных для взаимодействия с информацией о салонах красоты.
 ///
@@ -20,35 +24,49 @@ import java.util.UUID
 object Timetable {
     // MARK: - Parameters -
     data object Parameters {
-        /// Параметры запроса для поиска доступных временных слотов для процедур.
-        /// Учитывает часовой пояс и список запрашиваемых процедур.
-        ///
-        /// ### Properties:
-        /// - `procedures`: Список идентификаторов процедур, для которых ищутся слоты.
+        data object Create {
+            @Serializable
+            data class Pattern(
+                val schedule: Schedule.Pattern,
+                val startAt: Date,
+                val endAt: Date?,
+            ) : `Parametable ✅`()
+
+            @Serializable
+            data class Flexible(
+                val workDays: Map<Date, Schedule.Day>
+            ) : `Parametable ✅`()
+        }
+
         @Serializable
         data class SearchSlot(
-            val procedures: List<UUID>,
+            val appointmentType: AppointmentType,
+            val customerId: UUID?,
+        ) : `Parametable ✅`()
+
+        @Serializable
+        data class Retrieve(
+            val owners: List<TimetableOwner>,
+            //Идеально отправлять в salon time zone с 00:00-00:00 чтобы были только дни
+            val period: `DateInterval ✅`,
         ) : `Parametable ✅`()
     }
 
     // MARK: - Responses -
     data object Responses {
-        /// Структура ответа, возвращающая доступные временные слоты.
-        /// Представляет доступные интервалы для записи к мастеру или в салоне на ближайшие дни.
-        ///
-        /// ### Properties:
-        /// - `days`: Словарь, сопоставляющий даты с массивами доступных временных интервалов.
+        // Используется для возвращения найденных слотов на которые можно записаться
         @Serializable
-        data class Slot(
-            val intervals: Map<Date, List<DateInterval>>,
-            val timeZone: String,
+        data class Slots(
+            val intervals: Intervals,
+            val timeZoneId: String,
         ) : `Responsable ✅`
 
-
         @Serializable
-        data class Week(
-            val schedule: Schedule.Week,
-            val timeZone: String,
-        ) : `Parametable ✅`(), `Responsable ✅`
+        data class Schedule(
+            val owner: TimetableOwner,
+            //для недели 7 дней для месяца 28-31
+            val intervals: Intervals,
+            val timeZoneId: String,
+        ) : `Responsable ✅`
     }
 }

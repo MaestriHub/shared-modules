@@ -2,7 +2,7 @@
 
 package shared.dto.enums
 
-import com.maestri.sdk.sources.shared.dto.objects.Professional
+import com.maestri.sdk.sources.shared.dto.objects.`Professional ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import kotlinx.serialization.DeserializationStrategy
@@ -22,7 +22,7 @@ sealed class ProfessionalEmployee : `Responsable ✅` {
 
     @Serializable
     data class Value(
-        val user: Professional.Responses.Partial,
+        val user: `Professional ✅`.Responses.Partial,
     ) : ProfessionalEmployee()
 
     internal object Serializer :

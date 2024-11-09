@@ -2,9 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects.finance
 
-import shared.dto.enums.`OperationType ✅`
 import shared.dto.enums.`PaymentType ✅`
-import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
@@ -14,33 +12,30 @@ import kotlinx.serialization.UseSerializers
 import java.util.Date
 import java.util.UUID
 
-object Operation {
+object `Cashbox ✅` {
     //MARK: - Parameters -
     data object Parameters {
+
         @Serializable
         data class Create(
-            val price: `Price ✅`,
-            val operationType: `OperationType ✅`,
-            val paymentType: `PaymentType ✅`,
             val salonId: UUID,
+            val paymentType: `PaymentType ✅`,
         ) : `Parametable ✅`()
 
         @Serializable
         data class Retrieve(
-            @Serializable(DateSerializer::class) val startDate: Date?,
-            @Serializable(DateSerializer::class) val endDate: Date?,
             val paymentType: `PaymentType ✅`?,
-            val cashboxIds: List<UUID>?,
+            val startDate: Date?,
+            val endDate: Date?,
         ) : `Parametable ✅`()
     }
 
     //MARK: - Responses -
     data object Responses {
-        @Serializable
+
         data class Full(
             val id: UUID,
             val createDate: Date,
-            val price: `Price ✅`,
             val paymentType: `PaymentType ✅`,
         ) : `Responsable ✅`
     }

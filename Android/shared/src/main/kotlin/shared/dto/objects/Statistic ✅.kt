@@ -16,7 +16,7 @@ import java.util.UUID
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object Statistic {
+object `Statistic ✅` {
     // MARK: - Parameters -
     data object Parameters {
         /// Параметры запроса для фильтрации статистики по записям на прием.

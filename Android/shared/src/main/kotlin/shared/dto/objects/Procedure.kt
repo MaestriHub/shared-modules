@@ -82,7 +82,7 @@ object Procedure {
             val duration: Int,
             val description: String?,
             val alias: String?,
-            val service: Service.Responses.Partial,
+            val service: `Service ✅`.Responses.Micro,
             val master: Employee.Responses.Partial,
         ) : `Responsable ✅`
 
@@ -101,7 +101,7 @@ object Procedure {
             val duration: Int,
             val description: String?,
             val alias: String?,
-            val service: Service.Responses.Partial,
+            val service: `Service ✅`.Responses.Micro,
             val master: Employee.Responses.Partial,
         ) : `Responsable ✅`
     }

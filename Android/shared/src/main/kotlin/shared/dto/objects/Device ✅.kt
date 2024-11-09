@@ -15,7 +15,7 @@ import java.util.UUID
 ///
 /// В него входят  модели ответов (`Responses`),
 /// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
-object Device {
+object `Device ✅` {
     // MARK: - Parameters -
     data object Parameters {
 

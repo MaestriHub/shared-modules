@@ -15,7 +15,7 @@ import java.util.UUID
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object Service {
+object `Service ✅` {
     // MARK: - Parameters -
     data object Parameters {
         /// Параметры запроса для получения списка услуг.
@@ -46,7 +46,7 @@ object Service {
             val title: String,
             val description: String,
             val category: `ServiceCategory ✅`,
-            val languageval: String,
+            val language: String?,
         ) : `Parametable ✅`()
 
         /// Параметры, передаваемые в теле запроса для частичного обновления данных об услуге.
@@ -81,7 +81,7 @@ object Service {
             val title: String,
             val description: String,
             val category: `ServiceCategory ✅`,
-            val procedures: List<Procedure.Responses.Partial>,
+            val procedures: List<Procedure.Responses.Full>,
         ) : `Responsable ✅`
 
         /// Упрощенная структура ответа для услуг.
@@ -99,6 +99,14 @@ object Service {
             val category: `ServiceCategory ✅`,
             val minPrice: `Price ✅`?,
             val minDuration: Int?,
+        ) : `Responsable ✅`
+
+        @Serializable
+        data class Micro(
+            val id: UUID,
+            val title: String,
+            val description: String,
+            val category: `ServiceCategory ✅`,
         ) : `Responsable ✅`
     }
 }

@@ -7,13 +7,12 @@ import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.net.URI
 
 /// Пространство имен `Professional` содержит типы данных для работы с информацией о клиентах.
 ///
 /// В него входят параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
-object Professional {
+object `Professional ✅` {
     //MARK: - Parameters -
     data object Parameters {
         @Serializable
@@ -24,8 +23,7 @@ object Professional {
     data object Responses {
         @Serializable
         data class Partial(
-            val avatar: URI?,
-            val nickname: String,
+            val user: `User ✅`.Responses.Partial
         ) : `Responsable ✅`
     }
 }

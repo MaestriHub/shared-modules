@@ -29,11 +29,12 @@ object Salon {
             val name: String,
             val type: `SalonType ✅`,
             val logo: URI?,
-            val timeZone: String,
+            val timeZoneId: String,
+            val localeId: String,
             val description: String?,
-            val timetable: Schedule.Week,
+            val timetable: Timetable.Parameters.Create.Pattern,
             val address: `Address ✅`,
-            var contacts: List<Contact.Parameters.Create>,
+            var contacts: List<`Contact ✅`.Parameters.Create>,
         ) : `Parametable ✅`()
 
         /// Параметры для обновления информации о салоне.
@@ -48,7 +49,6 @@ object Salon {
             val type: `SalonType ✅`?,
             val description: String?,
             val logo: URI?,
-            val timetable: Schedule.Week?,
         ) : `Parametable ✅`()
     }
 
@@ -78,8 +78,7 @@ object Salon {
             var isActive: Boolean,
             var canEdit: Boolean = false,
             var isFavorite: Boolean = false,
-            var timetable: Timetable.Responses.Week,
-            var masters: List<Employee.Responses.Full>?,
+            var localeId: String,
         ) : `Responsable ✅`
 
         /// Упрощенная информация о салоне для краткого отображения.
