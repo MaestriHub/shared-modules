@@ -57,16 +57,16 @@ public extension Device.Responses {
     
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
-        public var operatingSystemVersion: VersionType?
+        public var systemVersion: VersionType?
         public var appVersion: VersionType?
         
         public init(
             id: UUID,
-            operatingSystemVersion: VersionType? = nil,
+            systemVersion: VersionType? = nil,
             appVersion: VersionType? = nil
         ) {
             self.id = id
-            self.operatingSystemVersion = operatingSystemVersion
+            self.systemVersion = systemVersion
             self.appVersion = appVersion
         }
     }
