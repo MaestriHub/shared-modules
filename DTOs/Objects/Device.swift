@@ -19,22 +19,19 @@ public extension Device.Parameters {
     struct Create: Parametable {
         public var manufacturer : String?
         public var model: String?
-        public var operatingSystem: String?
-        public var operatingSystemVersion: String?
+        public var system: SystemType?
         public var appVersion: String?
         public var country: String?
         public init(
             manufacturer: String? = nil,
             model: String? = nil,
-            operatingSystem: String? = nil,
-            operatingSystemVersion: String? = nil,
+            system: SystemType? = nil,
             appVersion: String? = nil,
             country: String? = nil
         ) {
             self.manufacturer = manufacturer
             self.model = model
-            self.operatingSystem = operatingSystem
-            self.operatingSystemVersion = operatingSystemVersion
+            self.system = system
             self.appVersion = appVersion
             self.country = country
         }
