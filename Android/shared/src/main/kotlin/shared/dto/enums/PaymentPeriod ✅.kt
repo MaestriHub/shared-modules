@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 /// - `MONTH`: Раз в месяц
 /// - `DAY`  : Раз в день
 /// - `HOUR` : Раз в час
-enum class PaymentPeriod {
+enum class `PaymentPeriod ✅` {
     @SerialName("month")
     MONTH,
 

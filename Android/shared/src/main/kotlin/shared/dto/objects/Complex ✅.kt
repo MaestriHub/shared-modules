@@ -2,7 +2,7 @@
 
 package shared.dto.objects
 
-import com.maestri.sdk.sources.shared.dto.objects.Procedure
+import com.maestri.sdk.sources.shared.dto.objects.`Procedure ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.`Price ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
@@ -71,7 +71,7 @@ object `Complex ✅` {
             val duration: Int,
             val description: String?,
             val alias: String?,
-            val procedures: List<Procedure.Responses.Partial>
+            val procedures: List<`Procedure ✅`.Responses.Partial>
         ) : `Responsable ✅`
 
         /// ### Properties:
@@ -88,7 +88,7 @@ object `Complex ✅` {
             val duration: Int,
             val description: String?,
             val alias: String?,
-            val procedures: List<Procedure.Responses.Partial>
+            val procedures: List<`Procedure ✅`.Responses.Partial>
         ) : `Responsable ✅`
     }
 }

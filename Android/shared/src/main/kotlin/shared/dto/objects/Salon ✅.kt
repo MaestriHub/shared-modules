@@ -2,10 +2,9 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import shared.dto.objects.Timetable
+import shared.dto.objects.`Timetable ✅`
 import shared.dto.enums.`SalonType ✅`
 import com.maestri.sdk.sources.shared.dto.primitives.`Address ✅`
-import shared.dto.primitives.Schedule
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.URISerializer
@@ -19,7 +18,7 @@ import java.util.UUID
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object Salon {
+object `Salon ✅` {
     //MARK: - Parameters -
     data object Parameters {
         /// Параметры для создания салона.
@@ -32,7 +31,7 @@ object Salon {
             val timeZoneId: String,
             val localeId: String,
             val description: String?,
-            val timetable: Timetable.Parameters.Create.Pattern,
+            val timetable: `Timetable ✅`.Parameters.Create.Pattern,
             val address: `Address ✅`,
             var contacts: List<`Contact ✅`.Parameters.Create>,
         ) : `Parametable ✅`()

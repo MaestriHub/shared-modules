@@ -62,7 +62,7 @@ object `Search ✅` {
         /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
         data class Full(
             val suggests: List<Suggest>,
-            val salons: List<Salon.Responses.Partial>,
+            val salons: List<`Salon ✅`.Responses.Partial>,
         ) : `Responsable ✅`
     }
 }

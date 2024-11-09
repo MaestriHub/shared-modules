@@ -3,7 +3,7 @@
 package shared.dto.objects
 
 import com.maestri.sdk.sources.shared.dto.enums.TimetableOwner
-import shared.dto.primitives.Schedule
+import shared.dto.primitives.`Schedule ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
@@ -11,7 +11,6 @@ import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentType
-import shared.dto.enums.PaymentPeriod
 import java.util.Date
 import java.util.UUID
 
@@ -21,20 +20,20 @@ typealias Intervals = List<`DateInterval ✅`>
 ///
 /// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// используемые для обработки данных о салонах в системе.
-object Timetable {
+object `Timetable ✅` {
     // MARK: - Parameters -
     data object Parameters {
         data object Create {
             @Serializable
             data class Pattern(
-                val schedule: Schedule.Pattern,
+                val schedule: `Schedule ✅`.Pattern,
                 val startAt: Date,
                 val endAt: Date?,
             ) : `Parametable ✅`()
 
             @Serializable
             data class Flexible(
-                val workDays: Map<Date, Schedule.Day>
+                val workDays: Map<Date, `Schedule ✅`.Day>
             ) : `Parametable ✅`()
         }
 

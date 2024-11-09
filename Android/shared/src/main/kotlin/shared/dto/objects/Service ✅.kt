@@ -81,7 +81,7 @@ object `Service ✅` {
             val title: String,
             val description: String,
             val category: `ServiceCategory ✅`,
-            val procedures: List<Procedure.Responses.Full>,
+            val procedures: List<`Procedure ✅`.Responses.Full>,
         ) : `Responsable ✅`
 
         /// Упрощенная структура ответа для услуг.

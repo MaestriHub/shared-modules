@@ -77,7 +77,7 @@ object `AppointmentEmployee ✅` {
         ///  - associative: ``[Base]`` - ассоциативные
         @Serializable
         data class Full(
-            val salon: Salon.Responses.Partial,
+            val salon: `Salon ✅`.Responses.Partial,
             val customer: `Customer ✅`.Responses.Partial,
             val address: `Address ✅`,
             val associative: List<Base>,
@@ -102,7 +102,7 @@ object `AppointmentEmployee ✅` {
         data class Base(
             val id: UUID,
             val status: `AppointmentStatus ✅`,
-            val procedure: Procedure.Responses.Partial,
+            val procedure: `Procedure ✅`.Responses.Partial,
             val time: `DateInterval ✅`,
             val price: `Price ✅`,
         ) : `Responsable ✅`

@@ -15,7 +15,7 @@ import java.util.UUID
 ///
 /// Включает в себя параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// которые применяются для обмена данными о сотрудниках между клиентскими приложениями и сервером.
-object Procedure {
+object `Procedure ✅` {
     // MARK: - Parameters -
     data object Parameters {
 
@@ -83,7 +83,7 @@ object Procedure {
             val description: String?,
             val alias: String?,
             val service: `Service ✅`.Responses.Micro,
-            val master: Employee.Responses.Partial,
+            val master: `Employee ✅`.Responses.Partial,
         ) : `Responsable ✅`
 
         /// Упрощенная структура ответа для процедур.
@@ -102,7 +102,7 @@ object Procedure {
             val description: String?,
             val alias: String?,
             val service: `Service ✅`.Responses.Micro,
-            val master: Employee.Responses.Partial,
+            val master: `Employee ✅`.Responses.Partial,
         ) : `Responsable ✅`
     }
 }

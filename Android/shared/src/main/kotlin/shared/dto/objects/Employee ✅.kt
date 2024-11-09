@@ -2,7 +2,7 @@
 
 package com.maestri.sdk.sources.shared.dto.objects
 
-import shared.dto.objects.Timetable
+import shared.dto.objects.`Timetable ✅`
 import shared.dto.enums.ProfessionalEmployee
 import com.maestri.sdk.sources.shared.dto.protocols.`Parametable ✅`
 import com.maestri.sdk.sources.shared.dto.protocols.`Responsable ✅`
@@ -17,7 +17,7 @@ import java.util.UUID
 ///
 /// Включает в себя параметры для запросов (`Parameters`) и модели ответов (`Responses`),
 /// которые применяются для обмена данными о сотрудниках между клиентскими приложениями и сервером.
-object Employee {
+object `Employee ✅` {
     //MARK: - Parameters -
     data object Parameters {
 
@@ -40,7 +40,7 @@ object Employee {
             val salondId: UUID,
             val positionId: UUID,
             val contacts: List<`Contact ✅`.Parameters.Create>,
-            val timetable: Timetable.Parameters.Create.Pattern?,
+            val timetable: `Timetable ✅`.Parameters.Create.Pattern?,
             val description: String?,
         ) : `Parametable ✅`()
 

@@ -73,8 +73,8 @@ object `AppointmentCustomer ✅` {
         data class Full(
             val id: UUID,
             val status: `AppointmentStatus ✅`,
-            val salon: Salon.Responses.Partial,
-            val procedures: List<Procedure.Responses.Partial>,
+            val salon: `Salon ✅`.Responses.Partial,
+            val procedures: List<`Procedure ✅`.Responses.Partial>,
             val time: `DateInterval ✅`,
             val price: `Price ✅`,
             val address: `Address ✅`,
@@ -95,7 +95,7 @@ object `AppointmentCustomer ✅` {
             val status: `AppointmentStatus ✅`,
             val time: `DateInterval ✅`,
             val price: `Price ✅`,
-            val procedures: List<Procedure.Responses.Partial>,
+            val procedures: List<`Procedure ✅`.Responses.Partial>,
         ) : `Responsable ✅`
     }
 }

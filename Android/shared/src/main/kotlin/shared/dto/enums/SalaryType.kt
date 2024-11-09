@@ -47,7 +47,7 @@ sealed class SalaryType {
     @Serializable
     data class Wage(
         val price: `Price ✅`,
-        val period: PaymentPeriod,
+        val period: `PaymentPeriod ✅`,
     ) : SalaryType()
 
     @Serializable
