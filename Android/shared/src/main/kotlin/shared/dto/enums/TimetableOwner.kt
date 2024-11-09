@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.util.UUID
 
-//Тут явно нужено свой сериализатор
+// Тут явно нужено свой десериализатор
 @Serializable
 sealed class TimetableOwner : `Parametable ✅`(), `Responsable ✅` {
     val description: String
