@@ -3,7 +3,7 @@ public enum SystemType: Codable, Equatable {
     case android(version: String)
     case chrome(version: String)
     case edge(version: String)
-    case firedox(version: String)
+    case firefox(version: String)
     case opera(version: String)
     case safari(version: String)
 }
