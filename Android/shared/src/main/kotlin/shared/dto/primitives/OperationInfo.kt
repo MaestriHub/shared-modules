@@ -8,14 +8,13 @@ import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
-import java.security.Key
 import java.util.Date
 import java.util.UUID
-import javax.management.Descriptor
 
 @Serializable
 data class AppointmentOperation(
@@ -36,29 +35,37 @@ data class OtherOperation(
     val descriptor: String,
 ) : `Parametable ✅`(), `Responsable ✅`
 
+
 @Serializable
-data class OperationInfo(
+data class OperationInfo (
     val keys: Keys
 ) {
     @Serializable(Keys.Serializer::class)
     sealed class Keys : `Responsable ✅` {
-
         @Serializable
-        data class Complex(
-            val id: UUID,
+        data class Appointment(
+            val appointment: AppointmentOperation,
         ) : Keys()
 
         @Serializable
-        data class Procedure(
-            val id: UUID,
+        data class Salary(
+            val salary: SalaryOperation,
+        ) : Keys()
+
+        @Serializable
+        data class Other(
+            val other: OtherOperation,
         ) : Keys()
 
         internal object Serializer :
             JsonContentPolymorphicSerializer<Keys>(Keys::class) {
             override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Keys> {
-                return when (element.jsonObject.contains("complex")) {
-                    true -> Complex.serializer()
-                    false -> Procedure.serializer()
+                val keys = element.jsonObject.keys
+                return when {
+                    "appointment" in keys -> Appointment.serializer()
+                    "salary" in keys -> Salary.serializer()
+                    "other" in keys -> Other.serializer()
+                    else -> throw SerializationException("Unknown pattern type")
                 }
             }
         }
