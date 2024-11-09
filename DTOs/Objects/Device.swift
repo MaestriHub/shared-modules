@@ -17,6 +17,12 @@ public enum Device {
 public extension Device.Parameters {
 
     struct Create: Parametable {
+        public enum Token: Codable {
+            case apple(token: String)
+            case fcm(token: String)
+        }
+        
+        public let token: Token?
         public var manufacturer : String?
         public var model: String?
         public var system: SystemType?
@@ -27,13 +33,15 @@ public extension Device.Parameters {
             model: String? = nil,
             system: SystemType? = nil,
             appVersion: String? = nil,
-            country: String? = nil
+            country: String? = nil,
+            token: Token? = nil
         ) {
             self.manufacturer = manufacturer
             self.model = model
             self.system = system
             self.appVersion = appVersion
             self.country = country
+            self.token = token
         }
     }
     
