@@ -17,29 +17,28 @@ import java.util.Date
 import java.util.UUID
 
 @Serializable
-data class AppointmentOperation(
-    val realizerId: UUID,
-    val appointmentId: UUID,
-) : `Parametable ✅`(), `Responsable ✅`
-
-@Serializable
-data class SalaryOperation(
-    val initiatorId: UUID, // employeeId
-    val receiverId: UUID, // employeeId
-    val dateTo: Date, // Дата, Дальше которой все оплачено зарплатой
-) : `Parametable ✅`(), `Responsable ✅`
-
-@Serializable
-data class OtherOperation(
-    val realizerId: UUID,
-    val descriptor: String,
-) : `Parametable ✅`(), `Responsable ✅`
-
-
-@Serializable
-data class OperationInfo (
+data class `OperationInfo ✅` (
     val keys: Keys
 ) {
+    @Serializable
+    data class AppointmentOperation(
+        val realizerId: UUID,
+        val appointmentId: UUID,
+    ) : `Parametable ✅`(), `Responsable ✅`
+
+    @Serializable
+    data class SalaryOperation(
+        val initiatorId: UUID, // employeeId
+        val receiverId: UUID, // employeeId
+        val dateTo: Date, // Дата, Дальше которой все оплачено зарплатой
+    ) : `Parametable ✅`(), `Responsable ✅`
+
+    @Serializable
+    data class OtherOperation(
+        val realizerId: UUID,
+        val descriptor: String,
+    ) : `Parametable ✅`(), `Responsable ✅`
+
     @Serializable(Keys.Serializer::class)
     sealed class Keys : `Responsable ✅` {
         @Serializable

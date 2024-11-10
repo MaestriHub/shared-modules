@@ -10,6 +10,7 @@ import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.primitives.`OperationInfo ✅`
 import java.util.Date
 import java.util.UUID
 
@@ -22,9 +23,9 @@ object `Operation ✅` {
             val price: `Price ✅`,
             val paymentType: `PaymentType ✅`,
             val salonId: UUID,
-            val appointment: AppointmentOperation? = null,
-            val salary: SalaryOperation? = null,
-            val other: OtherOperation? = null,
+            val appointment: `OperationInfo ✅`.AppointmentOperation? = null,
+            val salary: `OperationInfo ✅`.SalaryOperation? = null,
+            val other: `OperationInfo ✅`.OtherOperation? = null,
         ) : `Parametable ✅`()
 
         @Serializable
