@@ -1,10 +1,9 @@
-package com.maestri.sdk.sources.shared.dto.objects
+package shared.dto.objects
 
 import shared.dto.enums.SalonType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import kotlinx.serialization.Serializable
-import shared.dto.objects.Salon
 
 object Search {
     data object Parameters {

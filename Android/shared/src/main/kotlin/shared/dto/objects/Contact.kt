@@ -2,7 +2,6 @@
 
 package shared.dto.objects
 
-
 import shared.dto.enums.ContactType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable

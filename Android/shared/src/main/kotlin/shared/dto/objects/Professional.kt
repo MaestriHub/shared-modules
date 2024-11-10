@@ -14,7 +14,6 @@ object Professional {
         class Create : Parametable()
     }
 
-    //MARK: - Responses -
     data object Responses {
         @Serializable
         data class Partial(

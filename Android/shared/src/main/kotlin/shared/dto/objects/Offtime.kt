@@ -1,4 +1,4 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(UUIDSerializer::class, TimetableOwnerSerializer::class, BigDecimalSerializer::class)
 
 package shared.dto.objects
 
@@ -8,16 +8,18 @@ import shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.serializers.BigDecimalSerializer
+import shared.serializers.TimetableOwnerSerializer
+import java.math.BigDecimal
 import java.util.UUID
 
 object Offtime {
-    // MARK: - Parameters -
     data object Parameters {
         @Serializable
         data class Create(
             val interval: DateInterval,
             val reason: String?,
-            val coefficient: Float, // BigDecimal?
+            val coefficient: BigDecimal
         ) : Parametable()
 
         @Serializable

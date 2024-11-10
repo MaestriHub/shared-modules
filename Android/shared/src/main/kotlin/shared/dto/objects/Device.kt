@@ -1,7 +1,6 @@
 @file:UseSerializers(UUIDSerializer::class)
 
-package com.maestri.sdk.sources.shared.dto.objects
-
+package shared.dto.objects
 
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable

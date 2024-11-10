@@ -11,10 +11,6 @@ import kotlinx.serialization.UseSerializers
 import shared.dto.objects.Contact
 import java.util.UUID
 
-/// Пространство имен `Customer` содержит типы данных для работы с информацией о клиентах.
-///
-/// В него входят параметры для запросов (`Parameters`) и модели ответов (`Responses`),
-/// используемые для обмена данными между клиентом и сервером в контексте клиентских данных.
 object Customer {
     data object Parameters {
         @Serializable

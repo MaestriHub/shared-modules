@@ -1,4 +1,4 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(UUIDSerializer::class, TimetableOwnerSerializer::class)
 
 package shared.dto.enums
 
@@ -8,9 +8,9 @@ import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.serializers.TimetableOwnerSerializer
 import java.util.UUID
 
-@Serializable
 sealed class TimetableOwner : Parametable(), Responsable {
     val description: String
         get() = when (this) {

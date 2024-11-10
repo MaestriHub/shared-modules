@@ -1,4 +1,4 @@
-@file:UseSerializers(UUIDSerializer::class, DateSerializer::class)
+@file:UseSerializers(UUIDSerializer::class, DateSerializer::class, TimetableOwnerSerializer::class)
 
 package shared.dto.objects
 
@@ -11,6 +11,7 @@ import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentType
+import shared.serializers.TimetableOwnerSerializer
 import java.util.Date
 import java.util.UUID
 
