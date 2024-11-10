@@ -12,15 +12,15 @@ public extension Operation.Parameters {
         public var price: Price
         public var paymentType: PaymentType
         public var salonId: UUID
-        public var appointment: AppointmentOperation?
-        public var salary: SalaryOperation?
-        public var other: OtherOperation?
+        public var appointment: OperationInfo.AppointmentOperation?
+        public var salary: OperationInfo.SalaryOperation?
+        public var other: OperationInfo.OtherOperation?
         
 
         public init (
             price: Price,
             paymentType: PaymentType,
-            appointment: AppointmentOperation,
+            appointment: OperationInfo.AppointmentOperation,
             salonId: UUID
         ) {
             self.price = price
@@ -32,7 +32,7 @@ public extension Operation.Parameters {
         public init (
             price: Price,
             paymentType: PaymentType,
-            salary: SalaryOperation,
+            salary: OperationInfo.SalaryOperation,
             salonId: UUID
         ) {
             self.price = price
@@ -45,7 +45,7 @@ public extension Operation.Parameters {
         public init (
             price: Price,
             paymentType: PaymentType,
-            other: OtherOperation,
+            other: OperationInfo.OtherOperation,
             salonId: UUID
         ) {
             self.price = price

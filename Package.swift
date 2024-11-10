@@ -21,17 +21,17 @@ let package = Package(
         .target(
             name: "DTOs",
             dependencies: [],
-            path: "DTOs"
+            path: "IOS/DTOs"
         ),
         .target(
             name: "SwifCron",
             dependencies: [],
-            path: "SwifCron/Sources"
+            path: "IOS/SwifCron/Sources"
         ),
         .testTarget(
             name: "SwifCronTests",
             dependencies: ["SwifCron"],
-            path: "SwifCron/Tests"
+            path: "IOS/SwifCron/Tests"
         ),
     ]
 )
