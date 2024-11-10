@@ -15,22 +15,30 @@ public enum Device {
 }
 
 public extension Device.Parameters {
-    
-    struct Create: Parametable {
+
+    struct System: Parametable {
         
-        public init() {}
-    }
-    
-    struct RegisterPush: Parametable {
-        public enum Token: Codable {
-            case apple(token: String)
-            case fcm(token: String)
-        }
+        public var manufacturer : String?
+        public var model: String?
+        public var system: SystemType?
+        public var appVersion: String?
+        public var country: String?
+        public let fcmToken: String?
         
-        public let token: Token
-        
-        public init(token: Token) {
-            self.token = token
+        public init(
+            manufacturer: String? = nil,
+            model: String? = nil,
+            system: SystemType? = nil,
+            appVersion: String? = nil,
+            country: String? = nil,
+            fcmToken: String? = nil
+        ) {
+            self.manufacturer = manufacturer
+            self.model = model
+            self.system = system
+            self.appVersion = appVersion
+            self.country = country
+            self.fcmToken = fcmToken
         }
     }
 }
@@ -41,11 +49,14 @@ public extension Device.Responses {
     
     struct Full: Responsable, Identifiable, Equatable {
         public var id: UUID
+        public var version: VersionType?
         
         public init(
-            id: UUID
+            id: UUID,
+            version: VersionType? = nil
         ) {
             self.id = id
+            self.version = version
         }
     }
 }
