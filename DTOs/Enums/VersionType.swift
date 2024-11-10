@@ -1,5 +1,5 @@
 public enum VersionType: String, Codable, CaseIterable, Equatable {
-    case newest
+    case latest
     case stable
     case unsupported
 }

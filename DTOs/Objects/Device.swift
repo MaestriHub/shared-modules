@@ -16,7 +16,7 @@ public enum Device {
 
 public extension Device.Parameters {
 
-    struct Create: Parametable {
+    struct System: Parametable {
         
         public var manufacturer : String?
         public var model: String?
