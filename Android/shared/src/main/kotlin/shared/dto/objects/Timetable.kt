@@ -2,18 +2,17 @@
 
 package shared.dto.objects
 
+import com.maestri.sdk.sources.shared.serializers.DateSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import shared.dto.enums.AppointmentType
 import shared.dto.enums.TimetableOwner
 import shared.dto.primitives.Schedule
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import shared.dto.enums.AppointmentType
 import shared.serializers.TimetableOwnerSerializer
-import java.util.Date
-import java.util.UUID
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 typealias Intervals = List<DateInterval>
 

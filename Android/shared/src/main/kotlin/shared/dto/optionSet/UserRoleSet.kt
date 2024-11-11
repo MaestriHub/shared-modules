@@ -1,7 +1,7 @@
 package shared.dto.optionSet
 
-import com.maestri.sdk.sources.shared.serializers.UserRoleSetSerializer
 import kotlinx.serialization.Serializable
+import shared.serializers.UserRoleSetSerializer
 
 @Serializable(UserRoleSetSerializer::class)
 @JvmInline

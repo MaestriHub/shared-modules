@@ -2,16 +2,16 @@
 
 package shared.dto.objects
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.enums.TimetableOwner
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import shared.serializers.BigDecimalSerializer
 import shared.serializers.TimetableOwnerSerializer
+import shared.serializers.UUIDSerializer
 import java.math.BigDecimal
-import java.util.UUID
+import java.util.*
 
 object Offtime {
     data object Parameters {

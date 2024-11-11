@@ -2,14 +2,13 @@
 
 package shared.dto.objects
 
-import shared.dto.enums.NoticeCategory
-import shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.util.Date
-import java.util.UUID
+import shared.dto.enums.NoticeCategory
+import shared.dto.protocols.Responsable
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Notice {
     data object Responses {

@@ -2,16 +2,14 @@
 
 package shared.dto.objects
 
-import shared.dto.protocols.Parametable
-import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.SystemType
 import shared.dto.enums.VersionType
-import java.util.UUID
-import javax.print.attribute.standard.PrinterMoreInfoManufacturer
+import shared.dto.protocols.Parametable
+import shared.dto.protocols.Responsable
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Device {
     data object Parameters {

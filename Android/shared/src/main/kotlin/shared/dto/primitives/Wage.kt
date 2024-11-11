@@ -1,8 +1,8 @@
 package shared.dto.primitives
 
-import shared.dto.protocols.Responsable
 import kotlinx.serialization.Serializable
 import shared.dto.enums.PaymentPeriod
+import shared.dto.protocols.Responsable
 
 @Serializable
 data class Wage(

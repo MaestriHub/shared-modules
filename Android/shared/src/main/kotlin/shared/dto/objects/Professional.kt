@@ -2,11 +2,11 @@
 
 package shared.dto.objects
 
-import shared.dto.protocols.Parametable
-import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.URISerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.protocols.Parametable
+import shared.dto.protocols.Responsable
+import shared.serializers.URISerializer
 
 object Professional {
     data object Parameters {

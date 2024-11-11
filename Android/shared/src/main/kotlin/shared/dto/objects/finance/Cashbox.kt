@@ -2,15 +2,14 @@
 
 package shared.dto.objects.finance
 
+import com.maestri.sdk.sources.shared.serializers.DateSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.enums.PaymentType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import java.util.Date
-import java.util.UUID
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Cashbox {
     data object Parameters {

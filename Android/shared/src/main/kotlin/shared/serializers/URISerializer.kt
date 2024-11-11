@@ -1,4 +1,4 @@
-package com.maestri.sdk.sources.shared.serializers
+package shared.serializers
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

@@ -2,11 +2,11 @@
 
 package shared.dto.primitives
 
-import shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.util.Date
+import shared.dto.protocols.Responsable
+import java.util.*
 
 @Serializable
 data class Token(
