@@ -5,7 +5,7 @@ package shared.dto.objects
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.util.Date
+import java.util.*
 
 @Serializable
 data class DateInterval(

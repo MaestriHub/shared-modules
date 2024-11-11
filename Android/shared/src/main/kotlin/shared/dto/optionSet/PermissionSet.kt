@@ -1,7 +1,7 @@
 package shared.dto.optionSet
 
-import com.maestri.sdk.sources.shared.serializers.PermissionSetSerializer
 import kotlinx.serialization.Serializable
+import shared.serializers.PermissionSetSerializer
 
 @Serializable(PermissionSetSerializer::class)
 @JvmInline

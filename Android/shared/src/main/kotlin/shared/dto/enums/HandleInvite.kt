@@ -1,12 +1,12 @@
 package shared.dto.enums
 
-import com.maestri.sdk.sources.shared.dto.objects.Customer
-import shared.dto.protocols.Responsable
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
+import shared.dto.objects.Customer
+import shared.dto.protocols.Responsable
 
 @Serializable(HandleInvite.Serializer::class)
 sealed class HandleInvite : Responsable {

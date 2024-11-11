@@ -1,9 +1,9 @@
 package shared.dto.objects
 
+import kotlinx.serialization.Serializable
 import shared.dto.enums.SalonType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import kotlinx.serialization.Serializable
 
 object Search {
     data object Parameters {

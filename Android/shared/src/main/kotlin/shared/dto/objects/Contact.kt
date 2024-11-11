@@ -2,13 +2,13 @@
 
 package shared.dto.objects
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import java.util.UUID
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Contact {
     data object Parameters {

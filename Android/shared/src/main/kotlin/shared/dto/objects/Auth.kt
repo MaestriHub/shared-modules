@@ -1,9 +1,9 @@
 package shared.dto.objects
 
+import kotlinx.serialization.Serializable
 import shared.dto.primitives.Token
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import kotlinx.serialization.Serializable
 
 object Auth {
     data object Parameters {

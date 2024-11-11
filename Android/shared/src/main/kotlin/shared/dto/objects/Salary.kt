@@ -2,17 +2,16 @@
 
 package shared.dto.objects
 
-import shared.dto.primitives.Price
-import shared.dto.protocols.Parametable
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.PaymentType
 import shared.dto.enums.SalaryPaymentType
+import shared.dto.primitives.Price
 import shared.dto.primitives.Wage
-import java.util.Date
-import java.util.UUID
+import shared.dto.protocols.Parametable
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Salary {
     data object Parameters {

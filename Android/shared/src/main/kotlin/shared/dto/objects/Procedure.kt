@@ -2,14 +2,14 @@
 
 package shared.dto.objects
 
+import com.maestri.sdk.sources.shared.serializers.DateSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import java.util.UUID
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 object Procedure {
     data object Parameters {

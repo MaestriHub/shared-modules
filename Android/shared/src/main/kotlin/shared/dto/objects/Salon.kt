@@ -2,16 +2,16 @@
 
 package shared.dto.objects
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.URISerializer
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
+import shared.serializers.URISerializer
+import shared.serializers.UUIDSerializer
 import java.net.URI
-import java.util.UUID
+import java.util.*
 
 object Salon {
     data object Parameters {

@@ -2,14 +2,14 @@
 
 package shared.dto.enums
 
-import shared.dto.protocols.Parametable
-import shared.dto.protocols.Responsable
-import com.maestri.sdk.sources.shared.serializers.UUIDSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.protocols.Parametable
+import shared.dto.protocols.Responsable
 import shared.serializers.TimetableOwnerSerializer
-import java.util.UUID
+import shared.serializers.UUIDSerializer
+import java.util.*
 
 sealed class TimetableOwner : Parametable(), Responsable {
     val description: String

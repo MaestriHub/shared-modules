@@ -1,12 +1,12 @@
 package shared.dto.enums
 
-import shared.dto.primitives.Price
-import shared.dto.protocols.Responsable
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
+import shared.dto.primitives.Price
+import shared.dto.protocols.Responsable
 
 @Serializable(SalaryPaymentType.Serializer::class)
 sealed class SalaryPaymentType : Responsable {

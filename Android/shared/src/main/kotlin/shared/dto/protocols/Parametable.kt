@@ -1,7 +1,7 @@
 package shared.dto.protocols
 
+import io.ktor.util.*
 import shared.dto.utils.ParamsEncodeUtils
-import io.ktor.util.StringValues
 
 abstract class Parametable {
     fun toStringValues(): StringValues = StringValues.build {

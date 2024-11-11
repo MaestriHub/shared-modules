@@ -2,8 +2,6 @@
 
 package shared.dto.primitives
 
-import shared.dto.protocols.Parametable
-import shared.dto.protocols.Responsable
 import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
@@ -12,6 +10,8 @@ import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
+import shared.dto.protocols.Parametable
+import shared.dto.protocols.Responsable
 import java.util.*
 
 object Schedule {
