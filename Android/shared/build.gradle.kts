@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "app.maestri"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
