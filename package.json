@@ -1,0 +1,15 @@
+{
+  "name": "shared-modules",
+  "version": "0.0.1",
+  "description": "dtos - now; requests - later",
+  "main": "Node/src/index.js",
+  "scripts": {
+    "test": "foo"
+  },
+  "keywords": [
+    "dto",
+    "shared-modules"
+  ],
+  "author": "misha",
+  "license": "ISC"
+}
