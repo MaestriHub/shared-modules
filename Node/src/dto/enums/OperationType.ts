@@ -2,7 +2,7 @@
 /// - `APPOINTMENT`: Операция связанная с аппоинтментом
 /// - `SALARY`     : Операция связанная с зарплатой
 /// - `OTHER`      : "Какая-то" операция
-enum OperationType {
+export enum OperationType {
     APPOINTMENT = "appointment",
     SALARY = "salary",
     OTHER = "other",

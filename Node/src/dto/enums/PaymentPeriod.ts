@@ -2,7 +2,7 @@
 /// - `MONTH`: Раз в месяц
 /// - `DAY`  : Раз в день
 /// - `HOUR` : Раз в час
-enum PaymentPeriod {
+export enum PaymentPeriod {
     MONTH = "month",
     DAY = "day",
     HOUR = "hour",

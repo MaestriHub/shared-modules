@@ -5,7 +5,7 @@
 /// - `POSITION`            : Уведомления о изменении позиции
 /// - `SALARY`              : Уведомления о зарплате
 /// - `SUGGEST`             : Предложение о смерживании контактов
-enum NoticeCategory {
+export enum NoticeCategory {
     APPOINTMENT_EMPLOYEE = "appointmentEmployee",
     APPOINTMENT_CUSTOMER = "appointmentCustomer",
     EMPLOYEE = "employee",

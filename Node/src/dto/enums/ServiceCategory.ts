@@ -12,7 +12,7 @@
 /// - `BROWS`       : Брови
 /// - `LASHES`      : Ресницы
 /// - `OTHER`       : Остальное
-enum ServiceCategory {
+export enum ServiceCategory {
     NAILS = "nails",
     MASSAGE = "massage",
     SPA = "spa",

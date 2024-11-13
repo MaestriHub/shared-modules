@@ -3,7 +3,7 @@
 /// - `LATEST`     : Последняя
 /// - `STABLE`     : Рабочая но лучше обновиться
 /// - `UNSUPPORTED`: Неподдерживаемая
-enum VersionType {
+export enum VersionType {
     LATEST = "latest",
     STABLE = "stable",
     UNSUPPORTED = "unsupported",

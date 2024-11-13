@@ -2,7 +2,7 @@
 /// - `BANK_TRANSFER`: Банковский перевод
 /// - `REAL`         : Кеш
 /// - `CRYPT`        : Криптовалюта
-enum PaymentType {
+export enum PaymentType {
     BANK_TRANSFER = "bankTransfer",
     REAL = "real",
     CRYPT = "crypt",
