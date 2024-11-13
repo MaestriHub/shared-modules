@@ -7,7 +7,7 @@
 /// - `MASTER_APPROVED`  : (AppointmentEmployee) соответствующий Employee подтвердил участие
 /// - `CUSTOMER_APPROVED`: (AppointmentCustomer) соответствующий Customer подтвердил участие
 /// - `REQUESTED`        : соответствующий Employee/Customer не подтвердил свое участие
-enum AppointmentStatus {
+export enum AppointmentStatus {
     REQUESTED = "requested",
     CUSTOMER_APPROVED = "customerApproved",
     MASTER_APPROVED = "masterApproved",

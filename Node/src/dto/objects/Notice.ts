@@ -1,6 +1,6 @@
 import { NoticeCategory } from "../enums/NoticeCategory"
 
-interface Notice {
+export interface Notice {
     Full: {
         id: string, // TODO: UUID представлено как строка??
         titleKey: string,

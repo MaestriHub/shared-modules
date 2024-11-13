@@ -5,7 +5,7 @@
 /// - `WHATSAPP` : Идентификатор WhatsApp.
 /// - `INSTAGRAM`: Идентификатор Instagram.
 /// - `MESSAGE`  : Сообщение в приложении
-enum ContactType {
+export enum ContactType {
     PHONE = "phone",
     EMAIL = "email",
     TELEGRAM = "telegram",
