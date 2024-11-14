@@ -1,20 +1,22 @@
-export enum PermissionSet {
-    OWNER = 1 << 0,
+export class PermissionSet {
+    value: number;
 
-    APPOINTMENTS = 1 << 1,
-    STATISTIC = 1 << 2,
-    EMPLOYEE = 1 << 3,
-    TIMETABLE = 1 << 4,
-    NOTIFICATIONS = 1 << 5,
-    SALON = 1 << 6,
-    FINANCE = 1 << 7,
-    PROCEDURE = 1 << 8,
-    CONTACT = 1 << 9,
-    POSITION = 1 << 10,
-    SALARY = 1 << 11,
+    static OWNER = 1 << 0;
 
-    NONE = 0,
-    FULL = 
+    static APPOINTMENTS = 1 << 1;
+    static STATISTIC = 1 << 2;
+    static EMPLOYEE = 1 << 3;
+    static TIMETABLE = 1 << 4;
+    static NOTIFICATIONS = 1 << 5;
+    static SALON = 1 << 6;
+    static FINANCE = 1 << 7;
+    static PROCEDURE = 1 << 8;
+    static CONTACT = 1 << 9;
+    static POSITION = 1 << 10;
+    static SALARY = 1 << 11;
+
+    static NONE = 0;
+    static FULL = 
         PermissionSet.APPOINTMENTS  | 
         PermissionSet.STATISTIC     | 
         PermissionSet.EMPLOYEE      | 
@@ -25,19 +27,21 @@ export enum PermissionSet {
         PermissionSet.PROCEDURE     | 
         PermissionSet.CONTACT       | 
         PermissionSet.POSITION      | 
-        PermissionSet.SALARY,
-}
+        PermissionSet.SALARY;
 
-// TODO: может можно сделать эти функции интерфейсом для optionSetov
+    constructor(...permissions: number[]) {
+        this.value = permissions.reduce((acc, permission) => acc | permission, PermissionSet.NONE);
+    }
 
-export function addPermission(set: PermissionSet, permission: PermissionSet): PermissionSet {
-    return set | permission;
-}
+    addPermission(permission: number): void {
+        this.value |= permission;
+    }
 
-export function removePermission(set: PermissionSet, permission: PermissionSet): PermissionSet {
-    return set & ~permission;
-}
+    removePermission(permission: number): void {
+        this.value &= ~permission;
+    }
 
-export function hasPermission(set: PermissionSet, permission: PermissionSet): boolean {
-    return (set & permission) === permission;
+    hasPermission(permission: number): boolean {
+        return (this.value & permission) === permission;
+    }
 }

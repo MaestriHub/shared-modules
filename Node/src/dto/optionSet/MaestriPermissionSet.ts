@@ -1,18 +1,24 @@
-export enum MaestriPermissionSet {
-    SERVICE = 1 << 0, // Разрешаем создавать свои сервисы
-    
-    NONE = 0,
-    FULL = MaestriPermissionSet.SERVICE,
-}
+export class MaestriPermissionSet {
+    value: number;
 
-export function addPermission(set: MaestriPermissionSet, permission: MaestriPermissionSet): MaestriPermissionSet {
-    return set | permission;
-}
+    static SERVICE = 1 << 0; // Разрешаем создавать свои сервисы
 
-export function removePermission(set: MaestriPermissionSet, permission: MaestriPermissionSet): MaestriPermissionSet {
-    return set & ~permission;
-}
+    static NONE = 0;
+    static FULL = MaestriPermissionSet.SERVICE;
 
-export function hasPermission(set: MaestriPermissionSet, permission: MaestriPermissionSet): boolean {
-    return (set & permission) === permission;
+    constructor(...permissions: number[]) {
+        this.value = permissions.reduce((acc, permission) => acc | permission, MaestriPermissionSet.NONE);
+    }
+
+    addPermission(permission: number): void {
+        this.value |= permission;
+    }
+
+    removePermission(permission: number): void {
+        this.value &= ~permission;
+    }
+
+    hasPermission(permission: number): boolean {
+        return (this.value & permission) === permission;
+    }
 }

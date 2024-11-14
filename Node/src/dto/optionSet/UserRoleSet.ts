@@ -1,20 +1,25 @@
-export enum UserRoleSet {
-    CUSTOMER = 1 << 0,
-    PROFESSIONAL = 1 << 1,
-    
-    ALL = UserRoleSet.CUSTOMER | UserRoleSet.PROFESSIONAL
-}
+export class UserRoleSet {
+    value: number;
 
-// TODO: может можно сделать эти функции интерфейсом для optionSetov
+    static CUSTOMER = 1 << 0;
+    static PROFESSIONAL = 1 << 1;
 
-export function addPermission(set: UserRoleSet, permission: UserRoleSet): UserRoleSet {
-    return set | permission;
-}
+    static NONE = 0;
+    static ALL = UserRoleSet.CUSTOMER | UserRoleSet.PROFESSIONAL;
 
-export function removePermission(set: UserRoleSet, permission: UserRoleSet): UserRoleSet {
-    return set & ~permission;
-}
+    constructor(...permissions: number[]) {
+        this.value = permissions.reduce((acc, permission) => acc | permission, UserRoleSet.NONE);
+    }
 
-export function hasPermission(set: UserRoleSet, permission: UserRoleSet): boolean {
-    return (set & permission) === permission;
+    addPermission(permission: number): void {
+        this.value |= permission;
+    }
+
+    removePermission(permission: number): void {
+        this.value &= ~permission;
+    }
+
+    hasPermission(permission: number): boolean {
+        return (this.value & permission) === permission;
+    }
 }
