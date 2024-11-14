@@ -32,6 +32,11 @@ object Schedule {
             val day: Schedule.Day,
         ) : Pattern()
 
+        @Serializable
+        data class Empty(
+            val empty: String = "",
+        ) : Pattern()
+
         internal object Serializer :
             JsonContentPolymorphicSerializer<Pattern>(Pattern::class) {
             override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Pattern> {
@@ -40,6 +45,7 @@ object Schedule {
                     "week" in keys -> Weekly.serializer()
                     "cycle" in keys -> Cycled.serializer()
                     "day" in keys -> Daily.serializer()
+                    "empty" in keys -> Empty.serializer()
                     else -> throw SerializationException("Unknown pattern type")
                 }
             }
