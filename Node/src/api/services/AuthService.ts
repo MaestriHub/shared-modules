@@ -19,7 +19,7 @@ export class AuthService {
         headers: specificHeaders,
         data: someBody
       })
-  
+
       const resultDTO: Response = response.data;
 
       return { error: false, data: resultDTO };
