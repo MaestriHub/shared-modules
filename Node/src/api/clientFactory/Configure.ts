@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function createClient({
+export function clientFactory({
   options,
   getCurrentAccessToken,
   getCurrentRefreshToken,

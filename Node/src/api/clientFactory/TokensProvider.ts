@@ -1,5 +1,3 @@
-import { HeadersFoxAxios } from "../Headers";
-
 export const REFRESH_TOKEN_URL = 'http://localhost:5000/api/v1/auth/refreshToken'
 
 export async function getCurrentAccessToken() {
