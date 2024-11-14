@@ -11,11 +11,15 @@ let package = Package(
             targets: [ "DTOs" ]
         ),
         .library(
-            name: "SwifCron", 
-            targets: [ "SwifCron" ]
+            name: "MaestriSDK",
+            targets: [ "MaestriSDK" ]
         ),
     ],
     dependencies: [
+        .package(path: "../DTOs"),
+        .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "5.8.0")),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", .upToNextMajor(from: "4.2.2")),
     ],
     targets: [
         .target(
@@ -24,14 +28,14 @@ let package = Package(
             path: "IOS/DTOs"
         ),
         .target(
-            name: "SwifCron",
-            dependencies: [],
-            path: "IOS/SwifCron/Sources"
-        ),
-        .testTarget(
-            name: "SwifCronTests",
-            dependencies: ["SwifCron"],
-            path: "IOS/SwifCron/Tests"
+            name: "MaestriSDK",
+            dependencies: [
+                .product(name: "DTOs", package: "DTOs"),
+                .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "KeychainAccess", package: "KeychainAccess"),
+            ],
+            path: "IOS/SDK"
         ),
     ]
 )
