@@ -1,35 +1,32 @@
 import { ContactType } from "../enums/ContactType"
 
-interface Contact {
+export type Contact = Parameters | Responses
 
-    Parameters: {
-    
-        Create: {
-            value: string
-            type: ContactType
-            isVerify: boolean | undefined
-        }
+type Parameters =  Create | SendCode | Verify
 
-        SendCode: {
-            recaptchaToken: string | undefined
-        }
+type Responses = Full | Verified
 
-        Verify: {
-            code: string
-        }
-    }// TODO: | undefined
+interface Create {
+    value: string
+    type: ContactType
+    isVerify: boolean | undefined
+}
 
-    Responses: {
+interface SendCode {
+    recaptchaToken: string | undefined
+}
 
-        Full: {
-            id: string, // TODO: UUID представлено как строка??
-            value: string,
-            isVerify: boolean,
-            type: ContactType,
-        }
+interface Verify {
+    code: string
+}
 
-        Verify: {
-            isVerified: boolean
-        }
-    } // TODO: | undefined
+interface Full {
+    id: string, // TODO: UUID представлено как строка??
+    value: string,
+    isVerify: boolean,
+    type: ContactType,
+}
+
+interface Verified {
+    isVerified: boolean
 }
