@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateSerializer : KSerializer<Date> {
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd 'T' HH:mm:ss.SSSZ")
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
 
