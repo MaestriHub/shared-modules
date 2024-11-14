@@ -12,4 +12,8 @@
   ],
   "author": "misha",
   "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "next": "^15.0.3"
+  }
 }
