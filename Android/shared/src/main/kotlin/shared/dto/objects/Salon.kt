@@ -50,6 +50,7 @@ object Salon {
             var canEdit: Boolean = false,
             var isFavorite: Boolean = false,
             var localeId: String,
+            var timeZoneId: String
         ) : Responsable
 
         @Serializable
