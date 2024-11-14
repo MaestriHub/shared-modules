@@ -1,5 +1,3 @@
-import { Price } from "../primitives/Price"
-
 type TimetableOwner = Salon | Employee
 
 interface Salon {

@@ -21,10 +21,10 @@ interface Verify {
 }
 
 interface Full {
-    id: string, // TODO: UUID представлено как строка??
-    value: string,
-    isVerify: boolean,
-    type: ContactType,
+    id: string // TODO: UUID представлено как строка??
+    value: string
+    isVerify: boolean
+    type: ContactType
 }
 
 interface Verified {

@@ -35,10 +35,13 @@ interface Full {
     description: string | undefined
     alias: string | undefined
     //procedureIds: string[]
-    //user:
 }
 
 interface Partial {
-    accessToken: Token
-    refreshToken: Token | undefined
+    id: string
+    price: Price
+    duration: Int
+    description: string | undefined
+    alias: string | undefined
+    //procedureIds: string[]
 }

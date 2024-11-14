@@ -1,5 +1,3 @@
-import { Price } from "../primitives/Price"
-
 type SystemType = Ios | Android | Chrome | Edge | Firefox | Opera | Safari 
 
 interface Ios {

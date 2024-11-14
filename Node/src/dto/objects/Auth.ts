@@ -1,7 +1,3 @@
-import { DateInterval } from "../tsPrimitives/DateInterval"
-import { Price } from "../primitives/Price"
-import { Address } from "../primitives/Address"
-import { AppointmentStatus } from "../enums/AppointmentStatus"
 import { Token } from "../primitives/Token"
 
 export type Auth = Parameters | Responses

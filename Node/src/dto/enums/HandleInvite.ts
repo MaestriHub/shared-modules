@@ -5,5 +5,5 @@ interface Success {
 }
 
 interface Request {
-    //value: User // TODO: сдкелать
+    //verify: User // TODO: сдкелать
 } 
