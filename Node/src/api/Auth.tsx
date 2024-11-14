@@ -2,17 +2,18 @@ import axios from "axios";
 import { HeadersFoxAxios } from "./Headers";
 import * as User from "../dto/objects/User"
 
-const token = "foo"
+const getToken = () => {
+  return "TODO";
+};
 
 const URL_BACKEND_MAESTRI = "http://localhost:8080"
 
 export async function GoogleAuth() {
     try {
-      const accessToken = token;
+      const accessToken = getToken();
   
-      // мне кажется этого не должно быть в этой функции
       if (!accessToken) {
-        return { redirect: "/auth" };
+        return "TODO throw error with status error"
       }
 
       const headers = await HeadersFoxAxios(accessToken);
@@ -21,7 +22,7 @@ export async function GoogleAuth() {
       console.log(apiUrl);
 
       const apiResponse = await axios.post(apiUrl, {
-        headers: await HeadersFoxAxios(accessToken)
+        headers: headers
       });
 
       const userFullDTO: User.Full  = apiResponse.data;

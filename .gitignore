@@ -7,3 +7,5 @@ DerivedData/
 .netrc
 .idea
 .swiftpm
+/Node/node_modules
+*.js
