@@ -1,12 +1,12 @@
 import { Token } from "../primitives/Token"
 
-export type Auth = Parameters | Responses
+type Auth = Parameters | Responses
 
 type Parameters =  AppleToken | GoogleToken
 
 type Responses = Full | Partial
 
-interface AppleToken {
+export interface AppleToken {
     token: string
     firstName: string | undefined
     lastName: string | undefined
@@ -14,19 +14,19 @@ interface AppleToken {
     emailVerified: boolean | undefined
 }
 
-interface GoogleToken {
+export interface GoogleToken {
     token: string
     firstName: string | undefined
     lastName: string | undefined
 }
 
-interface Full {
+export interface Full {
     accessToken: Token
     refreshToken: Token
     //user:
 }
 
-interface Partial {
+export interface Partial {
     accessToken: Token
     refreshToken: Token | undefined
 }
