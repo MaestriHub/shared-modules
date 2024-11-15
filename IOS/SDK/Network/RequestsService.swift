@@ -8,8 +8,8 @@ enum RequestType {
 }
 
 public struct ErrorResponse: Error, Decodable {
-    let error: Bool
-    let reason: String
+    public let error: Bool
+    public let reason: String
 }
 
 // MARK: - Protocol
