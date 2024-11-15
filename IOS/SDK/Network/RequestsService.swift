@@ -74,7 +74,7 @@ extension DependencyValues {
 
 // MARK: - Live
 
-struct RequestsService: IRequestsService {
+public struct RequestsService: IRequestsService {
     
     static var baseURL = URL(string: "https://api.maestri.me")!
     static var eventMonitor: EventMonitor?
