@@ -14,10 +14,12 @@ export class AuthService {
     try {
       const specificHeaders = {}
       const someBody: Request = someValues
+      const someQuery: Request = someValues
 
       const response = await client.post(Paths.GoogleAuth, {
         headers: specificHeaders,
-        data: someBody
+        params: someQuery,
+        data: someBody,
       })
 
       const resultDTO: Response = response.data;

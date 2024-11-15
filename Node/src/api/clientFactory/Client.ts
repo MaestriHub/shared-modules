@@ -1,4 +1,4 @@
-import { clientFactory } from "./configure";
+import { clientFactory } from "./Configure";
 import * as TokensProvider from "./TokensProvider"
 
 export const BASE_URL = 'http://localhost:8080/v1'
