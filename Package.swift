@@ -1,6 +1,4 @@
-// swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version: 5.10
 import PackageDescription
 
 let package = Package(
@@ -8,17 +6,16 @@ let package = Package(
     products: [
         .library(
             name: "DTOs",
-            targets: [ "DTOs" ]
+            targets: ["DTOs"]
         ),
         .library(
             name: "MaestriSDK",
-            targets: [ "MaestriSDK" ]
+            targets: ["MaestriSDK"]
         ),
     ],
     dependencies: [
-        .package(path: "../DTOs"),
-        .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "5.8.0")),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "5.10.1")),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "1.5.2")),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", .upToNextMajor(from: "4.2.2")),
     ],
     targets: [
@@ -30,7 +27,7 @@ let package = Package(
         .target(
             name: "MaestriSDK",
             dependencies: [
-                .product(name: "DTOs", package: "DTOs"),
+                "DTOs",
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
