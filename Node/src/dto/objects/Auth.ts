@@ -1,6 +1,6 @@
 import { Token } from "../primitives/Token"
 
-type Auth = Parameters | Responses
+export type Auth = Parameters | Responses
 
 type Parameters =  AppleToken | GoogleToken
 

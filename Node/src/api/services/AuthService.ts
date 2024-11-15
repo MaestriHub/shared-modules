@@ -7,7 +7,7 @@ interface Request {}
 enum Paths {
   GoogleAuth = "auth/google",
   AppleAuth = "auth/apple",
-  TestAuth = "foo",
+  TestAuth = "auth/test/",
 }
 
 export class AuthService {
@@ -29,7 +29,7 @@ export class AuthService {
 
   static async AppleAuth(someValues): Promise<{ error: boolean; data: Auth.Full }> {
     const specificHeaders = {}
-    const someBody: Auth.AppleToken = someValues.someBody
+    const someBody: Auth.AppleToken = someValues
     const someQuery: Request = ""
 
     const response = await client.post(Paths.AppleAuth, {
@@ -48,7 +48,9 @@ export class AuthService {
     const someBody: Request = ""
     const someQuery: Request = ""
 
-    const response = await client.post(Paths.TestAuth, {
+    const customUrl = Paths.TestAuth + someValues.testToken 
+
+    const response = await client.post(customUrl, {
       headers: specificHeaders,
       params: someQuery,
       data: someBody,
