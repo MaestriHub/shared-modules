@@ -3,6 +3,12 @@ import PackageDescription
 
 let package = Package(
     name: "shared-modules",
+    platforms: [
+      .iOS(.v13),
+      .macOS(.v10_15),
+      .tvOS(.v13),
+      .watchOS(.v6),
+    ],
     products: [
         .library(
             name: "DTOs",
