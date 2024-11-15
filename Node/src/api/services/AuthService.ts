@@ -11,23 +11,18 @@ enum Paths {
 
 export class AuthService {
   static async GoogleAuth(someValues) {
-    try {
-      const specificHeaders = {}
-      const someBody: Request = someValues.someBody
-      const someQuery: Request = someValues.someQuery
+    const specificHeaders = {}
+    const someBody: Request = someValues.someBody
+    const someQuery: Request = someValues.someQuery
 
-      const response = await client.post(Paths.GoogleAuth, {
-        headers: specificHeaders,
-        params: someQuery,
-        data: someBody,
-      })
+    const response = await client.post(Paths.GoogleAuth, {
+      headers: specificHeaders,
+      params: someQuery,
+      data: someBody,
+    })
 
-      const resultDTO: Response = response.data;
+    const resultDTO: Response = response.data;
 
-      return { error: false, data: resultDTO };
-    } catch (error) {
-      console.error(error);
-      // some state
-    }
+    return { error: false, data: resultDTO };
   }
 }
