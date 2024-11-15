@@ -46,7 +46,7 @@ struct TimetablesService: ITimetablesService {
     
     // MARK: - Methods
     
-    public func searchSlots(parameters: Timetable.Parameters.SearchSlot) async throws -> Timetable.Responses.Slots {
+    func searchSlots(parameters: Timetable.Parameters.SearchSlot) async throws -> Timetable.Responses.Slots {
         try await requestsService
             .request(
                 path: "/v1/timetables/search-slots",
@@ -58,7 +58,7 @@ struct TimetablesService: ITimetablesService {
             .value
     }
     
-    public func get(parameters: Timetable.Parameters.Retrieve) async throws -> [Timetable.Responses.Schedule] {
+    func get(parameters: Timetable.Parameters.Retrieve) async throws -> [Timetable.Responses.Schedule] {
         try await requestsService
             .request(
                 path: "/v1/timetables/schedules",
@@ -70,8 +70,8 @@ struct TimetablesService: ITimetablesService {
             .value
     }
     
-    public func update(owner: TimetableOwner, parameters: Timetable.Parameters.Create.Pattern) async throws {
-        try await requestsService
+    func update(owner: TimetableOwner, parameters: Timetable.Parameters.Create.Pattern) async throws {
+        _ = try await requestsService
             .request(
                 path: "/v1/timetables/\(owner)/\(false)",
                 method: .post,

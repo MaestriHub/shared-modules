@@ -52,7 +52,7 @@ struct ServicesService: IServicesService {
     
     // MARK: - Methods
     
-    public func services(parameters: Service.Parameters.Retrieve) async throws -> [Service.Responses.Partial] {
+    func services(parameters: Service.Parameters.Retrieve) async throws -> [Service.Responses.Partial] {
         try await requestsService
             .request(
                 path: "/v1/services",
@@ -64,7 +64,7 @@ struct ServicesService: IServicesService {
             .value
     }
     
-    public func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.Full {
+    func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/services",
@@ -76,7 +76,7 @@ struct ServicesService: IServicesService {
             .value
     }
     
-    public func service(id: UUID, parameters: Service.Parameters.RetrieveFull) async throws -> Service.Responses.Full {
+    func service(id: UUID, parameters: Service.Parameters.RetrieveFull) async throws -> Service.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/services/\(id)",
@@ -88,7 +88,7 @@ struct ServicesService: IServicesService {
             .value
     }
     
-    public func update(id: UUID, parameters: Service.Parameters.Patch) async throws -> Service.Responses.Full {
+    func update(id: UUID, parameters: Service.Parameters.Patch) async throws -> Service.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/services/\(id)",
@@ -100,7 +100,7 @@ struct ServicesService: IServicesService {
             .value
     }
     
-    public func delete(id: UUID) async throws {
+    func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/services/\(id)",
@@ -114,8 +114,8 @@ struct ServicesService: IServicesService {
 
 // MARK: - Mock
 
-struct ServicesServiceMock {
-    private func createServicesFullMock(prefix: String) -> DTOs.Service.Responses.Full {
+struct ServicesServiceMock: IServicesService {
+    private func createServicesFullMock(prefix: String) -> Service.Responses.Full {
         Service.Responses.Full(
             id: UUID(),
             title: "Service \(prefix)",
@@ -125,11 +125,11 @@ struct ServicesServiceMock {
         )
     }
     
-    private func createServicesFullMocks(count: Int) -> [DTOs.Service.Responses.Full] {
+    private func createServicesFullMocks(count: Int) -> [Service.Responses.Full] {
         (0..<count).map { createServicesFullMock(prefix: "\($0)")}
     }
     
-    private func createServicesPartialMock(prefix: String) -> DTOs.Service.Responses.Partial {
+    private func createServicesPartialMock(prefix: String) -> Service.Responses.Partial {
         Service.Responses.Partial(
             id: UUID(),
             title: "Service \(prefix)",
@@ -140,31 +140,25 @@ struct ServicesServiceMock {
         )
     }
     
-    func createServicesPartialMocks(count: Int) -> [DTOs.Service.Responses.Partial] {
+    func createServicesPartialMocks(count: Int) -> [Service.Responses.Partial] {
         (0..<count).map { createServicesPartialMock(prefix: "\($0)")}
     }
-}
-
-// MARK: - IServicesService
-
-extension ServicesServiceMock: IServicesService {
     
-    public func services(parameters: DTOs.Service.Parameters.Retrieve) async throws -> [DTOs.Service.Responses.Partial] {
+    func services(parameters: Service.Parameters.Retrieve) async throws -> [Service.Responses.Partial] {
         createServicesPartialMocks(count: 40)
     }
     
-    public func create(parameters: DTOs.Service.Parameters.Create) async throws -> DTOs.Service.Responses.Full {
+    func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.Full {
         createServicesFullMock(prefix: "create")
     }
     
-    public func service(id: UUID, parameters: Service.Parameters.RetrieveFull) async throws -> DTOs.Service.Responses.Full {
+    func service(id: UUID, parameters: Service.Parameters.RetrieveFull) async throws -> Service.Responses.Full {
         createServicesFullMock(prefix: "procedure")
     }
     
-    public func update(id: UUID, parameters: DTOs.Service.Parameters.Patch) async throws -> DTOs.Service.Responses.Full {
+    func update(id: UUID, parameters: Service.Parameters.Patch) async throws -> Service.Responses.Full {
         createServicesFullMock(prefix: "update")
     }
     
-    public func delete(id: UUID) async throws {
-    }
+    func delete(id: UUID) async throws {}
 }

@@ -52,9 +52,9 @@ public extension DependencyValues {
 
 // MARK: - Live
 
-public struct AppointmentEmployeeService: IAppointmentEmployeeService {
+struct AppointmentEmployeeService: IAppointmentEmployeeService {
     
-    public var appointmentCreatePublisher =  PassthroughSubject<AppointmentEmployee.Responses.Full, Never>()
+    var appointmentCreatePublisher =  PassthroughSubject<AppointmentEmployee.Responses.Full, Never>()
     
     // MARK: - Services
     
@@ -63,7 +63,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
     
     // MARK: - Methods
     
-    public func history(parameters: AppointmentEmployee.Parameters.Retrieve) async throws -> [AppointmentEmployee.Responses.Partial] {
+    func history(parameters: AppointmentEmployee.Parameters.Retrieve) async throws -> [AppointmentEmployee.Responses.Partial] {
         try await requestsService
             .request(
                 path: "v1/appointment/employee/history",
@@ -75,7 +75,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
             .value
     }
     
-    public func retrieve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func retrieve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/appointment/employee/\(id)",
@@ -86,7 +86,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
             .value
     }
     
-    public func create(parameters: AppointmentEmployee.Parameters.Create, notify: Bool) async throws -> AppointmentEmployee.Responses.Full {
+    func create(parameters: AppointmentEmployee.Parameters.Create, notify: Bool) async throws -> AppointmentEmployee.Responses.Full {
         let appointment = try await requestsService
             .request(
                 path: "v1/appointment/employee/",
@@ -102,7 +102,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
         return appointment
     }
     
-    public func update(id: UUID, parameters: AppointmentEmployee.Parameters.Patch) async throws -> AppointmentEmployee.Responses.Full {
+    func update(id: UUID, parameters: AppointmentEmployee.Parameters.Patch) async throws -> AppointmentEmployee.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/appointment/employee/\(id)",
@@ -114,7 +114,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
             .value
     }
     
-    public func approve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func approve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/appointment/employee/\(id)/approve",
@@ -125,7 +125,7 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
             .value
     }
     
-    public func reject(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func reject(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/appointment/employee/\(id)/reject",
@@ -139,9 +139,9 @@ public struct AppointmentEmployeeService: IAppointmentEmployeeService {
 
 // MARK: - Mock
 
-public final class AppointmentEmployeeServiceMock {
+final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
 
-    public var appointmentCreatePublisher = PassthroughSubject<AppointmentEmployee.Responses.Full, Never>()
+    var appointmentCreatePublisher = PassthroughSubject<AppointmentEmployee.Responses.Full, Never>()
 
     // MARK: - Services
 
@@ -340,33 +340,28 @@ public final class AppointmentEmployeeServiceMock {
             )
         ]
     }
-}
 
-// MARK: - Mock methods
-
-extension AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
-
-    public func update(id: UUID, parameters: AppointmentEmployee.Parameters.Patch) async throws -> AppointmentEmployee.Responses.Full {
+    func update(id: UUID, parameters: AppointmentEmployee.Parameters.Patch) async throws -> AppointmentEmployee.Responses.Full {
         appointment
     }
 
-    public func retrieve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func retrieve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         appointment
     }
 
-    public func history(parameters: AppointmentEmployee.Parameters.Retrieve) async throws -> [AppointmentEmployee.Responses.Partial] {
+    func history(parameters: AppointmentEmployee.Parameters.Retrieve) async throws -> [AppointmentEmployee.Responses.Partial] {
         appointments
     }
 
-    public func reject(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func reject(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         appointment
     }
 
-    public func approve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
+    func approve(id: UUID) async throws -> AppointmentEmployee.Responses.Full {
         appointment
     }
 
-    public func create(parameters: AppointmentEmployee.Parameters.Create, notify: Bool) async throws -> AppointmentEmployee.Responses.Full {
+    func create(parameters: AppointmentEmployee.Parameters.Create, notify: Bool) async throws -> AppointmentEmployee.Responses.Full {
         appointment
     }
 }

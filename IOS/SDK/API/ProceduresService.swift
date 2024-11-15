@@ -67,11 +67,11 @@ struct ProceduresService: IProceduresService {
     @Dependency(\.requestsService) var requestsService
     @Dependency(\.coderService) var coderService
     
-    public var event = PublishedAction<ProceduresServiceActionType>()
+    var event = PublishedAction<ProceduresServiceActionType>()
     
     // MARK: - Methods
     
-    public func procedures(parameters: Procedure.Parameters.Retrieve) async throws -> [Procedure.Responses.Partial] {
+    func procedures(parameters: Procedure.Parameters.Retrieve) async throws -> [Procedure.Responses.Partial] {
         let result = try await requestsService
             .request(
                 path: "/v1/procedures",
@@ -85,7 +85,7 @@ struct ProceduresService: IProceduresService {
         return result
     }
     
-    public func create(parameters: Procedure.Parameters.Create) async throws -> Procedure.Responses.Full {
+    func create(parameters: Procedure.Parameters.Create) async throws -> Procedure.Responses.Full {
         let result = try await requestsService
             .request(
                 path: "/v1/procedures",
@@ -99,7 +99,7 @@ struct ProceduresService: IProceduresService {
         return result
     }
     
-    public func procedure(id: UUID) async throws -> Procedure.Responses.Full {
+    func procedure(id: UUID) async throws -> Procedure.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/procedures/\(id)",
@@ -110,7 +110,7 @@ struct ProceduresService: IProceduresService {
             .value
     }
     
-    public func update(id: UUID, parameters: Procedure.Parameters.Patch) async throws -> Procedure.Responses.Full {
+    func update(id: UUID, parameters: Procedure.Parameters.Patch) async throws -> Procedure.Responses.Full {
         let result = try await requestsService
             .request(
                 path: "/v1/procedures/\(id)",
@@ -124,7 +124,7 @@ struct ProceduresService: IProceduresService {
         return result
     }
     
-    public func delete(id: UUID) async throws {
+    func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/procedures/\(id)",
@@ -141,8 +141,8 @@ struct ProceduresService: IProceduresService {
 
 //public final class ProceduresServiceMock {
 //    
-//    private func createPartialMock1(amount: Decimal = 228) -> DTOs.Procedure.Responses.Partial {
-//        DTOs.Procedure.Responses.Partial(
+//    private func createPartialMock1(amount: Decimal = 228) -> Procedure.Responses.Partial {
+//        Procedure.Responses.Partial(
 //            id: UUID(),
 //            price: Price(amount: amount, currency: "USD"),
 //            duration: 225,
@@ -152,8 +152,8 @@ struct ProceduresService: IProceduresService {
 //        )
 //    }
 //    
-//    private func createPartialMock2(amount: Decimal = 228) -> DTOs.Procedure.Responses.Partial {
-//        DTOs.Procedure.Responses.Partial(
+//    private func createPartialMock2(amount: Decimal = 228) -> Procedure.Responses.Partial {
+//        Procedure.Responses.Partial(
 //            id: UUID(),
 //            price: Price(amount: amount, currency: "USD"),
 //            duration: 225,
@@ -164,7 +164,7 @@ struct ProceduresService: IProceduresService {
 //    }
 //    
 //    private func createFullMock() -> Procedure.Responses.Full {
-//        DTOs.Procedure.Responses.Full(
+//        Procedure.Responses.Full(
 //            id: UUID(),
 //            price: Price(amount: 228, currency: "USD"),
 //            duration: 3,
@@ -188,7 +188,7 @@ struct ProceduresService: IProceduresService {
 //        return PublishedAction<ProceduresServiceActionType>()
 //    }
 //    
-//    public func procedures(parameters: DTOs.Procedure.Parameters.Retrieve) async throws -> [DTOs.Procedure.Responses.Partial] {
+//    public func procedures(parameters: Procedure.Parameters.Retrieve) async throws -> [Procedure.Responses.Partial] {
 //        [
 //            createPartialMock1(amount: 15),
 //            createPartialMock1(amount: 15),
@@ -198,15 +198,15 @@ struct ProceduresService: IProceduresService {
 //        ]
 //    }
 //    
-//    public func create(parameters: DTOs.Procedure.Parameters.Create) async throws -> DTOs.Procedure.Responses.Full {
+//    public func create(parameters: Procedure.Parameters.Create) async throws -> Procedure.Responses.Full {
 //        createFullMock()
 //    }
 //    
-//    public func procedure(id: UUID) async throws -> DTOs.Procedure.Responses.Full {
+//    public func procedure(id: UUID) async throws -> Procedure.Responses.Full {
 //        createFullMock()
 //    }
 //    
-//    public func update(id: UUID, parameters: DTOs.Procedure.Parameters.Patch) async throws -> DTOs.Procedure.Responses.Full {
+//    public func update(id: UUID, parameters: Procedure.Parameters.Patch) async throws -> Procedure.Responses.Full {
 //        createFullMock()
 //    }
 //    

@@ -144,9 +144,9 @@ struct AppointmentCustomerService: IAppointmentCustomerService {
 
 // MARK: - Mock
 
-public final class AppointmentCustomerMockService {
+final class AppointmentCustomerMockService: IAppointmentCustomerService {
     
-    public var appointmentCreatePublisher = PassthroughSubject<AppointmentCustomer.Responses.Full, Never>()
+    var appointmentCreatePublisher = PassthroughSubject<AppointmentCustomer.Responses.Full, Never>()
     
     // MARK: - Dependencies
     
@@ -292,37 +292,32 @@ public final class AppointmentCustomerMockService {
             )
         ]
     }
-}
-
-// MARK: - Mock methods
-
-extension AppointmentCustomerMockService: IAppointmentCustomerService {
     
-    public func approve(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
+    func approve(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
         appointment
     }
     
-    public func current() async throws -> [AppointmentCustomer.Responses.Full] {
+    func current() async throws -> [AppointmentCustomer.Responses.Full] {
         [appointment, appointment]
     }
     
-    public func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
+    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
         appointments
     }
     
-    public func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full {
+    func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full {
         appointment
     }
     
-    public func update(id: UUID, parameters: AppointmentCustomer.Parameters.Patch) async throws -> AppointmentCustomer.Responses.Full {
+    func update(id: UUID, parameters: AppointmentCustomer.Parameters.Patch) async throws -> AppointmentCustomer.Responses.Full {
         appointment
     }
     
-    public func retrieve(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
+    func retrieve(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
         appointment
     }
     
-    public func reject(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
+    func reject(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
         appointment
     }
 }

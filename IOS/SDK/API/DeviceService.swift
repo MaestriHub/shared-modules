@@ -36,7 +36,7 @@ struct DeviceService: IDeviceService {
     // MARK: - Methods
     
     @discardableResult
-    public func check(parameters: Device.Parameters.System) async throws -> Device.Responses.Full {
+    func check(parameters: Device.Parameters.System) async throws -> Device.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/devices",

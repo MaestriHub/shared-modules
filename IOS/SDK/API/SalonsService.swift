@@ -59,7 +59,7 @@ struct SalonsService: ISalonsService {
     
     // MARK: - Methods
     
-    public func workshops() async throws -> [Salon.Responses.Partial] {
+    func workshops() async throws -> [Salon.Responses.Partial] {
         try await requestsService
             .request(
                 path: "/v1/salons/workshops",
@@ -70,7 +70,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func create(parameters: Salon.Parameters.Create) async throws -> Salon.Responses.Full {
+    func create(parameters: Salon.Parameters.Create) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons",
@@ -82,7 +82,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func salon(id: UUID) async throws -> Salon.Responses.Full {
+    func salon(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)",
@@ -93,7 +93,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func update(id: UUID, parameters: Salon.Parameters.Patch) async throws -> Salon.Responses.Full {
+    func update(id: UUID, parameters: Salon.Parameters.Patch) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)",
@@ -105,7 +105,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func activate(id: UUID) async throws -> Salon.Responses.Full {
+    func activate(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)/activate",
@@ -116,7 +116,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func deactivate(id: UUID) async throws -> Salon.Responses.Full {
+    func deactivate(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)/deactivate",
@@ -127,7 +127,7 @@ struct SalonsService: ISalonsService {
             .value
     }
     
-    public func delete(id: UUID) async throws {
+    func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/salons/\(id)",
@@ -141,11 +141,11 @@ struct SalonsService: ISalonsService {
 
 final class SalonsServiceMock: ISalonsService {
     
-    func workshops() async throws -> [DTOs.Salon.Responses.Partial] {
+    func workshops() async throws -> [Salon.Responses.Partial] {
         []
     }
     
-    func salon(id: UUID) async throws -> DTOs.Salon.Responses.Full {
+    func salon(id: UUID) async throws -> Salon.Responses.Full {
         try await Task.sleep(for: .seconds(10))
         return .init(
             id: UUID(),
@@ -161,7 +161,7 @@ final class SalonsServiceMock: ISalonsService {
         )
     }
     
-    func create(parameters: DTOs.Salon.Parameters.Create) async throws -> DTOs.Salon.Responses.Full {
+    func create(parameters: Salon.Parameters.Create) async throws -> Salon.Responses.Full {
         .init(
             id: UUID(),
             name: "Салон №1",
@@ -182,7 +182,7 @@ final class SalonsServiceMock: ISalonsService {
         )
     }
     
-    func update(id: UUID, parameters: DTOs.Salon.Parameters.Patch) async throws -> DTOs.Salon.Responses.Full {
+    func update(id: UUID, parameters: Salon.Parameters.Patch) async throws -> Salon.Responses.Full {
         .init(
             id: UUID(),
             name: "Салон №1",
@@ -203,7 +203,7 @@ final class SalonsServiceMock: ISalonsService {
         )
     }
     
-    func activate(id: UUID) async throws -> DTOs.Salon.Responses.Full {
+    func activate(id: UUID) async throws -> Salon.Responses.Full {
         .init(
             id: UUID(),
             name: "Салон №1",
@@ -224,7 +224,7 @@ final class SalonsServiceMock: ISalonsService {
         )
     }
     
-    func deactivate(id: UUID) async throws -> DTOs.Salon.Responses.Full {
+    func deactivate(id: UUID) async throws -> Salon.Responses.Full {
         .init(
             id: UUID(),
             name: "Салон №1",

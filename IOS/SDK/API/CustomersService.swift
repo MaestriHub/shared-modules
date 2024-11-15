@@ -43,7 +43,7 @@ struct CustomersService: ICustomersService {
     
     // MARK: - Methods
     
-    public func create(parameters: Customer.Parameters.Create) async throws -> Customer.Responses.Partial {
+    func create(parameters: Customer.Parameters.Create) async throws -> Customer.Responses.Partial {
         try await requestsService
             .request(
                 path: "v1/customers",
@@ -55,7 +55,7 @@ struct CustomersService: ICustomersService {
             .value
     }
     
-    public func customers(parameters: Customer.Parameters.Retrieve) async throws -> [Customer.Responses.Partial] {
+    func customers(parameters: Customer.Parameters.Retrieve) async throws -> [Customer.Responses.Partial] {
         try await requestsService
             .request(
                 path: "v1/customers",
@@ -67,7 +67,7 @@ struct CustomersService: ICustomersService {
             .value
     }
     
-    public func customer(id: UUID) async throws -> Customer.Responses.Full {
+    func customer(id: UUID) async throws -> Customer.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/customers/\(id)",
@@ -78,7 +78,7 @@ struct CustomersService: ICustomersService {
             .value
     }
     
-    public func inviteHandler(id: UUID, parameters: Customer.Parameters.HandleInvite) async throws -> HandleInvite {
+    func inviteHandler(id: UUID, parameters: Customer.Parameters.HandleInvite) async throws -> HandleInvite {
         try await requestsService
             .request(
                 path: "v1/customers/\(id)",

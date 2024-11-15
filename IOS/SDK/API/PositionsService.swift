@@ -51,7 +51,7 @@ struct PositionsService: IPositionsService {
     @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
-    public func positions(salonId: UUID) async throws -> [Position.Responses.Full] {
+    func positions(salonId: UUID) async throws -> [Position.Responses.Full] {
         try await requestsService
             .request(
                 path: "/v1/positions/salon/\(salonId)",
@@ -62,7 +62,7 @@ struct PositionsService: IPositionsService {
             .value
     }
     
-    public func create(salonId: UUID, parameters: Position.Parameters.Create) async throws -> Position.Responses.Full {
+    func create(salonId: UUID, parameters: Position.Parameters.Create) async throws -> Position.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/positions/salon/\(salonId)",
@@ -74,7 +74,7 @@ struct PositionsService: IPositionsService {
             .value
     }
     
-    public func position(id: UUID) async throws -> Position.Responses.Full {
+    func position(id: UUID) async throws -> Position.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/positions/\(id)",
@@ -85,7 +85,7 @@ struct PositionsService: IPositionsService {
             .value
     }
     
-    public func update(id: UUID, parameters: Position.Parameters.Patch) async throws -> Position.Responses.Full {
+    func update(id: UUID, parameters: Position.Parameters.Patch) async throws -> Position.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/positions/\(id)",
@@ -97,7 +97,7 @@ struct PositionsService: IPositionsService {
             .value
     }
     
-    public func delete(id: UUID) async throws {
+    func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/positions/\(id)",

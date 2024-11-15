@@ -51,7 +51,7 @@ struct ContactService: IContactService {
     
     // MARK: - Methods
     
-    public func contacts() async throws -> [Contact.Responses.Full] {
+    func contacts() async throws -> [Contact.Responses.Full] {
         try await requestsService
             .request(
                 path: "/v1/contacts",
@@ -62,7 +62,7 @@ struct ContactService: IContactService {
             .value
     }
     
-    public func create(customerId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
+    func create(customerId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/contacts/customer/\(customerId)",
@@ -74,7 +74,7 @@ struct ContactService: IContactService {
             .value
     }
     
-    public func delete(id: UUID, customerId: UUID) async throws {
+    func delete(id: UUID, customerId: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/contacts/customer/\(customerId)/\(id)",
@@ -85,7 +85,7 @@ struct ContactService: IContactService {
             .value
     }
     
-    public func create(employeeId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
+    func create(employeeId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/contacts/employee/\(employeeId)",
@@ -97,7 +97,7 @@ struct ContactService: IContactService {
             .value
     }
     
-    public func delete(id: UUID, employeeId: UUID) async throws {
+    func delete(id: UUID, employeeId: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/contacts/employee/\(employeeId)/\(id)",

@@ -46,7 +46,7 @@ struct FavoritesService: IFavoritesService {
     
     // MARK: - Methods
     
-    public func favorites() async throws -> [Salon.Responses.Partial] {
+    func favorites() async throws -> [Salon.Responses.Partial] {
         try await requestsService
             .request(
                 path: "/v1/favorites",
@@ -57,7 +57,7 @@ struct FavoritesService: IFavoritesService {
             .value
     }
     
-    public func add(id: UUID) async throws {
+    func add(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/favorites/\(id)/add",
@@ -68,7 +68,7 @@ struct FavoritesService: IFavoritesService {
             .value
     }
     
-    public func remove(id: UUID) async throws {
+    func remove(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/favorites/\(id)/remove",
@@ -81,7 +81,7 @@ struct FavoritesService: IFavoritesService {
 }
 
 final class FavoritesServiceMock: IFavoritesService {
-    func favorites() async throws -> [DTOs.Salon.Responses.Partial] {
+    func favorites() async throws -> [Salon.Responses.Partial] {
         return [.init(id: UUID(),
                       name: "SalonName",
                       type: .individual,

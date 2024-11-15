@@ -42,7 +42,7 @@ struct AuthService: IAuthService {
     @Dependency(\.coderService) var coderService
     @Dependency(\.secureStorageService) var secureStorageService
     
-    public func authWithApple(data: ASAuthorization) async throws -> User.Responses.Full {
+    func authWithApple(data: ASAuthorization) async throws -> User.Responses.Full {
         guard let appleIDCredential = data.credential as? ASAuthorizationAppleIDCredential,
               let identityToken = appleIDCredential.identityToken,
               let appleToken = String(data: identityToken, encoding: .utf8) else {
@@ -70,7 +70,7 @@ struct AuthService: IAuthService {
         return value.user
     }
     
-    public func logout() async throws {
+    func logout() async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/logout",
@@ -87,7 +87,7 @@ struct AuthService: IAuthService {
 extension AuthService {
     
     @available(*, deprecated, message: "Использовать только для тестирования")
-    public func authWithAnonymus(token: String) async throws -> User.Responses.Full {
+    func authWithAnonymus(token: String) async throws -> User.Responses.Full {
         let value = try await requestsService
             .request(
                 path: "/v1/auth/test/\(token)",

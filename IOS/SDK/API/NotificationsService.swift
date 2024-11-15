@@ -46,7 +46,7 @@ struct NoticesService: INoticesService {
     
     // MARK: - Methods
     
-    public func notices() async throws -> [Notice.Responses.Full] {
+    func notices() async throws -> [Notice.Responses.Full] {
         try await requestsService
             .request(
                 path: "/v1/notifications",
@@ -57,7 +57,7 @@ struct NoticesService: INoticesService {
             .value
     }
     
-    public func readed(id: UUID) async throws {
+    func readed(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/notifications/readed/\(id)",
@@ -68,7 +68,7 @@ struct NoticesService: INoticesService {
             .value
     }
     
-    public func readedAll() async throws {
+    func readedAll() async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/notifications/readed",
@@ -82,7 +82,7 @@ struct NoticesService: INoticesService {
 
 // MARK: - Mock
 
-public final class NoticesServiceMock {
+final class NoticesServiceMock: INoticesService {
     static var notices: [Notice.Responses.Full] = [
         Notice.Responses.Full(
             id: UUID(),
@@ -130,17 +130,12 @@ public final class NoticesServiceMock {
             date: Date.now
         )
     ]
-}
-
-// MARK: - INoticesService
-
-extension NoticesServiceMock: INoticesService {
     
-    public func notices() async throws -> [DTOs.Notice.Responses.Full] {
+    func notices() async throws -> [Notice.Responses.Full] {
         NoticesServiceMock.notices
     }
     
-    public func readed(id: UUID) async throws {}
+    func readed(id: UUID) async throws {}
     
-    public func readedAll() async throws {}
+    func readedAll() async throws {}
 }

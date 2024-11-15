@@ -51,7 +51,7 @@ struct EmployeesService: IEmployeesService {
     
     // MARK: - Methods
     
-    public func employees(parameters: Employee.Parameters.Retrieve) async throws -> [Employee.Responses.Partial] {
+    func employees(parameters: Employee.Parameters.Retrieve) async throws -> [Employee.Responses.Partial] {
         try await requestsService
             .request(
                 path: "/v1/employees",
@@ -63,7 +63,7 @@ struct EmployeesService: IEmployeesService {
             .value
     }
     
-    public func employees(id: UUID) async throws -> Employee.Responses.Full {
+    func employees(id: UUID) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/\(id)",
@@ -74,7 +74,7 @@ struct EmployeesService: IEmployeesService {
             .value
     }
     
-    public func invite(parameters: Employee.Parameters.Invite) async throws -> Employee.Responses.Full {
+    func invite(parameters: Employee.Parameters.Invite) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/invite",
@@ -86,8 +86,7 @@ struct EmployeesService: IEmployeesService {
             .value
     }
     
-    public func handler(id: UUID) async throws -> Employee.Responses.Full {
-        //TODO: Сюда будет приходить уже целлая ссылка и из неё будем получать id
+    func handler(id: UUID) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/\(id)/handler",
@@ -98,7 +97,7 @@ struct EmployeesService: IEmployeesService {
             .value
     }
     
-    public func update(id: UUID, parameters: Employee.Parameters.Patch) async throws -> Employee.Responses.Full {
+    func update(id: UUID, parameters: Employee.Parameters.Patch) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/\(id)",
@@ -110,7 +109,7 @@ struct EmployeesService: IEmployeesService {
             .value
     }
     
-    public func fire(id: UUID) async throws {
+    func fire(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/employees/\(id)",

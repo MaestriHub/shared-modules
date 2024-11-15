@@ -7,7 +7,7 @@ enum RequestType {
     case other
 }
 
-struct ErrorResponse: Error, Decodable {
+public struct ErrorResponse: Error, Decodable {
     let error: Bool
     let reason: String
 }
@@ -76,8 +76,8 @@ extension DependencyValues {
 
 public struct RequestsService: IRequestsService {
     
-    static var baseURL = URL(string: "https://api.maestri.me")!
-    static var eventMonitor: EventMonitor?
+    public static var baseURL = URL(string: "https://api.maestri.me")!
+    public static var eventMonitor: EventMonitor?
     
     // MARK: - Dependencies
     

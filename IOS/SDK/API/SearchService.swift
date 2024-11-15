@@ -43,13 +43,13 @@ struct SearchService: ISearchService {
     @Dependency(\.requestsService) var requestsService
     @Dependency(\.coderService) var coderService
     
-    public var searchResultPublished = PublishedAction<Search.Responses.Full>()
-    public var isLoadingPublished = PublishedAction<Bool>()
-    public var searchCenterPublished = PublishedAction<CLLocationCoordinate2D>()
+    var searchResultPublished = PublishedAction<Search.Responses.Full>()
+    var isLoadingPublished = PublishedAction<Bool>()
+    var searchCenterPublished = PublishedAction<CLLocationCoordinate2D>()
     
     // MARK: - Methods
     
-    public func search(parameters: Search.Parameters.Retrieve) async throws -> Search.Responses.Full {
+    func search(parameters: Search.Parameters.Retrieve) async throws -> Search.Responses.Full {
         isLoadingPublished.send(true)
         let result = try await requestsService
             .request(
@@ -68,7 +68,7 @@ struct SearchService: ISearchService {
 
 // MARK: - Mock
 
-struct SearchServiceMock {
+struct SearchServiceMock: ISearchService {
     static var salons = Search.Responses.Full(
         suggests: [], salons: [
             Salon.Responses.Partial(
@@ -313,13 +313,8 @@ struct SearchServiceMock {
     public var searchResultPublished = PublishedAction<Search.Responses.Full>()
     public var isLoadingPublished = PublishedAction<Bool>()
     public var searchCenterPublished = PublishedAction<CLLocationCoordinate2D>()
-}
 
-// MARK: - ISearchService
-
-extension SearchServiceMock: ISearchService {
-    
-    public func search(parameters: DTOs.Search.Parameters.Retrieve) async throws -> DTOs.Search.Responses.Full {
+    func search(parameters: Search.Parameters.Retrieve) async throws -> Search.Responses.Full {
         isLoadingPublished.send(true)
         searchResultPublished.send(SearchServiceMock.salons)
         isLoadingPublished.send(false)

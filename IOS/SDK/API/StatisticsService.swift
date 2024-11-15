@@ -38,7 +38,7 @@ struct StatisticsService: IStatisticsService {
     
     // MARK: - Methods
     
-    public func appointmentsStatistic(parameters: Statistic.Parameters.AppointmentsQuery) async throws -> Statistic.Responses.Appointments {
+    func appointmentsStatistic(parameters: Statistic.Parameters.AppointmentsQuery) async throws -> Statistic.Responses.Appointments {
         try await requestsService
             .request(
                 path: "/v1/statistics/appointments",
