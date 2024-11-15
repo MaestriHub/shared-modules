@@ -1,25 +1,20 @@
 import axios from 'axios';
-import { cookies } from 'next/headers';
+import { CookieDealer } from './CookieDealer';
+import { REFRESH_TOKEN_URL } from './env';
 
 /// Пример middleware для проверки токена на каждом запросе
 
 // вероятно это нужно для консистентного обновления токена
 let isRefreshing = false;
 
-export function clientFactory({
-  options,
-  getCurrentAccessToken,
-  getCurrentRefreshToken,
-  refreshTokenUrl,
-  logout,
-  setRefreshedTokens,
-}) {
+export function clientFactory({ options, storage }) {
   const client = axios.create(options);
+  const cookie = new CookieDealer(storage);
 
   client.interceptors.request.use(
     (config) => {
       if (config.headers.authorization !== false) {
-        const token = getCurrentAccessToken();
+        const token = cookie.getCurrentAccessToken();
         if (token) {
           config.headers.Authorization = "Bearer " + token;
         }
@@ -43,11 +38,11 @@ export function clientFactory({
       originalRequest.headers = JSON.parse(
         JSON.stringify(originalRequest.headers || {})
       );
-      const refreshToken = getCurrentRefreshToken();
+      const refreshToken = cookie.getCurrentRefreshToken();
 
       // If error logout the user.
       const handleError = (error) => {
-        logout();
+        cookie.logout();
         throw error
       };
 
@@ -56,7 +51,7 @@ export function clientFactory({
         refreshToken &&
         error.response?.status === 401 &&
         error.response.data.message === "TokenExpiredError" &&
-        originalRequest?.url !== refreshTokenUrl &&
+        originalRequest?.url !== REFRESH_TOKEN_URL &&
         originalRequest?._retry !== true
       ) {
         if (isRefreshing) {
@@ -74,7 +69,7 @@ export function clientFactory({
         isRefreshing = true;
         originalRequest._retry = true;
         return client
-          .post(refreshTokenUrl, {
+          .post(REFRESH_TOKEN_URL, {
             refreshToken: refreshToken,
           })
           .then((res) => {
@@ -82,7 +77,7 @@ export function clientFactory({
               accessToken: res.data?.accessToken,
               refreshToken: res.data?.refreshToken,
             };
-            setRefreshedTokens(tokens);
+            cookie.setRefreshedTokens(tokens);
 
             return client(originalRequest);
           }, handleError)
