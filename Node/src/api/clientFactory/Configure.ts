@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { cookies } from 'next/headers';
 
 /// Пример middleware для проверки токена на каждом запросе
 

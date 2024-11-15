@@ -1,7 +1,7 @@
 import { AuthService } from "../services/AuthService";
 
-const testToken = "I'm_test_token!"
+const testToken: string = "I'm_test_token!"
 
-const AuthFull = await AuthService.TestAuth({ testToken })
+const AuthFull = await AuthService.TestAuth( testToken )
 
-console.log(AuthFull)
+console.log(AuthFull.accessToken)

@@ -1,52 +1,31 @@
-export const REFRESH_TOKEN_URL = 'http://localhost:5000/api/v1/auth/refreshToken'
+import { cookies } from "next/headers";
+import { ACCESS_LIFETIME, ACCESS_TOKEN, REFRESH_LIFETIME, REFRESH_TOKEN } from "./env";
+
+const cookieStore = await cookies();
 
 export async function getCurrentAccessToken() {
-
-    return "access-token"
+    return cookieStore.get(ACCESS_TOKEN)?.value;
 }
 
 export async function getCurrentRefreshToken() {
-    
-    return "refresh-token"
+    return cookieStore.get(REFRESH_TOKEN)?.value;
 }
 
-export async function setRefreshedTokens(tokens){
-    console.log('set tokens...')
-}
-
-export async function logout(){
-    console.log('logout...')
-}
-
-/// MARK: Test
-
-class TokensStorage {
+interface Tokens {
     accessToken: string
     refreshToken: string
 }
 
-let storage = new TokensStorage()
-
-export async function testGetCurrentAccessToken() {
-
-    return storage.accessToken
-}
-
-export async function testGetCurrentRefreshToken() {
-    
-    return storage.refreshToken
-}
-
-export async function testSetRefreshedTokens(tokens){
-    
+export async function setRefreshedTokens(tokens: Tokens){
+    cookieStore.delete(ACCESS_TOKEN)
+    cookieStore.delete(REFRESH_TOKEN)
+    cookieStore.set(ACCESS_TOKEN, tokens.accessToken, {maxAge: ACCESS_LIFETIME})
+    cookieStore.set(REFRESH_TOKEN, tokens.refreshToken, {maxAge: REFRESH_LIFETIME})
     console.log('set tokens...')
-    storage.accessToken = tokens.accessToken
-    storage.refreshToken = tokens.refreshToken
 }
 
-export async function testLogout(){
-
+export async function logout(){
+    cookieStore.delete(ACCESS_TOKEN)
+    cookieStore.delete(REFRESH_TOKEN)
     console.log('logout...')
-    storage.accessToken = ''
-    storage.refreshToken = ''
 }
