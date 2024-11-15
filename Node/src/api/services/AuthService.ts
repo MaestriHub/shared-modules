@@ -1,5 +1,5 @@
 import { client } from "../clientFactory/Client";
-import * as Auth from "../../dto/objects/Auth"
+import { Auth } from "../../dto/objects/Auth"
 
 enum Paths {
   GoogleAuth = "auth/google",
@@ -8,7 +8,7 @@ enum Paths {
 }
 
 export class AuthService {
-  static async GoogleAuth(body: Auth.GoogleToken): Promise<Auth.Full> {
+  static async GoogleAuth(body: Auth.Parameters.GoogleToken): Promise<Auth.Responses.Full> {
     const response = await client.post(Paths.GoogleAuth, {
       data: body
     })
@@ -16,7 +16,7 @@ export class AuthService {
     return response.data;
   }
 
-  static async AppleAuth(body: Auth.AppleToken): Promise<Auth.Full> {
+  static async AppleAuth(body: Auth.Parameters.AppleToken): Promise<Auth.Responses.Full> {
     const response = await client.post(Paths.AppleAuth, {
       data: body,
     })
@@ -24,7 +24,7 @@ export class AuthService {
     return response.data;
   }
 
-  static async TestAuth(testToken: string): Promise<Auth.Full> {
+  static async TestAuth(testToken: string): Promise<Auth.Responses.Full> {
     const customUrl = Paths.TestAuth + testToken
     const response = await client.post(customUrl)
 

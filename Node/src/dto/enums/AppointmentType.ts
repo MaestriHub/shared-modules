@@ -1,4 +1,4 @@
-type AppointmentType = ProcedureType | ComplexType
+export type AppointmentType = ProcedureType | ComplexType
 
 interface ProcedureType {
     type: "procedure"

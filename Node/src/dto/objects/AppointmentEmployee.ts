@@ -2,51 +2,55 @@ import { DateInterval } from "../tsPrimitives/DateInterval"
 import { Price } from "../primitives/Price"
 import { Address } from "../primitives/Address"
 import { AppointmentStatus } from "../enums/AppointmentStatus"
+import { AppointmentType } from "../enums/AppointmentType"
 
-export type AppointmentEmployee = Parameters | Responses
+export namespace AppointmentEmployee {
 
-type Parameters =  Retrieve | Create | Patch | Approve
+    export namespace Parameters {
+        
+        export class Retrieve {
+            startDate: Date | undefined
+            endDate: Date | undefined
+            employees: string[] | undefined
+            salons: string[] | undefined
+            customer: string | undefined
+        }
 
-type Responses = Full | Partial | Base
+        export class Create {
+            customerId: string
+            type: AppointmentType
+            time: DateInterval
+        }
 
-interface Retrieve {
-    startDate: Date | undefined
-    endDate: Date | undefined
-    employees: string[] | undefined
-    salons: string[] | undefined
-    customer: string | undefined
-}
+        export class Patch {
+            time: DateInterval
+        }
 
-interface Create {
-    customerId: string
-    type: AppointmentType
-    time: DateInterval
-}
+        export class Approve {
+            appointmentsEmployeeId: string[]
+        }
+    }
 
-interface Patch {
-    time: DateInterval
-}
+    export namespace Responses {
 
-interface Approve {
-    appointmentsEmployeeId: string[]
-}
+        export class Full {
+            // salon //TODO:
+            // customer
+            address: Address
+            associative: Base[]
+        }
 
-interface Full {
-    // salon //TODO:
-    // customer
-    address: Address
-    associative: Base[]
-}
+        export class Partial {
+            // customer
+            associative: Base[]
+        }
 
-interface Partial {
-    // customer
-    associative: Base[]
-}
-
-interface Base {
-    id: string
-    status: AppointmentStatus
-    // procedure:
-    time: DateInterval
-    price: Price
+        export class Base {
+            id: string
+            status: AppointmentStatus
+            // procedure:
+            time: DateInterval
+            price: Price
+        }
+    }
 }

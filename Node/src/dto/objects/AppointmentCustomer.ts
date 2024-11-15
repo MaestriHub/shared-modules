@@ -2,43 +2,47 @@ import { DateInterval } from "../tsPrimitives/DateInterval"
 import { Price } from "../primitives/Price"
 import { Address } from "../primitives/Address"
 import { AppointmentStatus } from "../enums/AppointmentStatus"
+import { AppointmentType } from "../enums/AppointmentType"
 
-export type AppointmentCustomer = Parameters | Responses
+export namespace AppointmentEmployee {
 
-type Parameters =  Retrieve | Create | Patch
+    export namespace Parameters {
 
-type Responses = Full | Partial
+        export class Retrieve {
+            startDate: Date | undefined
+            endDate: Date | undefined
+            employees: string[] | undefined
+            salons: string[] | undefined
+        }
 
-interface Retrieve {
-    startDate: Date | undefined
-    endDate: Date | undefined
-    employees: string[] | undefined
-    salons: string[] | undefined
-}
+        export class Create {
+            type: AppointmentType
+            time: DateInterval
+        }
 
-interface Create {
-    type: AppointmentType
-    time: DateInterval
-}
+        export class Patch {
+            time: DateInterval
+        }
+    }
 
-interface Patch {
-    time: DateInterval
-}
+    export namespace Responses {
 
-interface Full {
-    id: string
-    status: AppointmentStatus
-    // salon: TODO:
-    // procedures:
-    time: DateInterval
-    price: Price
-    address: Address
-}
+        export class Full {
+            id: string
+            status: AppointmentStatus
+            // salon: TODO:
+            // procedures:
+            time: DateInterval
+            price: Price
+            address: Address
+        }
 
-interface Partial {
-    id: string
-    status: AppointmentStatus
-    // procedures:
-    time: DateInterval
-    price: Price
+        export class Partial {
+            id: string
+            status: AppointmentStatus
+            // procedures:
+            time: DateInterval
+            price: Price
+        }
+    }
 }

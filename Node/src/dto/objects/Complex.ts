@@ -1,47 +1,50 @@
 import { Price } from "../primitives/Price"
-import { Token } from "../primitives/Token"
+import { Int } from "../tsPrimitives/Int"
 
-export type Complex = Parameters | Responses
+export namespace Complex {
 
-type Parameters =  Retrieve | Create | Patch
+    export namespace Parameters {
+        
+        export class Retrieve {
+            salons: string[] | undefined
+            employees: string[] | undefined
+        }
 
-type Responses = Full | Partial
+        export class Create {
+            price: Price
+            duration: Int
+            description: string | undefined
+            alias: string | undefined
+            procedureIds: string[]
+        }
 
-interface Retrieve {
-    salons: string[] | undefined
-    employees: string[] | undefined
-}
+        export class Patch {
+            price: Price
+            duration: Int
+            description: string | undefined
+            alias: string | undefined
+            procedureIds: string[]
+        }
+    }
 
-interface Create {
-    price: Price
-    duration: Int
-    description: string | undefined
-    alias: string | undefined
-    procedureIds: string[]
-}
+    export namespace Responses {
+        
+        export class Full {
+            id: string
+            price: Price
+            duration: Int
+            description: string | undefined
+            alias: string | undefined
+            //procedureIds: string[]
+        }
 
-interface Patch {
-    price: Price
-    duration: Int
-    description: string | undefined
-    alias: string | undefined
-    procedureIds: string[]
-}
-
-interface Full {
-    id: string
-    price: Price
-    duration: Int
-    description: string | undefined
-    alias: string | undefined
-    //procedureIds: string[]
-}
-
-interface Partial {
-    id: string
-    price: Price
-    duration: Int
-    description: string | undefined
-    alias: string | undefined
-    //procedureIds: string[]
+        export class Partial {
+            id: string
+            price: Price
+            duration: Int
+            description: string | undefined
+            alias: string | undefined
+            //procedureIds: string[]
+        }
+    }
 }

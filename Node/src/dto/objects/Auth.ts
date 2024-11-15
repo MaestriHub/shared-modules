@@ -1,32 +1,35 @@
 import { Token } from "../primitives/Token"
 
-export type Auth = Parameters | Responses
+export namespace Auth {
 
-type Parameters =  AppleToken | GoogleToken
+    export namespace Parameters {
 
-type Responses = Full | Partial
-
-export interface AppleToken {
-    token: string
-    firstName: string | undefined
-    lastName: string | undefined
-    email: string | undefined
-    emailVerified: boolean | undefined
-}
-
-export interface GoogleToken {
-    token: string
-    firstName: string | undefined
-    lastName: string | undefined
-}
-
-export interface Full {
-    accessToken: Token
-    refreshToken: Token
-    //user:
-}
-
-export interface Partial {
-    accessToken: Token
-    refreshToken: Token | undefined
+        export interface AppleToken {
+            token: string
+            firstName: string | undefined
+            lastName: string | undefined
+            email: string | undefined
+            emailVerified: boolean | undefined
+        }
+        
+        export class GoogleToken {
+            token: string
+            firstName: string | undefined
+            lastName: string | undefined
+        }
+    }
+    
+    export namespace Responses {
+    
+        export class Full {
+            accessToken: Token
+            refreshToken: Token
+            //user:
+        }
+        
+        export class Partial {
+            accessToken: Token
+            refreshToken: Token | undefined
+        }
+    }    
 }
