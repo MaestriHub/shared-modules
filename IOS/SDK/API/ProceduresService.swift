@@ -1,9 +1,3 @@
-//
-//  ProceduresService.swift
-//  Created by Vitaliy Shevtsov on 3/29/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -56,12 +50,11 @@ public extension DependencyValues {
     }
     
     enum ProceduresServiceKey: DependencyKey {
-        
-        public static let liveValue: IProceduresService = {
-            //@Dependency(\.toggleService) var toggleService
-            //return toggleService.isActive(.procedureMocks) ? ProceduresServiceMock() : ProceduresService()
-            return ProceduresService()
-        }()
+        public static var liveValue: IProceduresService = ProceduresService()
+//        public static let liveValue: IProceduresService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.procedureMocks) ? ProceduresServiceMock() : ProceduresService()
+//        }()
     }
 }
 

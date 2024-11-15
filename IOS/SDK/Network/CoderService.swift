@@ -1,9 +1,3 @@
-//
-//  Decoder&EncoderService.swift
-//  Created by Vitaliy Shevtsov on 4/12/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies

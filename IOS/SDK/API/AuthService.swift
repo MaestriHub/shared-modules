@@ -1,8 +1,3 @@
-//
-//  AuthService.swift
-//  Created by Vitaliy Shevtsov on 4/4/23.
-//
-
 import Foundation
 import Dependencies
 import KeychainAccess

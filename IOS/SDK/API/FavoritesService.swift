@@ -1,8 +1,3 @@
-//
-//  FavoritesService.swift
-//  Created by Vitaliy Shevtsov on 3/29/23.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -32,10 +27,11 @@ public extension DependencyValues {
     }
     
     enum FavoritesServiceKey: DependencyKey {
-        public static let liveValue: IFavoritesService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.favoritesMocks) ? FavoritesServiceMock() : FavoritesService()
-        }()
+        public static var liveValue: IFavoritesService = FavoritesService()
+//        public static let liveValue: IFavoritesService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.favoritesMocks) ? FavoritesServiceMock() : FavoritesService()
+//        }()
     }
 }
 

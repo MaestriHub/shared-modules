@@ -1,9 +1,3 @@
-//
-//  SearchService.swift
-//  Created by Vitaliy Shevtsov on 7/17/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -32,10 +26,11 @@ public extension DependencyValues {
     }
     
     enum SearchServiceKey: DependencyKey {
-        public static let liveValue: ISearchService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.searchServiceMocks) ? SearchServiceMock() : SearchService()
-        }()
+        public static var liveValue: ISearchService = SearchService()
+//        public static let liveValue: ISearchService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.searchServiceMocks) ? SearchServiceMock() : SearchService()
+//        }()
     }
 }
 

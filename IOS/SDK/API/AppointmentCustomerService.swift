@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  MaestriSDK
-//
-//  Created by aristarh on 24.10.2024.
-//
-
 import Foundation
 import DTOs
 import Dependencies
@@ -12,44 +5,45 @@ import Combine
 
 public protocol IAppointmentCustomerService {
     
-    public var appointmentCreatePublisher: PassthroughSubject<AppointmentCustomer.Responses.Full, Never> { get }
+    var appointmentCreatePublisher: PassthroughSubject<AppointmentCustomer.Responses.Full, Never> { get }
     
     /// Get /appointment/customer/current
-    public func current() async throws -> [AppointmentCustomer.Responses.Full]
+    func current() async throws -> [AppointmentCustomer.Responses.Full]
     
     /// Get /appointment/customer/history
-    public func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
+    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
     
     /// Post /appointment/customer
-    public func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full
+    func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full
     
     /// Put /appointment/customer/:id
-    public func update(id: UUID, parameters: AppointmentCustomer.Parameters.Patch) async throws -> AppointmentCustomer.Responses.Full
+    func update(id: UUID, parameters: AppointmentCustomer.Parameters.Patch) async throws -> AppointmentCustomer.Responses.Full
     
     /// Patch /appointment/customer/:id/approve
-    public func approve(id: UUID) async throws -> AppointmentCustomer.Responses.Full
+    func approve(id: UUID) async throws -> AppointmentCustomer.Responses.Full
     
     /// Get /appointment/customer/:id
-    public func retrieve(id: UUID) async throws -> AppointmentCustomer.Responses.Full
+    func retrieve(id: UUID) async throws -> AppointmentCustomer.Responses.Full
     
     /// Patch /appointment/customer/:id/reject
-    public func reject(id: UUID) async throws -> AppointmentCustomer.Responses.Full
+    func reject(id: UUID) async throws -> AppointmentCustomer.Responses.Full
 }
 
 // MARK: - Dependency values
 
 public extension DependencyValues {
     
-    public var appointmentsCustomerService: any IAppointmentCustomerService {
+    var appointmentsCustomerService: any IAppointmentCustomerService {
         get { self[AppointmentCustomerServiceKey.self] }
         set { self[AppointmentCustomerServiceKey.self] = newValue }
     }
     
     enum AppointmentCustomerServiceKey: DependencyKey {
-        public static let liveValue: IAppointmentCustomerService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.appointmentMocks) ? AppointmentCustomerMockService() : AppointmentCustomerService()
-        }()
+        public static var liveValue: IAppointmentCustomerService = AppointmentCustomerService()
+//        public static let liveValue: IAppointmentCustomerService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.appointmentMocks) ? AppointmentCustomerMockService() : AppointmentCustomerService()
+//        }()
     }
 }
 
@@ -302,7 +296,7 @@ public final class AppointmentCustomerMockService {
 
 // MARK: - Mock methods
 
-public extension AppointmentCustomerMockService: IAppointmentCustomerService {
+extension AppointmentCustomerMockService: IAppointmentCustomerService {
     
     public func approve(id: UUID) async throws -> AppointmentCustomer.Responses.Full {
         appointment

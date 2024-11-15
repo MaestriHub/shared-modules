@@ -1,9 +1,3 @@
-//
-//  TimetablesService.swift
-//  Created by Vitaliy Shevtsov on 4/4/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -33,10 +27,11 @@ public extension DependencyValues {
     }
     
     enum TimetablesServiceKey: DependencyKey {
-        public static let liveValue: ITimetablesService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.timetableMocks) ? TimetablesServiceMock() : TimetablesService()
-        }()
+        public static var liveValue: ITimetablesService = TimetablesService()
+//        public static let liveValue: ITimetablesService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.timetableMocks) ? TimetablesServiceMock() : TimetablesService()
+//        }()
     }
 }
 

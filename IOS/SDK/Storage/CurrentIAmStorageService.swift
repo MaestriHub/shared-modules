@@ -1,10 +1,3 @@
-//
-//  CurrentIAmStorageService.swift
-//
-//
-//  Created by Kovalev Alexander on 18.05.2024.
-//
-
 import Dependencies
 import Foundation
 import Combine

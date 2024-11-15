@@ -1,9 +1,3 @@
-//
-//  NoticesService.swift
-//  Created by Vitaliy Shevtsov on 7/17/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -33,10 +27,11 @@ public extension DependencyValues {
     }
     
     enum NoticesServiceKey: DependencyKey {
-        public static let liveValue: INoticesService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.noticesServiceMocks) ? NoticesServiceMock() : NoticesService()
-        }()
+        public static var liveValue: INoticesService = NoticesService()
+//        public static let liveValue: INoticesService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.noticesServiceMocks) ? NoticesServiceMock() : NoticesService()
+//        }()
     }
 }
 

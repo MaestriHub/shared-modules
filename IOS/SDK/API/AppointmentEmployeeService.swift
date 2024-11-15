@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  MaestriSDK
-//
-//  Created by aristarh on 24.10.2024.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -49,11 +42,11 @@ public extension DependencyValues {
     }
     
     enum AppointmentEmployeeServiceKey: DependencyKey {
-//        public static var liveValue: IAppointmentEmployeeService = AppointmentEmployeeService()
-        public static var liveValue: IAppointmentEmployeeService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.appointmentMocks) ? AppointmentEmployeeServiceMock() : AppointmentEmployeeService()
-        }()
+        public static var liveValue: IAppointmentEmployeeService = AppointmentEmployeeService()
+//        public static var liveValue: IAppointmentEmployeeService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.appointmentMocks) ? AppointmentEmployeeServiceMock() : AppointmentEmployeeService()
+//        }()
     }
 }
 

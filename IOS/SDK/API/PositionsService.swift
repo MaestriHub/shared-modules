@@ -1,8 +1,3 @@
-//
-//  PositionsService.swift
-//  Created by Алексей on 24.07.2024.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -38,10 +33,11 @@ public extension DependencyValues {
     }
     
     enum PositionsServiceKey: DependencyKey {
-        public static let liveValue: IPositionsService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.positionsServiceMocks) ? PositionsServiceMock() : PositionsService()
-        }()
+        public static var liveValue: IPositionsService = PositionsService()
+//        public static let liveValue: IPositionsService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.positionsServiceMocks) ? PositionsServiceMock() : PositionsService()
+//        }()
     }
 }
 

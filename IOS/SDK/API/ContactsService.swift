@@ -1,8 +1,3 @@
-//
-//  ContactService.swift
-//  Created by Vitaliy Shevtsov on 3/29/23.
-//
-
 import Foundation
 import Alamofire
 import Dependencies

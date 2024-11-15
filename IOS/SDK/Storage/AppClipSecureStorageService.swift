@@ -1,10 +1,3 @@
-//
-//  AppClipSecureStorageService.swift
-//
-//
-//  Created by Kovalev Alexander on 17.05.2024.
-//
-
 import KeychainAccess
 import Dependencies
 import Combine

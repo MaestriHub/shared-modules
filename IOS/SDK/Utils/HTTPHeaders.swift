@@ -1,8 +1,3 @@
-//
-//  HTTPHeaders.swift
-//  Created by Гаджиев Казим on 09.01.2024.
-//
-
 import Alamofire
 
 // MARK: Requester-Type

@@ -1,10 +1,6 @@
-//
-//  PublishedAction.swift
-//  Created by Алексей on 09.04.2024.
-//
-
 import Combine
 
+//TODO: По хорошему эта не должно быть в SDK
 public struct PublishedAction<Value> {
     private var subject = PassthroughSubject<Value, Never>()
     public var publisher: AnyPublisher<Value, Never> {

@@ -1,9 +1,3 @@
-//
-//  ServicesService.swift
-//  Created by Vitaliy Shevtsov on 3/29/23.
-//  Copyright © 2023 Maestri Hub. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -39,10 +33,11 @@ public extension DependencyValues {
     }
     
     enum ServicesServiceKey: DependencyKey {
-        public static let liveValue: IServicesService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.serviceMocks) ? ServicesServiceMock() : ServicesService()
-        }()
+        public static var liveValue: IServicesService = ServicesService()
+//        public static let liveValue: IServicesService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.serviceMocks) ? ServicesServiceMock() : ServicesService()
+//        }()
     }
 }
 

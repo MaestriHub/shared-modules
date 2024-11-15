@@ -1,8 +1,3 @@
-//
-//  SalonsService.swift
-//  Created by Vitaliy Shevtsov on 3/29/23.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
@@ -45,10 +40,11 @@ public extension DependencyValues {
     }
     
     enum SalonsServiceKey: DependencyKey {
-        public static let liveValue: ISalonsService = {
-            @Dependency(\.toggleService) var toggleService
-            return toggleService.isActive(.salonMocks) ? SalonsServiceMock() : SalonsService()
-        }()
+        public static var liveValue: ISalonsService = SalonsService()
+//        public static let liveValue: ISalonsService = {
+//            @Dependency(\.toggleService) var toggleService
+//            return toggleService.isActive(.salonMocks) ? SalonsServiceMock() : SalonsService()
+//        }()
     }
 }
 

@@ -1,8 +1,3 @@
-//
-//  AuthenticatorService.swift
-//  Created by Vitalii Shevtsov on 1/23/24.
-//
-
 import Foundation
 import Alamofire
 import Dependencies

@@ -35,21 +35,6 @@ protocol IRequestsService {
         method: HTTPMethod,
         requestType: RequestType
     ) -> DataRequest
-    
-    func mockedRequest<Parameters: Encodable>(
-        mock: Data,
-        path: String,
-        method: HTTPMethod,
-        parameters: Parameters?,
-        requestType: RequestType
-    ) -> DataRequest
-    
-    func mockedRequest(
-        mock: Data,
-        path: String,
-        method: HTTPMethod,
-        requestType: RequestType
-    ) -> DataRequest
 }
 
 // MARK: - DependencyValues
@@ -63,10 +48,7 @@ extension DependencyValues {
     
     enum RequestsServiceKey: DependencyKey {
         static var liveValue: IRequestsService {
-            let eventMonitor = DependencyValues.LoggerServiceKey.eventMonitor.map {
-                [NetworkLoggerEventMonitor(logger: $0)]
-            }
-            let monitors = eventMonitor ?? []
+            let monitors = [RequestsService.eventMonitor].compactMap { $0 }
             
             let session = Session(
                 configuration: URLSessionConfiguration.af.default,
@@ -94,18 +76,16 @@ extension DependencyValues {
 
 struct RequestsService: IRequestsService {
     
+    static var baseURL = URL(string: "https://api.maestri.me")!
+    static var eventMonitor: EventMonitor?
+    
     // MARK: - Dependencies
     
     @Dependency(\.secureStorageService) var secureStorageService
     @Dependency(\.coderService) var coderService
-    @Dependency(\.mockService) var mockService
-    @Dependency(\.toggleService) var toggleService
     
     // MARK: - Init
     
-    private var base: URL {
-        URL(string: toggleService.fetchToggleValue(.baseURL) ?? "https://api.maestri.me")!
-    }
     private var session: Session
     private var authenticator: JWTAuthenticator
     
@@ -122,7 +102,12 @@ extension RequestsService {
         method: HTTPMethod,
         requestType: RequestType
     ) -> DataRequest {
-        return request(path: path, method: method, parameters: nil as Empty?, requestType: requestType)
+        request(
+            path: path,
+            method: method,
+            parameters: nil as Empty?,
+            requestType: requestType
+        )
     }
     
     func request<Parameters: Encodable>(
@@ -132,7 +117,7 @@ extension RequestsService {
         requestType: RequestType
     ) -> DataRequest {
         
-        var url = base
+        var url = RequestsService.baseURL
         url.append(path: path)
         
         let encoder: ParameterEncoder
@@ -194,7 +179,7 @@ extension RequestsService {
         mimeType: String
     ) -> UploadRequest {
         
-        var url = base
+        var url = RequestsService.baseURL
         url.append(path: path)
         
         return session.upload(
@@ -209,30 +194,5 @@ extension RequestsService {
                 credential: JWTCredential(token: secureStorageService.accessToken)
             )
         )
-    }
-}
-
-// MARK: Mocked
-
-extension RequestsService {
-    
-    func mockedRequest<Parameters: Encodable>(
-        mock: Data,
-        path: String,
-        method: HTTPMethod,
-        parameters: Parameters?,
-        requestType: RequestType
-    ) -> DataRequest {
-        mockService.registerMock(for: path, method: method, response: mock)
-        return request(path: path, method: method, parameters: parameters, requestType: requestType)
-    }
-    
-    func mockedRequest(
-        mock: Data,
-        path: String,
-        method: HTTPMethod,
-        requestType: RequestType
-    ) -> DataRequest {
-        mockedRequest(mock: mock, path: path, method: method, parameters: nil as Empty?, requestType: requestType)
     }
 }

@@ -1,8 +1,3 @@
-//
-//  UploadService.swift
-//  Created by Vitalii Shevtsov on 1/15/24.
-//
-
 import Foundation
 import Alamofire
 import Dependencies

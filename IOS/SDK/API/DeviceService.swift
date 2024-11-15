@@ -1,8 +1,3 @@
-//
-//  DeviceService.swift
-//  Created by Vitalii Shevtsov on 3/23/24.
-//
-
 import Foundation
 import Alamofire
 import Dependencies
