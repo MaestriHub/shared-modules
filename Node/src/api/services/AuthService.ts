@@ -13,8 +13,8 @@ export class AuthService {
   static async GoogleAuth(someValues) {
     try {
       const specificHeaders = {}
-      const someBody: Request = someValues
-      const someQuery: Request = someValues
+      const someBody: Request = someValues.someBody
+      const someQuery: Request = someValues.someQuery
 
       const response = await client.post(Paths.GoogleAuth, {
         headers: specificHeaders,
