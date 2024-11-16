@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { ACCESS_LIFETIME, ACCESS_TOKEN, REFRESH_LIFETIME, REFRESH_TOKEN } from "./env";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 

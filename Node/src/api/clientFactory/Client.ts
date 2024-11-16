@@ -1,12 +1,16 @@
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { clientFactory } from "./Configure";
-import { BASE_URL } from "./env";
+import { BASE_URL, REQUEST_TIMEOUT } from "./env";
+import { AxiosInstance } from "axios";
 
-export function client(storage: Promise<ReadonlyRequestCookies>) {
+type TestStorage = Map<string, string>
+type ProductionStorage = Promise<ReadonlyRequestCookies>
+
+export function client(storage: ProductionStorage | TestStorage): AxiosInstance {
     return clientFactory({
         options: {
             baseURL: BASE_URL,
-            timeout: 300000,
+            timeout: REQUEST_TIMEOUT, // 15 secs timeout
             headers: {
                 Accept: "*/*",
                 "Requester-Type": "professional",

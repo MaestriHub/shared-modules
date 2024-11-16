@@ -12,7 +12,15 @@ enum Paths {
 export class AuthService {
   private client: AxiosInstance
 
-  constructor() { this.client = client(cookies()) }
+  constructor() { 
+    if (process.env.NODE_ENV === 'production') {
+      this.client = client(cookies())
+      console.log('production env')
+    } else {
+      this.client = client(new Map())
+      console.log('test env')
+    }
+  }
   
   async GoogleAuth(body: Auth.Parameters.GoogleToken): Promise<Auth.Responses.Full> {
     const response = await this.client.post(Paths.GoogleAuth, {

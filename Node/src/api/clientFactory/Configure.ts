@@ -2,11 +2,8 @@ import axios from 'axios';
 import { CookieDealer } from './CookieDealer';
 import { REFRESH_TOKEN_URL } from './env';
 
-/// Пример middleware для проверки токена на каждом запросе
-
-// вероятно это нужно для консистентного обновления токена
-let isRefreshing = false;
-
+// TODO: Протестировать. Проблема при конверизации запросов. Нужно придумать локальную очередь если падает
+// то нужно пойти обновить токены а другие пусть ждуть этого события
 export function clientFactory({ options, storage }) {
   const client = axios.create(options);
   const cookie = new CookieDealer(storage);
@@ -22,52 +19,35 @@ export function clientFactory({ options, storage }) {
       return config;
     },
     (error) => {
-      return Promise.reject(error);
+      throw error;
     }
   );
 
   client.interceptors.response.use(
     (response) => {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      // Do something with response data
       return response;
     },
     (error) => {
-      const originalRequest = error.config;
-      // In "axios": "^1.1.3" there is an issue with headers, and this is the workaround.
+      const originalRequest = error.config
+
       originalRequest.headers = JSON.parse(
         JSON.stringify(originalRequest.headers || {})
       );
       const refreshToken = cookie.getCurrentRefreshToken();
 
-      // If error logout the user.
       const handleError = (error) => {
         cookie.logout();
-        throw error
+        throw error;
       };
 
-      // Refresh token conditions
       if (
         refreshToken &&
         error.response?.status === 401 &&
-        error.response.data.message === "TokenExpiredError" &&
         originalRequest?.url !== REFRESH_TOKEN_URL &&
-        originalRequest?._retry !== true
+        originalRequest?.retry !== true
       ) {
-        if (isRefreshing) {
-          return new Promise(function (resolve, reject) {
-            //failedQueue.push({resolve, reject});
-          })
-            .then(() => {
-              return client(originalRequest);
-            })
-            .catch((err) => {
-              throw err
-            });
-        }
-        
-        isRefreshing = true;
-        originalRequest._retry = true;
+        originalRequest.retry = true;
+
         return client
           .post(REFRESH_TOKEN_URL, {
             refreshToken: refreshToken,
@@ -81,9 +61,6 @@ export function clientFactory({ options, storage }) {
 
             return client(originalRequest);
           }, handleError)
-          .finally(() => {
-            isRefreshing = false;
-          });
       }
 
       // Refresh token missing or expired => logout user...

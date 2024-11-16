@@ -7,6 +7,6 @@ DerivedData/
 .netrc
 .idea
 .swiftpm
-/Node/node_modules
+node_modules
 *.js
 *.js.map
