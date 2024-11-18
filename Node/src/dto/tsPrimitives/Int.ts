@@ -13,10 +13,11 @@ export class Int {
         return this.int
     }
 
-    public static fromJSON(int: number): Int {
-        if (!isInt(int)) {
+    public static fromJSON(json: any): Int {
+        if (!isInt(json)) {
             throw new Error("Invalid Int")
         }
-        return new Int(int)
+
+        return new Int(Number(json))
     }
 }

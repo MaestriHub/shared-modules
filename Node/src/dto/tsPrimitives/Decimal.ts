@@ -13,10 +13,10 @@ export class Decimal {
         return this.decimal
     }
 
-    public static fromJSON(decimal: string): Decimal {
-        if (!isDecimal(decimal)) {
+    public static fromJSON(json: any): Decimal {
+        if (!isDecimal(json)) {
             throw new Error("Invalid Int")
         }
-        return new Decimal(decimal)
+        return new Decimal(json)
     }
 }

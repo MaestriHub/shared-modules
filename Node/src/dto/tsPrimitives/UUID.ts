@@ -14,10 +14,10 @@ export class UUID {
         return this.uuid
     }
 
-    public static fromJSON(uuid: string): UUID {
-        if (!isUUID(uuid)) {
+    public static fromJSON(json: any): UUID {
+        if (!isUUID(json)) {
             throw new Error("Invalid UUID")
         }
-        return new UUID(uuid)
+        return new UUID(json)
     }
 }

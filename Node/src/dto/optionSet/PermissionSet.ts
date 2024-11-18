@@ -1,4 +1,4 @@
-import { IsInt } from "class-validator";
+import { isInt, IsInt } from "class-validator";
 
 export class PermissionSet {
     @IsInt()
@@ -46,5 +46,16 @@ export class PermissionSet {
 
     hasPermission(permission: number): boolean {
         return (this.value & permission) === permission;
+    }
+
+    toJSON() {
+        return this.value;
+    }
+
+    static fromJSON(json: any): PermissionSet {
+        if (!isInt(json)) {
+            throw new Error("Invalid Int")
+        }
+        return new PermissionSet(Number(json));
     }
 }

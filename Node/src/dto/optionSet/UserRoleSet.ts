@@ -1,4 +1,4 @@
-import { IsInt } from "class-validator";
+import { isInt, IsInt } from "class-validator";
 
 export class UserRoleSet {
     @IsInt()
@@ -24,5 +24,16 @@ export class UserRoleSet {
 
     hasPermission(permission: number): boolean {
         return (this.value & permission) === permission;
+    }
+
+    toJSON() {
+        return this.value;
+    }
+
+    static fromJSON(json: any): UserRoleSet {
+        if (!isInt(json)) {
+            throw new Error("Invalid Int")
+        }
+        return new UserRoleSet(Number(json));
     }
 }
