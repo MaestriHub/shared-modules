@@ -1,4 +1,4 @@
-import { ValidateNested } from "class-validator"
+import { IsTimeZone, ValidateNested } from "class-validator"
 import { DateInterval } from "../tsPrimitives/DateInterval"
 import { Decimal } from "../tsPrimitives/Decimal"
 import { UUID } from "../tsPrimitives/UUID"
@@ -13,7 +13,7 @@ export namespace Offtime {
 
             @ValidateNested()
             coefficient: Decimal
-            
+
             reason?: string
 
             constructor(
@@ -38,8 +38,11 @@ export namespace Offtime {
             interval: DateInterval
 
             reason?: string
+
+            @IsTimeZone()
             timeZoneId: string
-            coefficient: Decimal //Decimal
+
+            coefficient: Decimal
 
             constructor(
                 id: UUID,

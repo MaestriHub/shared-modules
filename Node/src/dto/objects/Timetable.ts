@@ -3,7 +3,7 @@ import { UUID } from "../tsPrimitives/UUID"
 import { Schedule } from "../primitives/Schedule"
 import { TimetableOwner } from "../enums/TimetableOwner"
 import { AppointmentType } from "../enums/AppointmentType"
-import { ValidateNested } from "class-validator"
+import { IsTimeZone, ValidateNested } from "class-validator"
 
 export namespace Timetable {
 
@@ -81,6 +81,7 @@ export namespace Timetable {
             @ValidateNested()
             intervals: Intervals
 
+            @IsTimeZone()
             timeZoneId: string
 
             constructor(
@@ -99,6 +100,7 @@ export namespace Timetable {
             @ValidateNested()
             intervals: Intervals
             
+            @IsTimeZone()
             timeZoneId: string
 
             constructor(

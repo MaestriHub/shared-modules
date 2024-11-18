@@ -3,7 +3,7 @@ import { SalonType } from "../enums/SalonType"
 import { Timetable } from "./Timetable"
 import { Contact } from "./Contact"
 import { UUID } from "../tsPrimitives/UUID"
-import { ValidateNested } from "class-validator"
+import { IsLocale, IsTimeZone, ValidateNested } from "class-validator"
 
 export namespace Salon {
 
@@ -13,8 +13,13 @@ export namespace Salon {
             name: string
             type: SalonType
             logo?: URL
+
+            @IsTimeZone()
             timeZoneId: string
+
+            @IsLocale()
             localeId: string
+
             description?: string
 
             @ValidateNested()
@@ -86,7 +91,11 @@ export namespace Salon {
             isActive: boolean
             canEdit: boolean
             isFavorite: boolean
+
+            @IsLocale()
             localeId: string
+
+            @IsTimeZone()
             timeZoneId: string
 
             constructor(
