@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Storage } from './Storage';
 import { v4 as uuidv4 } from 'uuid';
 import { REFRESH_TOKEN_BAD_MESSAGE, REFRESH_TOKEN_EXPIRED_MESSAGE, REFRESH_TOKEN_URL } from './env';
+import { UUID } from '../../dto/tsPrimitives/UUID';
 
 // TODO: Протестировать. Проблема при конверизации запросов. Нужно придумать локальную очередь если падает
 // то нужно пойти обновить токены а другие пусть ждуть этого события
@@ -28,8 +29,7 @@ export function clientFactory({ options, storage }) {
     async (config) => {
       let deviceID = await cookie.getCurrentDeviceId() //TODO:
       if (deviceID === undefined) {
-        deviceID = uuidv4()
-        await cookie.setDeviceId(deviceID)
+        await cookie.setDeviceId(new UUID())
       }
       config.headers["Device-ID"] = deviceID
       return config;

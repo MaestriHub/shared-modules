@@ -14,17 +14,17 @@ export class Storage {
         this.cookieStore = cookieStore;
     }
 
-    async getCurrentAccessToken() {
+    async getCurrentAccessToken(): Promise<string> {
         const cookies = await this.cookieStore;
         return cookies.get(ACCESS_TOKEN)?.value;
     }
 
-    async getCurrentDeviceId() { 
+    async getCurrentDeviceId(): Promise<UUID> { 
         const cookies = await this.cookieStore;
-        return cookies.get(DEVICE_ID)?.value;
+        return new UUID(cookies.get(DEVICE_ID)?.value);
     }
     
-    async getCurrentRefreshToken() {
+    async getCurrentRefreshToken(): Promise<string> {
         const cookies = await this.cookieStore;
         return cookies.get(REFRESH_TOKEN)?.value;
     }
@@ -41,7 +41,7 @@ export class Storage {
     async setDeviceId(id: UUID) {
         const cookies = await this.cookieStore;
         cookies.delete(DEVICE_ID)
-        cookies.set(DEVICE_ID, id, {maxAge: DEVICE_ID_LIFETIME, httpOnly: true})
+        cookies.set(DEVICE_ID, id.uuid, {maxAge: DEVICE_ID_LIFETIME, httpOnly: true})
         console.log('set tokens...')
     }
     

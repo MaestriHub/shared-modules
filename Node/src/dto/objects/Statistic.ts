@@ -1,6 +1,7 @@
 import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
+import { UUID } from "crypto"
 
 export namespace Static {
 
@@ -9,14 +10,14 @@ export namespace Static {
         export class AppointmentsQuery {
             startDate: Date
             endDate: Date
-            employees?: string[] //TODO: 
-            salons?: string[]
+            employees?: UUID[]
+            salons?: UUID[]
 
             constructor(
                 startDate: Date,
                 endDate: Date,
-                employees?: string[],
-                salons?: string[]
+                employees?: UUID[],
+                salons?: UUID[]
             ) {
                 this.startDate = startDate
                 this.endDate = endDate

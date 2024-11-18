@@ -13,16 +13,16 @@ export namespace AppointmentEmployee {
         export class Retrieve {
             startDate?: Date
             endDate?: Date
-            employees?: string[]
-            salons?: string[]
-            customer?: string
+            employees?: UUID[]
+            salons?: UUID[]
+            customer?: UUID
 
             constructor(
                 startDate?: Date,
                 endDate?: Date,
-                employees?: string[], // TODO: все таки проверить что не все штуки я перевел на uuid
-                salons?: string[],
-                customer?: string
+                employees?: UUID[],
+                salons?: UUID[],
+                customer?: UUID
             ) {
                 this.startDate = startDate
                 this.endDate = endDate

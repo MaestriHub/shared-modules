@@ -10,8 +10,8 @@ export namespace Service {
     export namespace Parameters {
         
         export class Retrieve {
-            salons?: string[] // TODO:
-            employees?: string[]
+            salons?: UUID[]
+            employees?: UUID[]
             value?: string
 
             @ValidateNested()
@@ -23,8 +23,8 @@ export namespace Service {
             constructor(
                 page: Int,
                 per: Int,
-                salons?: string[],
-                employees?: string[],
+                salons?: UUID[],
+                employees?: UUID[],
                 value?: string,
             ) {
                 this.salons = salons
@@ -36,10 +36,10 @@ export namespace Service {
         }
 
         export class RetrieveFull {
-            salon?: string // TODO:
+            salon?: UUID
 
             constructor(
-                salon?: string
+                salon?: UUID
             ) {
                 this.salon = salon
             }

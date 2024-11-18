@@ -39,12 +39,12 @@ export namespace Customer {
         }
 
         export class Retrieve {
-            salons?: string[] // TODO:
-            employees?: string[]
+            salons?: UUID[]
+            employees?: UUID[]
 
             constructor(
-                salons?: string[],
-                employees?: string[],
+                salons?: UUID[],
+                employees?: UUID[],
             ) {
                 this.salons = salons
                 this.employees = employees

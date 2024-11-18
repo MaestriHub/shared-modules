@@ -12,7 +12,8 @@ export namespace Offtime {
             interval: DateInterval
 
             @ValidateNested()
-            coefficient: Decimal //TODO: decimal
+            coefficient: Decimal
+            
             reason?: string
 
             constructor(

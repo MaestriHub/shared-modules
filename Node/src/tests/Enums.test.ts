@@ -1,8 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
-import { AppointmentType, Types } from "../../dto/enums/AppointmentType";
+import { AppointmentType, Types } from "../dto/enums/AppointmentType";
+import { UUID } from '../dto/tsPrimitives/UUID';
 
 test("AppointmentType toJson", async () => {
-    const appointmentType = new AppointmentType(Types.PROCEDURE, uuidv4())
+    const appointmentType = new AppointmentType(Types.PROCEDURE, new UUID())
     expect(appointmentType.type).toBe(Types.PROCEDURE);
 })
 
