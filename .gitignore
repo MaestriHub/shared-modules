@@ -10,3 +10,4 @@ DerivedData/
 node_modules
 *.js
 *.js.map
+*.resolved

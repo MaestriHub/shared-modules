@@ -31,7 +31,8 @@ object Search {
         data class Suggest(
             val value: String,
         ) : Responsable
-
+        
+        @Serializable
         data class Full(
             val suggests: List<Suggest>,
             val salons: List<Salon.Responses.Partial>,

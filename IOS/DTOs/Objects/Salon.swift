@@ -102,6 +102,7 @@ public extension Salon.Responses {
         public var canEdit: Bool = false
         public var isFavorite: Bool = false
         public var localeId: String
+        public var timeZoneId: String
         
         public init(
             id: UUID,
@@ -113,7 +114,8 @@ public extension Salon.Responses {
             isActive: Bool,
             canEdit: Bool,
             isFavorite: Bool,
-            localeId: String
+            localeId: String,
+            timeZoneId: String
         ) {
             self.id = id
             self.name = name
@@ -125,6 +127,7 @@ public extension Salon.Responses {
             self.canEdit = canEdit
             self.isFavorite = isFavorite
             self.localeId = localeId
+            self.timeZoneId = timeZoneId
         }
     }
     
