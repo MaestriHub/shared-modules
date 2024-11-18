@@ -1,4 +1,4 @@
-//MARK: NEED BRAINSTORM
+// MARK: NEED BRAINSTORM
 //export class OperationInfo {
 //    type: OperationInfo.Keys
 //

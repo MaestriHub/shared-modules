@@ -1,12 +1,14 @@
+import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
+import { UUID } from "../tsPrimitives/UUID"
 
 export namespace Complex {
 
     export namespace Parameters {
         
         export class Retrieve {
-            salons?: string[]
+            salons?: string[] // TODO: 
             employees?: string[]
 
             constructor(
@@ -19,18 +21,23 @@ export namespace Complex {
         }
 
         export class Create {
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
             description?: string
             alias?: string
-            procedureIds: string[]
+
+            @ValidateNested()
+            procedureIds: UUID[]
 
             constructor(
                 price: Price,
                 duration: Int,
                 description?: string,
                 alias?: string,
-                procedureIds: string[] = []
+                procedureIds: UUID[] = []
             ) {
                 this.price = price
                 this.duration = duration
@@ -41,18 +48,22 @@ export namespace Complex {
         }
 
         export class Patch {
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
+
             description?: string
             alias?: string
-            procedureIds: string[]
+            procedureIds: UUID[]
 
             constructor(
                 price: Price,
                 duration: Int,
                 description?: string,
                 alias?: string,
-                procedureIds: string[] = []
+                procedureIds: UUID[] = []
             ) {
                 this.price = price
                 this.duration = duration
@@ -66,15 +77,21 @@ export namespace Complex {
     export namespace Responses {
         
         export class Full {
-            id: string
+            @ValidateNested()
+            id: UUID
+
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
+
             description?: string
             alias?: string
             //procedureIds: string[]
 
             constructor(
-                id: string,
+                id: UUID,
                 price: Price,
                 duration: Int,
                 description?: string,
@@ -90,15 +107,21 @@ export namespace Complex {
         }
 
         export class Partial {
-            id: string
+            @ValidateNested()
+            id: UUID
+            
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
+            
             description?: string
             alias?: string
             //procedureIds: string[]
 
             constructor(
-                id: string,
+                id: UUID,
                 price: Price,
                 duration: Int,
                 description?: string,

@@ -1,3 +1,4 @@
+import { IsEmail, isEmail } from "class-validator"
 import { Token } from "../primitives/Token"
 
 export namespace Auth {
@@ -8,7 +9,10 @@ export namespace Auth {
             token: string
             firstName?: string
             lastName?: string
+
+            @IsEmail()
             email?: string
+            
             emailVerified?: boolean
 
             constructor(

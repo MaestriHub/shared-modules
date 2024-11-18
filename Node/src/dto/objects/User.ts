@@ -1,6 +1,8 @@
 import { Contact } from "./Contact"
 import { UserRoleSet } from '../optionSet/UserRoleSet'
 import { MaestriPermissionSet } from '../optionSet/MaestriPermissionSet'
+import { UUID } from "../tsPrimitives/UUID"
+import { ValidateNested } from "class-validator"
 
 export namespace User {
     
@@ -9,6 +11,8 @@ export namespace User {
         export class Patch {
             nickname?: string
             avatar?: URL
+
+            @ValidateNested()
             contact?: Contact.Parameters.Create
 
             constructor(
@@ -26,15 +30,19 @@ export namespace User {
     export namespace Responses {
         
         export class Full {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             nickname: string
             options: UserRoleSet
             permissions: MaestriPermissionSet
             avatar?: URL
+
+            @ValidateNested()
             contact?: Contact.Responses.Full
 
             constructor(
-                id: string,
+                id: UUID,
                 options: UserRoleSet,
                 permissions: MaestriPermissionSet,
                 nickname: string,

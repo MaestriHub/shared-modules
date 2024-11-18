@@ -1,4 +1,4 @@
-//MARK: NEED BRAINSTORM
+// MARK: NEED BRAINSTORM
 /// Описывает тип выплаты
 /// - `BANK_TRANSFER`: Банковский перевод
 /// - `REAL`         : Кеш

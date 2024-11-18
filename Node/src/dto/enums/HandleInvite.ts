@@ -1,4 +1,4 @@
-//MARK: NO NEED FOR WEB TEMPORE
+// MARK: NO NEED FOR WEB TEMPORE
 //import { Customer } from "../objects/Customer"
 //
 //type Success = Customer.Responses.Full

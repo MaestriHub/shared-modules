@@ -4,6 +4,7 @@ import { Wage } from "../primitives/Wage";
 import { Price } from "../primitives/Price";
 import { UUID } from "../tsPrimitives/UUID";
 import { Service } from "./Service";
+import { ValidateNested } from "class-validator";
 
 export namespace Salary {
     
@@ -12,8 +13,13 @@ export namespace Salary {
         export namespace Rules {
 
             export class Create {
+                @ValidateNested()
                 percent?: Int
+                
+                @ValidateNested()
                 grid?: Map<UUID, SalaryPaymentType>
+
+                @ValidateNested()
                 wage?: Wage
 
                 constructor(
@@ -60,8 +66,13 @@ export namespace Salary {
         export namespace Rules {
             
             export class Full {
+                @ValidateNested()
                 percent?: Int
+
+                @ValidateNested()
                 grid?: Map<Service.Responses.Partial, SalaryPaymentType>
+
+                @ValidateNested()
                 wage?: Wage
 
                 constructor(
@@ -79,9 +90,16 @@ export namespace Salary {
         export namespace Balance {
             
             export class Full {
+                @ValidateNested()
                 wage?: Price
+
+                @ValidateNested()
                 grid?: Price[]
+
+                @ValidateNested()
                 procent?: Price[]
+
+                @ValidateNested()
                 sum?: Price[]
 
                 constructor(

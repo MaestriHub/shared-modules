@@ -1,4 +1,6 @@
+import { ValidateNested } from "class-validator"
 import { NoticeCategory } from "../enums/NoticeCategory"
+import { UUID } from "../tsPrimitives/UUID"
 
 export namespace Notice {
     
@@ -6,7 +8,9 @@ export namespace Notice {
 
     export namespace Responses {        
         export class Full {
-            id: string // TODO: UUID представлено как строка??
+            @ValidateNested()
+            id: UUID
+            
             titleKey: string
             messageKey: string
             parameters?: string
@@ -15,7 +19,7 @@ export namespace Notice {
             date?: Date
 
             constructor(
-                id: string, // TODO: UUID представлено как строка??
+                id: UUID,
                 titleKey: string,
                 messageKey: string,
                 category: NoticeCategory,

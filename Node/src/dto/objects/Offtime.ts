@@ -1,4 +1,6 @@
+import { ValidateNested } from "class-validator"
 import { DateInterval } from "../tsPrimitives/DateInterval"
+import { Decimal } from "../tsPrimitives/Decimal"
 import { UUID } from "../tsPrimitives/UUID"
 
 export namespace Offtime {
@@ -6,13 +8,16 @@ export namespace Offtime {
     export namespace Parameters {
 
         export class Create {
+            @ValidateNested()
             interval: DateInterval
-            coefficient: number //TODO: decimal
+
+            @ValidateNested()
+            coefficient: Decimal //TODO: decimal
             reason?: string
 
             constructor(
                 interval: DateInterval,
-                coefficient: number,
+                coefficient: Decimal,
                 reason?: string
             ) {
                 this.interval = interval
@@ -25,17 +30,21 @@ export namespace Offtime {
     export namespace Responses {
 
         export class Full {
+            @ValidateNested()
             id: UUID
+
+            @ValidateNested()
             interval: DateInterval
+
             reason?: string
             timeZoneId: string
-            coefficient: number //Decimal
+            coefficient: Decimal //Decimal
 
             constructor(
                 id: UUID,
                 interval: DateInterval,
                 timeZoneId: string,
-                coefficient: number,
+                coefficient: Decimal,
                 reason?: string
             ) {
                 this.id = id
@@ -47,7 +56,10 @@ export namespace Offtime {
         }
 
         export class Partial {
+            @ValidateNested()
             id: UUID
+            
+            @ValidateNested()
             interval: DateInterval 
 
             constructor(

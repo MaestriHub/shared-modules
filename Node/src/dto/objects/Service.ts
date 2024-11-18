@@ -2,16 +2,22 @@ import { Int } from "../tsPrimitives/Int"
 import { ServiceCategory } from "../enums/ServiceCategory"
 import { Procedure } from "./Procedure"
 import { Price } from "../primitives/Price"
+import { UUID } from "../tsPrimitives/UUID"
+import { ValidateNested } from "class-validator"
 
 export namespace Service {
 
     export namespace Parameters {
         
         export class Retrieve {
-            salons?: string[]
+            salons?: string[] // TODO:
             employees?: string[]
             value?: string
+
+            @ValidateNested()
             page: Int
+
+            @ValidateNested()
             per: Int
 
             constructor(
@@ -30,7 +36,7 @@ export namespace Service {
         }
 
         export class RetrieveFull {
-            salon?: string
+            salon?: string // TODO:
 
             constructor(
                 salon?: string
@@ -81,14 +87,16 @@ export namespace Service {
     export namespace Responses {
 
         export class Full {
-            id: string
+            id: UUID
             title: string
             description: string
             category: ServiceCategory
+
+            @ValidateNested()
             procedure: Procedure.Responses.Full[]
 
             constructor(
-                id: string,
+                id: UUID,
                 title: string,
                 description: string,
                 category: ServiceCategory,
@@ -107,7 +115,11 @@ export namespace Service {
             title: string
             description: string
             category: ServiceCategory
+
+            @ValidateNested()
             minPrice?: Price
+
+            @ValidateNested()
             minDuration?: Int
 
             constructor(
@@ -128,13 +140,15 @@ export namespace Service {
         }
 
         export class Micro {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             title: string
             description: string
             category: ServiceCategory
 
             constructor(
-                id: string,
+                id: UUID,
                 title: string,
                 description: string,
                 category: ServiceCategory,

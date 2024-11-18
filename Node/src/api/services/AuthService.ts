@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   async AppleAuth(body: Auth.Parameters.AppleToken): Promise<Auth.Responses.Full> {
-    const response = await this.client.post(Paths.AppleAuth, body, { headers: {"Device-ID": uuidv4()}})
+    const response = await this.client.post(Paths.AppleAuth, body)
 
     return response.data;
   }

@@ -1,3 +1,4 @@
+import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 
@@ -8,7 +9,7 @@ export namespace Static {
         export class AppointmentsQuery {
             startDate: Date
             endDate: Date
-            employees?: string[]
+            employees?: string[] //TODO: 
             salons?: string[]
 
             constructor(
@@ -28,7 +29,10 @@ export namespace Static {
     export namespace Responses {
 
         export class Appointments {
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             count: Int
 
             constructor(

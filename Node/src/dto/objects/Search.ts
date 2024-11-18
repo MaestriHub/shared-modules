@@ -1,4 +1,4 @@
-//MARK: NO NEED FOR WEB TEMPORE
+// MARK: NO NEED FOR WEB TEMPORE
 //import { SalonType } from "../enums/SalonType"
 //import { Salon } from "./Salon"
 //

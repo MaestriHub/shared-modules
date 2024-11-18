@@ -1,3 +1,4 @@
+import { ValidateNested } from "class-validator"
 import { User } from "./User"
 
 export namespace Professional {
@@ -12,6 +13,7 @@ export namespace Professional {
     export namespace Responses {
         
         export class Partial {
+            @ValidateNested()
             user: User.Responses.Partial
             
             constructor(

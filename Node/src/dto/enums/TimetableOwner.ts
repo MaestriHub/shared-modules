@@ -1,3 +1,5 @@
+import { UUID } from "../tsPrimitives/UUID"
+
 export enum Types {
     Salon = "salon",
     Employee = "employee",
@@ -5,9 +7,9 @@ export enum Types {
 
 export class TimetableOwner {
     type: Types
-    id: string
+    id: UUID
 
-    constructor(type: Types, id: string) {
+    constructor(type: Types, id: UUID) {
         this.type = type
         this.id = id
     }

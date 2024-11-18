@@ -1,3 +1,4 @@
+import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 import { UUID } from "../tsPrimitives/UUID"
@@ -7,7 +8,7 @@ export namespace Procedure {
     export namespace Parameters {
         
         export class Retrieve {
-            salons?: string[]
+            salons?: string[] // TODO:
             employees?: string[]
 
             constructor(
@@ -20,11 +21,18 @@ export namespace Procedure {
         }
 
         export class Create {
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
             description?: string
             alias?: string
+
+            @ValidateNested()
             serviceId: UUID
+
+            @ValidateNested()
             employeeId: UUID
 
             constructor(
@@ -43,8 +51,12 @@ export namespace Procedure {
         }
 
         export class Patch {
+            @ValidateNested()
             price?: Price
+
+            @ValidateNested()
             duration?: Int
+
             description?: string
             alias?: string
 
@@ -65,9 +77,15 @@ export namespace Procedure {
     export namespace Responses {
     
         export class Full {
+            @ValidateNested()
             id: UUID
+
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
+
             description?: string
             alias?: string
             //service: 
@@ -75,9 +93,16 @@ export namespace Procedure {
         }
 
         export class Partial {
+            @ValidateNested()
             id: UUID
+
+            @ValidateNested()
             price: Price
+
+            @ValidateNested()
             duration: Int
+
+            
             description?: string
             alias?: string
             //service:

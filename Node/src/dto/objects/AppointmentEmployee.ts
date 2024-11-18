@@ -3,6 +3,8 @@ import { Price } from "../primitives/Price"
 import { Address } from "../primitives/Address"
 import { AppointmentStatus } from "../enums/AppointmentStatus"
 import { AppointmentType } from "../enums/AppointmentType"
+import { UUID } from "../tsPrimitives/UUID"
+import { ValidateNested } from "class-validator"
 
 export namespace AppointmentEmployee {
 
@@ -18,7 +20,7 @@ export namespace AppointmentEmployee {
             constructor(
                 startDate?: Date,
                 endDate?: Date,
-                employees?: string[],
+                employees?: string[], // TODO: все таки проверить что не все штуки я перевел на uuid
                 salons?: string[],
                 customer?: string
             ) {
@@ -31,12 +33,16 @@ export namespace AppointmentEmployee {
         }
 
         export class Create {
-            customerId: string
+            @ValidateNested()
+            customerId: UUID
+
             type: AppointmentType
+
+            @ValidateNested()
             time: DateInterval
 
             constructor(
-                customerId: string,
+                customerId: UUID,
                 type: AppointmentType,
                 time: DateInterval
             ) {
@@ -47,6 +53,7 @@ export namespace AppointmentEmployee {
         }
 
         export class Patch {
+            @ValidateNested()
             time: DateInterval
 
             constructor(
@@ -57,10 +64,11 @@ export namespace AppointmentEmployee {
         }
 
         export class Approve {
-            appointmentsEmployeeId: string[]
+            @ValidateNested()
+            appointmentsEmployeeId: UUID[]
 
             constructor(
-                appointmentsEmployeeId: string[]
+                appointmentsEmployeeId: UUID[]
             ) {
                 this.appointmentsEmployeeId = appointmentsEmployeeId
             }
@@ -72,7 +80,10 @@ export namespace AppointmentEmployee {
         export class Full {
             // salon //TODO:
             // customer
+            @ValidateNested()
             address: Address
+            
+            @ValidateNested()
             associative: Base[]
 
             constructor(
@@ -86,6 +97,7 @@ export namespace AppointmentEmployee {
 
         export class Partial {
             // customer
+            @ValidateNested()
             associative: Base[]
 
             constructor(
@@ -96,14 +108,20 @@ export namespace AppointmentEmployee {
         }
 
         export class Base {
-            id: string
+            @ValidateNested()
+            id: UUID
+            
             status: AppointmentStatus
             // procedure:
+            
+            @ValidateNested()
             time: DateInterval
+
+            @ValidateNested()
             price: Price
 
             constructor(
-                id: string,
+                id: UUID,
                 status: AppointmentStatus,
                 // procedure:
                 time: DateInterval,

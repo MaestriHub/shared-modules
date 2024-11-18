@@ -1,4 +1,6 @@
+import { ValidateNested } from "class-validator"
 import { CustomerUser } from "../enums/CustomerUser"
+import { UUID } from "../tsPrimitives/UUID"
 import { Contact } from "./Contact"
 
 export namespace Customer {
@@ -6,14 +8,18 @@ export namespace Customer {
     export namespace Parameters {
         
         export class Create {
-            salonId?: string
+            @ValidateNested()
+            salonId?: UUID
+
             alias: string
+
+            @ValidateNested()
             contacts: Contact.Parameters.Create[]
 
             constructor(
                 alias: string,
                 contacts: Contact.Parameters.Create[],
-                salonId?: string,
+                salonId?: UUID,
             ) {
                 this.salonId = salonId
                 this.alias = alias
@@ -22,6 +28,7 @@ export namespace Customer {
         }
 
         export class Registration {
+            @ValidateNested()
             contacts: Contact.Parameters.Create[]
 
             constructor(
@@ -32,7 +39,7 @@ export namespace Customer {
         }
 
         export class Retrieve {
-            salons?: string[]
+            salons?: string[] // TODO:
             employees?: string[]
 
             constructor(
@@ -57,13 +64,17 @@ export namespace Customer {
 
     export namespace Responses {
         export class Full {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             user: CustomerUser
             alias?: string
+
+            @ValidateNested()
             contacts: Contact.Responses.Full[]
 
             constructor(
-                id: string,
+                id: UUID,
                 user: CustomerUser,
                 contacts: Contact.Responses.Full[],
                 alias?: string,
@@ -76,13 +87,17 @@ export namespace Customer {
         }
 
         export class Partial {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             user: CustomerUser
+            
+            @ValidateNested()
             contacts: Contact.Responses.Full[]
             alias?: string
 
             constructor(
-                id: string,
+                id: UUID,
                 user: CustomerUser,
                 contacts: Contact.Responses.Full[],
                 alias?: string,
@@ -95,6 +110,7 @@ export namespace Customer {
         }
 
         export class Verify {
+            @ValidateNested()
             contacts: Contact.Responses.Full[]
 
             constructor(

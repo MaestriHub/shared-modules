@@ -1,3 +1,4 @@
+import { ValidateNested } from "class-validator"
 import { Int } from "../tsPrimitives/Int"
 
 export namespace Schedule {
@@ -37,6 +38,8 @@ export namespace Schedule {
     export class Cycled {
         startDay: Date
         workDays: Map<Int, Day>
+
+        @ValidateNested()
         restDays: Int
 
         constructor (

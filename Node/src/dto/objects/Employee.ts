@@ -1,29 +1,35 @@
+import { ValidateNested } from "class-validator"
 import { ProfessionalEmployee } from "../enums/ProfessionalEmployee"
+import { UUID } from "../tsPrimitives/UUID"
 
 export namespace Employee {
 
     export namespace Parameters {
         
         export class Retrieve {
-            salonId: string[]
+            @ValidateNested()
+            salonId: UUID[]
 
             constructor(
-                salonId: string[]
+                salonId: UUID[]
             ) {
                 this.salonId = salonId
             }
         }
 
         export class Invite {
-            salonId: string
-            positionId: string
+            @ValidateNested()
+            salonId: UUID
+
+            @ValidateNested()
+            positionId: UUID
             //contacts
             //timetable
             description?: string
 
             constructor(
-                salonId: string,
-                positionId: string,
+                salonId: UUID,
+                positionId: UUID,
                 //contacts
                 //timetable
                 description?: string
@@ -35,10 +41,11 @@ export namespace Employee {
         }
 
         export class Patch {
-            positionId?: string
+            @ValidateNested()
+            positionId?: UUID
 
             constructor(
-                positionId?: string
+                positionId?: UUID
             ) {
                 this.positionId = positionId
             }
@@ -47,19 +54,23 @@ export namespace Employee {
 
     export namespace Responses {
         export class Full {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             user: ProfessionalEmployee
             description?: string
             canEdit: boolean
             //contacts
-            salonId: string
+
+            @ValidateNested()
+            salonId: UUID
             //position?: string
 
             constructor(
-                id: string,
+                id: UUID,
                 user: ProfessionalEmployee,
                 canEdit: boolean,
-                salonId: string,
+                salonId: UUID,
                 description?: string,
                 //position?: string
             ) {
@@ -73,13 +84,14 @@ export namespace Employee {
         }
 
         export class Partial {
-            id: string
+            @ValidateNested()
+            id: UUID
             // user:
             // contacts: 
             // position:
 
             constructor(
-                id: string
+                id: UUID
             ) {
                 this.id = id
             }

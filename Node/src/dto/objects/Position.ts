@@ -1,6 +1,7 @@
-import { UUID } from "crypto"
 import { PermissionSet } from "../optionSet/PermissionSet"
 import {  Salary } from "./Salary"
+import { UUID } from "../tsPrimitives/UUID"
+import { ValidateNested } from "class-validator"
 
 export namespace Position {
 
@@ -9,6 +10,8 @@ export namespace Position {
         export class Create {
             title: string
             permissions: PermissionSet
+
+            @ValidateNested()
             salary: Salary.Parameters.Rules.Create
 
             constructor (
@@ -25,12 +28,14 @@ export namespace Position {
         export class Patch {
             title?: string
             permissions?: PermissionSet
-            salary?: Salary.Parameters.Rules.Patch
+
+            @ValidateNested()
+            salary?: Salary.Parameters.Rules.Create
 
             constructor (
                 title?: string,
                 permissions?: PermissionSet,
-                salary?: Salary.Parameters.Rules.Patch
+                salary?: Salary.Parameters.Rules.Create
             ) {
                 this.title = title
                 this.permissions = permissions
@@ -42,9 +47,13 @@ export namespace Position {
     export namespace Responses {
         
         export class Full {
+            @ValidateNested()
             id: UUID
+
             title: string
             permissions: PermissionSet
+
+            @ValidateNested()
             salary: Salary.Responses.Rules.Full
 
             constructor (
@@ -61,7 +70,9 @@ export namespace Position {
         }
 
         export class Partial {
+            @ValidateNested()
             id: UUID
+            
             title: string
 
             constructor (

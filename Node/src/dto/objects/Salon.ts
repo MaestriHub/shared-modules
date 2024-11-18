@@ -2,7 +2,8 @@ import { Address } from "../primitives/Address"
 import { SalonType } from "../enums/SalonType"
 import { Timetable } from "./Timetable"
 import { Contact } from "./Contact"
-import { UUID } from "crypto"
+import { UUID } from "../tsPrimitives/UUID"
+import { ValidateNested } from "class-validator"
 
 export namespace Salon {
 
@@ -15,8 +16,14 @@ export namespace Salon {
             timeZoneId: string
             localeId: string
             description?: string
+
+            @ValidateNested()
             timetable: Timetable.Parameters.Create.Pattern
+
+            @ValidateNested()
             address: Address
+
+            @ValidateNested()
             contacts: Contact.Parameters.Create[]
 
             constructor(
@@ -65,12 +72,17 @@ export namespace Salon {
     export namespace Responses {
 
         export class Full {
+            @ValidateNested()
             id: UUID
+            
             name: string
             type: SalonType
             description?: string
             logo?: URL
+            
+            @ValidateNested()
             address: Address
+            
             isActive: boolean
             canEdit: boolean
             isFavorite: boolean
@@ -105,11 +117,16 @@ export namespace Salon {
         }
 
         export class Partial {
+            @ValidateNested()
             id: UUID
+
             name: string
             type: SalonType
             logo?: URL
+            
+            @ValidateNested()
             address: Address
+            
             isFavorite: boolean
 
             constructor(

@@ -1,4 +1,4 @@
-//MARK: NO NEED FOR WEB TEMPORE
+// MARK: NO NEED FOR WEB TEMPORE
 //import { DateInterval } from "../tsPrimitives/DateInterval"
 //import { Price } from "../primitives/Price"
 //import { Address } from "../primitives/Address"

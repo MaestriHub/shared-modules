@@ -1,4 +1,6 @@
+import { ValidateNested } from "class-validator"
 import { ContactType } from "../enums/ContactType"
+import { UUID } from "../tsPrimitives/UUID"
 
 export namespace Contact {
 
@@ -44,13 +46,15 @@ export namespace Contact {
     export namespace Responses {
         
         export class Full {
-            id: string // TODO: UUID представлено как строка??
+            @ValidateNested()
+            id: UUID
+            
             value: string
             isVerify: boolean
             type: ContactType
 
             constructor(
-                id: string, 
+                id: UUID, 
                 value: string, 
                 isVerify: boolean, 
                 type: ContactType

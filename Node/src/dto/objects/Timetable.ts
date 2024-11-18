@@ -3,6 +3,7 @@ import { UUID } from "../tsPrimitives/UUID"
 import { Schedule } from "../primitives/Schedule"
 import { TimetableOwner } from "../enums/TimetableOwner"
 import { AppointmentType } from "../enums/AppointmentType"
+import { ValidateNested } from "class-validator"
 
 export namespace Timetable {
 
@@ -11,7 +12,9 @@ export namespace Timetable {
         export namespace Create {
 
             export class Pattern {
+                @ValidateNested()
                 schedule: Schedule.Pattern
+
                 startAt: Date
                 endAt?: Date
 
@@ -27,6 +30,7 @@ export namespace Timetable {
             }
 
             export class Flexible {
+                @ValidateNested()
                 workDays: Map<Date, Schedule.Day>
 
                 constructor(
@@ -39,6 +43,8 @@ export namespace Timetable {
 
         export class SearchSlot {
             appointmentType: AppointmentType
+
+            @ValidateNested()
             customerId?: UUID
 
             constructor(
@@ -51,7 +57,10 @@ export namespace Timetable {
         }
 
         export class Retrieve {
+            @ValidateNested()
             owners: TimetableOwner[]
+
+            @ValidateNested()
             period: DateInterval
 
             constructor(
@@ -69,7 +78,9 @@ export namespace Timetable {
         type Intervals = DateInterval[]
 
         export class Slots {
+            @ValidateNested()
             intervals: Intervals
+
             timeZoneId: string
 
             constructor(
@@ -82,8 +93,12 @@ export namespace Timetable {
         }
 
         export class Schedule {
+            @ValidateNested()
             owner: TimetableOwner
+
+            @ValidateNested()
             intervals: Intervals
+            
             timeZoneId: string
 
             constructor(
