@@ -3,7 +3,7 @@
 /// - `CHAIN`     : Сеть салонов
 /// - `MASTER`    : Самозанятый мастер
 export enum SalonType {
-    INDIVIDUAL = "individual",
-    CHAIN = "chain",
-    MASTER = "master",
+    individual = "individual",
+    chain = "chain",
+    master = "master",
 }

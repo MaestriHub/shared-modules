@@ -4,7 +4,7 @@
 /// - `STABLE`     : Рабочая но лучше обновиться
 /// - `UNSUPPORTED`: Неподдерживаемая
 export enum VersionType {
-    LATEST = "latest",
-    STABLE = "stable",
-    UNSUPPORTED = "unsupported",
+    latest = "latest",
+    stable = "stable",
+    unsupported = "unsupported",
 }

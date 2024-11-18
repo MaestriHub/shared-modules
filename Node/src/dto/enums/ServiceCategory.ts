@@ -13,18 +13,18 @@
 /// - `LASHES`      : Ресницы
 /// - `OTHER`       : Остальное
 export enum ServiceCategory {
-    NAILS = "nails",
-    MASSAGE = "massage",
-    SPA = "spa",
-    COSMETOLOGY = "cosmetology",
-    HAIRDRESSING = "hairdressing",
-    EPILATION = "epilation",
-    DEPILATION = "depilation",
-    TATTOO = "tattoo",
-    PIERCING = "piercing",
-    MAKEUP = "makeup",
-    BROWS = "brows",
-    LASHES = "lashes",
-    OTHER = "other",
+    nails = "nails",
+    massage = "massage",
+    spa = "spa",
+    cosmetology = "cosmetology",
+    hairdressing = "hairdressing",
+    epilation = "epilation",
+    depilation = "depilation",
+    tattoo = "tattoo",
+    piercing = "piercing",
+    makeup = "makeup",
+    brows = "brows",
+    lashes = "lashes",
+    other = "other",
 }
 

@@ -6,10 +6,10 @@
 /// - `SALARY`              : Уведомления о зарплате
 /// - `SUGGEST`             : Предложение о смерживании контактов
 export enum NoticeCategory {
-    APPOINTMENT_EMPLOYEE = "appointmentEmployee",
-    APPOINTMENT_CUSTOMER = "appointmentCustomer",
-    EMPLOYEE = "employee",
-    POSITION = "position",
-    SALARY = "salary",
-    SUGGEST = "suggest",
+    appointmentEmployee = "appointmentEmployee",
+    appointmentCustomer = "appointmentCustomer",
+    employee = "employee",
+    position = "position",
+    salary = "salary",
+    suggest = "suggest",
 }

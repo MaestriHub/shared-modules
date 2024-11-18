@@ -3,7 +3,7 @@
 /// - `CANCEL`  : Подписка отменена
 /// - `INACTIVE`: Подписка неактивна
 export enum MembershipState {
-    ACTIVE = "active",
-    CANCEL = "cancel",
-    INACTIVE = "inactive",
+    active = "active",
+    cancel = "cancel",
+    inactive = "inactive",
 }
