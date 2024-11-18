@@ -42,6 +42,7 @@ export namespace Offtime {
             @IsTimeZone()
             timeZoneId: string
 
+            @ValidateNested()
             coefficient: Decimal
 
             constructor(

@@ -10,8 +10,12 @@ export namespace Service {
     export namespace Parameters {
         
         export class Retrieve {
+            @ValidateNested()
             salons?: UUID[]
+
+            @ValidateNested()
             employees?: UUID[]
+
             value?: string
 
             @ValidateNested()
@@ -36,6 +40,7 @@ export namespace Service {
         }
 
         export class RetrieveFull {
+            @ValidateNested()
             salon?: UUID
 
             constructor(
@@ -87,7 +92,9 @@ export namespace Service {
     export namespace Responses {
 
         export class Full {
+            @ValidateNested()
             id: UUID
+
             title: string
             description: string
             category: ServiceCategory
@@ -111,7 +118,9 @@ export namespace Service {
         }
 
         export class Partial {
-            id: string
+            @ValidateNested()
+            id: UUID
+
             title: string
             description: string
             category: ServiceCategory
@@ -123,7 +132,7 @@ export namespace Service {
             minDuration?: Int
 
             constructor(
-                id: string,
+                id: UUID,
                 title: string,
                 description: string,
                 category: ServiceCategory,

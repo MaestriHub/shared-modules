@@ -5,4 +5,12 @@ export class DateInterval {
     duration: number;
 
     start: Date;
+
+    constructor(
+        duration: number,
+        start: Date
+    ) {
+        this.duration = duration;
+        this.start = start;
+    }
 }

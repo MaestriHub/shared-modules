@@ -10,7 +10,11 @@ export namespace Static {
         export class AppointmentsQuery {
             startDate: Date
             endDate: Date
+
+            @ValidateNested()
             employees?: UUID[]
+            
+            @ValidateNested()
             salons?: UUID[]
 
             constructor(

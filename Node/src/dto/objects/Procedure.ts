@@ -8,7 +8,10 @@ export namespace Procedure {
     export namespace Parameters {
         
         export class Retrieve {
+            @ValidateNested()
             salons?: UUID[]
+
+            @ValidateNested()
             employees?: UUID[]
 
             constructor(
@@ -26,6 +29,7 @@ export namespace Procedure {
 
             @ValidateNested()
             duration: Int
+
             description?: string
             alias?: string
 
@@ -90,6 +94,22 @@ export namespace Procedure {
             alias?: string
             //service: 
             //master: 
+
+            constructor(
+                id: UUID,
+                price: Price,
+                duration: Int,
+                description?: string,
+                alias?: string,
+                //service: 
+                //master:
+            ) {
+                this.id = id
+                this.price = price
+                this.duration = duration
+                this.description = description
+                this.alias = alias
+            }
         }
 
         export class Partial {
@@ -101,11 +121,25 @@ export namespace Procedure {
 
             @ValidateNested()
             duration: Int
-
             
             description?: string
             alias?: string
             //service:
+
+            constructor(
+                id: UUID,
+                price: Price,
+                duration: Int,
+                description?: string,
+                alias?: string,
+                //service:
+            ) {
+                this.id = id
+                this.price = price
+                this.duration = duration
+                this.description = description
+                this.alias = alias
+            }
         }
     }
 }

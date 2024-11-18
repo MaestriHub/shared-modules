@@ -39,7 +39,10 @@ export namespace Customer {
         }
 
         export class Retrieve {
+            @ValidateNested()
             salons?: UUID[]
+
+            @ValidateNested()
             employees?: UUID[]
 
             constructor(

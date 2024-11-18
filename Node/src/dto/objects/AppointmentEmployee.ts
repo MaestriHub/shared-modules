@@ -13,8 +13,14 @@ export namespace AppointmentEmployee {
         export class Retrieve {
             startDate?: Date
             endDate?: Date
+
+            @ValidateNested()
             employees?: UUID[]
+
+            @ValidateNested()
             salons?: UUID[]
+
+            @ValidateNested()
             customer?: UUID
 
             constructor(

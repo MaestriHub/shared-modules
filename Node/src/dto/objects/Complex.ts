@@ -8,7 +8,10 @@ export namespace Complex {
     export namespace Parameters {
         
         export class Retrieve {
+            @ValidateNested()
             salons?: UUID[]
+
+            @ValidateNested()
             employees?: UUID[]
 
             constructor(
@@ -56,6 +59,8 @@ export namespace Complex {
 
             description?: string
             alias?: string
+
+            @ValidateNested()
             procedureIds: UUID[]
 
             constructor(
