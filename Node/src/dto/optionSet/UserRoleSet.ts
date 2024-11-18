@@ -1,4 +1,7 @@
+import { IsInt } from "class-validator";
+
 export class UserRoleSet {
+    @IsInt()
     value: number;
 
     static CUSTOMER = 1 << 0;

@@ -1,4 +1,7 @@
+import { IsInt } from "class-validator";
+
 export class PermissionSet {
+    @IsInt()
     value: number;
 
     static OWNER = 1 << 0;

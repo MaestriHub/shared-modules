@@ -1,4 +1,7 @@
+import { IsInt } from "class-validator";
+
 export class MaestriPermissionSet {
+    @IsInt()
     value: number;
 
     static SERVICE = 1 << 0; // Разрешаем создавать свои сервисы
