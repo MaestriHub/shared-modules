@@ -1,29 +1,66 @@
-import * as Contact from './Contact'
+import { Contact } from "./Contact"
 import { UserRoleSet } from '../optionSet/UserRoleSet'
 import { MaestriPermissionSet } from '../optionSet/MaestriPermissionSet'
 
-export type User = Parameters | Responses
+export namespace User {
+    
+    export namespace Parameters {
 
-type Parameters =  Patch
+        export class Patch {
+            nickname?: string
+            avatar?: URL
+            contact?: Contact.Parameters.Create
 
-type Responses = Full | Partial
+            constructor(
+                nickname?: string,
+                avatar?: URL,
+                contact?: Contact.Parameters.Create,
+            ) {
+                this.nickname = nickname
+                this.avatar = avatar
+                this.contact = contact
+            }
+        }
+    }
 
-interface Patch {
-    nickname: string | undefined
-    avatar: URL | undefined
-    contact: Contact.Create | undefined
-}
+    export namespace Responses {
+        
+        export class Full {
+            id: string
+            nickname: string
+            options: UserRoleSet
+            permissions: MaestriPermissionSet
+            avatar?: URL
+            contact?: Contact.Responses.Full
 
-export interface Full {
-    id: string
-    avatar: URL | undefined
-    nickname: string
-    contact: Contact.Full | undefined
-    options: UserRoleSet
-    permissions: MaestriPermissionSet
-}
+            constructor(
+                id: string,
+                options: UserRoleSet,
+                permissions: MaestriPermissionSet,
+                nickname: string,
+                avatar?: URL,
+                contact?: Contact.Responses.Full,
+            ) {
+                this.id = id
+                this.avatar = avatar
+                this.nickname = nickname
+                this.contact = contact
+                this.options = options
+                this.permissions = permissions
+            }
+        }
+        
+        export class Partial {
+            avatar?: URL
+            nickname: string
 
-interface Partial {
-    avatar: URL | undefined
-    nickname: string
+            constructor(
+                nickname: string,
+                avatar?: URL,
+            ) {
+                this.avatar = avatar
+                this.nickname = nickname
+            }
+        }
+    }
 }

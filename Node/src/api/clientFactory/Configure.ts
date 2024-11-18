@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { CookieDealer } from './CookieDealer';
-import { REFRESH_TOKEN_URL } from './env';
+import { Storage } from './Storage';
+import { v4 as uuidv4 } from 'uuid';
+import { REFRESH_TOKEN_BAD_MESSAGE, REFRESH_TOKEN_EXPIRED_MESSAGE, REFRESH_TOKEN_URL } from './env';
 
 // TODO: Протестировать. Проблема при конверизации запросов. Нужно придумать локальную очередь если падает
 // то нужно пойти обновить токены а другие пусть ждуть этого события
 export function clientFactory({ options, storage }) {
   const client = axios.create(options);
-  const cookie = new CookieDealer(storage);
+  const cookie = new Storage(storage);
 
   client.interceptors.request.use(
     (config) => {
@@ -23,35 +24,62 @@ export function clientFactory({ options, storage }) {
     }
   );
 
+  client.interceptors.request.use(
+    async (config) => {
+      let deviceID = await cookie.getCurrentDeviceId() //TODO:
+      if (deviceID === undefined) {
+        deviceID = uuidv4()
+        await cookie.setDeviceId(deviceID)
+      }
+      config.headers["Device-ID"] = deviceID
+      return config;
+    },
+    (error) => {
+      throw error;
+    }
+  )
+
   client.interceptors.response.use(
     (response) => {
       return response;
     },
     (error) => {
+      if (error.config.retry === true) { //TODO: нужно точно разобраться как это работает
+        return
+      }
+
+      const handleError = (error) => {
+        cookie.logout();
+        console.log("ХУЙ!")
+        throw error;
+      };
+
       const originalRequest = error.config
 
       originalRequest.headers = JSON.parse(
         JSON.stringify(originalRequest.headers || {})
       );
+
+      // AUTH ROUTER PROBLEM NEED PANIC
+      //TODO: вероятно еще бывают ошибки и вообще нужно подумать
+      if (error.response.data.reason === 'malformed JWT') {
+        handleError(error);
+      }
+      
       const refreshToken = cookie.getCurrentRefreshToken();
-
-      const handleError = (error) => {
-        cookie.logout();
-        throw error;
-      };
-
+      
+      // TODO: Нужно подумать над правильностью recovery 
       if (
         refreshToken &&
         error.response?.status === 401 &&
         originalRequest?.url !== REFRESH_TOKEN_URL &&
-        originalRequest?.retry !== true
+        error.response?.data?.message !== REFRESH_TOKEN_BAD_MESSAGE &&
+        error.response?.data?.message !== REFRESH_TOKEN_EXPIRED_MESSAGE
       ) {
         originalRequest.retry = true;
 
         return client
-          .post(REFRESH_TOKEN_URL, {
-            refreshToken: refreshToken,
-          })
+          .post(REFRESH_TOKEN_URL, refreshToken)
           .then((res) => {
             const tokens = {
               accessToken: res.data?.accessToken,
@@ -64,15 +92,9 @@ export function clientFactory({ options, storage }) {
       }
 
       // Refresh token missing or expired => logout user...
-      if (
-        error.response?.status === 401 &&
-        error.response?.data?.message === "TokenExpiredError"
-      ) {
-        return handleError(error);
-      }
+      error.response.status === 401 ? handleError(error) : null;
       
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      // Do something with response error
+      // TODO: Нужно ли что-то еще?
       throw error
     }
   );

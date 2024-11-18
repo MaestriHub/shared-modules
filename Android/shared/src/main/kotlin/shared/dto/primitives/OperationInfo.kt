@@ -15,6 +15,7 @@ import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
 import java.util.*
 
+// DEPRECATED! пока не используется и это будет переделано 100%!
 @Serializable
 data class OperationInfo(
     val keys: Keys

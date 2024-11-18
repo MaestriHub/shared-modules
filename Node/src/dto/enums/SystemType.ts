@@ -1,29 +1,37 @@
-type SystemType = Ios | Android | Chrome | Edge | Firefox | Opera | Safari 
-
-interface Ios {
-    version: string
+export enum Types {
+    IOS = "ios",
+    ANDROID = "android",
+    CHROME = "chrome",
+    EDGE = "edge",
+    FIREFOX = "firefox",
+    OPERA = "opera",
+    SAFARI = "safari",
 }
 
-interface Android {
+export class SystemType {
+    type: Types
     version: string
-}
 
-interface Chrome {
-    version: string
-}
+    constructor(type: Types, version: string) {
+        this.type = type
+        this.version = version
+    }
 
-interface Edge {
-    version: string
-}
+    toJSON() {
+        return {
+            [this.type]: {
+                version: this.version
+            }
+        }
+    }
 
-interface Firefox {
-    version: string
-}
+    static fromJSON(json: any): SystemType {
+        const type = Object.keys(json).find(key => Object.values(Types).find(value => value === key));
+        if (!type) {
+            throw new Error('Invalid JSON: no type found');
+        }
+        const version = json[type].version;
 
-interface Opera {
-    version: string
-}
-
-interface Safari {
-    version: string
+        return new SystemType(type as Types, version);
+    }
 }

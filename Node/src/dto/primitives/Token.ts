@@ -1,4 +1,4 @@
 export interface Token {
-    value: string,
-    expiration: Date,
+    value: string
+    expiration: Date
 }

@@ -1,4 +1,4 @@
-type CustomerUser = Link | Value
+export type CustomerUser = Link | Value
 
 interface Link {
     url: URL

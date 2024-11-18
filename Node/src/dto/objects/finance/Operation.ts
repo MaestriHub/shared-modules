@@ -1,31 +1,72 @@
 import { PaymentType } from "../../enums/PaymentType"
 import { Price } from "../../primitives/Price"
 
-export type Operation = Parameters | Responses
+export namespace Operation {
 
-type Parameters = Create | Retrieve
+    export namespace Parameters {
+        export class Create {
+            price: Price
+            salonId: string // TODO: UUID представлено как строка??
+            paymentType: PaymentType
+            appointment?: AppointmentOperation
+            salary?: SalaryOperation
+            other?: OtherOperation
 
-type Responses = Full
+            constructor(
+                price: Price,
+                salonId: string, // TODO: UUID представлено как строка??
+                paymentType: PaymentType,
+                appointment?: AppointmentOperation,
+                salary?: SalaryOperation,
+                other?: OtherOperation
+            ) {
+                this.price = price
+                this.salonId = salonId
+                this.paymentType = paymentType
+                this.appointment = appointment
+                this.salary = salary
+                this.other = other
+            }
+        }
 
-export interface Create {
-    price: Price
-    salonId: string // TODO: UUID представлено как строка??
-    paymentType: PaymentType
-    appointment: AppointmentOperation | undefined
-    salary: SalaryOperation | undefined
-    other: OtherOperation | undefined
-}
+        export class Retrieve {
+            paymentType?: PaymentType
+            startDate?: Date
+            endDate?: Date
+            cashboxIds: string[]
 
-export interface Retrieve {
-    paymentType: PaymentType | undefined
-    startDate: Date | undefined
-    endDate: Date | undefined
-    cashboxIds: string[]
-}
+            constructor(
+                cashboxIds: string[],
+                paymentType?: PaymentType,
+                startDate?: Date,
+                endDate?: Date
+            ) {
+                this.paymentType = paymentType
+                this.startDate = startDate
+                this.endDate = endDate
+                this.cashboxIds = cashboxIds
+            }
+        }
+    }
 
-export interface Full {
-    id: string // TODO: UUID представлено как строка??
-    createDate: Date
-    price: Price
-    paymentType: PaymentType
+    export namespace Responses {
+        export class Full {
+            id: string // TODO: UUID представлено как строка??
+            createDate: Date
+            price: Price
+            paymentType: PaymentType
+
+            constructor(
+                id: string, // TODO: UUID представлено как строка??
+                createDate: Date,
+                price: Price,
+                paymentType: PaymentType
+            ) {
+                this.id = id
+                this.createDate = createDate
+                this.price = price
+                this.paymentType = paymentType
+            }
+        }
+    }
 }

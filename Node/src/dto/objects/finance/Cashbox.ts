@@ -1,35 +1,54 @@
 import { PaymentType } from "../../enums/PaymentType"
 
-// TODO: 
-// FLOW EXAMPLE
-//import * as Cashbox from "./Cashbox";
-//
-// const cashbox: Cashbox.Create = {
-//     salonId: "",
-//     paymentType: PaymentType.BANK_TRANSFER,
-// }
+export namespace Cashbox {
 
-// const createDTO: Create = cashbox
+    export namespace Parameters {
 
-export type Cashbox = Parameters | Responses
+        export class Create {
+            salonId: string // TODO: UUID представлено как строка??
+            paymentType: PaymentType
 
-type Parameters = Create | Retrieve
+            constructor(
+                salonId: string, 
+                paymentType: PaymentType
+            ) {
+                this.salonId = salonId
+                this.paymentType = paymentType
+            }
+        }
 
-type Responses = Full
+        export class Retrieve {
+            paymentType?: PaymentType
+            startDate?: Date
+            endDate?: Date
 
-export interface Create {
-    salonId: string // TODO: UUID представлено как строка??
-    paymentType: PaymentType
-}
+            constructor(
+                paymentType?: PaymentType,
+                startDate?: Date,
+                endDate?: Date
+            ) {
+                this.paymentType = paymentType
+                this.startDate = startDate
+                this.endDate = endDate
+            }
+        }
+    }
 
-export interface Retrieve {
-    paymentType: PaymentType | undefined
-    startDate: Date | undefined
-    endDate: Date | undefined
-}
+    export namespace Responses {
+        export class Full {
+            id: string // TODO: UUID представлено как строка??
+            createDate: Date
+            paymentType: PaymentType
 
-export interface Full {
-    id: string // TODO: UUID представлено как строка??
-    createDate: Date
-    paymentType: PaymentType
+            constructor(
+                id: string, // TODO: UUID представлено как строка??
+                createDate: Date,
+                paymentType: PaymentType
+            ) {
+                this.id = id
+                this.createDate = createDate
+                this.paymentType = paymentType
+            }
+        }
+    }
 }

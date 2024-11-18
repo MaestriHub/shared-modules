@@ -1,21 +1,49 @@
 import { VersionType } from "../enums/VersionType"
+import { SystemType } from "../enums/SystemType"
 
-export type Device = Parameters | Responses
+export namespace Device {
 
-type Parameters =  System
+    export namespace Parameters {
 
-type Responses = Full
+        export class System {
+            manufacturer?: string
+            model?: string
+            system?: SystemType
+            appVersion?: string
+            country?: string
+            fcmToken?: string
 
-interface System {
-    manuFacturer: string | undefined
-    model: string | undefined
-    system: SystemType | undefined
-    appVersion: string | undefined
-    country: string | undefined
-    fcmToken: string | undefined
-}
+            constructor (
+                manufacturer?: string, 
+                model?: string, 
+                system?: SystemType, 
+                appVersion?: string, 
+                country?: string, 
+                fcmToken?: string
+            ) {
+                this.manufacturer = manufacturer
+                this.model = model
+                this.system = system
+                this.appVersion = appVersion
+                this.country = country
+                this.fcmToken = fcmToken
+            }
+        }
+    }
 
-interface Full {
-    id: string
-    version: VersionType | undefined
+    export namespace Responses {
+
+        export class Full {
+            id: string
+            version?: VersionType
+
+            constructor(
+                id: string, 
+                version?: VersionType
+            ) {
+                this.id = id
+                this.version = version
+            }
+        }
+    }
 }

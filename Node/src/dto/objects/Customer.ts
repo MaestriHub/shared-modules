@@ -1,44 +1,107 @@
-import { ContactType } from "../enums/ContactType"
+import { CustomerUser } from "../enums/CustomerUser"
+import { Contact } from "./Contact"
 
-export type Customer = Parameters | Responses
+export namespace Customer {
 
-type Parameters =  Registration | Create | Retrieve | HandleInvite
+    export namespace Parameters {
+        
+        export class Create {
+            salonId?: string
+            alias: string
+            contacts: Contact.Parameters.Create[]
 
-type Responses = Full | Partial | Verify
+            constructor(
+                alias: string,
+                contacts: Contact.Parameters.Create[],
+                salonId?: string,
+            ) {
+                this.salonId = salonId
+                this.alias = alias
+                this.contacts = contacts
+            }
+        }
 
-interface Registration {
-    //contacts: 
-}
+        export class Registration {
+            contacts: Contact.Parameters.Create[]
 
-interface Create {
-    salonId: string | undefined
-    alias: string
-    //contacts:
-}
+            constructor(
+                contacts: Contact.Parameters.Create[]
+            ) {
+                this.contacts = contacts
+            }
+        }
 
-interface Retrieve {
-    salons: string[] | undefined
-    employees: string[] | undefined
-}
+        export class Retrieve {
+            salons?: string[]
+            employees?: string[]
 
-interface HandleInvite {
-    contact: string | undefined
-}
+            constructor(
+                salons?: string[],
+                employees?: string[],
+            ) {
+                this.salons = salons
+                this.employees = employees
+            }
+        }
 
-interface Full {
-    id: string
-    user: CustomerUser
-    alias: string | undefined
-    //contacts: Contact[]
-}
+        export class HandleInvite {
+            contact?: string
 
-interface Partial {
-    id: string
-    user: CustomerUser
-    alias: string | undefined
-    //contacts: Contact[]
-}
+            constructor(
+                contact?: string
+            ) {
+                this.contact = contact
+            }
+        }
+    }
 
-interface Verify {
-    //contacts: 
+    export namespace Responses {
+        export class Full {
+            id: string
+            user: CustomerUser
+            alias?: string
+            contacts: Contact.Responses.Full[]
+
+            constructor(
+                id: string,
+                user: CustomerUser,
+                contacts: Contact.Responses.Full[],
+                alias?: string,
+            ) {
+                this.id = id
+                this.user = user
+                this.alias = alias
+                this.contacts = contacts
+            }
+        }
+
+        export class Partial {
+            id: string
+            user: CustomerUser
+            contacts: Contact.Responses.Full[]
+            alias?: string
+
+            constructor(
+                id: string,
+                user: CustomerUser,
+                contacts: Contact.Responses.Full[],
+                alias?: string,
+            ) {
+                this.id = id
+                this.user = user
+                this.alias = alias
+                this.contacts = contacts
+            }
+        }
+
+        export class Verify {
+            contacts: Contact.Responses.Full[]
+
+            constructor(
+                contacts: Contact.Responses.Full[]
+            ) {
+                this.contacts = contacts
+            }
+        }
+    }
 }

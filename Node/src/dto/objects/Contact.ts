@@ -1,32 +1,75 @@
 import { ContactType } from "../enums/ContactType"
 
-export type Contact = Parameters | Responses
+export namespace Contact {
 
-type Parameters =  Create | SendCode | Verify
+    export namespace Parameters {
 
-type Responses = Full | Verified
+        export class Create {
+            value: string
+            type: ContactType
+            isVerify?: boolean
 
-interface Create {
-    value: string
-    type: ContactType
-    isVerify: boolean | undefined
-}
+            constructor(
+                value: string, 
+                type: ContactType, 
+                isVerify?: boolean
+            ) {
+                this.value = value
+                this.type = type
+                this.isVerify = isVerify
+            }
+        }
 
-interface SendCode {
-    recaptchaToken: string | undefined
-}
+        export class SendCode {
+            recaptchaToken?: string
 
-interface Verify {
-    code: string
-}
+            constructor(
+                recaptchaToken?: string
+            ) {
+                this.recaptchaToken = recaptchaToken
+            }
+        }
 
-interface Full {
-    id: string // TODO: UUID представлено как строка??
-    value: string
-    isVerify: boolean
-    type: ContactType
-}
+        export class Verify {
+            code: string
 
-interface Verified {
-    isVerified: boolean
+            constructor(
+                code: string
+            ) {
+                this.code = code
+            }
+        }
+    }
+
+    export namespace Responses {
+        
+        export class Full {
+            id: string // TODO: UUID представлено как строка??
+            value: string
+            isVerify: boolean
+            type: ContactType
+
+            constructor(
+                id: string, 
+                value: string, 
+                isVerify: boolean, 
+                type: ContactType
+            ) {
+                this.id = id
+                this.value = value
+                this.isVerify = isVerify
+                this.type = type
+            }
+        }
+
+        export class Verified {
+            isVerified: boolean
+
+            constructor(
+                isVerified: boolean
+            ) {
+                this.isVerified = isVerified
+            }
+        }
+    }
 }

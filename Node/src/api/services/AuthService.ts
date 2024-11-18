@@ -1,7 +1,8 @@
 import { client } from "../clientFactory/Client";
 import { Auth } from "../../dto/objects/Auth"
 import { AxiosInstance } from "axios";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { v4 as uuidv4 } from 'uuid';
 
 enum Paths {
   GoogleAuth = "auth/google",
@@ -13,27 +14,17 @@ export class AuthService {
   private client: AxiosInstance
 
   constructor() { 
-    if (process.env.NODE_ENV === 'production') {
-      this.client = client(cookies())
-      console.log('production env')
-    } else {
-      this.client = client(new Map())
-      console.log('test env')
-    }
+    this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
   }
   
   async GoogleAuth(body: Auth.Parameters.GoogleToken): Promise<Auth.Responses.Full> {
-    const response = await this.client.post(Paths.GoogleAuth, {
-      data: body
-    })
+    const response = await this.client.post(Paths.GoogleAuth, body)
 
     return response.data;
   }
 
   async AppleAuth(body: Auth.Parameters.AppleToken): Promise<Auth.Responses.Full> {
-    const response = await this.client.post(Paths.AppleAuth, {
-      data: body,
-    })
+    const response = await this.client.post(Paths.AppleAuth, body, { headers: {"Device-ID": uuidv4()}})
 
     return response.data;
   }
