@@ -5,5 +5,5 @@ interface Link {
 }
 
 interface Value {
-    //value: User // TODO: сдкелать
+    //value: User // TODO: сделать
 } 
