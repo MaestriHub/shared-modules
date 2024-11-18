@@ -2,6 +2,7 @@ import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 import { UUID } from "../tsPrimitives/UUID"
+import { Procedure } from "./Procedure"
 
 export namespace Complex {
 
@@ -93,7 +94,9 @@ export namespace Complex {
 
             description?: string
             alias?: string
-            //procedureIds: string[]
+            
+            @ValidateNested()
+            procedures: Procedure.Responses.Partial[]
 
             constructor(
                 id: UUID,
@@ -101,13 +104,14 @@ export namespace Complex {
                 duration: Int,
                 description?: string,
                 alias?: string,
-                //procedureIds: string[] = []
+                procedures: Procedure.Responses.Partial[] = []
             ) {
                 this.id = id
                 this.price = price
                 this.duration = duration
                 this.description = description
                 this.alias = alias
+                this.procedures = procedures
             }
         }
 
@@ -123,21 +127,24 @@ export namespace Complex {
             
             description?: string
             alias?: string
-            //procedureIds: string[]
+            
+            @ValidateNested()
+            procedures: Procedure.Responses.Partial[]
 
             constructor(
                 id: UUID,
                 price: Price,
                 duration: Int,
+                procedures: Procedure.Responses.Partial[],
                 description?: string,
                 alias?: string,
-                //procedureIds: string[] = []
             ) {
                 this.id = id
                 this.price = price
                 this.duration = duration
                 this.description = description
                 this.alias = alias
+                this.procedures = procedures
             }
         }
     }

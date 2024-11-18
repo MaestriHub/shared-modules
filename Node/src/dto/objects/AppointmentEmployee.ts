@@ -5,6 +5,9 @@ import { AppointmentStatus } from "../enums/AppointmentStatus"
 import { AppointmentType } from "../enums/AppointmentType"
 import { UUID } from "../tsPrimitives/UUID"
 import { ValidateNested } from "class-validator"
+import { Salon } from "./Salon"
+import { Customer } from "./Customer"
+import { Procedure } from "./Procedure"
 
 export namespace AppointmentEmployee {
 
@@ -84,8 +87,12 @@ export namespace AppointmentEmployee {
     export namespace Responses {
 
         export class Full {
-            // salon //TODO:
-            // customer
+            @ValidateNested()
+            salon: Salon.Responses.Partial
+
+            @ValidateNested()
+            customer: Customer.Responses.Partial
+
             @ValidateNested()
             address: Address
             
@@ -93,22 +100,30 @@ export namespace AppointmentEmployee {
             associative: Base[]
 
             constructor(
+                salon: Salon.Responses.Partial,
+                customer: Customer.Responses.Partial,
                 address: Address,
                 associative: Base[]
             ) {
+                this.salon = salon
+                this.customer = customer
                 this.address = address
                 this.associative = associative
             }
         }
 
         export class Partial {
-            // customer
+            @ValidateNested()
+            customer: Customer.Responses.Partial
+
             @ValidateNested()
             associative: Base[]
 
             constructor(
+                customer: Customer.Responses.Partial,
                 associative: Base[]
             ) {
+                this.customer = customer
                 this.associative = associative
             }
         }
@@ -118,7 +133,9 @@ export namespace AppointmentEmployee {
             id: UUID
             
             status: AppointmentStatus
-            // procedure:
+            
+            @ValidateNested()
+            procedure: Procedure.Responses.Partial
             
             @ValidateNested()
             time: DateInterval
@@ -129,12 +146,13 @@ export namespace AppointmentEmployee {
             constructor(
                 id: UUID,
                 status: AppointmentStatus,
-                // procedure:
+                procedure: Procedure.Responses.Partial,
                 time: DateInterval,
                 price: Price
             ) {
                 this.id = id
                 this.status = status
+                this.procedure = procedure
                 this.time = time
                 this.price = price
             }

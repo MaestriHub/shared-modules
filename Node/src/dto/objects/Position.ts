@@ -9,6 +9,8 @@ export namespace Position {
         
         export class Create {
             title: string
+
+            @ValidateNested()
             permissions: PermissionSet
 
             @ValidateNested()
@@ -27,6 +29,8 @@ export namespace Position {
 
         export class Patch {
             title?: string
+
+            @ValidateNested()
             permissions?: PermissionSet
 
             @ValidateNested()
@@ -51,6 +55,8 @@ export namespace Position {
             id: UUID
 
             title: string
+
+            @ValidateNested()
             permissions: PermissionSet
 
             @ValidateNested()

@@ -34,8 +34,13 @@ export namespace User {
             id: UUID
 
             nickname: string
+
+            @ValidateNested()
             options: UserRoleSet
+
+            @ValidateNested()
             permissions: MaestriPermissionSet
+
             avatar?: URL
 
             @ValidateNested()

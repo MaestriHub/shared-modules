@@ -1,5 +1,6 @@
-import { IsEmail, isEmail } from "class-validator"
+import { IsEmail, isEmail, Validate, ValidateNested } from "class-validator"
 import { Token } from "../primitives/Token"
+import { User } from "./User"
 
 export namespace Auth {
 
@@ -52,14 +53,18 @@ export namespace Auth {
         export class Full {
             accessToken: Token
             refreshToken: Token
-            //user:
+
+            @ValidateNested()
+            user: User.Responses.Full
 
             constructor(
                 accessToken: Token, 
-                refreshToken: Token
+                refreshToken: Token,
+                user: User.Responses.Full
             ) { 
                 this.accessToken = accessToken
                 this.refreshToken = refreshToken
+                this.user = user
             }
         }
         

@@ -2,6 +2,8 @@ import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 import { UUID } from "../tsPrimitives/UUID"
+import { Service } from "./Service"
+import { Employee } from "./Employee"
 
 export namespace Procedure {
     
@@ -92,23 +94,29 @@ export namespace Procedure {
 
             description?: string
             alias?: string
-            //service: 
-            //master: 
+            
+            @ValidateNested()
+            service: Service.Responses.Micro
+
+            @ValidateNested()
+            master: Employee.Responses.Partial
 
             constructor(
                 id: UUID,
                 price: Price,
                 duration: Int,
+                service: Service.Responses.Micro,
+                master: Employee.Responses.Partial,
                 description?: string,
                 alias?: string,
-                //service: 
-                //master:
             ) {
                 this.id = id
                 this.price = price
                 this.duration = duration
                 this.description = description
                 this.alias = alias
+                this.service = service
+                this.master = master
             }
         }
 
@@ -124,21 +132,29 @@ export namespace Procedure {
             
             description?: string
             alias?: string
-            //service:
+            
+            @ValidateNested()
+            service: Service.Responses.Micro
+
+            @ValidateNested()
+            master: Employee.Responses.Partial
 
             constructor(
                 id: UUID,
                 price: Price,
                 duration: Int,
+                service: Service.Responses.Micro,
+                master: Employee.Responses.Partial,
                 description?: string,
                 alias?: string,
-                //service:
             ) {
                 this.id = id
                 this.price = price
                 this.duration = duration
                 this.description = description
                 this.alias = alias
+                this.service = service
+                this.master = master
             }
         }
     }
