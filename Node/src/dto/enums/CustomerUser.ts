@@ -1,9 +1,58 @@
-export type CustomerUser = Link | Value
+import { User } from "../objects/User";
+import { UUID } from "../tsPrimitives/UUID";
+import { ValidateNested } from "class-validator";
 
-interface Link {
-    url: URL
+export class CustomerUser {
+    type: CustomerUser.Types
+
+    constructor(type: CustomerUser.Types) {
+        this.type = type
+    }
+
+    toJSON() {
+        switch (true) {
+        case this.type instanceof CustomerUser.Link:
+            return {
+                link: this.type
+            }
+        case this.type instanceof CustomerUser.Value:
+            return {
+                value: this.type
+            }
+        }
+    }
+
+    static fromJSON(json: any): CustomerUser {
+        if (json.link) {
+            return new CustomerUser(json.link);
+        } else if (json.value) {
+            return new CustomerUser(json.value);
+        } else {
+            throw new Error("Unknown Schedule pattern type");
+        }
+    }
 }
 
-interface Value {
-    //value: User // TODO: сделать
-} 
+export namespace CustomerUser {
+
+    export type Types = CustomerUser.Link | 
+                        CustomerUser.Value
+
+    export class Link {
+        @ValidateNested()
+        url: URL
+
+        constructor(url: URL) {
+            this.url = url
+        }
+    }
+
+    export class Value {
+        @ValidateNested()
+        customer: User.Responses.Partial
+
+        constructor(customer: User.Responses.Partial) {
+            this.customer = customer
+        }
+    }
+}

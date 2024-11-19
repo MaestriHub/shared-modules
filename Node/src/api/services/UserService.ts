@@ -4,6 +4,7 @@ import { AxiosInstance } from "axios";
 import { cookies, headers } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Customer } from "../../dto/objects/Customer";
+import { Professional } from "../../dto/objects/Professional";
 
 enum Paths {
   CreateProfessional = "users/professional",
@@ -20,17 +21,18 @@ export class UserService {
     this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
   }
 
-  async CreateProfessional(body: ): Promise<User.Responses.Full> {
+  async CreateProfessional(body: Professional.Parameters.Create): Promise<User.Responses.Full> {
     const response = await this.client.post(Paths.CreateProfessional, body)
 
     return response.data;
   }
 
-  async CreateCustomer(body: Customer.Parameters.Create): Promise<User.Responses.Full> {
-    const response = await this.client.post(Paths.CreateCustomer, body)
+  // ❌ Depreceted for WEB
+  // async CreateCustomer(body: Customer.Parameters.Create): Promise<User.Responses.Full> {
+  //   const response = await this.client.post(Paths.CreateCustomer, body)
 
-    return response.data;
-  }
+  //   return response.data;
+  // }
 
   async GetUser(id: UUID): Promise<User.Responses.Full> {
     const response = await this.client.get(Paths.GetUser)

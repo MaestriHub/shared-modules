@@ -1,31 +1,55 @@
 import { UUID } from "../tsPrimitives/UUID"
-
-export enum Types {
-    Salon = "salon",
-    Employee = "employee",
-}
+import { ValidateNested } from "class-validator";
 
 export class TimetableOwner {
-    type: Types
-    id: UUID
+    type: TimetableOwner.Types
 
-    constructor(type: Types, id: UUID) {
+    constructor(type: TimetableOwner.Types) {
         this.type = type
-        this.id = id
     }
 
     toJSON() {
-        return this.type + ":" + this.id
+        switch (true) {
+        case this.type instanceof TimetableOwner.Salon:
+            return "salon:" + this.type.id
+        case this.type instanceof TimetableOwner.Employee:
+            return "employee:" + this.type.id
+        }
     }
 
-    //TODO: явно не работает
     static fromJSON(json: any): TimetableOwner {
-        const type = Object.keys(json).find(key => Object.values(Types).find(value => value === key));
-        if (!type) {
-            throw new Error('Invalid JSON: no type found');
+        const [type, id] = json.split(":");
+        switch (type) {
+        case "salon":
+            return new TimetableOwner(new TimetableOwner.Salon(id));
+        case "employee":
+            return new TimetableOwner(new TimetableOwner.Employee(id));
+        default:
+            throw new Error("Unknown type");
         }
-        const version = json[type].version;
+    }
+}
 
-        return new TimetableOwner(type as Types, version);
+export namespace TimetableOwner {
+
+    export type Types = TimetableOwner.Employee | 
+                        TimetableOwner.Salon
+
+    export class Salon {
+        @ValidateNested()
+        id: UUID
+
+        constructor(id: UUID) {
+            this.id = id
+        }
+    }
+
+    export class Employee {
+        @ValidateNested()
+        id: UUID 
+
+        constructor(id: UUID) {
+            this.id = id
+        }
     }
 }

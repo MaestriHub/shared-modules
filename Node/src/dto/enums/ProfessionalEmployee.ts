@@ -1,46 +1,57 @@
-type Link = URL
-type Value = Professional.Responses.Partial
+import { Professional } from "../objects/Professional";
+import { ValidateNested } from "class-validator";
 
-export enum Types {
-    LINK = "link",
-    VALUE = "value",
-}
-
-// TODO:
 export class ProfessionalEmployee {
-    type: Types
-    employee: Value | Link
+    type: ProfessionalEmployee.Types
 
-    constructor(type: Types, employee: Value | Link) {
+    constructor(type: ProfessionalEmployee.Types) {
         this.type = type
-        this.employee = this.employee
     }
 
-    //TODO: проверить
     toJSON() {
-        let key: string
-        switch (this.type) {
-            case Types.LINK:
-                key = "url"
-            case Types.VALUE:
-                key = "user"
-        }
-
-        return {
-            [this.type]: {
-                [key]: this.employee
+        switch (true) {
+        case this.type instanceof ProfessionalEmployee.Link:
+            return {
+                link: this.type
+            }
+        case this.type instanceof ProfessionalEmployee.Value:
+            return {
+                value: this.type
             }
         }
     }
 
-    //TODO: проверить!!!
     static fromJSON(json: any): ProfessionalEmployee {
-        const type = Object.keys(json).find(key => Object.values(Types).find(value => value === key));
-        if (!type) {
-            throw new Error('Invalid JSON: no type found');
+        if (json.link) {
+            return new ProfessionalEmployee(json.link);
+        } else if (json.value) {
+            return new ProfessionalEmployee(json.value);
+        } else {
+            throw new Error("Unknown Schedule pattern type");
         }
-        const employee = json[type].employee;
+    }
+}
 
-        return new ProfessionalEmployee(type as Types, employee);
+export namespace ProfessionalEmployee {
+
+    export type Types = ProfessionalEmployee.Link | 
+                        ProfessionalEmployee.Value
+
+    export class Link {
+        @ValidateNested()
+        url: URL
+
+        constructor(url: URL) {
+            this.url = url
+        }
+    }
+
+    export class Value {
+        @ValidateNested()
+        professional: Professional.Responses.Partial
+
+        constructor(professional: Professional.Responses.Partial) {
+            this.professional = professional
+        }
     }
 }

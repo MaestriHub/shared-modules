@@ -1,9 +1,9 @@
-import { AppointmentStatus } from "../dto/enums/AppointmentStatus";
-import { AppointmentType, Types } from "../dto/enums/AppointmentType";
-import { UUID } from '../dto/tsPrimitives/UUID';
+import { AppointmentStatus } from "../../dto/enums/AppointmentStatus";
+import { AppointmentType } from "../../dto/enums/AppointmentType";
+import { UUID } from '../../dto/tsPrimitives/UUID';
 
 test("AppointmentType (ASSOCIATIVE) toJson", async () => {
-    const appointmentType = new AppointmentType(Types.PROCEDURE, new UUID())
+    const appointmentType = new AppointmentType(new AppointmentType.Procedure(new UUID()));
     expect(appointmentType.type).toBe(Types.PROCEDURE);
 })
 

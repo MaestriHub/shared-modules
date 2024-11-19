@@ -1,37 +1,127 @@
-export enum Types {
-    IOS = "ios",
-    ANDROID = "android",
-    CHROME = "chrome",
-    EDGE = "edge",
-    FIREFOX = "firefox",
-    OPERA = "opera",
-    SAFARI = "safari",
-}
-
 export class SystemType {
-    type: Types
-    version: string
+    type: SystemType.Types
 
-    constructor(type: Types, version: string) {
+    constructor(type: SystemType.Types) {
         this.type = type
-        this.version = version
     }
 
     toJSON() {
-        return {
-            [this.type]: {
-                version: this.version
+        switch (true) {
+        case this.type instanceof SystemType.Ios:
+            return {
+                ios: this.type
+            }
+        case this.type instanceof SystemType.Android:
+            return {
+                android: this.type
+            }
+        case this.type instanceof SystemType.Chrome:
+            return {
+                chrome: this.type
+            }
+        case this.type instanceof SystemType.Edge:
+            return {
+                edge: this.type
+            }
+        case this.type instanceof SystemType.Firefox:
+            return {
+                firefox: this.type
+            }
+        case this.type instanceof SystemType.Opera:
+            return {
+                opera: this.type
+            }
+        case this.type instanceof SystemType.Safari:
+            return {
+                safari: this.type
             }
         }
     }
 
     static fromJSON(json: any): SystemType {
-        const type = Object.keys(json).find(key => Object.values(Types).find(value => value === key));
-        if (!type) {
-            throw new Error('Invalid JSON: no type found');
+        if (json.ios) {
+            return new SystemType(json.ios);
+        } else if (json.android) {
+            return new SystemType(json.android);
+        } else if (json.chrome) {
+            return new SystemType(json.chrome);
+        } else if (json.edge) {
+            return new SystemType(json.edge);
+        } else if (json.firefox) {
+            return new SystemType(json.firefox);
+        } else if (json.opera) {
+            return new SystemType(json.opera);
+        } else if (json.safari) {
+            return new SystemType(json.safari);
+        } else {
+            throw new Error("Unknown Schedule pattern type");
         }
-        const version = json[type].version;
+    }
+}
 
-        return new SystemType(type as Types, version);
+export namespace SystemType {
+
+    export type Types = SystemType.Ios     | 
+                        SystemType.Android |
+                        SystemType.Edge    |
+                        SystemType.Chrome  |
+                        SystemType.Opera   |
+                        SystemType.Firefox |
+                        SystemType.Safari
+                        
+    export class Ios {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Android {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Chrome {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Edge {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Firefox {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Opera {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
+    }
+
+    export class Safari {
+        version: string
+
+        constructor(version: string) {
+            this.version = version
+        }
     }
 }

@@ -68,7 +68,9 @@ export namespace Employee {
             @ValidateNested()
             id: UUID
 
+            @ValidateNested()
             user: ProfessionalEmployee
+            
             description?: string
             canEdit: boolean
             

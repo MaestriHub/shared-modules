@@ -1,49 +1,58 @@
-import { Price } from "../primitives/Price"
-import { Int } from "../tsPrimitives/Int"
-
-type Percent = Int
-type Value = Price
-
-export enum Types {
-    PERCENT = "percent",
-    VALUE = "value",
-}
+import { ValidateNested } from "class-validator";
+import { Int } from "../tsPrimitives/Int";
+import { Price } from "../primitives/Price";
 
 export class SalaryPaymentType {
-    type: Types
-    salary: Value | Percent
+    type: SalaryPaymentType.Types
 
-    constructor(type: Types, salary: Value | Percent) {
+    constructor(type: SalaryPaymentType.Types) {
         this.type = type
-        this.salary = salary
     }
 
-    //TODO: проверить
-    //TODO: проверить
     toJSON() {
-        let key: string
-        switch (this.type) {
-            case Types.PERCENT:
-                key = "percent"
-            case Types.VALUE:
-                key = "value"
-        }
-
-        return {
-            [this.type]: {
-                [key]: this.salary
+        switch (true) {
+        case this.type instanceof SalaryPaymentType.Percent:
+            return {
+                percent: this.type
+            }
+        case this.type instanceof SalaryPaymentType.Value:
+            return {
+                value: this.type
             }
         }
     }
 
-    //TODO: проверить
     static fromJSON(json: any): SalaryPaymentType {
-        const type = Object.keys(json).find(key => Object.values(Types).find(value => value === key));
-        if (!type) {
-            throw new Error('Invalid JSON: no type found');
+        if (json.percent) {
+            return new SalaryPaymentType(json.percent);
+        } else if (json.value) {
+            return new SalaryPaymentType(json.value);
+        } else {
+            throw new Error("Unknown Schedule pattern type");
         }
-        const salary = json[type].salary;
+    }
+}
 
-        return new SalaryPaymentType(type as Types, salary);
+export namespace SalaryPaymentType {
+
+    export type Types = SalaryPaymentType.Percent | 
+                        SalaryPaymentType.Value
+
+    export class Percent {
+        @ValidateNested()
+        percent: Int
+
+        constructor(percent: Int) {
+            this.percent = percent
+        }
+    }
+
+    export class Value {
+        @ValidateNested()
+        value: Price
+
+        constructor(value: Price) {
+            this.value = value
+        }
     }
 }

@@ -3,8 +3,60 @@ import { Int } from "../tsPrimitives/Int"
 
 export namespace Schedule {
 
+    type Types = Schedule.Week   | 
+                 Schedule.Cycled | 
+                 Schedule.Day    |  
+                 Schedule.Empty
+
     export class Pattern {
-        //TODO: add other patterns
+        schedules: Types
+
+        constructor(pattern: Types) {
+            this.schedules = pattern
+        }
+
+        toJSON() {
+            switch (true) {
+            case this.schedules instanceof Schedule.Week:
+                return {
+                    weekly: {
+                        week: this.schedules
+                    }
+                }
+            case this.schedules instanceof Schedule.Cycled:
+                return {
+                    cycled: {
+                        cycle: this.schedules
+                    }
+                }
+            case this.schedules instanceof  Schedule.Day:
+                return {
+                    daily: {
+                        day: this.schedules
+                    }
+                }
+            case this.schedules instanceof  Schedule.Empty:
+                return {
+                    empty: {
+                        empty: ''
+                    }
+                }
+            }
+        }
+
+        static fromJSON(json: any): Pattern {
+            if (json.weekly) {
+                return new Pattern(json.weekly.week);
+            } else if (json.cycled) {
+                return new Pattern(json.cycled.cycle);
+            } else if (json.daily) {
+                return new Pattern(json.daily.day);
+            } else if (json.empty) {
+                return new Pattern(new Empty());
+            } else {
+                throw new Error("Unknown Schedule pattern type");
+            }
+        }
     }
 
     export class Week {
@@ -65,4 +117,6 @@ export namespace Schedule {
             this.offTime = offTime
         }
     }
+    
+    export class Empty {}
 }
