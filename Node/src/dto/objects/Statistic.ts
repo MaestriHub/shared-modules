@@ -3,7 +3,7 @@ import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 import { UUID } from "crypto"
 
-export namespace Static {
+export namespace Statistic {
 
     export namespace Parameters {
 
