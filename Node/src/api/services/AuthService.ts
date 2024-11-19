@@ -1,8 +1,7 @@
 import { client } from "../clientFactory/Client";
 import { Auth } from "../../dto/objects/Auth"
 import { AxiosInstance } from "axios";
-import { cookies, headers } from "next/headers";
-import { v4 as uuidv4 } from 'uuid';
+import { cookies } from "next/headers";
 
 enum Paths {
   GoogleAuth = "auth/google",

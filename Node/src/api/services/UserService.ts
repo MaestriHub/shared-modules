@@ -1,10 +1,10 @@
 import { client } from "../clientFactory/Client";
 import { User } from "../../dto/objects/User";
 import { AxiosInstance } from "axios";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
-import { Customer } from "../../dto/objects/Customer";
 import { Professional } from "../../dto/objects/Professional";
+import { Int } from "../../dto/tsPrimitives/Int";
 
 enum Paths {
   CreateProfessional = "users/professional",
@@ -46,7 +46,9 @@ export class UserService {
     return response.data;
   }
 
-  async DeleteUser() {
-    await this.client.delete(Paths.DeleteUser)
+  async DeleteUser(): Promise<Int> {
+    const response = await this.client.delete(Paths.DeleteUser)
+
+    return new Int(response.status)
   }
 }
