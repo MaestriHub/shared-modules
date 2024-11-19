@@ -1,5 +1,5 @@
-import { Auth } from "../dto/objects/Auth";
-import { AuthService } from "../api/services/AuthService";
+import { Auth } from "../../dto/objects/Auth";
+import { AuthService } from "../../api/services/AuthService";
 
 const testToken = "test_npm2"
 
