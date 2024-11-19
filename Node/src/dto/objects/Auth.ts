@@ -1,4 +1,4 @@
-import { IsEmail, isEmail, Validate, ValidateNested } from "class-validator"
+import { IsEmail, ValidateNested } from "class-validator"
 import { Token } from "../primitives/Token"
 import { User } from "./User"
 

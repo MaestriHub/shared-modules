@@ -1,5 +1,5 @@
 import { PermissionSet } from "../optionSet/PermissionSet"
-import {  Salary } from "./Salary"
+import { Salary } from "./Salary"
 import { UUID } from "../tsPrimitives/UUID"
 import { ValidateNested } from "class-validator"
 

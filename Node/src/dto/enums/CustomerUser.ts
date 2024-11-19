@@ -1,5 +1,4 @@
 import { User } from "../objects/User";
-import { UUID } from "../tsPrimitives/UUID";
 import { ValidateNested } from "class-validator";
 
 export class CustomerUser {

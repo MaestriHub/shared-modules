@@ -3,7 +3,6 @@ import { SystemType } from "../enums/SystemType"
 import { UUID } from "../tsPrimitives/UUID"
 import { ValidateNested } from "class-validator"
 
-
 export namespace Device {
 
     export namespace Parameters {

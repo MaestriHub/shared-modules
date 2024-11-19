@@ -1,4 +1,4 @@
-import { IsCurrency, isCurrency, IsDecimal, ValidateNested } from "class-validator"
+import { IsCurrency, ValidateNested } from "class-validator"
 import { Decimal } from "../tsPrimitives/Decimal"
 
 export class Price {

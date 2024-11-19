@@ -5,6 +5,12 @@ export class SystemType {
         this.type = type
     }
 
+    // toJSON() {
+    //     return {
+    //         [this.type.constructor.name.toLowerCase()]: this.type
+    //     }
+    // }
+    
     toJSON() {
         switch (true) {
         case this.type instanceof SystemType.Ios:
@@ -68,7 +74,7 @@ export namespace SystemType {
                         SystemType.Opera   |
                         SystemType.Firefox |
                         SystemType.Safari
-                        
+
     export class Ios {
         version: string
 
