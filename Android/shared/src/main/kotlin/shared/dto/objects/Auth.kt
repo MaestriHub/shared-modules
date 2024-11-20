@@ -35,7 +35,7 @@ object Auth {
         @Serializable
         data class Partial(
             val accessToken: Token,
-            val refreshToken: Token?,
+            val refreshToken: Token? = null,
         ) : Responsable
     }
 }
