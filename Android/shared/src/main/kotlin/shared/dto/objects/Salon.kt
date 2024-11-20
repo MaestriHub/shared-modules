@@ -43,7 +43,7 @@ object Salon {
             var id: UUID,
             var name: String,
             var type: SalonType,
-            var description: String?,
+            var description: String? = null,
             var logo: URI? = null,
             var address: Address,
             var isActive: Boolean,
