@@ -2,6 +2,7 @@ import { IsTimeZone, ValidateNested } from "class-validator"
 import { DateInterval } from "../tsPrimitives/DateInterval"
 import { Decimal } from "../tsPrimitives/Decimal"
 import { UUID } from "../tsPrimitives/UUID"
+import { TimetableOwner } from "../enums/TimetableOwner"
 
 export namespace Offtime {
 
@@ -24,6 +25,22 @@ export namespace Offtime {
                 this.interval = interval
                 this.coefficient = coefficient
                 this.reason = reason
+            }
+        }
+
+        export class Retrieve {
+            @ValidateNested()
+            owners: TimetableOwner[]
+
+            @ValidateNested()
+            period: DateInterval
+
+            constructor(
+                owners: TimetableOwner[],
+                period: DateInterval
+            ) {
+                this.owners = owners
+                this.period = period
             }
         }
     }

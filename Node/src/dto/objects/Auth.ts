@@ -1,6 +1,7 @@
 import { IsEmail, ValidateNested } from "class-validator"
 import { Token } from "../primitives/Token"
 import { User } from "./User"
+import { ezValidate } from "../validate/EzValidate"
 
 export namespace Auth {
 

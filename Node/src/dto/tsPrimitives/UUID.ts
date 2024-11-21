@@ -1,4 +1,5 @@
 import { IsDefined, IsUUID, isUUID } from "class-validator"
+import {  v4 as uuidv4 } from 'uuid';
 
 export class UUID {
     
@@ -6,7 +7,7 @@ export class UUID {
     @IsDefined()
     uuid: string
 
-    constructor(uuid: string) {
+    constructor(uuid: string = uuidv4()) {
         this.uuid = uuid
     }
 

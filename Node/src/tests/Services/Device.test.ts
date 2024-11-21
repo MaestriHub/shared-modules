@@ -6,6 +6,4 @@ test("Device", async () => {
     const device = new Device.Parameters.System()
 
     const res = await deviceService.Check(device)
-
-    console.log(res)
 })

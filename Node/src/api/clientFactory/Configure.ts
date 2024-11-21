@@ -2,6 +2,7 @@ import axios from 'axios';
 import { REFRESH_TOKEN_BAD_MESSAGE, REFRESH_TOKEN_EXPIRED_MESSAGE, REFRESH_TOKEN_URL } from './env';
 import { UUID } from '../../dto/tsPrimitives/UUID';
 import {  v4 as uuidv4 } from 'uuid';
+import { ezValidate } from '../../dto/validate/EzValidate';
 
 // TODO: Протестировать. Проблема при конверизации запросов. Нужно придумать локальную очередь если падает
 // то нужно пойти обновить токены а другие пусть ждуть этого события
@@ -12,6 +13,13 @@ export function clientFactory({ options, storage }) {
     
     client.interceptors.request.use(
         async (config) => {
+            if (config.data) {
+                await ezValidate(config.data);
+            }
+            if (config.params) {
+                await ezValidate(config.params);
+            }
+
             if (config.headers.authorization !== false) {
                 const token = await cookie.getCurrentAccessToken();
                 config.headers.Authorization = "Bearer " + token;

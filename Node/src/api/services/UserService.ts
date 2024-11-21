@@ -2,7 +2,6 @@ import { client } from "../clientFactory/Client";
 import { User } from "../../dto/objects/User";
 import { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
-import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Professional } from "../../dto/objects/Professional";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { CookieStorage, TestStorage } from "../clientFactory/Storage";

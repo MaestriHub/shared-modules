@@ -9,9 +9,9 @@
 /// - `REQUESTED`        : соответствующий Employee/Customer не подтвердил свое участие
 export enum AppointmentStatus {
     requested = "requested",
-    customerApproved = "customerApproved",
-    masterApproved = "masterApproved",
-    bothApproved = "bothApproved",
-    customerDeclined = "customerDeclined",
-    masterDeclined = "masterDeclined",
+    customerApproved = "customer_approved",
+    masterApproved = "master_approved",
+    bothApproved = "both_approved",
+    customerDeclined = "customer_declined",
+    masterDeclined = "master_declined",
 }

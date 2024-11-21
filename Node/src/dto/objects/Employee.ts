@@ -12,12 +12,12 @@ export namespace Employee {
         
         export class Retrieve {
             @ValidateNested()
-            salonId: UUID[]
+            salonsId: UUID[]
 
             constructor(
-                salonId: UUID[]
+                salonsId: UUID[]
             ) {
-                this.salonId = salonId
+                this.salonsId = salonsId
             }
         }
 
@@ -64,6 +64,7 @@ export namespace Employee {
     }
 
     export namespace Responses {
+
         export class Full {
             description?: string
             canEdit: boolean
@@ -105,8 +106,14 @@ export namespace Employee {
         export class Partial {
             @ValidateNested()
             id: UUID
+            
+            @ValidateNested()
             user?: User.Responses.Partial
+
+            @ValidateNested()
             contacts: Contact.Responses.Full[]
+
+            @ValidateNested()
             position: Position.Responses.Partial
 
             constructor(

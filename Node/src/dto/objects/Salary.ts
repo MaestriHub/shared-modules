@@ -6,6 +6,7 @@ import { UUID } from "../tsPrimitives/UUID";
 import { Service } from "./Service";
 import { ValidateNested } from "class-validator";
 import { IsoDate } from "../tsPrimitives/IsoDate";
+import { PaymentType } from "../enums/PaymentType";
 
 export namespace Salary {
     
@@ -38,11 +39,11 @@ export namespace Salary {
         export namespace Balance {
 
             export class Payout {
-                paymentType: SalaryPaymentType
+                paymentType: PaymentType
                 dateTo: IsoDate
 
                 constructor(
-                    paymentType: SalaryPaymentType,
+                    paymentType: PaymentType,
                     dateTo: IsoDate
                 ) {
                     this.paymentType = paymentType
@@ -101,13 +102,13 @@ export namespace Salary {
                 procent?: Price[]
 
                 @ValidateNested()
-                sum?: Price[]
+                sum: Price[]
 
                 constructor(
+                    sum: Price[],
                     wage?: Price,
                     grid?: Price[],
                     procent?: Price[],
-                    sum?: Price[],
                 ) {
                     this.wage = wage
                     this.grid = grid

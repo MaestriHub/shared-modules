@@ -4,12 +4,6 @@ export class SystemType {
     constructor(type: SystemType.Types) {
         this.type = type
     }
-
-    // toJSON() {
-    //     return {
-    //         [this.type.constructor.name.toLowerCase()]: this.type
-    //     }
-    // }
     
     toJSON() {
         switch (true) {

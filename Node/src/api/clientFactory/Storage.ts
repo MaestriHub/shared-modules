@@ -1,7 +1,8 @@
 import { UUID } from "../../dto/tsPrimitives/UUID";
-import { mockStorage } from "./Client";
 import { ACCESS_LIFETIME, ACCESS_TOKEN, DEVICE_ID, DEVICE_ID_LIFETIME, REFRESH_LIFETIME, REFRESH_TOKEN } from "./env";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+
+export const mockStorage = new Map<string, string>()
 
 export interface Tokens {
     accessToken: string,

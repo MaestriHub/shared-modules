@@ -1,9 +1,7 @@
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { clientFactory } from "./Configure";
 import { BASE_URL, REQUEST_TIMEOUT } from "./env";
 import { AxiosInstance } from "axios";
 import { MyStorage } from "./Storage";
-
 
 export function client(storage: MyStorage): AxiosInstance {
     return clientFactory({
@@ -21,5 +19,3 @@ export function client(storage: MyStorage): AxiosInstance {
         storage: storage
     })
 }
-
-export const mockStorage = new Map<string, string>()

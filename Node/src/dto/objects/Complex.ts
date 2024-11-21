@@ -40,9 +40,9 @@ export namespace Complex {
             constructor(
                 price: Price,
                 duration: Int,
+                procedureIds: UUID[],
                 description?: string,
                 alias?: string,
-                procedureIds: UUID[] = []
             ) {
                 this.price = price
                 this.duration = duration
@@ -66,11 +66,11 @@ export namespace Complex {
             procedureIds: UUID[]
 
             constructor(
+                procedureIds: UUID[],
                 price: Price,
                 duration: Int,
                 description?: string,
-                alias?: string,
-                procedureIds: UUID[] = []
+                alias?: string
             ) {
                 this.price = price
                 this.duration = duration

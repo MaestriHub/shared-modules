@@ -34,7 +34,7 @@ export class CustomerUser {
 
 export namespace CustomerUser {
 
-    export type Types = CustomerUser.Link | 
+    export type Types = CustomerUser.Link  | 
                         CustomerUser.Value
 
     export class Link {

@@ -34,7 +34,7 @@ export class AppointmentType {
 
 export namespace AppointmentType {
 
-    export type Types = AppointmentType.Complex | 
+    export type Types = AppointmentType.Complex   | 
                         AppointmentType.Procedure
 
     export class Procedure {

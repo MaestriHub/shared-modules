@@ -8,6 +8,7 @@ export namespace Notice {
     export namespace Parameters {}
 
     export namespace Responses {        
+        
         export class Full {
             @ValidateNested()
             id: UUID
