@@ -10,7 +10,7 @@ import kotlinx.serialization.encoding.Encoder
 import java.text.SimpleDateFormat
 import java.util.*
 
-object DateSerializer : KSerializer<Date> {
+object DateISOSerializer : KSerializer<Date> {
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
@@ -22,5 +22,18 @@ object DateSerializer : KSerializer<Date> {
     override fun deserialize(decoder: Decoder): Date {
         return dateFormat.parse(decoder.decodeString())
             ?: throw SerializationException("Failed to parse date")
+    }
+}
+
+object DateUNIXSerializer : KSerializer<Date> {
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("UnixTimestamp", PrimitiveKind.LONG)
+
+    override fun serialize(encoder: Encoder, value: Date) {
+        encoder.encodeLong(value.time / 1000) // В секунды
+    }
+
+    override fun deserialize(decoder: Decoder): Date {
+        return Date(decoder.decodeLong() * 1000)
     }
 }

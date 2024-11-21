@@ -1,8 +1,7 @@
-@file:UseSerializers(UUIDSerializer::class, DateSerializer::class)
+@file:UseSerializers(UUIDSerializer::class)
 
 package shared.dto.objects
 
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
@@ -18,7 +17,9 @@ object AppointmentCustomer {
     data object Parameters {
         @Serializable
         data class Retrieve(
+            @Contextual
             val startDate: Date?,
+            @Contextual
             val endDate: Date?,
             val employees: List<UUID>?,
             val salons: List<UUID>?,
