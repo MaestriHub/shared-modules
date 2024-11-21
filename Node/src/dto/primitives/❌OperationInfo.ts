@@ -32,12 +32,12 @@
 //    export class SalaryOperation {
 //        initiatorId: string
 //        receiverId: string
-//        dateTo: Date
+//        dateTo: IsoDate
 //
 //        constructor(
 //            initiatorId: string, 
 //            receiverId: string, 
-//            dateTo: Date
+//            dateTo: IsoDate
 //        ) {
 //            this.initiatorId = initiatorId
 //            this.receiverId = receiverId

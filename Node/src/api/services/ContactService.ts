@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Contact } from "../../dto/objects/Contact";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     RetrieveCustomer:  "contacts/customer/(customerId)",
@@ -18,7 +19,10 @@ export class ContactService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async RetrieveCustomer(customerId: UUID): Promise<Contact.Responses.Full[]> {

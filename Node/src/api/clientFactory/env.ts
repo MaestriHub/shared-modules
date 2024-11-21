@@ -2,7 +2,7 @@ export const BASE_URL = 'http://localhost:8080/v1/'
 export const REFRESH_TOKEN_URL = 'refresh'
 
 export const REFRESH_TOKEN = "refreshToken"
-export const ACCESS_TOKEN = "refreshToken"
+export const ACCESS_TOKEN = "accessToken"
 export const DEVICE_ID = "Device-ID"
 
 export const REFRESH_TOKEN_BAD_MESSAGE = "Токен плохой"

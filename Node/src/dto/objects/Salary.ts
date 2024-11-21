@@ -5,6 +5,7 @@ import { Price } from "../primitives/Price";
 import { UUID } from "../tsPrimitives/UUID";
 import { Service } from "./Service";
 import { ValidateNested } from "class-validator";
+import { IsoDate } from "../tsPrimitives/IsoDate";
 
 export namespace Salary {
     
@@ -38,11 +39,11 @@ export namespace Salary {
 
             export class Payout {
                 paymentType: SalaryPaymentType
-                dateTo: Date
+                dateTo: IsoDate
 
                 constructor(
                     paymentType: SalaryPaymentType,
-                    dateTo: Date
+                    dateTo: IsoDate
                 ) {
                     this.paymentType = paymentType
                     this.dateTo = dateTo
@@ -50,10 +51,10 @@ export namespace Salary {
             }
 
             export class Calculate {
-                dateTo: Date
+                dateTo: IsoDate
 
                 constructor(
-                    dateTo: Date
+                    dateTo: IsoDate
                 ) {
                     this.dateTo = dateTo
                 }

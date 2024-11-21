@@ -5,6 +5,7 @@ import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { TimetableOwner } from "../../dto/enums/TimetableOwner";
 import { Offtime } from "../../dto/objects/Offtime";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     Create: "offtime/(owner)",
@@ -16,7 +17,10 @@ export class OfftimeService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async Create(owner: TimetableOwner, body: Offtime.Parameters.Create): Promise<Offtime.Responses.Full> {

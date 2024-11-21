@@ -1,6 +1,7 @@
 import { ValidateNested } from "class-validator"
 import { NoticeCategory } from "../enums/NoticeCategory"
 import { UUID } from "../tsPrimitives/UUID"
+import { IsoDate } from "../tsPrimitives/IsoDate"
 
 export namespace Notice {
     
@@ -16,7 +17,7 @@ export namespace Notice {
             parameters?: string
             category: NoticeCategory
             isRead: boolean
-            date?: Date
+            date?: IsoDate
 
             constructor(
                 id: UUID,
@@ -25,7 +26,7 @@ export namespace Notice {
                 category: NoticeCategory,
                 isRead: boolean,
                 parameters?: string,
-                date?: Date,
+                date?: IsoDate,
             ) {
                 this.id = id
                 this.titleKey = titleKey

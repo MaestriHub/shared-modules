@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Position } from "../../dto/objects/Position";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     Create:   "positions/salon/(salonId)",
@@ -17,7 +18,10 @@ export class PositionService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async Create(salonId: UUID, body: Position.Parameters.Create): Promise<Position.Responses.Full> {

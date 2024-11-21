@@ -25,13 +25,14 @@ export namespace Complex {
         }
 
         export class Create {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             price: Price
 
             @ValidateNested()
             duration: Int
-            description?: string
-            alias?: string
 
             @ValidateNested()
             procedureIds: UUID[]
@@ -52,14 +53,14 @@ export namespace Complex {
         }
 
         export class Patch {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             price: Price
 
             @ValidateNested()
             duration: Int
-
-            description?: string
-            alias?: string
 
             @ValidateNested()
             procedureIds: UUID[]
@@ -83,6 +84,9 @@ export namespace Complex {
     export namespace Responses {
         
         export class Full {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             id: UUID
 
@@ -91,9 +95,6 @@ export namespace Complex {
 
             @ValidateNested()
             duration: Int
-
-            description?: string
-            alias?: string
             
             @ValidateNested()
             procedures: Procedure.Responses.Partial[]
@@ -116,6 +117,9 @@ export namespace Complex {
         }
 
         export class Partial {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             id: UUID
             
@@ -124,9 +128,6 @@ export namespace Complex {
 
             @ValidateNested()
             duration: Int
-            
-            description?: string
-            alias?: string
             
             @ValidateNested()
             procedures: Procedure.Responses.Partial[]

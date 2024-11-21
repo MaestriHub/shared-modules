@@ -4,6 +4,7 @@ import { Schedule } from "../primitives/Schedule"
 import { TimetableOwner } from "../enums/TimetableOwner"
 import { AppointmentType } from "../enums/AppointmentType"
 import { IsTimeZone, ValidateNested } from "class-validator"
+import { IsoDate } from "../tsPrimitives/IsoDate"
 
 export namespace Timetable {
 
@@ -12,16 +13,16 @@ export namespace Timetable {
         export namespace Create {
 
             export class Pattern {
+                startAt: IsoDate
+                endAt?: IsoDate
+
                 @ValidateNested()
                 schedule: Schedule.Pattern
 
-                startAt: Date
-                endAt?: Date
-
                 constructor(
                     schedule: Schedule.Pattern, 
-                    startAt: Date, 
-                    endAt?: Date
+                    startAt: IsoDate, 
+                    endAt?: IsoDate
                 ) {
                     this.schedule = schedule
                     this.startAt = startAt

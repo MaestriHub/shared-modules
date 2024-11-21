@@ -2,14 +2,15 @@ import { ValidateNested } from "class-validator"
 import { Price } from "../primitives/Price"
 import { Int } from "../tsPrimitives/Int"
 import { UUID } from "crypto"
+import { IsoDate } from "../tsPrimitives/IsoDate"
 
 export namespace Statistic {
 
     export namespace Parameters {
 
         export class AppointmentsQuery {
-            startDate: Date
-            endDate: Date
+            startDate: IsoDate
+            endDate: IsoDate
 
             @ValidateNested()
             employees?: UUID[]
@@ -18,8 +19,8 @@ export namespace Statistic {
             salons?: UUID[]
 
             constructor(
-                startDate: Date,
-                endDate: Date,
+                startDate: IsoDate,
+                endDate: IsoDate,
                 employees?: UUID[],
                 salons?: UUID[]
             ) {

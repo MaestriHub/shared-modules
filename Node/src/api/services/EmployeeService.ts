@@ -5,6 +5,7 @@ import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Employee } from "../../dto/objects/Employee";
 import { Salary } from "../../dto/objects/Salary";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     All:          "employees",
@@ -20,7 +21,10 @@ export class EmployeeService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async All(query: Employee.Parameters.Retrieve): Promise<Employee.Responses.Partial[]> {

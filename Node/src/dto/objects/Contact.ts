@@ -46,12 +46,12 @@ export namespace Contact {
     export namespace Responses {
         
         export class Full {
-            @ValidateNested()
-            id: UUID
-            
             value: string
             isVerify: boolean
             type: ContactType
+
+            @ValidateNested()
+            id: UUID
 
             constructor(
                 id: UUID, 

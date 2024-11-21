@@ -30,18 +30,17 @@ export namespace User {
     export namespace Responses {
         
         export class Full {
+            nickname: string
+            avatar?: URL
+
             @ValidateNested()
             id: UUID
-
-            nickname: string
 
             @ValidateNested()
             options: UserRoleSet
 
             @ValidateNested()
             permissions: MaestriPermissionSet
-
-            avatar?: URL
 
             @ValidateNested()
             contact?: Contact.Responses.Full

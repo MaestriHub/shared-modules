@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Complex } from "../../dto/objects/Complex";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     All:      "complex",
@@ -17,7 +18,10 @@ export class ComplexService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async All(query: Complex.Parameters.Retrieve): Promise<Complex.Responses.Partial[]> {

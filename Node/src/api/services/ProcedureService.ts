@@ -5,6 +5,7 @@ import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Position } from "../../dto/objects/Position";
 import { Procedure } from "../../dto/objects/Procedure";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     Create:   "procedures",
@@ -18,7 +19,10 @@ export class ProcedureService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async Create(body: Procedure.Parameters.Create): Promise<Procedure.Responses.Full> {

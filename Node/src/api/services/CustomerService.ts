@@ -3,6 +3,7 @@ import { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Customer } from "../../dto/objects/Customer";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     All:          "customers",
@@ -15,7 +16,10 @@ export class CustomerService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async All(query: Customer.Parameters.Retrieve): Promise<Customer.Responses.Partial[]> {

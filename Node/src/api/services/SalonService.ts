@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Salon } from "../../dto/objects/Salon";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     Workshops:  "salons/workshops",
@@ -19,7 +20,10 @@ export class SalonService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async Workshops(): Promise<Salon.Responses.Partial[]> {

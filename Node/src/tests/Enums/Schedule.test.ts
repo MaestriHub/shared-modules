@@ -1,5 +1,6 @@
 import { Schedule } from "../../dto/primitives/Schedule";
 import { Int } from "../../dto/tsPrimitives/Int";
+import { IsoDate } from "../../dto/tsPrimitives/IsoDate";
 
 test("Schedule day", async () => {
     const day = new Schedule.Pattern(new Schedule.Day("10:00", ["10:00"]))
@@ -11,7 +12,7 @@ test("Schedule day", async () => {
 test("Schedule cycle", async () => {
     const cycle = new Schedule.Pattern(
         new Schedule.Cycled(
-            new Date(), 
+            new IsoDate(), 
             new Map([[new Int(1), new Schedule.Day("10:00", ["10:00"])]]),
             new Int(5)
         ))

@@ -8,13 +8,13 @@ export namespace Offtime {
     export namespace Parameters {
 
         export class Create {
+            reason?: string
+
             @ValidateNested()
             interval: DateInterval
 
             @ValidateNested()
             coefficient: Decimal
-
-            reason?: string
 
             constructor(
                 interval: DateInterval,
@@ -31,13 +31,13 @@ export namespace Offtime {
     export namespace Responses {
 
         export class Full {
+            reason?: string
+
             @ValidateNested()
             id: UUID
 
             @ValidateNested()
             interval: DateInterval
-
-            reason?: string
 
             @IsTimeZone()
             timeZoneId: string

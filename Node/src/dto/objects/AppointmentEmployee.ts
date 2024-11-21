@@ -8,14 +8,15 @@ import { ValidateNested } from "class-validator"
 import { Salon } from "./Salon"
 import { Customer } from "./Customer"
 import { Procedure } from "./Procedure"
+import { IsoDate } from "../tsPrimitives/IsoDate"
 
 export namespace AppointmentEmployee {
 
     export namespace Parameters {
         
         export class Retrieve {
-            startDate?: Date
-            endDate?: Date
+            startDate?: IsoDate
+            endDate?: IsoDate
 
             @ValidateNested()
             employees?: UUID[]
@@ -27,8 +28,8 @@ export namespace AppointmentEmployee {
             customer?: UUID
 
             constructor(
-                startDate?: Date,
-                endDate?: Date,
+                startDate?: IsoDate,
+                endDate?: IsoDate,
                 employees?: UUID[],
                 salons?: UUID[],
                 customer?: UUID
@@ -42,10 +43,10 @@ export namespace AppointmentEmployee {
         }
 
         export class Create {
+            type: AppointmentType
+
             @ValidateNested()
             customerId: UUID
-
-            type: AppointmentType
 
             @ValidateNested()
             time: DateInterval

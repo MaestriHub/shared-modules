@@ -22,6 +22,8 @@ export namespace Employee {
         }
 
         export class Invite {
+            description?: string
+
             @ValidateNested()
             salonId: UUID
 
@@ -33,8 +35,6 @@ export namespace Employee {
 
             @ValidateNested()
             timetable?: Timetable.Parameters.Create.Pattern
-
-            description?: string
 
             constructor(
                 salonId: UUID,
@@ -65,14 +65,14 @@ export namespace Employee {
 
     export namespace Responses {
         export class Full {
+            description?: string
+            canEdit: boolean
+
             @ValidateNested()
             id: UUID
 
             @ValidateNested()
             user: ProfessionalEmployee
-            
-            description?: string
-            canEdit: boolean
             
             @ValidateNested()
             contacts: Contact.Responses.Full[]

@@ -10,13 +10,13 @@ export namespace Service {
     export namespace Parameters {
         
         export class Retrieve {
+            value?: string
+
             @ValidateNested()
             salons?: UUID[]
 
             @ValidateNested()
             employees?: UUID[]
-
-            value?: string
 
             @ValidateNested()
             page: Int
@@ -92,12 +92,12 @@ export namespace Service {
     export namespace Responses {
 
         export class Full {
-            @ValidateNested()
-            id: UUID
-
             title: string
             description: string
             category: ServiceCategory
+
+            @ValidateNested()
+            id: UUID
 
             @ValidateNested()
             procedure: Procedure.Responses.Full[]
@@ -118,12 +118,12 @@ export namespace Service {
         }
 
         export class Partial {
-            @ValidateNested()
-            id: UUID
-
             title: string
             description: string
             category: ServiceCategory
+
+            @ValidateNested()
+            id: UUID
 
             @ValidateNested()
             minPrice?: Price
@@ -149,12 +149,12 @@ export namespace Service {
         }
 
         export class Micro {
-            @ValidateNested()
-            id: UUID
-
             title: string
             description: string
             category: ServiceCategory
+
+            @ValidateNested()
+            id: UUID
 
             constructor(
                 id: UUID,

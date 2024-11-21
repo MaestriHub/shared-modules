@@ -8,10 +8,10 @@ export namespace Customer {
     export namespace Parameters {
         
         export class Create {
+            alias: string
+
             @ValidateNested()
             salonId?: UUID
-
-            alias: string
 
             @ValidateNested()
             contacts: Contact.Parameters.Create[]
@@ -67,11 +67,11 @@ export namespace Customer {
 
     export namespace Responses {
         export class Full {
-            @ValidateNested()
-            id: UUID
-
             user: CustomerUser
             alias?: string
+
+            @ValidateNested()
+            id: UUID
 
             @ValidateNested()
             contacts: Contact.Responses.Full[]
@@ -90,14 +90,14 @@ export namespace Customer {
         }
 
         export class Partial {
+            user: CustomerUser
+            alias?: string
+            
             @ValidateNested()
             id: UUID
-
-            user: CustomerUser
             
             @ValidateNested()
             contacts: Contact.Responses.Full[]
-            alias?: string
 
             constructor(
                 id: UUID,

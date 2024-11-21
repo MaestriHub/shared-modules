@@ -32,15 +32,15 @@
 //
 //        export class Retrieve {
 //            paymentType?: PaymentType
-//            startDate?: Date
-//            endDate?: Date
+//            startDate?: IsoDate
+//            endDate?: IsoDate
 //            cashboxIds: string[]
 //
 //            constructor(
 //                cashboxIds: string[],
 //                paymentType?: PaymentType,
-//                startDate?: Date,
-//                endDate?: Date
+//                startDate?: IsoDate,
+//                endDate?: IsoDate
 //            ) {
 //                this.paymentType = paymentType
 //                this.startDate = startDate
@@ -53,13 +53,13 @@
 //    export namespace Responses {
 //        export class Full {
 //            id: string // TODO: UUID представлено как строка??
-//            createDate: Date
+//            createDate: IsoDate
 //            price: Price
 //            paymentType: PaymentType
 //
 //            constructor(
 //                id: string, // TODO: UUID представлено как строка??
-//                createDate: Date,
+//                createDate: IsoDate,
 //                price: Price,
 //                paymentType: PaymentType
 //            ) {

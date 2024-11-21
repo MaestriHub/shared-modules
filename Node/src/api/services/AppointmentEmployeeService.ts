@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { UUID } from "../../dto/tsPrimitives/UUID";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { AppointmentEmployee } from "../../dto/objects/AppointmentEmployee";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     History:  "appointment/employee/history",
@@ -19,7 +20,10 @@ export class AppointmentEmployeeService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     async History(query: AppointmentEmployee.Parameters.Retrieve): Promise<AppointmentEmployee.Responses.Partial[]> {

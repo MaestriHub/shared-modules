@@ -1,5 +1,6 @@
 import { ValidateNested } from "class-validator"
 import { Int } from "../tsPrimitives/Int"
+import { IsoDate } from "../tsPrimitives/IsoDate"
 
 export namespace Schedule {
 
@@ -9,33 +10,33 @@ export namespace Schedule {
                  Schedule.Empty
 
     export class Pattern {
-        schedules: Types
+        schedule: Types
 
         constructor(pattern: Types) {
-            this.schedules = pattern
+            this.schedule = pattern
         }
 
         toJSON() {
             switch (true) {
-            case this.schedules instanceof Schedule.Week:
+            case this.schedule instanceof Schedule.Week:
                 return {
                     weekly: {
-                        week: this.schedules
+                        week: this.schedule
                     }
                 }
-            case this.schedules instanceof Schedule.Cycled:
+            case this.schedule instanceof Schedule.Cycled:
                 return {
                     cycled: {
-                        cycle: this.schedules
+                        cycle: this.schedule
                     }
                 }
-            case this.schedules instanceof  Schedule.Day:
+            case this.schedule instanceof  Schedule.Day:
                 return {
                     daily: {
-                        day: this.schedules
+                        day: this.schedule
                     }
                 }
-            case this.schedules instanceof  Schedule.Empty:
+            case this.schedule instanceof  Schedule.Empty:
                 return {
                     empty: {
                         empty: ''
@@ -88,14 +89,14 @@ export namespace Schedule {
     }
 
     export class Cycled {
-        startDay: Date
+        startDay: IsoDate
         workDays: Map<Int, Day>
 
         @ValidateNested()
         restDays: Int
 
         constructor (
-            startDay: Date,
+            startDay: IsoDate,
             workDays: Map<Int, Day>,
             restDays: Int
         ) {

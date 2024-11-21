@@ -13,14 +13,13 @@ export namespace Salon {
             name: string
             type: SalonType
             logo?: URL
+            description?: string
 
             @IsTimeZone()
             timeZoneId: string
 
             @IsLocale()
             localeId: string
-
-            description?: string
 
             @ValidateNested()
             timetable: Timetable.Parameters.Create.Pattern
@@ -84,13 +83,12 @@ export namespace Salon {
             type: SalonType
             description?: string
             logo?: URL
-            
-            @ValidateNested()
-            address: Address
-            
             isActive: boolean
             canEdit: boolean
             isFavorite: boolean
+            
+            @ValidateNested()
+            address: Address
 
             @IsLocale()
             localeId: string
@@ -128,14 +126,13 @@ export namespace Salon {
         export class Partial {
             @ValidateNested()
             id: UUID
-
-            name: string
-            type: SalonType
-            logo?: URL
             
             @ValidateNested()
             address: Address
             
+            name: string
+            type: SalonType
+            logo?: URL
             isFavorite: boolean
 
             constructor(

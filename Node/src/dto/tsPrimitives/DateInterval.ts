@@ -1,14 +1,15 @@
 import { IsPositive } from "class-validator";
+import { IsoDate } from "./IsoDate";
 
 export class DateInterval {
     @IsPositive()
     duration: number;
 
-    start: Date;
+    start: IsoDate;
 
     constructor(
         duration: number,
-        start: Date
+        start: IsoDate
     ) {
         this.duration = duration;
         this.start = start;

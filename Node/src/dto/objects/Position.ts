@@ -51,10 +51,10 @@ export namespace Position {
     export namespace Responses {
         
         export class Full {
+            title: string
+
             @ValidateNested()
             id: UUID
-
-            title: string
 
             @ValidateNested()
             permissions: PermissionSet
@@ -76,10 +76,10 @@ export namespace Position {
         }
 
         export class Partial {
+            title: string
+
             @ValidateNested()
             id: UUID
-            
-            title: string
 
             constructor (
                 id: UUID,

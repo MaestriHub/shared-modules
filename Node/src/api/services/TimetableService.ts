@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { TimetableOwner } from "../../dto/enums/TimetableOwner";
 import { Int } from "../../dto/tsPrimitives/Int";
 import { Timetable } from "../../dto/objects/Timetable";
+import { CookieStorage, TestStorage } from "../clientFactory/Storage";
 
 const Paths = {
     Create:      "timetables/(owner)/(force)",
@@ -15,7 +16,10 @@ export class TimetableService {
     private client: AxiosInstance
 
     constructor() { 
-        this.client = client(process.env.NODE_ENV === 'production' ? cookies() : new Map());
+        this.client = client(process.env.NODE_ENV === 'production' ? 
+            new CookieStorage(cookies()) : 
+            new TestStorage()
+        );
     }
 
     // forceChanging если установлено да то меняет расписание не смотря на appointments

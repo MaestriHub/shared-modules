@@ -36,10 +36,10 @@ export namespace Device {
     export namespace Responses {
 
         export class Full {
+            version?: VersionType
+
             @ValidateNested()
             id: UUID
-            
-            version?: VersionType
 
             constructor(
                 id: UUID, 

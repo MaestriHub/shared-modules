@@ -26,14 +26,14 @@ export namespace Procedure {
         }
 
         export class Create {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             price: Price
 
             @ValidateNested()
             duration: Int
-
-            description?: string
-            alias?: string
 
             @ValidateNested()
             serviceId: UUID
@@ -53,18 +53,20 @@ export namespace Procedure {
                 this.duration = duration
                 this.description = description
                 this.alias = alias
+                this.serviceId = serviceId
+                this.employeeId = employeeId
             }
         }
 
         export class Patch {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             price?: Price
 
             @ValidateNested()
             duration?: Int
-
-            description?: string
-            alias?: string
 
             constructor(
                 price?: Price,
@@ -83,6 +85,9 @@ export namespace Procedure {
     export namespace Responses {
     
         export class Full {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             id: UUID
 
@@ -91,9 +96,6 @@ export namespace Procedure {
 
             @ValidateNested()
             duration: Int
-
-            description?: string
-            alias?: string
             
             @ValidateNested()
             service: Service.Responses.Micro
@@ -121,6 +123,9 @@ export namespace Procedure {
         }
 
         export class Partial {
+            description?: string
+            alias?: string
+
             @ValidateNested()
             id: UUID
 
@@ -129,9 +134,6 @@ export namespace Procedure {
 
             @ValidateNested()
             duration: Int
-            
-            description?: string
-            alias?: string
             
             @ValidateNested()
             service: Service.Responses.Micro

@@ -10,11 +10,10 @@ export namespace Auth {
             token: string
             firstName?: string
             lastName?: string
+            emailVerified?: boolean
 
             @IsEmail()
             email?: string
-            
-            emailVerified?: boolean
 
             constructor(
                 token: string, 
