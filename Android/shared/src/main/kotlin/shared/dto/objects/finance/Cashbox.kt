@@ -1,8 +1,7 @@
-@file:UseSerializers(UUIDSerializer::class, DateSerializer::class)
+@file:UseSerializers(UUIDSerializer::class)
 
 package shared.dto.objects.finance
 
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.PaymentType
@@ -22,7 +21,9 @@ object Cashbox {
         @Serializable
         data class Retrieve(
             val paymentType: PaymentType?,
+            @Contextual
             val startDate: Date?,
+            @Contextual
             val endDate: Date?,
         ) : Parametable()
     }
@@ -30,6 +31,7 @@ object Cashbox {
     data object Responses {
         data class Full(
             val id: UUID,
+            @Contextual
             val createDate: Date,
             val paymentType: PaymentType,
         ) : Responsable

@@ -1,8 +1,5 @@
-@file:UseSerializers(DateSerializer::class)
-
 package shared.dto.primitives
 
-import com.maestri.sdk.sources.shared.serializers.DateSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -19,26 +16,26 @@ object Schedule {
     sealed class Pattern : Responsable {
         @Serializable
         data class Weekly(
-            val week: Schedule.Week,
+                val week: Schedule.Week,
         ) : Pattern()
 
         @Serializable
         data class Cycled(
-            val cycle: Schedule.Cycled,
+                val cycle: Schedule.Cycled,
         ) : Pattern()
 
         @Serializable
         data class Daily(
-            val day: Schedule.Day,
+                val day: Schedule.Day,
         ) : Pattern()
 
         @Serializable
         data class Empty(
-            val empty: String = "",
+                val empty: String = "",
         ) : Pattern()
 
         internal object Serializer :
-            JsonContentPolymorphicSerializer<Pattern>(Pattern::class) {
+                JsonContentPolymorphicSerializer<Pattern>(Pattern::class) {
             override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Pattern> {
                 val keys = element.jsonObject.keys
                 return when {
@@ -55,26 +52,27 @@ object Schedule {
     /// WorkSchedule: расписание которое содержит в себе одну неделю
     @Serializable
     data class Week(
-        val monday: Day? = null,
-        val tuesday: Day? = null,
-        val wednesday: Day? = null,
-        val thursday: Day? = null,
-        val friday: Day? = null,
-        val saturday: Day? = null,
-        val sunday: Day? = null,
+            val monday: Day? = null,
+            val tuesday: Day? = null,
+            val wednesday: Day? = null,
+            val thursday: Day? = null,
+            val friday: Day? = null,
+            val saturday: Day? = null,
+            val sunday: Day? = null,
     ) : Parametable(), Responsable
 
     @Serializable
     data class Cycled(
-        val startDay: Date,
-        val workDays: Map<Int, Day>,
-        val restDays: Int,
+            @Contextual
+            val startDay: Date,
+            val workDays: Map<Int, Day>,
+            val restDays: Int,
     ) : Parametable(), Responsable
 
     /// DaySchedule: модель одного дня в расписании
     @Serializable
     data class Day(
-        val workTime: String,
-        val offTime: List<String>,
+            val workTime: String,
+            val offTime: List<String>,
     ) : Parametable(), Responsable
 }
