@@ -57,13 +57,13 @@ public extension Service.Parameters {
     struct Create: Parametable {
         public var title: String
         public var description: String
-        public var category: ServiceCategory
+        public var category: [ServiceTags]
         public var language: String?
         
         public init(
             title: String,
             description: String,
-            category: ServiceCategory,
+            category: [ServiceTags],
             language: String?
         ) {
             self.title = title
@@ -83,13 +83,13 @@ public extension Service.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var description: String?
-        public var category: ServiceCategory?
+        public var category: [ServiceTags]?
         public var language: String?
         
         public init(
             title: String? = nil,
             description: String? = nil,
-            category: ServiceCategory? = nil,
+            category: [ServiceTags]? = nil,
             language: String? = nil
         ) {
             self.title = title
@@ -115,14 +115,14 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: ServiceCategory
+        public var category: [ServiceTags]
         public var procedures: [Procedure.Responses.Full]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: ServiceCategory,
+            category: [ServiceTags],
             procedures: [Procedure.Responses.Full]
         ) {
             self.id = id
@@ -144,7 +144,7 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: ServiceCategory
+        public var category: [ServiceTags]
         public var minPrice: Price?
         public var minDuration: Int?
         
@@ -152,7 +152,7 @@ public extension Service.Responses {
             id: UUID,
             title: String,
             description: String,
-            category: ServiceCategory,
+            category: [ServiceTags],
             minPrice: Price?,
             minDuration: Int?
         ) {
@@ -169,13 +169,13 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: ServiceCategory
+        public var category: [ServiceTags]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: ServiceCategory
+            category: [ServiceTags]
         ) {
             self.id = id
             self.title = title
