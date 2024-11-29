@@ -57,18 +57,18 @@ public extension Service.Parameters {
     struct Create: Parametable {
         public var title: String
         public var description: String
-        public var category: [ServiceTags]
+        public var tags: [ServiceTags]
         public var language: String?
         
         public init(
             title: String,
             description: String,
-            category: [ServiceTags],
+            tags: [ServiceTags],
             language: String?
         ) {
             self.title = title
             self.description = description
-            self.category = category
+            self.tags = tags
             self.language = language
         }
     }
@@ -83,18 +83,18 @@ public extension Service.Parameters {
     struct Patch: Parametable {
         public var title: String?
         public var description: String?
-        public var category: [ServiceTags]?
+        public var tags: [ServiceTags]?
         public var language: String?
         
         public init(
             title: String? = nil,
             description: String? = nil,
-            category: [ServiceTags]? = nil,
+            tags: [ServiceTags]? = nil,
             language: String? = nil
         ) {
             self.title = title
             self.description = description
-            self.category = category
+            self.tags = tags
             self.language = language
         }
     }
@@ -115,20 +115,20 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: [ServiceTags]
+        public var tags: [ServiceTags]
         public var procedures: [Procedure.Responses.Full]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: [ServiceTags],
+            tags: [ServiceTags],
             procedures: [Procedure.Responses.Full]
         ) {
             self.id = id
             self.title = title
             self.description = description
-            self.category = category
+            self.tags = tags
             self.procedures = procedures
         }
     }
@@ -144,7 +144,7 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: [ServiceTags]
+        public var tags: [ServiceTags]
         public var minPrice: Price?
         public var minDuration: Int?
         
@@ -152,14 +152,14 @@ public extension Service.Responses {
             id: UUID,
             title: String,
             description: String,
-            category: [ServiceTags],
+            tags: [ServiceTags],
             minPrice: Price?,
             minDuration: Int?
         ) {
             self.id = id
             self.title = title
             self.description = description
-            self.category = category
+            self.tags = tags
             self.minPrice = minPrice
             self.minDuration = minDuration
         }
@@ -169,20 +169,18 @@ public extension Service.Responses {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: [ServiceTags]
+        public var tags: [ServiceTags]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: [ServiceTags]
+            tags: [ServiceTags]
         ) {
             self.id = id
             self.title = title
             self.description = description
-            self.category = category
+            self.tags = tags
         }
     }
-
 }
-
