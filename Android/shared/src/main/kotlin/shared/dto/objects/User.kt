@@ -32,6 +32,8 @@ object User {
             val contact: Contact.Responses.Full?,
             val options: UserRoleSet,
             val permissions: MaestriPermissionSet,
+            val customerId: UUID?,
+            val professionalId: UUID?,
         ) : Responsable
 
         @Serializable
