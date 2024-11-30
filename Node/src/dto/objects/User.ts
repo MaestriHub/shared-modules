@@ -45,6 +45,12 @@ export namespace User {
             @ValidateNested()
             contact?: Contact.Responses.Full
 
+            @ValidateNested()
+            customerId?: UUID
+
+            @ValidateNested()
+            professionalId?: UUID
+
             constructor(
                 id: UUID,
                 options: UserRoleSet,
@@ -52,6 +58,8 @@ export namespace User {
                 nickname: string,
                 avatar?: URL,
                 contact?: Contact.Responses.Full,
+                customerId?: UUID,
+                professionalId?: UUID,
             ) {
                 this.id = id
                 this.avatar = avatar
@@ -59,6 +67,8 @@ export namespace User {
                 this.contact = contact
                 this.options = options
                 this.permissions = permissions
+                this.customerId = customerId
+                this.professionalId = professionalId
             }
         }
         
