@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum PaymentPeriod: Codable, Hashable {
+public enum PaymentPeriod: String, Codable, Hashable {
     case day
     case month
     case hour
