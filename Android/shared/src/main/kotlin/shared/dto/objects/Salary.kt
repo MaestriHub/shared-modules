@@ -17,47 +17,56 @@ object Salary {
         data object Rules {
             @Serializable
             data class Create(
-                    val percent: Int?,
-                    val grid: Map<UUID, SalaryPaymentType>?,
-                    val wage: Wage,
+                val percent: Int?,
+                val grid: Map<UUID, SalaryPaymentType>?,
+                val wage: Wage,
             ) : Parametable()
         }
 
         data object Balance {
             @Serializable
             data class Payout(
-                    val paymentType: PaymentType,
-                    @Contextual
-                    val dateTo: Date,
+                val paymentType: PaymentType,
+                @Contextual
+                val dateTo: Date,
             ) : Parametable()
 
             @Serializable
             data class Calculate(
-                    @Contextual
-                    val dateTo: Date,
+                @Contextual
+                val dateTo: Date,
             ) : Parametable()
         }
     }
 
     data object Responses {
+
+        data object Helpers {
+
+            @Serializable
+            data class ServiceWithPaymentType(
+                val service: Service.Responses.Partial,
+                val paymentType: SalaryPaymentType
+            )
+        }
+
         data object Rules {
             @Serializable
             data class Full(
-                    val percent: Int?,
-                    val grid: Map<UUID, SalaryPaymentType>?,
-                    val wage: Wage?,
+                val percent: Int?,
+                val grid: List<Helpers.ServiceWithPaymentType>?,
+                val wage: Wage?,
             ) : Parametable()
         }
 
         data object Balance {
             @Serializable
             data class Full(
-                    val wage: Price?,
-                    val grid: List<Price>?,
-                    val procent: List<Price>?,
-                    val sum: List<Price>?,
+                val wage: Price?,
+                val grid: List<Price>?,
+                val procent: List<Price>?,
+                val sum: List<Price>,
             ) : Parametable()
         }
     }
 }
-
