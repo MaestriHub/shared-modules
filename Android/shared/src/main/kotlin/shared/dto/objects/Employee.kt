@@ -38,7 +38,7 @@ object Employee {
         data class Full(
             val id: UUID,
             val user: ProfessionalEmployee,
-            val description: String?,
+            val description: String? = null,
             val canEdit: Boolean = false,
             val contacts: List<Contact.Responses.Full>,
             val salonId: UUID,

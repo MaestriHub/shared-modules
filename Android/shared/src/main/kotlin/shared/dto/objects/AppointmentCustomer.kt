@@ -1,7 +1,11 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.objects
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
@@ -17,9 +21,9 @@ object AppointmentCustomer {
     data object Parameters {
         @Serializable
         data class Retrieve(
-            @Contextual
+
             val startDate: Date?,
-            @Contextual
+
             val endDate: Date?,
             val employees: List<UUID>?,
             val salons: List<UUID>?,

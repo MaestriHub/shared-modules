@@ -1,7 +1,11 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.objects.finance
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.PaymentType
@@ -27,9 +31,7 @@ object Operation {
 
         @Serializable
         data class Retrieve(
-            @Contextual
             val startDate: Date?,
-            @Contextual
             val endDate: Date?,
             val paymentType: PaymentType?,
             val cashboxIds: List<UUID>?,
@@ -40,7 +42,6 @@ object Operation {
         @Serializable
         data class Full(
             val id: UUID,
-            @Contextual
             val createDate: Date,
             val price: Price,
             val paymentType: PaymentType,

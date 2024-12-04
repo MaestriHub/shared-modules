@@ -1,7 +1,11 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.primitives
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -29,7 +33,6 @@ data class OperationInfo(
     data class SalaryOperation(
         val initiatorId: UUID, // employeeId
         val receiverId: UUID, // employeeId
-        @Contextual
         val dateTo: Date, // Дата, Дальше которой все оплачено зарплатой
     ) : Parametable(), Responsable
 

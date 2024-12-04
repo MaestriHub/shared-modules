@@ -16,6 +16,7 @@ import kotlinx.serialization.SerialName
 /// - `BROWS`       : Брови
 /// - `LASHES`      : Ресницы
 /// - `OTHER`       : Остальное
+
 enum class ServiceCategory {
     @SerialName("nails")
     NAILS,
