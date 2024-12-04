@@ -12,11 +12,15 @@ public enum Salary {
 public extension Salary.Responses {
     enum Rules {}
     enum Balance {}
+    
+    enum Helpers {}
 }
 
 public extension Salary.Parameters {
     enum Rules {}
     enum Balance {}
+    
+    enum Helpers {}
 }
 
 // MARK: - Parameters -
@@ -84,19 +88,14 @@ public extension Salary.Parameters.Balance {
 public extension Salary.Responses.Rules {
     
     /// Полная информация о зарплате.
-    ///
-    /// ### Properties:
-    /// - `percent`: Процент от прибыли.
-    /// - `grid`: Сдельная оплата за конкретную услугу.
-    /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     struct Full: Responsable, Hashable, Equatable {
         public var percent: Int?
-        public var grid: [Service.Responses.Partial : SalaryPaymentType]?
+        public var grid: [Salary.Responses.Helpers.ServiceWithPaymentType]?
         public var wage: Wage?
         
         public init(
             percent: Int?,
-            grid: [Service.Responses.Partial : SalaryPaymentType]?,
+            grid: [Salary.Responses.Helpers.ServiceWithPaymentType]?,
             wage: Wage?
         ) {
             self.percent = percent
@@ -131,6 +130,22 @@ public extension Salary.Responses.Balance {
             self.grid = grid
             self.procent = procent
             self.sum = sum
+        }
+    }
+}
+
+public extension Salary.Responses.Helpers {
+    
+    struct ServiceWithPaymentType: Codable, Hashable {
+        public var service: Service.Responses.Partial
+        public var paymentType: SalaryPaymentType
+        
+        public init(
+            service: Service.Responses.Partial,
+            paymentType: SalaryPaymentType
+        ) {
+            self.service = service
+            self.paymentType = paymentType
         }
     }
 }
