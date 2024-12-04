@@ -22,8 +22,13 @@ sealed class ProfessionalEmployee : Responsable {
 
     @Serializable
     data class Value(
-        val user: Professional.Responses.Partial,
+        val value: User,
     ) : ProfessionalEmployee()
+
+    @Serializable
+    data class User(
+        val user: Professional.Responses.Partial
+    )
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<ProfessionalEmployee>(ProfessionalEmployee::class) {

@@ -1,7 +1,11 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.objects
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
@@ -18,55 +22,53 @@ object AppointmentEmployee {
 
         @Serializable
         data class Retrieve(
-                @Contextual
-                val startDate: Date?,
-                @Contextual
-                val endDate: Date?,
-                val employees: List<UUID>?,
-                val salons: List<UUID>?,
-                val customer: UUID?
+            val startDate: Date?,
+            val endDate: Date?,
+            val employees: List<UUID>?,
+            val salons: List<UUID>?,
+            val customer: UUID?
         ) : Parametable()
 
         @Serializable
         data class Create(
-                val customerId: UUID,
-                val type: AppointmentType,
-                val time: DateInterval,
+            val customerId: UUID,
+            val type: AppointmentType,
+            val time: DateInterval,
         ) : Parametable()
 
         @Serializable
         data class Approve(
-                val appointmentsEmployeeId: List<UUID>,
+            val appointmentsEmployeeId: List<UUID>,
         ) : Parametable()
 
         @Serializable
         data class Patch(
-                val time: DateInterval,
+            val time: DateInterval,
         ) : Parametable()
     }
 
     data object Responses {
         @Serializable
         data class Full(
-                val salon: Salon.Responses.Partial,
-                val customer: Customer.Responses.Partial,
-                val address: Address,
-                val associative: List<Base>,
+            val salon: Salon.Responses.Partial,
+            val customer: Customer.Responses.Partial,
+            val address: Address,
+            val associative: List<Base>,
         ) : Responsable
 
         @Serializable
         data class Partial(
-                val customer: Customer.Responses.Partial,
-                val associative: List<Base>,
+            val customer: Customer.Responses.Partial,
+            val associative: List<Base>,
         ) : Responsable
 
         @Serializable
         data class Base(
-                val id: UUID,
-                val status: AppointmentStatus,
-                val procedure: Procedure.Responses.Partial,
-                val time: DateInterval,
-                val price: Price,
+            val id: UUID,
+            val status: AppointmentStatus,
+            val procedure: Procedure.Responses.Partial,
+            val time: DateInterval,
+            val price: Price,
         ) : Responsable
     }
 }

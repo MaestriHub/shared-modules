@@ -10,9 +10,20 @@ import shared.dto.protocols.Responsable
 
 @Serializable(SalaryPaymentType.Serializer::class)
 sealed class SalaryPaymentType : Responsable {
+
+    @Serializable
+    data class Percent2(
+        val percent: Percent
+    ) : SalaryPaymentType()
+
     @Serializable
     data class Percent(
         val percent: Int,
+    ) : SalaryPaymentType()
+
+    @Serializable
+    data class Value2(
+        val value: Value,
     ) : SalaryPaymentType()
 
     @Serializable
@@ -24,8 +35,8 @@ sealed class SalaryPaymentType : Responsable {
         JsonContentPolymorphicSerializer<SalaryPaymentType>(SalaryPaymentType::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SalaryPaymentType> {
             return when (element.jsonObject.contains("percent")) {
-                true -> Percent.serializer()
-                false -> Value.serializer()
+                true -> Percent2.serializer()
+                false -> Value2.serializer()
             }
         }
     }
