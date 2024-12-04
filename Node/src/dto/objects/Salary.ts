@@ -64,6 +64,25 @@ export namespace Salary {
     }
     
     export namespace Responses {
+
+        export namespace Helpers {
+
+            export class ServiceWithPaymentType {
+                @ValidateNested()
+                service: Service.Responses.Partial
+
+                @ValidateNested()
+                paymentType: SalaryPaymentType
+
+                constructor(
+                    service: Service.Responses.Partial,
+                    paymentType: SalaryPaymentType
+                ) {
+                    this.service = service
+                    this.paymentType = paymentType
+                }
+            }
+        }
         
         export namespace Rules {
             
@@ -72,14 +91,14 @@ export namespace Salary {
                 percent?: Int
 
                 @ValidateNested()
-                grid?: Map<Service.Responses.Partial, SalaryPaymentType>
+                grid?: Helpers.ServiceWithPaymentType[]
 
                 @ValidateNested()
                 wage?: Wage
 
                 constructor(
                     percent?: Int,
-                    grid?: Map<Service.Responses.Partial, SalaryPaymentType>,
+                    grid?: Helpers.ServiceWithPaymentType[],
                     wage?: Wage,
                 ) {
                     this.percent = percent
