@@ -1,8 +1,4 @@
-@file:UseSerializers(
-    UUIDSerializer::class,
-    TimetableOwnerSerializer::class,
-    DateISOSerializer::class
-)
+@file:UseSerializers(UUIDSerializer::class, TimetableOwnerSerializer::class)
 
 package shared.dto.objects
 
@@ -13,7 +9,6 @@ import shared.dto.enums.TimetableOwner
 import shared.dto.primitives.Schedule
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import shared.serializers.DateISOSerializer
 import shared.serializers.TimetableOwnerSerializer
 import shared.serializers.UUIDSerializer
 import java.util.*
@@ -25,28 +20,31 @@ object Timetable {
         data object Create {
             @Serializable
             data class Pattern(
-                val schedule: Schedule.Pattern,
-                val startAt: Date,
-                val endAt: Date?,
+                    val schedule: Schedule.Pattern,
+                    @Contextual
+                    val startAt: Date,
+                    @Contextual
+                    val endAt: Date?,
             ) : Parametable()
 
             @Serializable
             data class Flexible(
-                val workDays: Map<Date, Schedule.Day>
+                    @Contextual
+                    val workDays: Map<Date, Schedule.Day>
             ) : Parametable()
         }
 
         @Serializable
         data class SearchSlot(
-            val appointmentType: AppointmentType,
-            val customerId: UUID?,
+                val appointmentType: AppointmentType,
+                val customerId: UUID?,
         ) : Parametable()
 
         @Serializable
         data class Retrieve(
-            val owners: List<TimetableOwner>,
-            //Идеально отправлять в salon time zone с 00:00-00:00 чтобы были только дни
-            val period: DateInterval,
+                val owners: List<TimetableOwner>,
+                //Идеально отправлять в salon time zone с 00:00-00:00 чтобы были только дни
+                val period: DateInterval,
         ) : Parametable()
     }
 
@@ -54,16 +52,16 @@ object Timetable {
         // Используется для возвращения найденных слотов на которые можно записаться
         @Serializable
         data class Slots(
-            val intervals: Intervals,
-            val timeZoneId: String,
+                val intervals: Intervals,
+                val timeZoneId: String,
         ) : Responsable
 
         @Serializable
         data class Schedule(
-            val owner: TimetableOwner,
-            //для недели 7 дней для месяца 28-31
-            val intervals: Intervals,
-            val timeZoneId: String,
+                val owner: TimetableOwner,
+                //для недели 7 дней для месяца 28-31
+                val intervals: Intervals,
+                val timeZoneId: String,
         ) : Responsable
     }
 }

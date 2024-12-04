@@ -1,8 +1,5 @@
-@file:UseSerializers(DateISOSerializer::class)
 package shared.dto.primitives
 
-
-import shared.serializers.DateISOSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -12,7 +9,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import java.util.Date
+import java.util.*
 
 object Schedule {
     @Serializable(Pattern.Serializer::class)
@@ -66,7 +63,7 @@ object Schedule {
 
     @Serializable
     data class Cycled(
-
+            @Contextual
             val startDay: Date,
             val workDays: Map<Int, Day>,
             val restDays: Int,

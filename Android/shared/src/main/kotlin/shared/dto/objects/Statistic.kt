@@ -1,11 +1,7 @@
-@file:UseSerializers(
-    UUIDSerializer::class,
-    DateISOSerializer::class
-)
+@file:UseSerializers(UUIDSerializer::class)
 
 package shared.dto.objects
 
-import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.primitives.Price
@@ -18,18 +14,20 @@ object Statistic {
     data object Parameters {
         @Serializable
         data class AppointmentsQuery(
-            val startDate: Date,
-            val endDate: Date,
-            val employees: List<UUID>?,
-            val salons: List<UUID>?,
+                @Contextual
+                val startDate: Date,
+                @Contextual
+                val endDate: Date,
+                val employees: List<UUID>?,
+                val salons: List<UUID>?,
         ) : Parametable()
     }
 
     data object Responses {
         @Serializable
         data class Appointments(
-            val price: Price,
-            val count: Int,
+                val price: Price,
+                val count: Int,
         ) : Responsable
     }
 }

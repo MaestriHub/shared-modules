@@ -14,25 +14,25 @@ object Procedure {
     data object Parameters {
         @Serializable
         data class Retrieve(
-            val salons: List<UUID>? = null,
-            val employees: List<UUID>? = null,
+            val salons: List<UUID>?,
+            val employees: List<UUID>?,
         ) : Parametable()
 
         @Serializable
         data class Create(
             val price: Price,
             val duration: Int,
-            val description: String? = null,
-            val alias: String? = null,
+            val description: String?,
+            val alias: String?,
             val serviceId: UUID,
             val employeeId: UUID,
         ) : Parametable()
 
         @Serializable
         data class Patch(
-            val priceval: Price? = null,
-            val durationval: Int? = null,
-            val description: String? = null,
+            val priceval: Price?,
+            val durationval: Int?,
+            val description: String?,
             val alias: String?,
         ) : Parametable()
     }
@@ -43,8 +43,8 @@ object Procedure {
             val id: UUID,
             val price: Price,
             val duration: Int,
-            val description: String? = null,
-            val alias: String? = null,
+            val description: String?,
+            val alias: String?,
             val service: Service.Responses.Micro,
             val master: Employee.Responses.Partial,
         ) : Responsable
@@ -54,8 +54,8 @@ object Procedure {
             val id: UUID,
             val price: Price,
             val duration: Int,
-            val description: String? = null,
-            val alias: String? = null,
+            val description: String?,
+            val alias: String?,
             val service: Service.Responses.Micro,
             val master: Employee.Responses.Partial,
         ) : Responsable

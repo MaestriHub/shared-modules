@@ -1,4 +1,4 @@
-package shared.serializers
+package com.maestri.sdk.sources.shared.serializers
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
@@ -8,8 +8,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.text.SimpleDateFormat
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 object DateISOSerializer : KSerializer<Date> {
@@ -28,19 +26,14 @@ object DateISOSerializer : KSerializer<Date> {
 }
 
 object DateUNIXSerializer : KSerializer<Date> {
-    private val isoFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
-
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("UnixTimestamp", PrimitiveKind.LONG)
 
     override fun serialize(encoder: Encoder, value: Date) {
-        encoder.encodeLong(value.time / 1000)
+        encoder.encodeLong(value.time / 1000) // В секунды
     }
 
     override fun deserialize(decoder: Decoder): Date {
-        val dateString = decoder.decodeString()
-        val parsedDateTime = ZonedDateTime.parse(dateString, isoFormatter)
-        return Date(parsedDateTime.toEpochSecond() * 1000)
+        return Date(decoder.decodeLong() * 1000)
     }
 }
-

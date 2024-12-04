@@ -1,11 +1,7 @@
-@file:UseSerializers(
-    UUIDSerializer::class,
-    ServiceCategorySerializer::class
-)
+@file:UseSerializers(UUIDSerializer::class)
 
 package shared.dto.objects
 
-import ServiceCategorySerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ServiceCategory
@@ -13,7 +9,7 @@ import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
-import java.util.UUID
+import java.util.*
 
 object Service {
     data object Parameters {
@@ -64,8 +60,8 @@ object Service {
             val title: String,
             val description: String,
             val category: ServiceCategory,
-            val minPrice: Price? = null,
-            val minDuration: Int? = null,
+            val minPrice: Price?,
+            val minDuration: Int?,
         ) : Responsable
 
         @Serializable
