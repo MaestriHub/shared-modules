@@ -7,8 +7,8 @@ import Foundation
 
 public enum TimetableOwner: Parametable, Responsable, LosslessStringConvertible, Equatable {
     
-    case salon(id: UUID)
-    case employee(id: UUID)
+    case salon(UUID)
+    case employee(UUID)
     
     public init?(_ description: String) {
         try? self.init(value: description)
@@ -19,13 +19,13 @@ public enum TimetableOwner: Parametable, Responsable, LosslessStringConvertible,
         switch splited.first {
         case "salon":
             if let uuidString = splited.last, let uuid = UUID(uuidString: String(uuidString)) {
-                self = .salon(id: uuid)
+                self = .salon(uuid)
             } else {
                 throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: ""))
             }
         case "employee":
             if let uuidString = splited.last, let uuid = UUID(uuidString: String(uuidString)) {
-                self = .employee(id: uuid)
+                self = .employee(uuid)
             } else {
                 throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: ""))
             }
