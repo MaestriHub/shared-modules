@@ -8,10 +8,10 @@ import Foundation
 public struct Schedule {
 
     public enum Pattern: Equatable, Decodable, Encodable { 
-        case weekly(week: Schedule.Week)
-        case cycled(cycle: Schedule.Cycled)
-        case daily(day: Schedule.Day)
-        case empty(empty: String = "")
+        case weekly(Schedule.Week)
+        case cycled(Schedule.Cycled)
+        case daily(Schedule.Day)
+        case empty(String = "")
     }
     
     /// WorkSchedule: расписание которое содержит в себе одну неделю
