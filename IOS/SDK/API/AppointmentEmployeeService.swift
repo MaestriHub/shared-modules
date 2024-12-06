@@ -167,7 +167,7 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
             ),
             customer: .init(
                 id: uuidGenerator.callAsFunction(),
-                user: .value(customer: .init(nickname: "Paul Johnson")),
+                user: .value(.init(nickname: "Paul Johnson")),
                 alias: "Paul",
                 contacts: [
                     .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
@@ -253,7 +253,7 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
             .init(
                 customer: .init(
                     id: uuidGenerator.callAsFunction(),
-                    user: .value(customer: .init(nickname: "MockCustomerNickname")),
+                    user: .value(.init(nickname: "MockCustomerNickname")),
                     alias: "MockAlias",
                     contacts: [
                         .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
@@ -297,7 +297,7 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
             .init(
                 customer: .init(
                     id: uuidGenerator.callAsFunction(),
-                    user: .value(customer: .init(nickname: "MockCustomerNickname")),
+                    user: .value(.init(nickname: "MockCustomerNickname")),
                     alias: "MockAlias",
                     contacts: [
                         .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
