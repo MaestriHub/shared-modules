@@ -41,7 +41,7 @@ object Customer {
         data class Full(
             var id: UUID,
             var user: CustomerUser,
-            var alias: String?,
+            var alias: String? = null,
             var contacts: List<Contact.Responses.Full>,
         ) : Responsable
 
@@ -49,7 +49,7 @@ object Customer {
         data class Partial(
             @Serializable(with = UUIDSerializer::class) var id: UUID,
             var user: CustomerUser,
-            var alias: String?,
+            var alias: String? = null,
             var contacts: List<Contact.Responses.Full>,
         ) : Responsable
 

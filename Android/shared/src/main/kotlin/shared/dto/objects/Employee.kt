@@ -38,7 +38,7 @@ object Employee {
         data class Full(
             val id: UUID,
             val user: ProfessionalEmployee,
-            val description: String?,
+            val description: String? = null,
             val canEdit: Boolean = false,
             val contacts: List<Contact.Responses.Full>,
             val salonId: UUID,
@@ -48,7 +48,7 @@ object Employee {
         @Serializable
         data class Partial(
             val id: UUID,
-            val user: User.Responses.Partial?,
+            val user: User.Responses.Partial? = null,
             val contacts: List<Contact.Responses.Full>,
             val position: Position.Responses.Partial,
         ) : Responsable

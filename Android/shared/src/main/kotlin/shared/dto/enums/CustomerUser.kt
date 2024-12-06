@@ -18,18 +18,18 @@ sealed class CustomerUser : Responsable {
 
     @Serializable
     data class Link(
-        val url: URI,
+        val link: URI,
     ) : CustomerUser()
 
     @Serializable
     data class Value(
-        val customer: User.Responses.Partial,
+        val value: User.Responses.Partial,
     ) : CustomerUser()
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<CustomerUser>(CustomerUser::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<CustomerUser> {
-            return when (element.jsonObject.contains("url")) {
+            return when (element.jsonObject.contains("link")) {
                 true -> Link.serializer()
                 false -> Value.serializer()
             }

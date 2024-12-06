@@ -1,5 +1,7 @@
-@file:UseSerializers(UUIDSerializer::class)
-
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 package shared.dto.objects
 
 import kotlinx.serialization.Serializable
@@ -10,7 +12,9 @@ import shared.dto.primitives.Price
 import shared.dto.primitives.Wage
 import shared.dto.protocols.Parametable
 import shared.serializers.UUIDSerializer
-import java.util.*
+import shared.serializers.DateISOSerializer
+import java.util.Date
+import java.util.UUID
 
 object Salary {
     data object Parameters {
@@ -27,13 +31,11 @@ object Salary {
             @Serializable
             data class Payout(
                 val paymentType: PaymentType,
-                @Contextual
                 val dateTo: Date,
             ) : Parametable()
 
             @Serializable
             data class Calculate(
-                @Contextual
                 val dateTo: Date,
             ) : Parametable()
         }
@@ -53,19 +55,19 @@ object Salary {
         data object Rules {
             @Serializable
             data class Full(
-                val percent: Int?,
-                val grid: List<Helpers.ServiceWithPaymentType>?,
-                val wage: Wage?,
+                val percent: Int? = null,
+                val grid: List<Helpers.ServiceWithPaymentType>? = null,
+                val wage: Wage? = null,
             ) : Parametable()
         }
 
         data object Balance {
             @Serializable
             data class Full(
-                val wage: Price?,
-                val grid: List<Price>?,
-                val procent: List<Price>?,
-                val sum: List<Price>,
+                val wage: Price? = null,
+                val grid: List<Price>? = null,
+                val percent: List<Price>? = null,
+                val sum: List<Price>? = null,
             ) : Parametable()
         }
     }

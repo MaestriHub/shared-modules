@@ -28,7 +28,7 @@ object Device {
         @Serializable
         data class Full(
             val id: UUID,
-            val version: VersionType?,
+            val version: VersionType? = null,
         ) : Responsable
     }
 }

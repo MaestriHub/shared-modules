@@ -1,5 +1,7 @@
+@file:UseSerializers(DateISOSerializer::class)
 package shared.dto.primitives
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -9,29 +11,29 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import java.util.*
+import java.util.Date
 
 object Schedule {
     @Serializable(Pattern.Serializer::class)
     sealed class Pattern : Responsable {
         @Serializable
         data class Weekly(
-                val week: Schedule.Week,
+            val weekly: Schedule.Week,
         ) : Pattern()
 
         @Serializable
         data class Cycled(
-                val cycle: Schedule.Cycled,
+            val cycled: Schedule.Cycled,
         ) : Pattern()
 
         @Serializable
         data class Daily(
-                val day: Schedule.Day,
+            val daily: Schedule.Day,
         ) : Pattern()
 
         @Serializable
         data class Empty(
-                val empty: String = "",
+            val empty: String = "",
         ) : Pattern()
 
         internal object Serializer :
@@ -39,9 +41,9 @@ object Schedule {
             override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Pattern> {
                 val keys = element.jsonObject.keys
                 return when {
-                    "week" in keys -> Weekly.serializer()
-                    "cycle" in keys -> Cycled.serializer()
-                    "day" in keys -> Daily.serializer()
+                    "weekly" in keys -> Weekly.serializer()
+                    "cycled" in keys -> Cycled.serializer()
+                    "daily" in keys -> Daily.serializer()
                     "empty" in keys -> Empty.serializer()
                     else -> throw SerializationException("Unknown pattern type")
                 }
@@ -63,7 +65,6 @@ object Schedule {
 
     @Serializable
     data class Cycled(
-            @Contextual
             val startDay: Date,
             val workDays: Map<Int, Day>,
             val restDays: Int,
