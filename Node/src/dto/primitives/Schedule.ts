@@ -20,38 +20,31 @@ export namespace Schedule {
             switch (true) {
             case this.schedule instanceof Schedule.Week:
                 return {
-                    weekly: {
-                        week: this.schedule
-                    }
+                    weekly: this.schedule
+                    
                 }
             case this.schedule instanceof Schedule.Cycled:
                 return {
-                    cycled: {
-                        cycle: this.schedule
-                    }
+                    cycled: this.schedule
                 }
             case this.schedule instanceof  Schedule.Day:
                 return {
-                    daily: {
-                        day: this.schedule
-                    }
+                    daily: this.schedule
                 }
             case this.schedule instanceof  Schedule.Empty:
                 return {
-                    empty: {
-                        empty: ''
-                    }
+                    empty: ''
                 }
             }
         }
 
         static fromJSON(json: any): Pattern {
             if (json.weekly) {
-                return new Pattern(json.weekly.week);
+                return new Pattern(json.weekly);
             } else if (json.cycled) {
-                return new Pattern(json.cycled.cycle);
+                return new Pattern(json.cycled);
             } else if (json.daily) {
-                return new Pattern(json.daily.day);
+                return new Pattern(json.daily);
             } else if (json.empty) {
                 return new Pattern(new Empty());
             } else {
