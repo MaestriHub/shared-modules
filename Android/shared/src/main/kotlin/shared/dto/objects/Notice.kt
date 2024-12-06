@@ -1,7 +1,11 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.objects
 
+import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.NoticeCategory
@@ -16,11 +20,10 @@ object Notice {
             val id: UUID,
             val titleKey: String,
             val messageKey: String,
-            val parameters: String?,
+            val parameters: String? = null,
             val category: NoticeCategory,
             val isRead: Boolean,
-            @Contextual
-            val date: Date?,
+            val date: Date? = null,
         ) : Responsable
     }
 }

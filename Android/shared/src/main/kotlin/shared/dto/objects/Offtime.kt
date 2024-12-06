@@ -34,7 +34,7 @@ object Offtime {
         data class Full(
             val id: UUID,
             val interval: DateInterval,
-            val reason: String?,
+            val reason: String? = null,
             val timeZoneId: String,
             val coefficient: Float,
         ) : Responsable

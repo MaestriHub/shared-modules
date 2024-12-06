@@ -12,18 +12,18 @@ import shared.dto.protocols.Responsable
 sealed class HandleInvite : Responsable {
     @Serializable
     data class Success(
-        val customer: Customer.Responses.Full,
+        val successCustomer: Customer.Responses.Full,
     ) : HandleInvite()
 
     @Serializable
     data class Request(
-        val verify: Customer.Responses.Verify,
+        val requestVerify: Customer.Responses.Verify,
     ) : HandleInvite()
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<HandleInvite>(HandleInvite::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<HandleInvite> {
-            return when (element.jsonObject.contains("verify")) {
+            return when (element.jsonObject.contains("requestVerify")) {
                 true -> Request.serializer()
                 false -> Success.serializer()
             }

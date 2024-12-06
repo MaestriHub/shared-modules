@@ -14,19 +14,19 @@ import java.util.*
 sealed class TimetableOwner : Parametable(), Responsable {
     val description: String
         get() = when (this) {
-            is Employee -> "employee:$id"
-            is Salon -> "salon:$id"
+            is Employee -> "employee:$employee"
+            is Salon -> "salon:$salon"
         }
 
     @Serializable
     @SerialName("salon")
     data class Salon(
-        val id: UUID,
+        val salon: UUID,
     ) : TimetableOwner()
 
     @Serializable
     @SerialName("employee")
     data class Employee(
-        val id: UUID,
+        val employee: UUID,
     ) : TimetableOwner()
 }

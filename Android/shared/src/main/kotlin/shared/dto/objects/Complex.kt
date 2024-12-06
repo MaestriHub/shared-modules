@@ -43,8 +43,8 @@ object Complex {
             val id: UUID,
             val price: Price,
             val duration: Int,
-            val description: String?,
-            val alias: String?,
+            val description: String? = null,
+            val alias: String? = null,
             val procedures: List<Procedure.Responses.Partial>
         ) : Responsable
 
@@ -53,7 +53,7 @@ object Complex {
             val id: UUID,
             val price: Price,
             val duration: Int,
-            val description: String?,
+            val description: String? = null,
             val alias: String?,
             val procedures: List<Procedure.Responses.Partial>
         ) : Responsable

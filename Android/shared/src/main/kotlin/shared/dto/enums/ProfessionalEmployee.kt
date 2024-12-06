@@ -17,18 +17,18 @@ import java.net.URI
 sealed class ProfessionalEmployee : Responsable {
     @Serializable
     data class Link(
-        val url: URI,
+        val link: URI,
     ) : ProfessionalEmployee()
 
     @Serializable
     data class Value(
-        val user: Professional.Responses.Partial,
+        val value: Professional.Responses.Partial,
     ) : ProfessionalEmployee()
 
     internal object Serializer :
         JsonContentPolymorphicSerializer<ProfessionalEmployee>(ProfessionalEmployee::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ProfessionalEmployee> {
-            return when (element.jsonObject.contains("url")) {
+            return when (element.jsonObject.contains("link")) {
                 true -> Link.serializer()
                 false -> Value.serializer()
             }

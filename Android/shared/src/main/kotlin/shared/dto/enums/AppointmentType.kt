@@ -17,12 +17,12 @@ sealed class AppointmentType : Responsable {
 
     @Serializable
     data class Complex(
-        val id: UUID,
+        val complex: UUID,
     ) : AppointmentType()
 
     @Serializable
     data class Procedure(
-        val id: UUID,
+        val procedure: UUID,
     ) : AppointmentType()
 
     internal object Serializer :
