@@ -1,57 +1,25 @@
 import { User } from "../objects/User";
 import { ValidateNested } from "class-validator";
 
-export class CustomerUser {
-    type: CustomerUser.Types
-
-    constructor(type: CustomerUser.Types) {
-        this.type = type
-    }
-
-    toJSON() {
-        switch (true) {
-        case this.type instanceof CustomerUser.Link:
-            return {
-                link: this.type
-            }
-        case this.type instanceof CustomerUser.Value:
-            return {
-                value: this.type
-            }
-        }
-    }
-
-    static fromJSON(json: any): CustomerUser {
-        if (json.link) {
-            return new CustomerUser(json.link);
-        } else if (json.value) {
-            return new CustomerUser(json.value);
-        } else {
-            throw new Error("Unknown Schedule pattern type");
-        }
-    }
-}
+export type CustomerUser = CustomerUser.Link   | 
+                           CustomerUser.Value
 
 export namespace CustomerUser {
 
-    export type Types = CustomerUser.Link  | 
-                        CustomerUser.Value
-
     export class Link {
-        @ValidateNested()
-        url: URL
+        link: URL
 
-        constructor(url: URL) {
-            this.url = url
+        constructor(link: URL) {
+            this.link = link
         }
     }
 
     export class Value {
         @ValidateNested()
-        customer: User.Responses.Partial
+        value: User.Responses.Partial
 
-        constructor(customer: User.Responses.Partial) {
-            this.customer = customer
+        constructor(value: User.Responses.Partial) {
+            this.value = value
         }
     }
 }
