@@ -7,6 +7,8 @@ import Foundation
 public enum Search {
     public enum Parameters {}
     public enum Responses {}
+    
+    public enum Helpers {}
 }
 
 //MARK: - Parameters -
@@ -82,14 +84,42 @@ public extension Search.Responses {
     /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
     struct Full: Responsable {
         public var suggests: [Suggest]
-        public var salons: [Salon.Responses.Partial]
+        public var salons: [Search.Helpers.Salon]
         
         public init(
             suggests: [Suggest],
-            salons: [Salon.Responses.Partial]
+            salons: [Search.Helpers.Salon]
         ) {
             self.suggests = suggests
             self.salons = salons
+        }
+    }
+}
+
+public extension Search.Helpers {
+    
+    struct Salon: Responsable, Identifiable, Hashable, Equatable {
+        public var id: UUID
+        public var name: String
+        public var type: SalonType
+        public var logo: URL?
+        public var address: Address
+        public var isFavorite: Bool = false
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: URL? = nil,
+            address: Address,
+            isFavorite: Bool
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.address = address
+            self.isFavorite = isFavorite
         }
     }
 }
