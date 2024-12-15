@@ -11,7 +11,7 @@ public protocol IAppointmentCustomerService {
     func current() async throws -> [AppointmentCustomer.Responses.Full]
     
     /// Get /appointment/customer/history
-    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
+    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
     
     /// Post /appointment/customer
     func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full
@@ -71,11 +71,12 @@ struct AppointmentCustomerService: IAppointmentCustomerService {
             .value
     }
     
-    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
+    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
         try await requestsService
             .request(
-                path: "v1/appointment/customer/history",
+                path: "v1/appointment/customer/history/\(id)",
                 method: .get,
+                parameters: parameters,
                 requestType: .other
             )
             .serializingDecodable([AppointmentCustomer.Responses.Partial].self, decoder: coderService.decoder)
@@ -87,6 +88,7 @@ struct AppointmentCustomerService: IAppointmentCustomerService {
             .request(
                 path: "v1/appointment/customer",
                 method: .post,
+                parameters: parameters,
                 requestType: .other
             )
             .serializingDecodable(AppointmentCustomer.Responses.Full.self, decoder: coderService.decoder)
@@ -102,6 +104,7 @@ struct AppointmentCustomerService: IAppointmentCustomerService {
             .request(
                 path: "v1/appointment/customer/\(id)",
                 method: .put,
+                parameters: parameters,
                 requestType: .other
             )
             .serializingDecodable(AppointmentCustomer.Responses.Full.self, decoder: coderService.decoder)
@@ -301,7 +304,7 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
         [appointment, appointment]
     }
     
-    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
+    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
         appointments
     }
     
