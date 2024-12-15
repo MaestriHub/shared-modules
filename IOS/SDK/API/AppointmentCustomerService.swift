@@ -11,7 +11,7 @@ public protocol IAppointmentCustomerService {
     func current() async throws -> [AppointmentCustomer.Responses.Full]
     
     /// Get /appointment/customer/history
-    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
+    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial]
     
     /// Post /appointment/customer
     func create(parameters: AppointmentCustomer.Parameters.Create, notify: Bool) async throws -> AppointmentCustomer.Responses.Full
@@ -71,10 +71,10 @@ struct AppointmentCustomerService: IAppointmentCustomerService {
             .value
     }
     
-    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
+    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
         try await requestsService
             .request(
-                path: "v1/appointment/customer/history/\(id)",
+                path: "v1/appointment/customer/history",
                 method: .get,
                 parameters: parameters,
                 requestType: .other
@@ -304,7 +304,7 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
         [appointment, appointment]
     }
     
-    func history(id: UUID, parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
+    func history(parameters: AppointmentCustomer.Parameters.Retrieve) async throws -> [AppointmentCustomer.Responses.Partial] {
         appointments
     }
     
