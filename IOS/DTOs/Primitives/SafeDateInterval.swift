@@ -7,16 +7,6 @@ public struct SafeDateInterval: Codable, Equatable {
         case duration = "duration"
         case start = "start"
     }
-    
-    public init(start: Date, end: Date) throws {
-        guard end > start else {
-            throw DecodingError.valueNotFound(
-                Date.self, 
-                DecodingError.Context(codingPath: [], debugDescription: "end is less than start")
-            )
-        }
-        self.interval = DateInterval(start: start, end: end)
-    }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
