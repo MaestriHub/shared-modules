@@ -41,7 +41,7 @@ struct UploadService: IUploadService {
     // MARK: - Methods
     
     func uploadThumb(image: UIImage) async throws -> URL {
-        guard let data = image.jpegData(compressionQuality: 0.7) else {
+        guard let data = image.jpegData(compressionQuality: 0.5) else {
             throw UploadServiceError.imageConversionFailed
         }
         

@@ -182,6 +182,11 @@ extension RequestsService {
         var url = RequestsService.baseURL
         url.append(path: path)
         
+        // Обработка Headers
+        var headers = HTTPHeaders()
+        headers.requesterType = secureStorageService.currentIAm
+        headers.deviceId = secureStorageService.deviceId
+        
         return session.upload(
             multipartFormData: { multipart in
                 //withName: "image" является ключом по которому кладётся data
@@ -189,6 +194,7 @@ extension RequestsService {
                 multipart.append(data, withName: keyName, fileName: fileName, mimeType: mimeType)
             },
             to: url,
+            headers: headers,
             interceptor: AuthenticationInterceptor(
                 authenticator: JWTAuthenticator(),
                 credential: JWTCredential(token: secureStorageService.accessToken)
