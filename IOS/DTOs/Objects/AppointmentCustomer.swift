@@ -103,7 +103,7 @@ public extension AppointmentCustomer.Responses {
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
         public var procedures: [Procedure.Responses.Partial]
-        public var time: DateInterval
+        public var time: SafeDateInterval
         public var price: Price
         public var address: Address
         
@@ -112,7 +112,7 @@ public extension AppointmentCustomer.Responses {
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             procedures: [Procedure.Responses.Partial],
-            time: DateInterval,
+            time: SafeDateInterval,
             price: Price,
             address: Address
         ) {
