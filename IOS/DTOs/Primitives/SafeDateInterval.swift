@@ -1,7 +1,22 @@
 import Foundation
 
 public struct SafeDateInterval: Codable, Equatable {
-    public var interval: DateInterval
+    public var interval: DateInterval  
+
+    public var start: Date {
+        set { interval.start = newValue }
+        get { return interval.start }
+    }
+
+    public var end: Date {
+        set { interval.end = newValue }
+        get { return interval.end }
+    }
+
+    public var duration: Double {
+        set { interval.duration = newValue }
+        get { return interval.duration }
+    }
 
     enum CodingKeys: String, CodingKey {
         case duration = "duration"
