@@ -23,6 +23,10 @@ public struct SafeDateInterval: Codable, Equatable, Hashable {
         case start = "start"
     }
 
+    public init(dateinterval: DateInterval) {
+        self.interval = dateinterval
+    }
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -40,7 +44,7 @@ public struct SafeDateInterval: Codable, Equatable, Hashable {
                 debugDescription: "duration is nil"
             )
         }
-        guard duration >= 0 else {
+        guard duration > 0 else {
              throw DecodingError.dataCorruptedError(
                 forKey: CodingKeys.duration,
                 in: container,
