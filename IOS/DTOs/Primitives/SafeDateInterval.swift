@@ -11,14 +11,14 @@ public struct SafeDateInterval: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        guard let start = try? container.decode(Int.self, forKey: .start) else {
+        guard let start = try? container.decode(Double.self, forKey: .start) else {
              throw DecodingError.dataCorruptedError(
                 forKey: CodingKeys.start,
                 in: container,
                 debugDescription: "start is nil"
             )
         }
-        guard let duration = try? container.decode(Int.self, forKey: .duration) else {
+        guard let duration = try? container.decode(Double.self, forKey: .duration) else {
              throw DecodingError.dataCorruptedError(
                 forKey: CodingKeys.duration,
                 in: container,
@@ -32,7 +32,7 @@ public struct SafeDateInterval: Codable {
                 debugDescription: "duration is negative"
             )
         }
-        self.interval = DateInterval(start: Date(timeIntervalSince1970: Double(start)), duration: TimeInterval(duration))
+        self.interval = DateInterval(start: Date(timeIntervalSince1970: start), duration: TimeInterval(duration))
     }
 
     public func encode(to encoder: Encoder) throws {
