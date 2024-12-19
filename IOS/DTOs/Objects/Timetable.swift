@@ -78,7 +78,7 @@ public extension Timetable.Parameters {
 
 public extension Timetable.Responses {
     
-    typealias Intervals = [DateInterval]
+    typealias Intervals = [SafeDateInterval]
 
     /// Используется для возвращение найденых слотов на которые можно записаться
     struct Slots: Responsable {

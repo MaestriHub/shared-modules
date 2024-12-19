@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SafeDateInterval: Codable {
+public struct SafeDateInterval: Codable, Equatable {
     public var interval: DateInterval
 
     enum CodingKeys: String, CodingKey {
@@ -8,11 +8,21 @@ public struct SafeDateInterval: Codable {
         case start = "start"
     }
     
+    public init(start: Date, end: Date) throws {
+        guard end > start else {
+            throw DecodingError.valueNotFound(
+                Date.self, 
+                DecodingError.Context(codingPath: [], debugDescription: "end is less than start")
+            )
+        }
+        self.interval = DateInterval(start: start, end: end)
+    }
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         guard let start = try? container.decode(Double.self, forKey: .start) else {
-             throw DecodingError.dataCorruptedError(
+            throw DecodingError.dataCorruptedError(
                 forKey: CodingKeys.start,
                 in: container,
                 debugDescription: "start is nil"
