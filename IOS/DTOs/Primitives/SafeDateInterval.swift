@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SafeDateInterval: Codable, Equatable, Hashable {
+public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
     public var interval: DateInterval  
 
     public var start: Date {
@@ -58,5 +58,9 @@ public struct SafeDateInterval: Codable, Equatable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(interval.start.timeIntervalSince1970, forKey: .start)
         try container.encode(interval.duration, forKey: .duration)
+    }
+
+    public static func < (lhs: SafeDateInterval, rhs: SafeDateInterval) -> Bool {
+        return lhs.start < rhs.start
     }
 }
