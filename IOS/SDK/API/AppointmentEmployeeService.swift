@@ -89,7 +89,7 @@ struct AppointmentEmployeeService: IAppointmentEmployeeService {
     func create(parameters: AppointmentEmployee.Parameters.Create, notify: Bool) async throws -> AppointmentEmployee.Responses.Full {
         let appointment = try await requestsService
             .request(
-                path: "v1/appointment/employee/",
+                path: "v1/appointment/employee",
                 method: .post,
                 parameters: parameters,
                 requestType: .other
