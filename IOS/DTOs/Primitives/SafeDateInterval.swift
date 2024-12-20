@@ -56,7 +56,13 @@ public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(interval.start.timeIntervalSince1970, forKey: .start)
+        
+        // Используем ISO8601DateFormatter для преобразования даты в строку
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime]
+        
+        let startString = dateFormatter.string(from: interval.start)
+        try container.encode(startString, forKey: .start)
         try container.encode(interval.duration, forKey: .duration)
     }
 
