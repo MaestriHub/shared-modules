@@ -30,12 +30,26 @@ public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        guard let start = try? container.decode(Double.self, forKey: .start) else {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime]
+        var start: Date?
+        
+        // Пробуем декодировать start как строку (ISO8601)
+        if let startString = try? container.decode(String.self, forKey: .start) {
+            start = dateFormatter.date(from: startString)
+        }
+        
+        // Пробуем декодировать start как Double (Unix-время)
+        if let startTimestamp = try? container.decode(Double.self, forKey: .start) {
+            start = Date(timeIntervalSince1970: startTimestamp)
+        }
+        
+        guard let start = start else {
             throw DecodingError.dataCorruptedError(
                 forKey: CodingKeys.start,
                 in: container,
-                debugDescription: "start is nil"
-            )
+                debugDescription: "Start date is neither a valid ISO8601 string nor a Unix timestamp"
+            )   
         }
         guard let duration = try? container.decode(Double.self, forKey: .duration) else {
              throw DecodingError.dataCorruptedError(
@@ -51,7 +65,7 @@ public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
                 debugDescription: "duration is negative"
             )
         }
-        self.interval = DateInterval(start: Date(timeIntervalSince1970: start), duration: TimeInterval(duration))
+        self.interval = DateInterval(start: start, duration: TimeInterval(duration))
     }
 
     public func encode(to encoder: Encoder) throws {
