@@ -221,10 +221,10 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
                     )
                 )
             ],
-            time: DateInterval(
+            time: SafeDateInterval(dateinterval: DateInterval(
                 start: date.now.addingTimeInterval(60*60*2*24),
                 end: date.now.addingTimeInterval(60*60*4*24)
-            ),
+            )),
             price: Price(amount: 120, currency: "USD"),
             address: .init(
                 address: "Times Square",
@@ -241,10 +241,10 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
             .init(
                 id: uuidGenerator.callAsFunction(),
                 status: .customerDeclined,
-                time: DateInterval(
+                time: SafeDateInterval(dateinterval: DateInterval(
                     start: date.now.addingTimeInterval(60*60*2*24),
                     end: date.now.addingTimeInterval(60*60*4*24)
-                ),
+                )),
                 price: Price(amount: 120, currency: "USD"),
                 procedures: [
                     .init(
