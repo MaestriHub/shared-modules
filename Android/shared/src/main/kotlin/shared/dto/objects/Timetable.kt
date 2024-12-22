@@ -18,7 +18,7 @@ import shared.serializers.TimetableOwnerSerializer
 import shared.serializers.UUIDSerializer
 import java.util.*
 
-typealias Intervals = List<DateInterval>
+typealias Intervals = List<DateUNIXInterval>
 
 object Timetable {
     data object Parameters {
@@ -46,7 +46,7 @@ object Timetable {
         data class Retrieve(
             val owners: List<TimetableOwner>,
                 //Идеально отправлять в salon time zone с 00:00-00:00 чтобы были только дни
-            val period: DateInterval,
+            val period: DateUNIXInterval,
         ) : Parametable()
     }
 
