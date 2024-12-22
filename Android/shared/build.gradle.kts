@@ -28,8 +28,8 @@ publishing {
             name = "MaestriHub"
             url = uri("https://maven.pkg.github.com/MaestriHub/shared-modules")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("user")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("key")
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
             }
         }
     }
@@ -37,7 +37,7 @@ publishing {
         register<MavenPublication>("gpr") {
             from(components["kotlin"])
             groupId = "app.maestri"
-            version = "1.1.28"
+            version = "1.1.26"
             artifactId = "shared"
         }
     }

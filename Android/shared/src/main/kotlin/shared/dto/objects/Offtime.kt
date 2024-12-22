@@ -17,7 +17,7 @@ object Offtime {
     data object Parameters {
         @Serializable
         data class Create(
-            val interval: DateUNIXInterval,
+            val interval: DateInterval,
             val reason: String?,
             val coefficient: BigDecimal
         ) : Parametable()
@@ -25,7 +25,7 @@ object Offtime {
         @Serializable
         data class Retrieve(
             val owners: List<TimetableOwner>,
-            val period: DateUNIXInterval,
+            val period: DateInterval,
         )
     }
 
@@ -33,7 +33,7 @@ object Offtime {
         @Serializable
         data class Full(
             val id: UUID,
-            val interval: DateUNIXInterval,
+            val interval: DateInterval,
             val reason: String? = null,
             val timeZoneId: String,
             val coefficient: Float,
@@ -42,7 +42,7 @@ object Offtime {
         @Serializable
         data class Partial(
             val id: UUID,
-            val interval: DateUNIXInterval,
+            val interval: DateInterval,
         ) : Responsable
     }
 }

@@ -34,7 +34,7 @@ object DateUNIXSerializer : KSerializer<Date> {
         PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: Date) {
-        encoder.encodeString((value.time / 1000).toString())
+        encoder.encodeLong(value.time / 1000)
     }
 
     override fun deserialize(decoder: Decoder): Date {
