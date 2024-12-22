@@ -62,11 +62,11 @@ public extension Timetable.Parameters {
     struct Retrieve: Parametable {
         public var owners: [TimetableOwner]
         //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
-        public var period: DateInterval
+        public var period: SafeDateInterval
         
         public init(
             owners: [TimetableOwner],
-            period: DateInterval
+            period: SafeDateInterval
         ) {
             self.owners = owners
             self.period = period
@@ -78,7 +78,7 @@ public extension Timetable.Parameters {
 
 public extension Timetable.Responses {
     
-    typealias Intervals = [DateInterval]
+    typealias Intervals = [SafeDateInterval]
 
     /// Используется для возвращение найденых слотов на которые можно записаться
     struct Slots: Responsable {

@@ -55,12 +55,12 @@ public extension AppointmentEmployee.Parameters {
     struct Create: Parametable {
         public let customerId: UUID
         public let type: AppointmentType
-        public let time: DateInterval
+        public let time: SafeDateInterval
         
         public init(
             customerId: UUID,
             type: AppointmentType,
-            time: DateInterval
+            time: SafeDateInterval
         ) {
             self.customerId = customerId
             self.type = type
@@ -85,10 +85,10 @@ public extension AppointmentEmployee.Parameters {
     ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        public let time: DateInterval
+        public let time: SafeDateInterval
         
         public init(
-            time: DateInterval
+            time: SafeDateInterval
         ) {
             self.time = time
         }
@@ -154,14 +154,14 @@ public extension AppointmentEmployee.Responses {
         public var id: UUID
         public var status: AppointmentStatus
         public var procedure: Procedure.Responses.Partial
-        public var time: DateInterval
+        public var time: SafeDateInterval
         public var price: Price
         
         public init(
             id: UUID,
             status: AppointmentStatus,
             procedure: Procedure.Responses.Partial,
-            time: DateInterval,
+            time: SafeDateInterval,
             price: Price
         ) {
             self.id = id

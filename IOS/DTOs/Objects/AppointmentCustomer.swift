@@ -53,11 +53,11 @@ public extension AppointmentCustomer.Parameters {
     ///  - address: `UUID` - идентификатор адреса салона.
     struct Create: Parametable {
         public let type: AppointmentType
-        public let time: DateInterval
+        public let time: SafeDateInterval
         
         public init(
             type: AppointmentType,
-            time: DateInterval
+            time: SafeDateInterval
         ) {
             self.type = type
             self.time = time
@@ -72,10 +72,10 @@ public extension AppointmentCustomer.Parameters {
     ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
     ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
     struct Patch: Parametable {
-        public let time: DateInterval
+        public let time: SafeDateInterval
         
         public init(
-            time: DateInterval
+            time: SafeDateInterval
         ) {
             self.time = time
         }
@@ -103,7 +103,7 @@ public extension AppointmentCustomer.Responses {
         public var status: AppointmentStatus
         public var salon: Salon.Responses.Partial
         public var procedures: [Procedure.Responses.Partial]
-        public var time: DateInterval
+        public var time: SafeDateInterval
         public var price: Price
         public var address: Address
         
@@ -112,7 +112,7 @@ public extension AppointmentCustomer.Responses {
             status: AppointmentStatus,
             salon: Salon.Responses.Partial,
             procedures: [Procedure.Responses.Partial],
-            time: DateInterval,
+            time: SafeDateInterval,
             price: Price,
             address: Address
         ) {
@@ -137,14 +137,14 @@ public extension AppointmentCustomer.Responses {
     struct Partial: Responsable, Identifiable, Equatable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var time: DateInterval
+        public var time: SafeDateInterval
         public var price: Price
         public var procedures: [Procedure.Responses.Partial]
         
         public init(
             id: UUID,
             status: AppointmentStatus,
-            time: DateInterval,
+            time: SafeDateInterval,
             price: Price,
             procedures: [Procedure.Responses.Partial]
         ) {

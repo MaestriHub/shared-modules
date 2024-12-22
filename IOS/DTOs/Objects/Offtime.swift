@@ -16,12 +16,12 @@ public extension Offtime.Parameters {
     /// Параметры для определения временных промежутков, когда услуги не будут доступны.
     /// Используется для учета периодов отгулов, отпусков и других нерабочих интервалов.
     struct Create: Parametable {
-        public var interval: DateInterval
+        public var interval: SafeDateInterval
         public var reason: String?
         public var coefficient: Decimal
 
         public init(
-            interval: DateInterval,
+            interval: SafeDateInterval,
             reason: String?,
             coefficient: Decimal
         ) {
@@ -34,11 +34,11 @@ public extension Offtime.Parameters {
     struct Retrieve: Parametable {
         public var owners: [TimetableOwner]
         //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
-        public var period: DateInterval
+        public var period: SafeDateInterval
         
         public init(
             owners: [TimetableOwner],
-            period: DateInterval
+            period: SafeDateInterval
         ) {
             self.owners = owners
             self.period = period
@@ -54,14 +54,14 @@ public extension Offtime.Responses {
     /// Включает статус работы и расписание по дням недели в текстовом формате.
     struct Full: Responsable, Equatable {
         public var id: UUID
-        public var interval: DateInterval
+        public var interval: SafeDateInterval
         public var reason: String?
         public var timeZoneId: String
         public var coefficient: Decimal
 
         public init(
             id: UUID,
-            interval: DateInterval,
+            interval: SafeDateInterval,
             reason: String?,
             timeZoneId: String,
             coefficient: Decimal
@@ -76,11 +76,11 @@ public extension Offtime.Responses {
     
     struct Partial: Responsable, Equatable {
         public var id: UUID
-        public var interval: DateInterval
+        public var interval: SafeDateInterval
 
         public init(
             id: UUID,
-            interval: DateInterval
+            interval: SafeDateInterval
         ) {
             self.id = id
             self.interval = interval
