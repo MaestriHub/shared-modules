@@ -30,12 +30,12 @@ object AppointmentCustomer {
         @Serializable
         data class Create(
             val type: AppointmentType,
-            val time: DateInterval,
+            val time: DateISOInterval,
         ) : Parametable()
 
         @Serializable
         data class Patch(
-            val time: DateInterval,
+            val time: DateISOInterval,
         ) : Parametable()
     }
 
@@ -46,7 +46,7 @@ object AppointmentCustomer {
             val status: AppointmentStatus,
             val salon: Salon.Responses.Partial,
             val procedures: List<Procedure.Responses.Partial>,
-            val time: DateInterval,
+            val time: DateISOInterval,
             val price: Price,
             val address: Address,
         ) : Responsable
@@ -55,7 +55,7 @@ object AppointmentCustomer {
         data class Partial(
             val id: UUID,
             val status: AppointmentStatus,
-            val time: DateInterval,
+            val time: DateISOInterval,
             val price: Price,
             val procedures: List<Procedure.Responses.Partial>,
         ) : Responsable
