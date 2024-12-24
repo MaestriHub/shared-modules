@@ -78,7 +78,7 @@ struct TimetablesService: ITimetablesService {
                 parameters: parameters,
                 requestType: .other
             )
-            .serializingDecodable(Empty.self)
+            .serializingDecodable(Empty.self, emptyResponseCodes: [200])
             .value
     }
 }
