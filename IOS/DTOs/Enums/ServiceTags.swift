@@ -12,11 +12,9 @@ public enum ServiceTags: String, Codable, CaseIterable, Equatable {
     case hairdressing
     case epilation
     case depilation
-    case tattoo
     case piercing
     case makeup
     case brows
     case lashes
-    case other
 }
 
