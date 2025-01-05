@@ -11,7 +11,7 @@ public enum ServiceTags: String, Codable, CaseIterable, Equatable {
     case cosmetology
     case hairdressing
     case epilation
-    case depilation
+    case permanentMakeup
     case piercing
     case makeup
     case brows
