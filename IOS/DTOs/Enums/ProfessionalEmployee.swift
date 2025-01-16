@@ -1,6 +1,6 @@
 import Foundation
 
-public enum ProfessionalEmployee: Responsable, Equatable {
+public enum ProfessionalEmployee: Responsable {
     case link(URL)
     case value(Professional.Responses.Partial)
     
