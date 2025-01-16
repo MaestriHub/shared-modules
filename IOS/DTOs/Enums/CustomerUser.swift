@@ -1,6 +1,6 @@
 import Foundation
 
-public enum CustomerUser: Responsable, Hashable, Equatable {
+public enum CustomerUser: Responsable {
     case link(URL)
     case value(User.Responses.Partial)
     
