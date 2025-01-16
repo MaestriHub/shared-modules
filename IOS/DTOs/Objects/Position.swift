@@ -51,7 +51,7 @@ public extension Position.Parameters {
 
 public extension Position.Responses {
     
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var title: String
         public var permissions: PermissionSet
