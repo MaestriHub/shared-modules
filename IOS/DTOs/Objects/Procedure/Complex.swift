@@ -134,4 +134,27 @@ public extension Complex.Responses {
             self.alias = alias
         }
     }
+    
+    struct Retrieve: Responsable {
+        public var id: UUID
+        public var price: Price
+        public var duration: Int
+        public var description: String?
+        public var alias: String?
+        // TODO: процедуры
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            description: String?,
+            alias: String?
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+        }
+    }
 }

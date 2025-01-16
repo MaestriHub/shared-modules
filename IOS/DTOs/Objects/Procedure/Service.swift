@@ -108,4 +108,21 @@ public extension Service.Responses {
             self.tags = tags
         }
     }
+    
+    struct Retrieve: Responsable {
+        public var id: UUID
+        public var title: String
+        public var tags: [ServiceTags]
+        // TODO: parameters
+        
+        public init(
+            id: UUID,
+            title: String,
+            tags: [ServiceTags]
+        ) {
+            self.id = id
+            self.title = title
+            self.tags = tags
+        }
+    }
 }
