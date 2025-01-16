@@ -23,7 +23,7 @@ public extension Professional.Parameters {
 
 public extension Professional.Responses {
     
-    struct Partial: Responsable, Equatable {
+    struct Partial: Responsable {
         
         public var user: User.Responses.Partial
         

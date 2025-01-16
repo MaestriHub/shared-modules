@@ -114,7 +114,7 @@ public extension Salary.Responses.Balance {
     /// - `grid`: Сдельная оплата за конкретную услугу.
     /// - `wage`: Оклад(за смену, почасовой, ежемесячный).
     /// - `sum`: Сумма по трем пунктам выше
-    struct Full: Responsable, Hashable, Equatable {
+    struct Full: Responsable {
         public var wage: Price?
         public var grid: [Price]?
         public var procent: [Price]?

@@ -81,7 +81,7 @@ public extension Employee.Responses {
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
     /// - position: Position.Responses.Full - полная информация о дожности
     /// - procedures: `[Procedure.Responses.Partial]?` - опциональный список процедур, которые сотрудник выполняет.
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var user: ProfessionalEmployee
         public var description: String?
@@ -116,7 +116,7 @@ public extension Employee.Responses {
     /// - name: `String` - имя сотрудника.
     /// - contacts: `[Contact.Responses.Full]` - полный список контактной информации сотрудника.
     /// - position: Position.Responses.Full - полная информация о дожности.
-    struct Partial: Responsable, Identifiable, Hashable, Equatable {
+    struct Partial: Responsable {
         public var id: UUID
         public var user: User.Responses.Partial?
         public var contacts: [Contact.Responses.Full]

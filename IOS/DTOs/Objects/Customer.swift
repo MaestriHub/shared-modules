@@ -74,7 +74,7 @@ public extension Customer.Parameters {
 
 public extension Customer.Responses {
     
-    struct Full: Responsable, Identifiable, Hashable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var user: CustomerUser
         public var alias: String?
@@ -93,7 +93,7 @@ public extension Customer.Responses {
         }
     }
     
-    struct Partial: Responsable, Identifiable, Hashable, Equatable {
+    struct Partial: Responsable {
         public var id: UUID
         public var user: CustomerUser
         public var alias: String?
@@ -112,7 +112,7 @@ public extension Customer.Responses {
         }
     }
 
-    struct Verify: Responsable, Hashable, Equatable {
+    struct Verify: Responsable {
         public var contacts: [Contact.Responses.Full]
 
         public init(
