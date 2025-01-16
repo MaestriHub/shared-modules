@@ -121,14 +121,14 @@ public extension Procedure.Responses {
         }
     }
     
-    struct Retrieve: Responsable {
+    struct All: Responsable {
         public var id: UUID
         public var price: Price
         public var duration: Int
         public var description: String?
         public var alias: String?
-        // TODO: добавить сервис ?
-        // TODO: добавить работника?
+        // TODO: добавить сервисов?
+        // TODO: добавить работников?
         
         public init(
             id: UUID,
@@ -145,14 +145,14 @@ public extension Procedure.Responses {
         }
     }
     
-    struct All: Responsable {
+    struct Retrieve: Responsable {
         public var id: UUID
         public var price: Price
         public var duration: Int
         public var description: String?
         public var alias: String?
-        // TODO: добавить сервисов?
-        // TODO: добавить работников?
+        // TODO: добавить сервис ?
+        // TODO: добавить работника?
         
         public init(
             id: UUID,
