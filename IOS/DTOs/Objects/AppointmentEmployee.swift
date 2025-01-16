@@ -9,12 +9,17 @@ public enum AppointmentEmployee {
     public enum Responses {}
 }
 
+
+public extension AppointmentEmployee.Parameters {
+    enum Helpers {}
+}
+public extension AppointmentEmployee.Responses {
+    enum Helpers {}
+}
+
 //MARK: - Parameters -
 
 public extension AppointmentEmployee.Parameters {
-    
-    
-    // ???
     /// Параметры запроса `Retrieve` определяют фильтры для получения записей на прием
     /// за определенный временной интервал с возможной фильтрацией по сотрудникам и салонам.
     ///
@@ -110,7 +115,7 @@ public extension AppointmentEmployee.Responses {
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
     ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
-    struct Full: Responsable, Equatable {
+    struct Full: Responsable {
         public var salon: Salon.Responses.Partial
         public var customer: Customer.Responses.Partial
         public var address: Address
@@ -137,7 +142,7 @@ public extension AppointmentEmployee.Responses {
     ///  - master: ``Employee.Responses.Partial`` - информация о мастере.
     ///  - time: ``Interval`` - временной интервал записи.
     ///  - price: ``Price`` - цена записи.
-    struct Partial: Responsable, Equatable {
+    struct Partial: Responsable {
         public var customer: Customer.Responses.Partial
         public var associative: [Base]
         
@@ -150,17 +155,17 @@ public extension AppointmentEmployee.Responses {
         }
     }
     
-    struct Base: Responsable, Identifiable, Equatable {
+    struct Base: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var procedure: Procedure.Responses.Partial
+        public var procedure: Helpers.Procedure
         public var time: SafeDateInterval
         public var price: Price
         
         public init(
             id: UUID,
             status: AppointmentStatus,
-            procedure: Procedure.Responses.Partial,
+            procedure: Helpers.Procedure,
             time: SafeDateInterval,
             price: Price
         ) {
@@ -169,6 +174,56 @@ public extension AppointmentEmployee.Responses {
             self.procedure = procedure
             self.time = time
             self.price = price
+        }
+    }
+}
+
+public extension AppointmentEmployee.Responses.Helpers {
+    
+    struct Procedure: Codable {
+        public var id: UUID
+        public var price: Price
+        public var duration: Int
+        public var description: String?
+        public var alias: String?
+        public var service: Service
+        public var master: Employee.Responses.Partial
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            description: String?,
+            alias: String?,
+            service: Service,
+            master: Employee.Responses.Partial
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+            self.service = service
+            self.master = master
+        }
+    }
+    
+    struct Service: Codable {
+        public var id: UUID
+        public var title: String
+        public var description: String
+        public var category: ServiceTags
+        
+        public init(
+            id: UUID,
+            title: String,
+            description: String,
+            category: ServiceTags
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+            self.category = category
         }
     }
 }
