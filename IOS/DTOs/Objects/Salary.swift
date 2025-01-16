@@ -88,7 +88,7 @@ public extension Salary.Parameters.Balance {
 public extension Salary.Responses.Rules {
     
     /// Полная информация о зарплате.
-    struct Full: Responsable, Hashable, Equatable {
+    struct Full: Responsable {
         public var percent: Int?
         public var grid: [Salary.Responses.Helpers.ServiceWithPaymentType]?
         public var wage: Wage?
@@ -136,16 +136,41 @@ public extension Salary.Responses.Balance {
 
 public extension Salary.Responses.Helpers {
     
-    struct ServiceWithPaymentType: Codable, Hashable {
-        public var service: Service.Responses.Partial
+    struct ServiceWithPaymentType: Codable {
+        public var service: Service
         public var paymentType: SalaryPaymentType
         
         public init(
-            service: Service.Responses.Partial,
+            service: Service,
             paymentType: SalaryPaymentType
         ) {
             self.service = service
             self.paymentType = paymentType
+        }
+    }
+    
+    struct Service: Codable {
+        public var id: UUID
+        public var title: String
+        public var description: String
+        public var category: ServiceTags
+        public var minPrice: Price?
+        public var minDuration: Int?
+        
+        public init(
+            id: UUID,
+            title: String,
+            description: String,
+            category: ServiceTags,
+            minPrice: Price?,
+            minDuration: Int?
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+            self.category = category
+            self.minPrice = minPrice
+            self.minDuration = minDuration
         }
     }
 }
