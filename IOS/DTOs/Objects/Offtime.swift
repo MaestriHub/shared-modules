@@ -52,7 +52,7 @@ public extension Offtime.Responses {
     
     /// Структура полного ответа, содержащая расписание работы на неделю.
     /// Включает статус работы и расписание по дням недели в текстовом формате.
-    struct Full: Responsable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var interval: SafeDateInterval
         public var reason: String?
@@ -74,7 +74,7 @@ public extension Offtime.Responses {
         }
     }
     
-    struct Partial: Responsable, Equatable {
+    struct Partial: Responsable {
         public var id: UUID
         public var interval: SafeDateInterval
 

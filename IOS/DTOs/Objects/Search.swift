@@ -98,7 +98,7 @@ public extension Search.Responses {
 
 public extension Search.Helpers {
     
-    struct Salon: Responsable, Identifiable, Hashable, Equatable {
+    struct Salon: Responsable {
         public var id: UUID
         public var name: String
         public var type: SalonType

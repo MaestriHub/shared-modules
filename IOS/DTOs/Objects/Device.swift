@@ -47,7 +47,7 @@ public extension Device.Parameters {
 
 public extension Device.Responses {
     
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var version: VersionType?
         
