@@ -5,6 +5,10 @@ public enum Complex {
     public enum Responses {}
 }
 
+public extension Complex.Responses {
+    enum Helpers {}
+}
+
 // MARK: - Parameters -
 
 public extension Complex.Parameters {
@@ -118,7 +122,36 @@ public extension Complex.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
-        // TODO: процедуры
+        public var procedures: [Helpers.Procedure]
+        public var services: [Helpers.Service]
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            description: String?,
+            alias: String?,
+            procedures: [Helpers.Procedure],
+            services: [Helpers.Service]
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+            self.procedures = procedures
+            self.services = services
+        }
+    }
+    
+    struct Retrieve: Responsable {
+        public var id: UUID
+        public var price: Price
+        public var duration: Int
+        public var description: String?
+        public var alias: String?
+        // TODO: процедура?
+        // TODO: мастера?
         
         public init(
             id: UUID,
@@ -134,27 +167,41 @@ public extension Complex.Responses {
             self.alias = alias
         }
     }
-    
-    struct Retrieve: Responsable {
-        public var id: UUID
-        public var price: Price
-        public var duration: Int
-        public var description: String?
-        public var alias: String?
-        // TODO: процедуры
+}
+
+public extension Complex.Responses.Helpers {
+    struct Procedure: Codable {
+        var id: UUID
+        var alias: String?
+        var description: String?
+        var serviceId: UUID
         
         public init(
             id: UUID,
-            price: Price,
-            duration: Int,
-            description: String?,
-            alias: String?
+            alias: String? = nil,
+            description: String? = nil,
+            serviceId: UUID
         ) {
             self.id = id
-            self.price = price
-            self.duration = duration
-            self.description = description
             self.alias = alias
+            self.description = description
+            self.serviceId = serviceId
+        }
+    }
+    
+    struct Service: Codable {
+        var id: UUID
+        var title: String
+        var tags: [ServiceTags]
+        
+        public init(
+            id: UUID,
+            title: String,
+            tags: [ServiceTags]
+        ) {
+            self.id = id
+            self.title = title
+            self.tags = tags
         }
     }
 }

@@ -9,9 +9,6 @@ public enum AppointmentCustomer {
     public enum Responses {}
 }
 
-public extension AppointmentCustomer.Parameters {
-    enum Helpers {}
-}
 public extension AppointmentCustomer.Responses {
     enum Helpers {}
 }
