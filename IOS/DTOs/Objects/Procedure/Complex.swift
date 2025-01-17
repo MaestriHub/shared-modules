@@ -120,28 +120,16 @@ public extension Complex.Responses {
     }
     
     struct All: Responsable {
-        public var id: UUID
-        public var price: Price
-        public var duration: Int
-        public var description: String?
-        public var alias: String?
+        public var complexes:  [Helpers.Complex]
         public var procedures: [Helpers.Procedure]
-        public var services: [Helpers.Service]
+        public var services:   [Helpers.Service]
         
         public init(
-            id: UUID,
-            price: Price,
-            duration: Int,
-            description: String?,
-            alias: String?,
+            complexes: [Helpers.Complex],
             procedures: [Helpers.Procedure],
             services: [Helpers.Service]
         ) {
-            self.id = id
-            self.price = price
-            self.duration = duration
-            self.description = description
-            self.alias = alias
+            self.complexes = complexes
             self.procedures = procedures
             self.services = services
         }
@@ -171,6 +159,28 @@ public extension Complex.Responses {
 }
 
 public extension Complex.Responses.Helpers {
+    struct Complex: Codable {
+        public var id: UUID
+        public var price: Price
+        public var duration: Int
+        public var description: String?
+        public var alias: String?
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Int,
+            description: String?,
+            alias: String?
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+        }
+    }
+    
     struct Procedure: Codable {
         var id: UUID
         var alias: String?
