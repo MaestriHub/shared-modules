@@ -14,12 +14,12 @@ public extension Complex.Responses {
 public extension Complex.Parameters {
     
     struct All: Parametable {
-        public let salonsFilter: [UUID]
-        public let employeesFilter: [UUID]
+        public let salonsFilter: [UUID]?
+        public let employeesFilter: [UUID]?
         
         public init(
-            salons: [UUID] = [],
-            employees: [UUID] = []
+            salons: [UUID]? = nil,
+            employees: [UUID]? = nil
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
@@ -78,19 +78,22 @@ public extension Complex.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
+        public let procedureIds: [UUID]
         
         public init(
             id: UUID,
             price: Price,
             duration: Int,
             description: String?,
-            alias: String?
+            alias: String?,
+            procedureIds: [UUID]
         ) {
             self.id = id
             self.price = price
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.procedureIds = procedureIds
         }
     }
     
@@ -150,8 +153,6 @@ public extension Complex.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
-        // TODO: процедура?
-        // TODO: мастера?
         
         public init(
             id: UUID,

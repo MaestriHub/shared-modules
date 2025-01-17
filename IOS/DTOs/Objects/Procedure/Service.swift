@@ -14,15 +14,15 @@ public extension Service.Responses {
 public extension Service.Parameters {
     
     struct All: Parametable {
-        public let salonsFilter: [UUID]
-        public let employeesFilter: [UUID]
+        public let salonsFilter: [UUID]?
+        public let employeesFilter: [UUID]?
         public let valueFilter: String?
         public let page: Int
         public let per: Int
         
         public init(
-            salons: [UUID] = [],
-            employees: [UUID] = [],
+            salons: [UUID]? = nil,
+            employees: [UUID]? = nil,
             value: String?,
             page: Int,
             per: Int
@@ -32,16 +32,6 @@ public extension Service.Parameters {
             self.valueFilter = value
             self.page = page
             self.per = per
-        }
-    }
-    
-    struct Retrieve: Parametable {
-        public let salon: UUID? // TODO: ?
-        
-        public init(
-            salon: UUID? = nil
-        ) {
-            self.salon = salon
         }
     }
 
@@ -78,21 +68,33 @@ public extension Service.Responses {
     
     struct Create: Responsable {
         public var id: UUID
+        public var title: String
+        public var tags: [ServiceTags]
         
         public init(
-            id: UUID
+            id: UUID,
+            title: String,
+            tags: [ServiceTags]
         ) {
             self.id = id
+            self.title = title
+            self.tags = tags
         }
     }
     
     struct Update: Responsable {
         public var id: UUID
+        public var title: String
+        public var tags: [ServiceTags]
         
         public init(
-            id: UUID
+            id: UUID,
+            title: String,
+            tags: [ServiceTags]
         ) {
             self.id = id
+            self.title = title
+            self.tags = tags
         }
     }
     
