@@ -5,6 +5,10 @@ public enum Service {
     public enum Responses {}
 }
 
+public extension Service.Responses {
+    enum Helpers {}
+}
+
 // MARK: - Parameters -
 
 public extension Service.Parameters {
@@ -93,10 +97,19 @@ public extension Service.Responses {
     }
     
     struct All: Responsable {
+        public var services: [Helpers.Service]
+        
+        public init(
+            services: [Helpers.Service]
+        ) {
+            self.services = services
+        }
+    }
+    
+    struct Retrieve: Responsable {
         public var id: UUID
         public var title: String
         public var tags: [ServiceTags]
-        // TODO: parameters
         
         public init(
             id: UUID,
@@ -108,12 +121,13 @@ public extension Service.Responses {
             self.tags = tags
         }
     }
-    
-    struct Retrieve: Responsable {
-        public var id: UUID
-        public var title: String
-        public var tags: [ServiceTags]
-        // TODO: parameters
+}
+
+public extension Service.Responses.Helpers {
+    struct Service: Codable {
+        var id: UUID
+        var title: String
+        var tags: [ServiceTags]
         
         public init(
             id: UUID,

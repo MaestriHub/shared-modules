@@ -7,8 +7,10 @@ import Foundation
 public enum Search {
     public enum Parameters {}
     public enum Responses {}
-    
-    public enum Helpers {}
+}
+
+public extension Search.Responses {
+    enum Helpers {}
 }
 
 //MARK: - Parameters -
@@ -84,11 +86,11 @@ public extension Search.Responses {
     /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
     struct Full: Responsable {
         public var suggests: [Suggest]
-        public var salons: [Search.Helpers.Salon]
+        public var salons: [Search.Responses.Helpers.Salon]
         
         public init(
             suggests: [Suggest],
-            salons: [Search.Helpers.Salon]
+            salons: [Search.Responses.Helpers.Salon]
         ) {
             self.suggests = suggests
             self.salons = salons
@@ -96,9 +98,9 @@ public extension Search.Responses {
     }
 }
 
-public extension Search.Helpers {
+public extension Search.Responses.Helpers {
     
-    struct Salon: Responsable {
+    struct Salon: Codable {
         public var id: UUID
         public var name: String
         public var type: SalonType
