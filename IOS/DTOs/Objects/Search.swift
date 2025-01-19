@@ -34,8 +34,7 @@ public extension Search.Parameters {
         public let salonType: SalonType?
         public let latitude: Double?
         public let longitude: Double?
-        public let page: Int?
-        public let per: Int?
+        public let pagination: Pagination?
         
         /// - Parameters:
         ///    - value: Поисковый запрос пользователя в виде строки.
@@ -49,15 +48,13 @@ public extension Search.Parameters {
             salonType: SalonType?,
             latitude: Double?,
             longitude: Double?,
-            page: Int?,
-            per: Int?
+            pagination: Pagination
         ) {
             self.value = value
             self.salonType = salonType
             self.latitude = latitude
             self.longitude = longitude
-            self.page = page
-            self.per = per
+            self.pagination = pagination
         }
     }
 }
