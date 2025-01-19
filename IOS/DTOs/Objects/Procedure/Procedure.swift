@@ -18,17 +18,23 @@ public extension Procedure.Parameters {
         public let employeesFilter: [UUID]?
         public let servicesFilter: [UUID]?
         public let addMastersInfo: Bool
+        public let page: Int
+        public let per: Int
         
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
             services: [UUID]? = nil,
-            addMastersInfo: Bool = false
+            addMastersInfo: Bool = false,
+            page: Int,
+            per: Int
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
             self.servicesFilter = services
             self.addMastersInfo = addMastersInfo
+            self.page = page
+            self.per = per
         }
     }
 

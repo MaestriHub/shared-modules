@@ -16,13 +16,19 @@ public extension Complex.Parameters {
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
+        public let page: Int
+        public let per: Int
         
         public init(
             salons: [UUID]? = nil,
-            employees: [UUID]? = nil
+            employees: [UUID]? = nil,
+            page: Int,
+            per: Int
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
+            self.page = page
+            self.per = per
         }
     }
     
