@@ -1,4 +1,12 @@
 public struct TranslatedServiceTag: Codable {
-    let tagKey: ServiceTags
-    let tagTranslate: String
+    public let key: ServiceTags
+    public let translate: String
+    
+    public init(
+        key: ServiceTags,
+        translate: String
+    ) {
+        self.key = key
+        self.translate = translate
+    }
 }
