@@ -17,21 +17,18 @@ public extension Service.Parameters {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let valueFilter: String?
-        public let page: Int
-        public let per: Int
+        public let pagination: Pagination?
         
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
             value: String?,
-            page: Int,
-            per: Int
+            pagination: Pagination?
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
             self.valueFilter = value
-            self.page = page
-            self.per = per
+            self.pagination = pagination
         }
     }
 
