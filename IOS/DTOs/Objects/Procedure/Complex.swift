@@ -21,7 +21,7 @@ public extension Complex.Parameters {
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
-            pagination: Pagination?
+            pagination: Pagination? = nil
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees

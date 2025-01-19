@@ -48,7 +48,7 @@ public extension Search.Parameters {
             salonType: SalonType?,
             latitude: Double?,
             longitude: Double?,
-            pagination: Pagination
+            pagination: Pagination?
         ) {
             self.value = value
             self.salonType = salonType
