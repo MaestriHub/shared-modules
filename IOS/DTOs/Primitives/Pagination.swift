@@ -1,6 +1,6 @@
 public struct Pagination: Codable {
-    let page: Int
-    let per: Int
+    public let page: Int
+    public let per: Int
     
     public init(
         page: Int,
