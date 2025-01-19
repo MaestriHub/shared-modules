@@ -210,12 +210,12 @@ public extension Procedure.Responses.Helpers {
     
     struct Service: Codable {
         public var id: UUID
-        public var tags: ServiceTags
+        public var tags: [TranslatedServiceTag]
         public var title: String
         
         public init(
             id: UUID,
-            tags: ServiceTags,
+            tags: [TranslatedServiceTag],
             title: String
         ) {
             self.id = id

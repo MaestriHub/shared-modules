@@ -111,12 +111,12 @@ public extension Service.Responses {
     struct Retrieve: Responsable {
         public var id: UUID
         public var title: String
-        public var tags: [ServiceTags]
+        public var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
             title: String,
-            tags: [ServiceTags]
+            tags: [TranslatedServiceTag]
         ) {
             self.id = id
             self.title = title
@@ -129,12 +129,12 @@ public extension Service.Responses.Helpers {
     struct Service: Codable {
         var id: UUID
         var title: String
-        var tags: [ServiceTags]
+        var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
             title: String,
-            tags: [ServiceTags]
+            tags: [TranslatedServiceTag]
         ) {
             self.id = id
             self.title = title
