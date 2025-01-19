@@ -22,8 +22,8 @@ public extension Service.Parameters {
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
-            value: String?,
-            pagination: Pagination?
+            value: String? = nil,
+            pagination: Pagination? = nil
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
