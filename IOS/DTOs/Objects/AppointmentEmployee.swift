@@ -198,12 +198,12 @@ public extension AppointmentEmployee.Responses.Helpers {
     struct Service: Codable {
         public var id: UUID
         public var title: String
-        public var category: ServiceTags
+        public var category: [ServiceTags]
         
         public init(
             id: UUID,
             title: String,
-            category: ServiceTags
+            category: [ServiceTags]
         ) {
             self.id = id
             self.title = title
