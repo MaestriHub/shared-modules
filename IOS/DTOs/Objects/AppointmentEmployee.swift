@@ -178,47 +178,35 @@ public extension AppointmentEmployee.Responses.Helpers {
     
     struct Procedure: Codable {
         public var id: UUID
-        public var price: Price
-        public var duration: Int
         public var description: String?
         public var alias: String?
         public var service: Service
-        public var master: Employee.Responses.Partial
         
         public init(
             id: UUID,
-            price: Price,
-            duration: Int,
             description: String?,
             alias: String?,
-            service: Service,
-            master: Employee.Responses.Partial
+            service: Service
         ) {
             self.id = id
-            self.price = price
-            self.duration = duration
             self.description = description
             self.alias = alias
             self.service = service
-            self.master = master
         }
     }
     
     struct Service: Codable {
         public var id: UUID
         public var title: String
-        public var description: String
         public var category: ServiceTags
         
         public init(
             id: UUID,
             title: String,
-            description: String,
             category: ServiceTags
         ) {
             self.id = id
             self.title = title
-            self.description = description
             self.category = category
         }
     }
