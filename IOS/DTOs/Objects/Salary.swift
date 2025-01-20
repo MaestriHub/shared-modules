@@ -153,24 +153,18 @@ public extension Salary.Responses.Helpers {
         public var id: UUID
         public var title: String
         public var description: String
-        public var category: ServiceTags
-        public var minPrice: Price?
-        public var minDuration: Int?
+        public var category: [ServiceTags]
         
         public init(
             id: UUID,
             title: String,
             description: String,
-            category: ServiceTags,
-            minPrice: Price?,
-            minDuration: Int?
+            category: [ServiceTags]
         ) {
             self.id = id
             self.title = title
             self.description = description
             self.category = category
-            self.minPrice = minPrice
-            self.minDuration = minDuration
         }
     }
 }
