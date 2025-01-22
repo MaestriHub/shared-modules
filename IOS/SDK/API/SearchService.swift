@@ -71,7 +71,7 @@ struct SearchService: ISearchService {
 struct SearchServiceMock: ISearchService {
     static var salons = Search.Responses.Full(
         suggests: [], salons: [
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Glamorous Touch",
                 type: .chain,
@@ -84,7 +84,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: true
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Chic & Classy",
                 type: .chain,
@@ -97,7 +97,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: true
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Luxe Beauty Lounge",
                 type: .chain,
@@ -111,7 +111,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: true
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Glamour Haven",
                 type: .chain,
@@ -125,7 +125,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Sleek Style Studio",
                 type: .chain,
@@ -138,7 +138,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Elegant Edge Salon",
                 type: .chain,
@@ -151,7 +151,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Classy Cuts & Colors",
                 type: .chain,
@@ -164,7 +164,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Posh Pampering Palace",
                 type: .chain,
@@ -177,7 +177,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Chic Beauty Bar",
                 type: .chain,
@@ -190,7 +190,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Glamour Zone",
                 type: .chain,
@@ -203,7 +203,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Divine Beauty Lounge",
                 type: .chain,
@@ -216,7 +216,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: true
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Sassy Style Studio",
                 type: .chain,
@@ -229,7 +229,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: true
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Glamorous Glow",
                 type: .chain,
@@ -242,7 +242,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Chic Charm Salon",
                 type: .chain,
@@ -255,7 +255,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Elegant Elements",
                 type: .chain,
@@ -268,7 +268,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Glowing Beauty Bar",
                 type: .chain,
@@ -281,7 +281,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Radiant Reflections",
                 type: .chain,
@@ -294,7 +294,7 @@ struct SearchServiceMock: ISearchService {
                 ),
                 isFavorite: false
             ),
-            Salon.Responses.Partial(
+            Search.Responses.Helpers.Salon(
                 id: UUID(),
                 name: "Chic & Sassy Salon",
                 type: .chain,
