@@ -1,4 +1,4 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(UUIDSerializer::class, SystemTypeSerializer::class)
 
 package shared.dto.objects
 
@@ -8,6 +8,7 @@ import shared.dto.enums.SystemType
 import shared.dto.enums.VersionType
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.SystemTypeSerializer
 import shared.serializers.UUIDSerializer
 import java.util.*
 
