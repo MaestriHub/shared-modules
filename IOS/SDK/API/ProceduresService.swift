@@ -71,7 +71,7 @@ struct ProceduresService: IProceduresService {
     
     // MARK: - Methods
     
-    func procedures(parameters: Procedure.Parameters.All) async throws -> [Procedure.Responses.All] {
+    func procedures(parameters: Procedure.Parameters.All) async throws -> Procedure.Responses.All {
         let result = try await requestsService
             .request(
                 path: "/v1/procedures",
@@ -79,7 +79,7 @@ struct ProceduresService: IProceduresService {
                 parameters: parameters,
                 requestType: .other
             )
-            .serializingDecodable([Procedure.Responses.All].self, decoder: coderService.decoder)
+            .serializingDecodable(Procedure.Responses.All.self, decoder: coderService.decoder)
             .value
         event.send(.fetch)
         return result
