@@ -85,51 +85,40 @@ struct ServicesService: IServicesService {
 
 // MARK: - Mock
 
-//struct ServicesServiceMock: IServicesService {
-//    private func createServiceAllMock(prefix: String) -> Service.Responses.All {
-//        Service.Responses.Full(
-//            id: UUID(),
-//            title: "Service \(prefix)",
-//            description: "Service \(prefix) description",
-//            category: .cosmetology,
-//            procedures: []
-//        )
-//    }
-//    
-//    private func createServicesFullMocks(count: Int) -> [Service.Responses.Full] {
-//        (0..<count).map { createServicesFullMock(prefix: "\($0)")}
-//    }
-//    
-//    private func createServicesPartialMock(prefix: String) -> Service.Responses.Partial {
-//        Service.Responses.Partial(
-//            id: UUID(),
-//            title: "Service \(prefix)",
-//            description: "Service \(prefix) description",
-//            category: .depilation,
-//            minPrice: Price(amount: 100, currency: "40"),
-//            minDuration: 45
-//        )
-//    }
-//    
-//    func createServicesPartialMocks(count: Int) -> [Service.Responses.Partial] {
-//        (0..<count).map { createServicesPartialMock(prefix: "\($0)")}
-//    }
-//    
-//    func services(parameters: Service.Parameters.All) async throws -> [Service.Responses.Retrieve] {
-//        createServicesPartialMocks(count: 40)
-//    }
-//    
-//    func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.All {
-//        createServicesFullMock(prefix: "create")
-//    }
-//    
-//    func service(id: UUID, parameters: Service.Parameters.All) async throws -> Service.Responses.All {
-//        createServicesFullMock(prefix: "procedure")
-//    }
-//    
-//    func update(id: UUID, parameters: Service.Parameters.Update) async throws -> Service.Responses.All {
-//        createServicesFullMock(prefix: "update")
-//    }
-//    
-//    func delete(id: UUID) async throws {}
-//}
+struct ServicesServiceMock: IServicesService {
+    func services(parameters: Service.Parameters.All) async throws -> Service.Responses.All {
+        Service.Responses.All(services: [
+            Service.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock Service Title",
+                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
+            ),
+            Service.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock Service Title",
+                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
+            ),
+            Service.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock Service Title",
+                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
+            )
+        ])
+    }
+    
+    func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.Create {
+        Service.Responses.Create(
+            id: UUID(),
+            title: "Mock Service Title",
+            tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
+        )
+    }
+    
+    func update(id: UUID, parameters: Service.Parameters.Update) async throws -> Service.Responses.Update {
+        Service.Responses.Update(
+            id: UUID(),
+            title: "Mock Service Title",
+            tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
+        )
+    }
+}

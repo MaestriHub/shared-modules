@@ -139,3 +139,123 @@ struct ComplexService: IComplexService {
         event.send(.delete)
     }
 }
+
+// MARK: - Mock
+
+public final class ComplexServiceMock {
+    private func createProceduresMock() -> [Complex.Responses.Helpers.Procedure] {
+        [
+            Complex.Responses.Helpers.Procedure(
+                id: UUID(),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            ),
+            Complex.Responses.Helpers.Procedure(
+                id: UUID(),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            ),
+            Complex.Responses.Helpers.Procedure(
+                id: UUID(),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            ),
+        ]
+    }
+    
+    private func createServicesMock() -> [Complex.Responses.Helpers.Service] {
+        [
+            Complex.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock service title",
+                tags: [TranslatedServiceTag(key: .brows, translate: "")]
+            ),
+            Complex.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock service title",
+                tags: [TranslatedServiceTag(key: .brows, translate: "")]
+            ),
+            Complex.Responses.Helpers.Service(
+                id: UUID(),
+                title: "Mock service title",
+                tags: [TranslatedServiceTag(key: .brows, translate: "")]
+            )
+        ]
+    }
+    
+    private func createComplexesMock(amount: Decimal = 228) -> [Complex.Responses.Helpers.Complex] {
+        [
+            Complex.Responses.Helpers.Complex(
+                id: UUID(),
+                price: Price(amount: amount, currency: "USD"),
+                duration: 34,
+                description: "",
+                alias: ""
+            ),
+            Complex.Responses.Helpers.Complex(
+                id: UUID(),
+                price: Price(amount: amount, currency: "USD"),
+                duration: 34,
+                description: "",
+                alias: ""
+            ),
+            Complex.Responses.Helpers.Complex(
+                id: UUID(),
+                price: Price(amount: amount, currency: "USD"),
+                duration: 34,
+                description: "",
+                alias: ""
+            )
+        ]
+    }
+}
+
+extension ComplexServiceMock: IComplexService {
+    public var event: PublishedAction<ComplexServiceActionType> {
+        return PublishedAction<ComplexServiceActionType>()
+    }
+    
+    public func complexes(parameters: Complex.Parameters.All) async throws -> Complex.Responses.All {
+        Complex.Responses.All(
+            complexes: createComplexesMock(),
+            procedures: createProceduresMock(),
+            services: createServicesMock()
+        )
+    }
+    
+    public func create(parameters: Complex.Parameters.Create) async throws -> Complex.Responses.Create {
+        Complex.Responses.Create(
+            id: UUID(),
+            price: Price(amount: 234, currency: "RUB"),
+            duration: 32,
+            description: "",
+            alias: "",
+            procedureIds: [UUID(), UUID()]
+        )
+    }
+    
+    public func complex(id: UUID) async throws -> Complex.Responses.Retrieve {
+        Complex.Responses.Retrieve(
+            id: UUID(),
+            price: Price(amount: 234, currency: "RUB"),
+            duration: 32,
+            description: "",
+            alias: ""
+        )
+    }
+    
+    public func update(id: UUID, parameters: Complex.Parameters.Update) async throws -> Complex.Responses.Update {
+        Complex.Responses.Update(
+            id: UUID(),
+            price: Price(amount: 234, currency: "RUB"),
+            duration: 32,
+            description: "",
+            alias: ""
+        )
+    }
+    
+    public func delete(id: UUID) async throws {}
+}

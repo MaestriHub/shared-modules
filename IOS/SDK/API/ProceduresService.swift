@@ -51,10 +51,10 @@ public extension DependencyValues {
     
     enum ProceduresServiceKey: DependencyKey {
         public static var liveValue: IProceduresService = ProceduresService()
-//        public static let liveValue: IProceduresService = {
-//            @Dependency(\.toggleService) var toggleService
-//            return toggleService.isActive(.procedureMocks) ? ProceduresServiceMock() : ProceduresService()
-//        }()
+        //        public static let liveValue: IProceduresService = {
+        //            @Dependency(\.toggleService) var toggleService
+        //            return toggleService.isActive(.procedureMocks) ? ProceduresServiceMock() : ProceduresService()
+        //        }()
     }
 }
 
@@ -139,76 +139,128 @@ struct ProceduresService: IProceduresService {
 
 // MARK: - Mock
 
-//public final class ProceduresServiceMock {
-//    
-//    private func createPartialMock1(amount: Decimal = 228) -> Procedure.Responses.Partial {
-//        Procedure.Responses.Partial(
-//            id: UUID(),
-//            price: Price(amount: amount, currency: "USD"),
-//            duration: 225,
-//            description: "Mock procedure description",
-//            alias: "MockAlias",
-//            service: Service.Responses.Micro(id: UUID(), title: "Service 1", description: "Тест Service 1", category: .brows)
-//        )
-//    }
-//    
-//    private func createPartialMock2(amount: Decimal = 228) -> Procedure.Responses.Partial {
-//        Procedure.Responses.Partial(
-//            id: UUID(),
-//            price: Price(amount: amount, currency: "USD"),
-//            duration: 225,
-//            description: "Mock procedure description 2",
-//            alias: "MockAlias",
-//            service: Service.Responses.Micro(id: UUID(), title: "Service 2", description: "Тест Service 2", category: .massage)
-//        )
-//    }
-//    
-//    private func createFullMock() -> Procedure.Responses.Full {
-//        Procedure.Responses.Full(
-//            id: UUID(),
-//            price: Price(amount: 228, currency: "USD"),
-//            duration: 3,
-//            description: "sdfsdf",
-//            alias: "MockAlias",
-//            service: Service.Responses.Micro(id: UUID(), title: "Тест Title", description: "Тест Description", category: .hairdressing),
-//            master: Employee.Responses.Partial(
-//                id: UUID(),
-//                user: nil,
-//                contacts: [],
-//                position: Position.Responses.Partial(id: UUID(), title: "Mock position")
-//            )
-//        )
-//    }
-//}
-//
+public final class ProceduresServiceMock {
+    
+    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
+        [
+            Procedure.Responses.Helpers.Procedure(
+                id: UUID(),
+                duration: 225,
+                price: Price(amount: 2134, currency: "USD"),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            ),
+            Procedure.Responses.Helpers.Procedure(
+                id: UUID(),
+                duration: 225,
+                price: Price(amount: 2134, currency: "USD"),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            ),
+            Procedure.Responses.Helpers.Procedure(
+                id: UUID(),
+                duration: 225,
+                price: Price(amount: 2134, currency: "USD"),
+                alias: "MockAlias",
+                description: "Mock procedure description",
+                serviceId: UUID()
+            )
+        ]
+    }
+    
+    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
+        [
+            Procedure.Responses.Helpers.Service(
+                id: UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+                title: "Mock service title"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+                title: "Mock service title"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+                title: "Mock service title"
+            )
+        ]
+    }
+    
+    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
+        [
+            Procedure.Responses.Helpers.Masters(
+                id: UUID(),
+                nickname: "Mock nickname",
+                avatar: "Mock avatar"
+            ),
+            Procedure.Responses.Helpers.Masters(
+                id: UUID(),
+                nickname: "Mock nickname",
+                avatar: "Mock avatar"
+            ),
+            Procedure.Responses.Helpers.Masters(
+                id: UUID(),
+                nickname: "Mock nickname",
+                avatar: "Mock avatar"
+            )
+        ]
+    }
+}
+
 // MARK: - IProceduresService
-//
-//extension ProceduresServiceMock: IProceduresService {
-//    public var event: PublishedAction<ProceduresServiceActionType> {
-//        return PublishedAction<ProceduresServiceActionType>()
-//    }
-//    
-//    public func procedures(parameters: Procedure.Parameters.Retrieve) async throws -> [Procedure.Responses.Partial] {
-//        [
-//            createPartialMock1(amount: 15),
-//            createPartialMock1(amount: 15),
-//            createPartialMock1(amount: 14.02),
-//            createPartialMock2(amount: 30),
-//            createPartialMock1(amount: 70)
-//        ]
-//    }
-//    
-//    public func create(parameters: Procedure.Parameters.Create) async throws -> Procedure.Responses.Full {
-//        createFullMock()
-//    }
-//    
-//    public func procedure(id: UUID) async throws -> Procedure.Responses.Full {
-//        createFullMock()
-//    }
-//    
-//    public func update(id: UUID, parameters: Procedure.Parameters.Patch) async throws -> Procedure.Responses.Full {
-//        createFullMock()
-//    }
-//    
-//    public func delete(id: UUID) async throws {  }
-//}
+
+extension ProceduresServiceMock: IProceduresService {
+    public var event: PublishedAction<ProceduresServiceActionType> {
+        return PublishedAction<ProceduresServiceActionType>()
+    }
+    
+    public func procedures(parameters: Procedure.Parameters.All) async throws -> Procedure.Responses.All {
+        Procedure.Responses.All(
+            procedures: createProceduresMock(),
+            services: createServicesMock(),
+            masters: createMastersMock()
+        )
+    }
+    
+    public func create(parameters: Procedure.Parameters.Create) async throws -> Procedure.Responses.Create {
+        Procedure.Responses.Create(
+            id: UUID(),
+            price: Price(amount: 222, currency: "USD"),
+            duration: 225,
+            description: "Mock procedure description",
+            alias: "MockAlias",
+            serviceId: UUID(),
+            employeeId: UUID()
+        )
+    }
+    
+    public func procedure(id: UUID) async throws -> Procedure.Responses.Retrieve {
+        Procedure.Responses.Retrieve(
+            id: UUID(),
+            price: Price(amount: 2134, currency: "USD"),
+            duration: 225,
+            description: "Mock procedure description",
+            alias: "MockAlias",
+            serviceId: UUID(),
+            employeeId: UUID()
+        )
+    }
+    
+    public func update(id: UUID, parameters: Procedure.Parameters.Update) async throws -> Procedure.Responses.Update {
+        Procedure.Responses.Update(
+            id: UUID(),
+            price: Price(amount: 2134, currency: "USD"),
+            duration: 225,
+            description: "Mock procedure description",
+            alias: "MockAlias",
+            serviceId: UUID(),
+            employeeId: UUID()
+        )
+    }
+    
+    public func delete(id: UUID) async throws { }
+}
