@@ -15,9 +15,6 @@ public protocol IServicesService {
     
     /// Put /services/:id
     func update(id: UUID, parameters: Service.Parameters.Update) async throws -> Service.Responses.Update
-    
-    /// Delete /services/:id
-    func delete(id: UUID) async throws
 }
 
 // MARK: - DependencyValues
@@ -82,17 +79,6 @@ struct ServicesService: IServicesService {
                 requestType: .other
             )
             .serializingDecodable(Service.Responses.Update.self, decoder: coderService.decoder)
-            .value
-    }
-    
-    func delete(id: UUID) async throws {
-        _ = try await requestsService
-            .request(
-                path: "/v1/services/\(id)",
-                method: .delete,
-                requestType: .other
-            )
-            .serializingDecodable(Empty.self)
             .value
     }
 }

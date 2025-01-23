@@ -11,7 +11,7 @@ public protocol IProceduresService {
     /// Get /procedures&salonId=123dscsd254423
     /// Передаю id salon для получение процедур по салону
     /// Передаю id master для получение процедур по мастеру
-    func procedures(parameters: Procedure.Parameters.All) async throws -> [Procedure.Responses.All]
+    func procedures(parameters: Procedure.Parameters.All) async throws -> Procedure.Responses.All
     
     /// Post /procedures
     /// Создаю процедуру для каждого мастера продолжительность процедуры и сумма своя то есть сущность процедуры описывает процесс,
