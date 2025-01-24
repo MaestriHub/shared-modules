@@ -40,10 +40,10 @@ public extension DependencyValues {
     
     enum AppointmentCustomerServiceKey: DependencyKey {
         public static var liveValue: IAppointmentCustomerService = AppointmentCustomerService()
-//        public static let liveValue: IAppointmentCustomerService = {
-//            @Dependency(\.toggleService) var toggleService
-//            return toggleService.isActive(.appointmentMocks) ? AppointmentCustomerMockService() : AppointmentCustomerService()
-//        }()
+        //        public static let liveValue: IAppointmentCustomerService = {
+        //            @Dependency(\.toggleService) var toggleService
+        //            return toggleService.isActive(.appointmentMocks) ? AppointmentCustomerMockService() : AppointmentCustomerService()
+        //        }()
     }
 }
 
@@ -178,46 +178,22 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
             procedures: [
                 .init(
                     id: uuidGenerator.callAsFunction(),
-                    price: Price(amount: 120, currency: "USD"),
-                    duration: 1,
                     description: "Looooooooong description",
                     alias: "MockAlias",
                     service: .init(
                         id: uuidGenerator.callAsFunction(),
                         title: "MockTitle",
-                        description: "Looooooooong description",
-                        category: .brows
-                    ),
-                    master: .init(
-                        id: uuidGenerator.callAsFunction(),
-                        user: .init(nickname: "MockUserNickname"),
-                        contacts: [
-                            .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                            .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                        ],
-                        position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                        category: [.brows]
                     )
                 ),
                 .init(
                     id: uuidGenerator.callAsFunction(),
-                    price: Price(amount: 120, currency: "USD"),
-                    duration: 1,
-                    description: "Looooooooong description",
-                    alias: "MockAlias",
+                    description: "Looooooooong description2",
+                    alias: "MockAlias2",
                     service: .init(
                         id: uuidGenerator.callAsFunction(),
-                        title: "MockTitle",
-                        description: "Looooooooong description",
-                        category: .brows
-                    ),
-                    master: .init(
-                        id: uuidGenerator.callAsFunction(),
-                        user: .init(nickname: "MockUserNickname"),
-                        contacts: [
-                            .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                            .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                        ],
-                        position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                        title: "MockTitle2",
+                        category: [.brows]
                     )
                 )
             ],
@@ -249,46 +225,22 @@ final class AppointmentCustomerMockService: IAppointmentCustomerService {
                 procedures: [
                     .init(
                         id: uuidGenerator.callAsFunction(),
-                        price: Price(amount: 120, currency: "USD"),
-                        duration: 1,
                         description: "Looooooooong description",
                         alias: "MockAlias",
                         service: .init(
                             id: uuidGenerator.callAsFunction(),
                             title: "MockTitle",
-                            description: "Looooooooong description",
-                            category: .brows
-                        ),
-                        master: .init(
-                            id: uuidGenerator.callAsFunction(),
-                            user: .init(nickname: "MockUserNickname"),
-                            contacts: [
-                                .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                            ],
-                            position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                            category: [.brows]
                         )
                     ),
                     .init(
                         id: uuidGenerator.callAsFunction(),
-                        price: Price(amount: 120, currency: "USD"),
-                        duration: 1,
-                        description: "Looooooooong description",
-                        alias: "MockAlias",
+                        description: "Looooooooong description2",
+                        alias: "MockAlias2",
                         service: .init(
                             id: uuidGenerator.callAsFunction(),
-                            title: "MockTitle",
-                            description: "Looooooooong description",
-                            category: .brows
-                        ),
-                        master: .init(
-                            id: uuidGenerator.callAsFunction(),
-                            user: .init(nickname: "MockUserNickname"),
-                            contacts: [
-                                .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                            ],
-                            position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                            title: "MockTitle2",
+                            category: [.brows]
                         )
                     )
                 ]

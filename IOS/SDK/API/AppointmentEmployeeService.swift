@@ -187,24 +187,12 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
                     status: .bothApproved,
                     procedure: .init(
                         id: uuidGenerator.callAsFunction(),
-                        price: Price(amount: 120, currency: "USD"),
-                        duration: 1,
                         description: "Looooooooong description",
                         alias: "MockAlias",
                         service: .init(
                             id: uuidGenerator.callAsFunction(),
                             title: "MockTitle",
-                            description: "Looooooooong description",
-                            category: .brows
-                        ),
-                        master: .init(
-                            id: uuidGenerator.callAsFunction(),
-                            user: .init(nickname: "MockUserNickname"),
-                            contacts: [
-                                .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                            ],
-                            position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                            category: [.brows]
                         )
                     ),
                     time: SafeDateInterval(dateinterval: DateInterval(
@@ -218,24 +206,12 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
                     status: .customerApproved,
                     procedure: .init(
                         id: uuidGenerator.callAsFunction(),
-                        price: Price(amount: 120, currency: "USD"),
-                        duration: 2,
                         description: "Looooooooong description",
                         alias: "MockAlias",
                         service: .init(
                             id: uuidGenerator.callAsFunction(),
                             title: "MockTitle",
-                            description: "Looooooooong description",
-                            category: .brows
-                        ),
-                        master: .init(
-                            id: uuidGenerator.callAsFunction(),
-                            user: .init(nickname: "MockUserNickname"),
-                            contacts: [
-                                .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                            ],
-                            position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                            category: [.brows]
                         )
                     ),
                     time: SafeDateInterval(dateinterval: DateInterval(
@@ -266,24 +242,12 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
                         status: .bothApproved,
                         procedure: .init(
                             id: uuidGenerator.callAsFunction(),
-                            price: Price(amount: 120, currency: "USD"),
-                            duration: 2,
                             description: "Looooooooong description",
                             alias: "MockAlias",
                             service: .init(
                                 id: uuidGenerator.callAsFunction(),
                                 title: "MockTitle",
-                                description: "Looooooooong description",
-                                category: .brows
-                            ),
-                            master: .init(
-                                id: uuidGenerator.callAsFunction(),
-                                user: .init(nickname: "MockUserNickname"),
-                                contacts: [
-                                    .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                    .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                                ],
-                                position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                                category: [.brows]
                             )
                         ),
                         time: SafeDateInterval(dateinterval: DateInterval(
@@ -310,24 +274,12 @@ final class AppointmentEmployeeServiceMock: IAppointmentEmployeeService {
                         status: .bothApproved,
                         procedure: .init(
                             id: uuidGenerator.callAsFunction(),
-                            price: Price(amount: 120, currency: "USD"),
-                            duration: 2,
                             description: "Looooooooong description",
                             alias: "MockAlias",
                             service: .init(
                                 id: uuidGenerator.callAsFunction(),
                                 title: "MockTitle",
-                                description: "Looooooooong description",
-                                category: .brows
-                            ),
-                            master: .init(
-                                id: uuidGenerator.callAsFunction(),
-                                user: .init(nickname: "MockUserNickname"),
-                                contacts: [
-                                    .init(id: uuidGenerator.callAsFunction(), value: "pauljohnson@gmail.com", isVerify: true, type: .email),
-                                    .init(id: uuidGenerator.callAsFunction(), value: "+79381615254", isVerify: false, type: .phone)
-                                ],
-                                position: .init(id: uuidGenerator.callAsFunction(), title: "")
+                                category: [.brows]
                             )
                         ),
                         time: SafeDateInterval(dateinterval: DateInterval(
