@@ -52,14 +52,14 @@ public extension Complex.Parameters {
     }
     
     struct Update: Parametable {
-        public let price: Price
-        public let duration: Int
+        public let price: Price?
+        public let duration: Int?
         public var description: String?
         public var alias: String?
         
         public init(
-            price: Price,
-            duration: Int,
+            price: Price?,
+            duration: Int?,
             description: String?,
             alias: String?
         ) {

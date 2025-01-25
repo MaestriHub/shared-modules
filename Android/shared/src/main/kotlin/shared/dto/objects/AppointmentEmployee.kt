@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
+import shared.dto.enums.ServiceTags
 import shared.dto.primitives.Address
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
@@ -66,9 +67,26 @@ object AppointmentEmployee {
         data class Base(
             val id: UUID,
             val status: AppointmentStatus,
-            val procedure: Procedure.Responses.Partial,
+            val procedure: Helpers.Procedure,
             val time: DateInterval,
             val price: Price,
         ) : Responsable
+
+        data object Helpers {
+            @Serializable
+            data class Procedure(
+                val id: UUID,
+                val description: String?,
+                val alias: String?,
+                var service: Service
+            )
+
+            @Serializable
+            data class Service(
+                val id: UUID,
+                val title: String,
+                val category: Array<ServiceTags>
+            )
+        }
     }
 }

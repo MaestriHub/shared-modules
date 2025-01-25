@@ -1,42 +1,57 @@
+@file:UseSerializers(
+    UUIDSerializer::class,
+    URISerializer::class
+)
+
 package shared.dto.objects
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import shared.dto.enums.SalonType
+import shared.dto.primitives.Address
+import shared.dto.primitives.Pagination
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.URISerializer
+import shared.serializers.UUIDSerializer
+import java.net.URI
+import java.util.*
 
 object Search {
     data object Parameters {
-        /// Эти параметры позволяют проводить поиск салонов в заданном радиусе относительно указанной точки на карте.
-        /// - Parameters:
-        ///    - value: Поисковый запрос пользователя в виде строки.
-        ///    - salonType: Фильтр по типу салона
-        ///    - latitude: Широта центральной точки поиска.
-        ///    - longitude: Долгота центральной точки поиска.
-        ///    - page: Номер страницы для пагинации.
-        ///    - per: Количество элементов на странице для пагинации.
         @Serializable
         data class Retrieve(
             val value: String?,
             val salonType: SalonType?,
             val latitude: Double?,
             val longitude: Double?,
-            val page: Int?,
-            val per: Int?,
+            val pagination: Pagination?
         ) : Parametable()
     }
 
     data object Responses {
         @Serializable
-        data class Suggest(
-            val value: String,
-        ) : Responsable
-        
-        @Serializable
         data class Full(
-            val suggests: List<Suggest>,
-            val salons: List<Salon.Responses.Partial>,
+            val suggests: List<Helpers.Suggest>,
+            val salons: List<Helpers.Salon>,
         ) : Responsable
+
+        data object Helpers {
+            @Serializable
+            data class Salon(
+                val id: UUID,
+                val name: String,
+                val type: SalonType,
+                val logo: URI?,
+                val address: Address,
+                val isFavorite: Boolean
+            )
+
+            @Serializable
+            data class Suggest(
+                val value: String,
+            ) : Responsable
+        }
     }
 }
 
