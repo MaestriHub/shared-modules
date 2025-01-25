@@ -8,6 +8,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.PaymentType
 import shared.dto.enums.SalaryPaymentType
+import shared.dto.enums.ServiceTags
+import shared.dto.objects.procedure.Service
 import shared.dto.primitives.Price
 import shared.dto.primitives.Wage
 import shared.dto.protocols.Parametable
@@ -42,16 +44,6 @@ object Salary {
     }
 
     data object Responses {
-
-        data object Helpers {
-
-            @Serializable
-            data class ServiceWithPaymentType(
-                val service: Service.Responses.Partial,
-                val paymentType: SalaryPaymentType
-            )
-        }
-
         data object Rules {
             @Serializable
             data class Full(
@@ -69,6 +61,23 @@ object Salary {
                 val percent: List<Price>? = null,
                 val sum: List<Price>? = null,
             ) : Parametable()
+        }
+
+        data object Helpers {
+
+            @Serializable
+            data class ServiceWithPaymentType(
+                val service: Service,
+                val paymentType: SalaryPaymentType
+            )
+
+            @Serializable
+            data class Service(
+                val id: UUID,
+                val title: String,
+                val description: String,
+                val category: Array<ServiceTags>
+            )
         }
     }
 }

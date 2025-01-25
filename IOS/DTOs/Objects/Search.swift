@@ -62,32 +62,18 @@ public extension Search.Parameters {
 //MARK: - Responses -
 
 public extension Search.Responses {
-    
-    /// Ответ на поисковый запрос, содержащий предложения для автозаполнения.
-    /// Позволяет пользователю выбрать из предложенных вариантов, основанных на начальных символах запроса.
-    ///
-    /// ### Properties:
-    /// - value: Текст предложения, соответствующий части поискового запроса пользователя.
-    struct Suggest: Responsable {
-        public var value: String
-        
-        public init(value: String) {
-            self.value = value
-        }
-    }
-    
     /// Полный ответ на поисковый запрос, включающий предложения и результаты поиска.
     ///
     /// ### Properties:
     /// - suggests: Массив предложений для автозаполнения поискового запроса.
     /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
     struct Full: Responsable {
-        public var suggests: [Suggest]
-        public var salons: [Search.Responses.Helpers.Salon]
+        public var suggests: [Helpers.Suggest]
+        public var salons: [Helpers.Salon]
         
         public init(
-            suggests: [Suggest],
-            salons: [Search.Responses.Helpers.Salon]
+            suggests: [Helpers.Suggest],
+            salons: [Helpers.Salon]
         ) {
             self.suggests = suggests
             self.salons = salons
@@ -96,6 +82,14 @@ public extension Search.Responses {
 }
 
 public extension Search.Responses.Helpers {
+    
+    struct Suggest: Responsable {
+        public var value: String
+        
+        public init(value: String) {
+            self.value = value
+        }
+    }
     
     struct Salon: Codable {
         public var id: UUID
