@@ -185,10 +185,10 @@ public extension Complex.Responses.Helpers {
     }
     
     struct Procedure: Codable {
-        var id: UUID
-        var alias: String?
-        var description: String?
-        var serviceId: UUID
+        public var id: UUID
+        public var alias: String?
+        public var description: String?
+        public var serviceId: UUID
         
         public init(
             id: UUID,
@@ -204,9 +204,9 @@ public extension Complex.Responses.Helpers {
     }
     
     struct Service: Codable {
-        var id: UUID
-        var title: String
-        var tags: [TranslatedServiceTag]
+        public var id: UUID
+        public var title: String
+        public var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
