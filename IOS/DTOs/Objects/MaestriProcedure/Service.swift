@@ -124,9 +124,9 @@ public extension Service.Responses {
 
 public extension Service.Responses.Helpers {
     struct Service: Codable {
-        var id: UUID
-        var title: String
-        var tags: [TranslatedServiceTag]
+        public var id: UUID
+        public var title: String
+        public var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
