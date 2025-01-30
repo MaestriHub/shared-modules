@@ -57,7 +57,7 @@ public extension DependencyValues {
     }
     
     enum ComplexServiceKey: DependencyKey {
-        public static var liveValue: IComplexService = ComplexService()
+        public static var liveValue: IComplexService = ComplexServiceMock()
     }
 }
 

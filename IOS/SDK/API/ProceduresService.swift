@@ -50,7 +50,7 @@ public extension DependencyValues {
     }
     
     enum ProceduresServiceKey: DependencyKey {
-        public static var liveValue: IProceduresService = ProceduresService()
+        public static var liveValue: IProceduresService = ProceduresServiceMock()
         //        public static let liveValue: IProceduresService = {
         //            @Dependency(\.toggleService) var toggleService
         //            return toggleService.isActive(.procedureMocks) ? ProceduresServiceMock() : ProceduresService()
