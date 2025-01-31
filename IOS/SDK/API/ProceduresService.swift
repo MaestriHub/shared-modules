@@ -149,7 +149,8 @@ public final class ProceduresServiceMock {
                 price: Price(amount: 2134, currency: "USD"),
                 alias: "MockAlias",
                 description: "Mock procedure description",
-                serviceId: UUID()
+                serviceId: UUID(),
+                masterId: UUID()
             ),
             Procedure.Responses.Helpers.Procedure(
                 id: UUID(),
@@ -157,7 +158,8 @@ public final class ProceduresServiceMock {
                 price: Price(amount: 2134, currency: "USD"),
                 alias: "MockAlias",
                 description: "Mock procedure description",
-                serviceId: UUID()
+                serviceId: UUID(),
+                masterId: UUID()
             ),
             Procedure.Responses.Helpers.Procedure(
                 id: UUID(),
@@ -165,7 +167,8 @@ public final class ProceduresServiceMock {
                 price: Price(amount: 2134, currency: "USD"),
                 alias: "MockAlias",
                 description: "Mock procedure description",
-                serviceId: UUID()
+                serviceId: UUID(),
+                masterId: UUID()
             )
         ]
     }
