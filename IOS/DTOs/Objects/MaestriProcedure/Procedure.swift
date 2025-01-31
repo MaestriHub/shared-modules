@@ -193,6 +193,7 @@ public extension Procedure.Responses.Helpers {
         public var alias: String?
         public var description: String?
         public var serviceId: UUID
+        public var masterId: UUID
         
         public init(
             id: UUID,
@@ -200,7 +201,8 @@ public extension Procedure.Responses.Helpers {
             price: Price,
             alias: String? = nil,
             description: String? = nil,
-            serviceId: UUID
+            serviceId: UUID,
+            masterId: UUID
         ) {
             self.id = id
             self.duration = duration
@@ -208,6 +210,7 @@ public extension Procedure.Responses.Helpers {
             self.alias = alias
             self.description = description
             self.serviceId = serviceId
+            self.masterId = masterId
         }
     }
     
