@@ -172,17 +172,17 @@ public final class ProceduresServiceMock {
             ),
             Procedure.Responses.Helpers.Service(
                 id: UUID(3),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                tags: [TranslatedServiceTag(key: .makeup, translate: "Макияж")],
                 title: "Сервис 3"
             ),
             Procedure.Responses.Helpers.Service(
                 id: UUID(4),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                tags: [TranslatedServiceTag(key: .nails, translate: "Ногти")],
                 title: "Сервис 4"
             ),
             Procedure.Responses.Helpers.Service(
                 id: UUID(5),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                tags: [TranslatedServiceTag(key: .spa, translate: "Спа")],
                 title: "Сервис 5"
             ),
             Procedure.Responses.Helpers.Service(
@@ -223,78 +223,6 @@ public final class ProceduresServiceMock {
             )
         }
     }
-    
-    //    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
-    //        [
-    //            Procedure.Responses.Helpers.Procedure(
-    //                id: UUID(),
-    //                duration: 225,
-    //                price: Price(amount: 2134, currency: "USD"),
-    //                alias: "MockAlias",
-    //                description: "Mock procedure description",
-    //                serviceId: UUID(),
-    //                masterId: UUID()
-    //            ),
-    //            Procedure.Responses.Helpers.Procedure(
-    //                id: UUID(),
-    //                duration: 225,
-    //                price: Price(amount: 2134, currency: "USD"),
-    //                alias: "MockAlias",
-    //                description: "Mock procedure description",
-    //                serviceId: UUID(),
-    //                masterId: UUID()
-    //            ),
-    //            Procedure.Responses.Helpers.Procedure(
-    //                id: UUID(),
-    //                duration: 225,
-    //                price: Price(amount: 2134, currency: "USD"),
-    //                alias: "MockAlias",
-    //                description: "Mock procedure description",
-    //                serviceId: UUID(),
-    //                masterId: UUID()
-    //            )
-    //        ]
-    //    }
-    //
-    //    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
-    //        [
-    //            Procedure.Responses.Helpers.Service(
-    //                id: UUID(),
-    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-    //                title: "Mock service title"
-    //            ),
-    //            Procedure.Responses.Helpers.Service(
-    //                id: UUID(),
-    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-    //                title: "Mock service title"
-    //            ),
-    //            Procedure.Responses.Helpers.Service(
-    //                id: UUID(),
-    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-    //                title: "Mock service title"
-    //            )
-    //        ]
-    //    }
-    //
-    //    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
-    //        [
-    //            Procedure.Responses.Helpers.Masters(
-    //                id: UUID(),
-    //                nickname: "Mock nickname",
-    //                avatar: "Mock avatar"
-    //            ),
-    //            Procedure.Responses.Helpers.Masters(
-    //                id: UUID(),
-    //                nickname: "Mock nickname",
-    //                avatar: "Mock avatar"
-    //            ),
-    //            Procedure.Responses.Helpers.Masters(
-    //                id: UUID(),
-    //                nickname: "Mock nickname",
-    //                avatar: "Mock avatar"
-    //            )
-    //        ]
-    //    }
 }
 
 // MARK: - IProceduresService
