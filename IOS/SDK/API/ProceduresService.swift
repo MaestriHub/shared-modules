@@ -153,7 +153,7 @@ public final class ProceduresServiceMock {
                 alias: "procedure_\(index)",
                 description: "Описание процедуры \(index + 1)",
                 serviceId: UUID(index),
-                masterId: masters[index - 1].id
+                masterId: masters[index].id
             )
         }
     }
