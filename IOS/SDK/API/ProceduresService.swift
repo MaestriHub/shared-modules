@@ -141,77 +141,114 @@ struct ProceduresService: IProceduresService {
 
 public final class ProceduresServiceMock {
     
-    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
-        [
+    private func createProceduresMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Procedure] {
+        let services = createServicesMock(amount: amount)
+        let masters = createMastersMock(amount: amount)
+
+        return (0..<amount).map { index in
             Procedure.Responses.Helpers.Procedure(
                 id: UUID(),
-                duration: 225,
-                price: Price(amount: 2134, currency: "USD"),
-                alias: "MockAlias",
-                description: "Mock procedure description",
-                serviceId: UUID(),
-                masterId: UUID()
-            ),
-            Procedure.Responses.Helpers.Procedure(
-                id: UUID(),
-                duration: 225,
-                price: Price(amount: 2134, currency: "USD"),
-                alias: "MockAlias",
-                description: "Mock procedure description",
-                serviceId: UUID(),
-                masterId: UUID()
-            ),
-            Procedure.Responses.Helpers.Procedure(
-                id: UUID(),
-                duration: 225,
-                price: Price(amount: 2134, currency: "USD"),
-                alias: "MockAlias",
-                description: "Mock procedure description",
-                serviceId: UUID(),
-                masterId: UUID()
+                duration: 30 * (index + 1), // Разная длительность процедур
+                price: Price(amount: Decimal(1000 + index * 500), currency: "USD"), // Разные цены
+                alias: "procedure_\(index)",
+                description: "Описание процедуры \(index + 1)",
+                serviceId: services[index % services.count].id,
+                masterId: masters[index % masters.count].id
             )
-        ]
+        }
+    }
+
+    private func createServicesMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Service] {
+        return (0..<amount).map { index in
+            Procedure.Responses.Helpers.Service(
+                id: UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис \(index + 1)"
+            )
+        }
+    }
+
+    private func createMastersMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Masters] {
+        return (0..<amount).map { index in
+            Procedure.Responses.Helpers.Masters(
+                id: UUID(),
+                nickname: "Мастер \(index + 1)",
+                avatar: "avatar_\(index).jpg"
+            )
+        }
     }
     
-    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
-        [
-            Procedure.Responses.Helpers.Service(
-                id: UUID(),
-                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-                title: "Mock service title"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(),
-                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-                title: "Mock service title"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(),
-                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-                title: "Mock service title"
-            )
-        ]
-    }
-    
-    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
-        [
-            Procedure.Responses.Helpers.Masters(
-                id: UUID(),
-                nickname: "Mock nickname",
-                avatar: "Mock avatar"
-            ),
-            Procedure.Responses.Helpers.Masters(
-                id: UUID(),
-                nickname: "Mock nickname",
-                avatar: "Mock avatar"
-            ),
-            Procedure.Responses.Helpers.Masters(
-                id: UUID(),
-                nickname: "Mock nickname",
-                avatar: "Mock avatar"
-            )
-        ]
-    }
+//    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
+//        [
+//            Procedure.Responses.Helpers.Procedure(
+//                id: UUID(),
+//                duration: 225,
+//                price: Price(amount: 2134, currency: "USD"),
+//                alias: "MockAlias",
+//                description: "Mock procedure description",
+//                serviceId: UUID(),
+//                masterId: UUID()
+//            ),
+//            Procedure.Responses.Helpers.Procedure(
+//                id: UUID(),
+//                duration: 225,
+//                price: Price(amount: 2134, currency: "USD"),
+//                alias: "MockAlias",
+//                description: "Mock procedure description",
+//                serviceId: UUID(),
+//                masterId: UUID()
+//            ),
+//            Procedure.Responses.Helpers.Procedure(
+//                id: UUID(),
+//                duration: 225,
+//                price: Price(amount: 2134, currency: "USD"),
+//                alias: "MockAlias",
+//                description: "Mock procedure description",
+//                serviceId: UUID(),
+//                masterId: UUID()
+//            )
+//        ]
+//    }
+//    
+//    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
+//        [
+//            Procedure.Responses.Helpers.Service(
+//                id: UUID(),
+//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+//                title: "Mock service title"
+//            ),
+//            Procedure.Responses.Helpers.Service(
+//                id: UUID(),
+//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+//                title: "Mock service title"
+//            ),
+//            Procedure.Responses.Helpers.Service(
+//                id: UUID(),
+//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+//                title: "Mock service title"
+//            )
+//        ]
+//    }
+//    
+//    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
+//        [
+//            Procedure.Responses.Helpers.Masters(
+//                id: UUID(),
+//                nickname: "Mock nickname",
+//                avatar: "Mock avatar"
+//            ),
+//            Procedure.Responses.Helpers.Masters(
+//                id: UUID(),
+//                nickname: "Mock nickname",
+//                avatar: "Mock avatar"
+//            ),
+//            Procedure.Responses.Helpers.Masters(
+//                id: UUID(),
+//                nickname: "Mock nickname",
+//                avatar: "Mock avatar"
+//            )
+//        ]
+//    }
 }
 
 // MARK: - IProceduresService
