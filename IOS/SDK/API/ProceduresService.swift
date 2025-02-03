@@ -152,8 +152,8 @@ public final class ProceduresServiceMock {
                 price: Price(amount: Decimal(1000 + index * 500), currency: "USD"),
                 alias: "procedure_\(index)",
                 description: "Описание процедуры \(index + 1)",
-                serviceId: services[amount - 1].id,
-                masterId: masters[amount - 1].id
+                serviceId: UUID(index),
+                masterId: masters[index - 1].id
             )
         }
     }
