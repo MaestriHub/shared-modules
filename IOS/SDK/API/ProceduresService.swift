@@ -159,58 +159,59 @@ public final class ProceduresServiceMock {
     }
     
     private func createServicesMock() -> [Procedure.Responses.Helpers.Service] {
-        [
+        let services = [
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "72B6A90F-AFC1-41D1-8BB3-A402626168D1") ?? UUID(),
+                id: UUID(1),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 1"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "1F5D4C7A-3E6B-4A59-9E7D-3B6A5D2E8F44") ?? UUID(),
+                id: UUID(2),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 2"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "3A4E8B9D-6C2F-4B01-8D9F-1E4A6F7D3C25") ?? UUID(),
+                id: UUID(3),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 3"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "5C6D8F2A-9B3E-4D7C-82A1-6E2F3B4D5C78") ?? UUID(),
+                id: UUID(4),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 4"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "8A9B3D6F-2C5E-4D7A-91B2-3F6C4E7D8A01") ?? UUID(),
+                id: UUID(5),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 5"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "B2A1C3D4-5E6F-7A89-B01C-2D3E4F5A6789") ?? UUID(),
+                id: UUID(6),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 6"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "C4D3E2F1-6A7B-89C0-1D2E-3F4A5B6789C0") ?? UUID(),
+                id: UUID(7),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 7"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "D5E4F3A2-7B6C-89D0-1E2F-3A4B5C6789D0") ?? UUID(),
+                id: UUID(8),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 8"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "E6F5A4B3-8C7D-90E1-2F3A-4B5C6D7890E1") ?? UUID(),
+                id: UUID(9),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 9"
             ),
             Procedure.Responses.Helpers.Service(
-                id: UUID(uuidString: "F7A6B5C4-9D8E-01F2-3A4B-5C6D7890E1F2") ?? UUID(),
+                id: UUID(10),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
                 title: "Сервис 10"
             )
         ]
+        return services
     }
     
     private func createMastersMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Masters] {
