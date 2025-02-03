@@ -142,14 +142,14 @@ struct ProceduresService: IProceduresService {
 public final class ProceduresServiceMock {
     
     private func createProceduresMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Procedure] {
-        let services = createServicesMock(amount: amount)
+        let services = createServicesMock()
         let masters = createMastersMock(amount: amount)
-
+        
         return (0..<amount).map { index in
             Procedure.Responses.Helpers.Procedure(
                 id: UUID(),
-                duration: 30 * (index + 1), // Разная длительность процедур
-                price: Price(amount: Decimal(1000 + index * 500), currency: "USD"), // Разные цены
+                duration: 30 * (index + 1),
+                price: Price(amount: Decimal(1000 + index * 500), currency: "USD"),
                 alias: "procedure_\(index)",
                 description: "Описание процедуры \(index + 1)",
                 serviceId: services[amount - 1].id,
@@ -157,17 +157,62 @@ public final class ProceduresServiceMock {
             )
         }
     }
-
-    private func createServicesMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Service] {
-        return (0..<amount).map { index in
+    
+    private func createServicesMock() -> [Procedure.Responses.Helpers.Service] {
+        [
             Procedure.Responses.Helpers.Service(
-                id: UUID(),
+                id: UUID(uuidString: "72B6A90F-AFC1-41D1-8BB3-A402626168D1") ?? UUID(),
                 tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис \(index + 1)"
+                title: "Сервис 1"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "1F5D4C7A-3E6B-4A59-9E7D-3B6A5D2E8F44") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 2"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "3A4E8B9D-6C2F-4B01-8D9F-1E4A6F7D3C25") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 3"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "5C6D8F2A-9B3E-4D7C-82A1-6E2F3B4D5C78") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 4"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "8A9B3D6F-2C5E-4D7A-91B2-3F6C4E7D8A01") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 5"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "B2A1C3D4-5E6F-7A89-B01C-2D3E4F5A6789") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 6"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "C4D3E2F1-6A7B-89C0-1D2E-3F4A5B6789C0") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 7"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "D5E4F3A2-7B6C-89D0-1E2F-3A4B5C6789D0") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 8"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "E6F5A4B3-8C7D-90E1-2F3A-4B5C6D7890E1") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 9"
+            ),
+            Procedure.Responses.Helpers.Service(
+                id: UUID(uuidString: "F7A6B5C4-9D8E-01F2-3A4B-5C6D7890E1F2") ?? UUID(),
+                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
+                title: "Сервис 10"
             )
-        }
+        ]
     }
-
+    
     private func createMastersMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Masters] {
         return (0..<amount).map { index in
             Procedure.Responses.Helpers.Masters(
@@ -178,77 +223,77 @@ public final class ProceduresServiceMock {
         }
     }
     
-//    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
-//        [
-//            Procedure.Responses.Helpers.Procedure(
-//                id: UUID(),
-//                duration: 225,
-//                price: Price(amount: 2134, currency: "USD"),
-//                alias: "MockAlias",
-//                description: "Mock procedure description",
-//                serviceId: UUID(),
-//                masterId: UUID()
-//            ),
-//            Procedure.Responses.Helpers.Procedure(
-//                id: UUID(),
-//                duration: 225,
-//                price: Price(amount: 2134, currency: "USD"),
-//                alias: "MockAlias",
-//                description: "Mock procedure description",
-//                serviceId: UUID(),
-//                masterId: UUID()
-//            ),
-//            Procedure.Responses.Helpers.Procedure(
-//                id: UUID(),
-//                duration: 225,
-//                price: Price(amount: 2134, currency: "USD"),
-//                alias: "MockAlias",
-//                description: "Mock procedure description",
-//                serviceId: UUID(),
-//                masterId: UUID()
-//            )
-//        ]
-//    }
-//    
-//    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
-//        [
-//            Procedure.Responses.Helpers.Service(
-//                id: UUID(),
-//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-//                title: "Mock service title"
-//            ),
-//            Procedure.Responses.Helpers.Service(
-//                id: UUID(),
-//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-//                title: "Mock service title"
-//            ),
-//            Procedure.Responses.Helpers.Service(
-//                id: UUID(),
-//                tags: [TranslatedServiceTag(key: .brows, translate: "")],
-//                title: "Mock service title"
-//            )
-//        ]
-//    }
-//    
-//    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
-//        [
-//            Procedure.Responses.Helpers.Masters(
-//                id: UUID(),
-//                nickname: "Mock nickname",
-//                avatar: "Mock avatar"
-//            ),
-//            Procedure.Responses.Helpers.Masters(
-//                id: UUID(),
-//                nickname: "Mock nickname",
-//                avatar: "Mock avatar"
-//            ),
-//            Procedure.Responses.Helpers.Masters(
-//                id: UUID(),
-//                nickname: "Mock nickname",
-//                avatar: "Mock avatar"
-//            )
-//        ]
-//    }
+    //    private func createProceduresMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Procedure] {
+    //        [
+    //            Procedure.Responses.Helpers.Procedure(
+    //                id: UUID(),
+    //                duration: 225,
+    //                price: Price(amount: 2134, currency: "USD"),
+    //                alias: "MockAlias",
+    //                description: "Mock procedure description",
+    //                serviceId: UUID(),
+    //                masterId: UUID()
+    //            ),
+    //            Procedure.Responses.Helpers.Procedure(
+    //                id: UUID(),
+    //                duration: 225,
+    //                price: Price(amount: 2134, currency: "USD"),
+    //                alias: "MockAlias",
+    //                description: "Mock procedure description",
+    //                serviceId: UUID(),
+    //                masterId: UUID()
+    //            ),
+    //            Procedure.Responses.Helpers.Procedure(
+    //                id: UUID(),
+    //                duration: 225,
+    //                price: Price(amount: 2134, currency: "USD"),
+    //                alias: "MockAlias",
+    //                description: "Mock procedure description",
+    //                serviceId: UUID(),
+    //                masterId: UUID()
+    //            )
+    //        ]
+    //    }
+    //
+    //    private func createServicesMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Service] {
+    //        [
+    //            Procedure.Responses.Helpers.Service(
+    //                id: UUID(),
+    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+    //                title: "Mock service title"
+    //            ),
+    //            Procedure.Responses.Helpers.Service(
+    //                id: UUID(),
+    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+    //                title: "Mock service title"
+    //            ),
+    //            Procedure.Responses.Helpers.Service(
+    //                id: UUID(),
+    //                tags: [TranslatedServiceTag(key: .brows, translate: "")],
+    //                title: "Mock service title"
+    //            )
+    //        ]
+    //    }
+    //
+    //    private func createMastersMock(amount: Decimal = 228) -> [Procedure.Responses.Helpers.Masters] {
+    //        [
+    //            Procedure.Responses.Helpers.Masters(
+    //                id: UUID(),
+    //                nickname: "Mock nickname",
+    //                avatar: "Mock avatar"
+    //            ),
+    //            Procedure.Responses.Helpers.Masters(
+    //                id: UUID(),
+    //                nickname: "Mock nickname",
+    //                avatar: "Mock avatar"
+    //            ),
+    //            Procedure.Responses.Helpers.Masters(
+    //                id: UUID(),
+    //                nickname: "Mock nickname",
+    //                avatar: "Mock avatar"
+    //            )
+    //        ]
+    //    }
 }
 
 // MARK: - IProceduresService
