@@ -141,8 +141,8 @@ struct ProceduresService: IProceduresService {
 
 public final class ProceduresServiceMock {
     
-    private func createProceduresMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Procedure] {
-        let services = createServicesMock()
+    private func createProceduresMock(amount: Int = 100) -> [Procedure.Responses.Helpers.Procedure] {
+        let services = createServicesMock(amount: amount)
         let masters = createMastersMock(amount: amount)
         
         return (0..<amount).map { index in
@@ -152,69 +152,43 @@ public final class ProceduresServiceMock {
                 price: Price(amount: Decimal(1000 + index * 500), currency: "USD"),
                 alias: "procedure_\(index)",
                 description: "Описание процедуры \(index + 1)",
-                serviceId: UUID(index),
+                serviceId: services[index].id,
                 masterId: masters[index].id
             )
         }
     }
     
-    private func createServicesMock() -> [Procedure.Responses.Helpers.Service] {
-        let services = [
-            Procedure.Responses.Helpers.Service(
-                id: UUID(1),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 1"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(2),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 2"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(3),
-                tags: [TranslatedServiceTag(key: .makeup, translate: "Макияж")],
-                title: "Сервис 3"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(4),
-                tags: [TranslatedServiceTag(key: .nails, translate: "Ногти")],
-                title: "Сервис 4"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(5),
-                tags: [TranslatedServiceTag(key: .spa, translate: "Спа")],
-                title: "Сервис 5"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(6),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 6"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(7),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 7"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(8),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 8"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(9),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 9"
-            ),
-            Procedure.Responses.Helpers.Service(
-                id: UUID(10),
-                tags: [TranslatedServiceTag(key: .brows, translate: "Брови")],
-                title: "Сервис 10"
+    private func createServicesMock(amount: Int = 100) -> [Procedure.Responses.Helpers.Service] {
+        let tags: [TranslatedServiceTag] = ServiceTags.allCases.map { tag in
+            let translations: [ServiceTags: String] = [
+                .barbershop: "Барбершоп",
+                .nails: "Ногти",
+                .massage: "Массаж",
+                .spa: "Спа",
+                .cosmetology: "Косметология",
+                .hairdressing: "Парикмахерские услуги",
+                .epilation: "Эпиляция",
+                .permanentMakeup: "Перманентный макияж",
+                .piercing: "Пирсинг",
+                .makeup: "Макияж",
+                .brows: "Брови",
+                .lashes: "Ресницы"
+            ]
+            
+            return TranslatedServiceTag(key: tag, translate: translations[tag] ?? tag.rawValue.capitalized)
+        }
+        
+        return (1...amount).map { id in
+            let randomTag = tags.randomElement()!
+            return Procedure.Responses.Helpers.Service(
+                id: UUID(id),
+                tags: [randomTag],
+                title: "Сервис \(id)"
             )
-        ]
-        return services
+        }
     }
     
-    private func createMastersMock(amount: Int = 10) -> [Procedure.Responses.Helpers.Masters] {
+    private func createMastersMock(amount: Int = 20) -> [Procedure.Responses.Helpers.Masters] {
         return (0..<amount).map { index in
             Procedure.Responses.Helpers.Masters(
                 id: UUID(),
