@@ -1,13 +1,29 @@
 import Foundation
 
 public enum Complex {
+    public enum Helpers {}
+    
     public enum Parameters {}
-    public enum Responses {}
+    
+    public enum Responses {
+        public enum Helpers {}
+    }
 }
 
-public extension Complex.Responses {
-    enum Helpers {}
+// MARK: - Helpers -
+
+public extension Complex.Helpers {
+    enum Sale: Codable {
+        case percent(Double)
+        case absolute(Double)
+    }
+
+    enum ExecutionType: Codable {
+        case parallel
+        case sequential
+    }
 }
+
 
 // MARK: - Parameters -
 
@@ -30,20 +46,23 @@ public extension Complex.Parameters {
     }
     
     struct Create: Parametable {
-        public let price: Price
+        public let sale: Complex.Helpers.Sale
+        public let executionType: Complex.Helpers.ExecutionType
         public let duration: Int
-        public var description: String?
-        public var alias: String?
+        public let description: String?
+        public let alias: String?
         public let procedureIds: [UUID]
         
         public init(
-            price: Price,
+            sale: Complex.Helpers.Sale,
+            executionType: Complex.Helpers.ExecutionType,
             duration: Int,
             description: String?,
             alias: String?,
             procedureIds: [UUID]
         ) {
-            self.price = price
+            self.sale = sale
+            self.executionType = executionType
             self.duration = duration
             self.description = description
             self.alias = alias
@@ -52,18 +71,18 @@ public extension Complex.Parameters {
     }
     
     struct Update: Parametable {
-        public let price: Price?
+        public let sale: Complex.Helpers.Sale?
         public let duration: Int?
         public var description: String?
         public var alias: String?
         
         public init(
-            price: Price?,
+            sale: Complex.Helpers.Sale?,
             duration: Int?,
             description: String?,
             alias: String?
         ) {
-            self.price = price
+            self.sale = sale
             self.duration = duration
             self.description = description
             self.alias = alias
@@ -77,7 +96,8 @@ public extension Complex.Responses {
     
     struct Create: Responsable {
         public var id: UUID
-        public var price: Price
+        public var sale: Complex.Helpers.Sale
+        public var executionType: Complex.Helpers.ExecutionType
         public var duration: Int
         public var description: String?
         public var alias: String?
@@ -85,14 +105,16 @@ public extension Complex.Responses {
         
         public init(
             id: UUID,
-            price: Price,
+            sale: Complex.Helpers.Sale,
+            executionType: Complex.Helpers.ExecutionType,
             duration: Int,
             description: String?,
             alias: String?,
             procedureIds: [UUID]
         ) {
             self.id = id
-            self.price = price
+            self.sale = sale
+            self.executionType = executionType
             self.duration = duration
             self.description = description
             self.alias = alias
@@ -102,20 +124,20 @@ public extension Complex.Responses {
     
     struct Update: Responsable {
         public var id: UUID
-        public var price: Price
+        public var sale: Complex.Helpers.Sale
         public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
-            price: Price,
+            sale: Complex.Helpers.Sale,
             duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
-            self.price = price
+            self.sale = sale
             self.duration = duration
             self.description = description
             self.alias = alias
@@ -140,20 +162,23 @@ public extension Complex.Responses {
     
     struct Retrieve: Responsable {
         public var id: UUID
-        public var price: Price
+        public var sale: Complex.Helpers.Sale
+        public var executionType: Complex.Helpers.ExecutionType
         public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
-            price: Price,
+            sale: Complex.Helpers.Sale,
+            executionType: Complex.Helpers.ExecutionType,
             duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
-            self.price = price
+            self.sale = sale
+            self.executionType = executionType
             self.duration = duration
             self.description = description
             self.alias = alias
@@ -164,20 +189,23 @@ public extension Complex.Responses {
 public extension Complex.Responses.Helpers {
     struct Complex: Codable {
         public var id: UUID
-        public var price: Price
+        public var sale: DTOs.Complex.Helpers.Sale
+        public var executionType: DTOs.Complex.Helpers.ExecutionType
         public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
-            price: Price,
+            sale: DTOs.Complex.Helpers.Sale,
+            executionType: DTOs.Complex.Helpers.ExecutionType,
             duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
-            self.price = price
+            self.sale = sale
+            self.executionType = executionType
             self.duration = duration
             self.description = description
             self.alias = alias
