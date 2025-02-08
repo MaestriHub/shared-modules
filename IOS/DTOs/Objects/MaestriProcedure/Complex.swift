@@ -14,8 +14,8 @@ public enum Complex {
 
 public extension Complex.Helpers {
     enum Sale: Codable {
-        case percent(Double)
-        case absolute(Double)
+        case percent(Decimal)
+        case absolute(Decimal)
     }
 
     enum ExecutionType: Codable {
