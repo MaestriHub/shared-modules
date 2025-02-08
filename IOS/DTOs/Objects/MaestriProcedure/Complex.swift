@@ -51,7 +51,7 @@ public extension Complex.Parameters {
         public let duration: Int
         public let description: String?
         public let alias: String?
-        public let procedureIds: [UUID]
+        public let proceduresForCopy: [UUID]
         
         public init(
             sale: Complex.Helpers.Sale,
@@ -59,14 +59,14 @@ public extension Complex.Parameters {
             duration: Int,
             description: String?,
             alias: String?,
-            procedureIds: [UUID]
+            proceduresForCopy: [UUID]
         ) {
             self.sale = sale
             self.executionType = executionType
             self.duration = duration
             self.description = description
             self.alias = alias
-            self.procedureIds = procedureIds
+            self.proceduresForCopy = proceduresForCopy
         }
     }
     
