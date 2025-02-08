@@ -51,23 +51,17 @@ public extension Complex.Parameters {
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
     struct Create: Parametable {
         public let sale: Complex.Helpers.Sale
-        public let executionType: Complex.Helpers.ExecutionType
-        public let duration: Int
         public let description: String?
         public let alias: String?
         public let proceduresForCopy: [UUID]
         
         public init(
             sale: Complex.Helpers.Sale,
-            executionType: Complex.Helpers.ExecutionType,
-            duration: Int,
             description: String?,
             alias: String?,
             proceduresForCopy: [UUID]
         ) {
             self.sale = sale
-            self.executionType = executionType
-            self.duration = duration
             self.description = description
             self.alias = alias
             self.proceduresForCopy = proceduresForCopy
@@ -76,18 +70,15 @@ public extension Complex.Parameters {
     
     struct Update: Parametable {
         public let sale: Complex.Helpers.Sale?
-        public let duration: Int?
         public var description: String?
         public var alias: String?
         
         public init(
             sale: Complex.Helpers.Sale?,
-            duration: Int?,
             description: String?,
             alias: String?
         ) {
             self.sale = sale
-            self.duration = duration
             self.description = description
             self.alias = alias
         }
@@ -101,8 +92,6 @@ public extension Complex.Responses {
     struct Create: Responsable {
         public var id: UUID
         public var sale: Complex.Helpers.Sale
-        public var executionType: Complex.Helpers.ExecutionType
-        public var duration: Int
         public var description: String?
         public var alias: String?
         public let procedureIds: [UUID]
@@ -110,16 +99,12 @@ public extension Complex.Responses {
         public init(
             id: UUID,
             sale: Complex.Helpers.Sale,
-            executionType: Complex.Helpers.ExecutionType,
-            duration: Int,
             description: String?,
             alias: String?,
             procedureIds: [UUID]
         ) {
             self.id = id
             self.sale = sale
-            self.executionType = executionType
-            self.duration = duration
             self.description = description
             self.alias = alias
             self.procedureIds = procedureIds
@@ -129,20 +114,17 @@ public extension Complex.Responses {
     struct Update: Responsable {
         public var id: UUID
         public var sale: Complex.Helpers.Sale
-        public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
             sale: Complex.Helpers.Sale,
-            duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
             self.sale = sale
-            self.duration = duration
             self.description = description
             self.alias = alias
         }
@@ -167,23 +149,17 @@ public extension Complex.Responses {
     struct Retrieve: Responsable {
         public var id: UUID
         public var sale: Complex.Helpers.Sale
-        public var executionType: Complex.Helpers.ExecutionType
-        public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
             sale: Complex.Helpers.Sale,
-            executionType: Complex.Helpers.ExecutionType,
-            duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
             self.sale = sale
-            self.executionType = executionType
-            self.duration = duration
             self.description = description
             self.alias = alias
         }
@@ -194,23 +170,17 @@ public extension Complex.Responses.Helpers {
     struct Complex: Codable {
         public var id: UUID
         public var sale: DTOs.Complex.Helpers.Sale
-        public var executionType: DTOs.Complex.Helpers.ExecutionType
-        public var duration: Int
         public var description: String?
         public var alias: String?
         
         public init(
             id: UUID,
             sale: DTOs.Complex.Helpers.Sale,
-            executionType: DTOs.Complex.Helpers.ExecutionType,
-            duration: Int,
             description: String?,
             alias: String?
         ) {
             self.id = id
             self.sale = sale
-            self.executionType = executionType
-            self.duration = duration
             self.description = description
             self.alias = alias
         }
