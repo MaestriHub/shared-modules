@@ -27,11 +27,7 @@ public extension DependencyValues {
     }
     
     enum ServicesServiceKey: DependencyKey {
-        public static var liveValue: IServicesService = ServicesServiceMock()
-//        public static let liveValue: IServicesService = {
-//            @Dependency(\.toggleService) var toggleService
-//            return toggleService.isActive(.serviceMocks) ? ServicesServiceMock() : ServicesService()
-//        }()
+        public static var liveValue: IServicesService = ServicesService()
     }
 }
 
@@ -80,45 +76,5 @@ struct ServicesService: IServicesService {
             )
             .serializingDecodable(Service.Responses.Update.self, decoder: coderService.decoder)
             .value
-    }
-}
-
-// MARK: - Mock
-
-struct ServicesServiceMock: IServicesService {
-    func services(parameters: Service.Parameters.All) async throws -> Service.Responses.All {
-        Service.Responses.All(services: [
-            Service.Responses.Helpers.Service(
-                id: UUID(),
-                title: "Mock Service Title",
-                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
-            ),
-            Service.Responses.Helpers.Service(
-                id: UUID(),
-                title: "Mock Service Title",
-                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
-            ),
-            Service.Responses.Helpers.Service(
-                id: UUID(),
-                title: "Mock Service Title",
-                tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
-            )
-        ])
-    }
-    
-    func create(parameters: Service.Parameters.Create) async throws -> Service.Responses.Create {
-        Service.Responses.Create(
-            id: UUID(),
-            title: "Mock Service Title",
-            tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
-        )
-    }
-    
-    func update(id: UUID, parameters: Service.Parameters.Update) async throws -> Service.Responses.Update {
-        Service.Responses.Update(
-            id: UUID(),
-            title: "Mock Service Title",
-            tags: [TranslatedServiceTag(key: .barbershop, translate: "")]
-        )
     }
 }
