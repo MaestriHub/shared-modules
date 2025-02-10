@@ -57,7 +57,6 @@ struct UploadService: IUploadService {
                 data: data,
                 mimeType: mimeType
             )
-            .serializingDecodable(URL.self)
-            .value
+            .serializingValue(URL.self)
     }
 }

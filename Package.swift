@@ -19,6 +19,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "5.10.1")),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "1.5.2")),
+        .package(url: "https://github.com/pointfreeco/swift-sharing", .upToNextMajor(from: "2.2.0")),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", .upToNextMajor(from: "4.2.2")),
     ],
     targets: [
@@ -32,6 +33,7 @@ let package = Package(
             dependencies: [
                 "DTOs",
                 .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "Sharing", package: "swift-sharing"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
             ],

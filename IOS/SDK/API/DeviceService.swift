@@ -31,7 +31,6 @@ struct DeviceService: IDeviceService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -41,10 +40,8 @@ struct DeviceService: IDeviceService {
             .request(
                 path: "v1/devices",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Device.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Device.Responses.Full.self)
     }
 }

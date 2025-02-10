@@ -39,7 +39,6 @@ struct CustomersService: ICustomersService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -48,11 +47,9 @@ struct CustomersService: ICustomersService {
             .request(
                 path: "v1/customers",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Customer.Responses.Partial.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Customer.Responses.Partial.self)
     }
     
     func customers(parameters: Customer.Parameters.Retrieve) async throws -> [Customer.Responses.Partial] {
@@ -60,22 +57,18 @@ struct CustomersService: ICustomersService {
             .request(
                 path: "v1/customers",
                 method: .get,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable([Customer.Responses.Partial].self, decoder: coderService.decoder)
-            .value
+            .serializingValue([Customer.Responses.Partial].self)
     }
     
     func customer(id: UUID) async throws -> Customer.Responses.Full {
         try await requestsService
             .request(
                 path: "v1/customers/\(id)",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable(Customer.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Customer.Responses.Full.self)
     }
     
     func inviteHandler(id: UUID, parameters: Customer.Parameters.HandleInvite) async throws -> HandleInvite {
@@ -83,10 +76,8 @@ struct CustomersService: ICustomersService {
             .request(
                 path: "v1/customers/\(id)",
                 method: .put,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(HandleInvite.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(HandleInvite.self)
     }
 }

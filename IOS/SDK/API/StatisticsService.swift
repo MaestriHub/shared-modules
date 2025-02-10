@@ -34,7 +34,6 @@ struct StatisticsService: IStatisticsService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -43,10 +42,8 @@ struct StatisticsService: IStatisticsService {
             .request(
                 path: "/v1/statistics/appointments",
                 method: .get,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Statistic.Responses.Appointments.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Statistic.Responses.Appointments.self)
     }
 }

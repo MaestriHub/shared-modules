@@ -1,6 +1,7 @@
 import Foundation
 import Dependencies
 import KeychainAccess
+import Sharing
 
 import AuthenticationServices
 import Alamofire
@@ -35,12 +36,13 @@ public extension DependencyValues {
 // MARK: - Live
 
 struct AuthService: IAuthService {
-            
+    
+    @Shared(.accessJWT()) var accessToken: Token?
+    @Shared(.refreshJWT()) var refreshToken: Token?
+    
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
-    @Dependency(\.secureStorageService) var secureStorageService
     
     func authWithApple(data: ASAuthorization) async throws -> User.Responses.Full {
         guard let appleIDCredential = data.credential as? ASAuthorizationAppleIDCredential,
@@ -59,28 +61,22 @@ struct AuthService: IAuthService {
             .request(
                 path: "/v1/auth/apple",
                 method: .post,
-                parameters: parameters,
-                requestType: .session
+                parameters: parameters
             )
-            .serializingDecodable(Auth.Responses.Full.self, decoder: coderService.decoder)
-            .value
-
-        secureStorageService.setAccess(token: value.accessToken)
-        secureStorageService.setRefresh(token: value.refreshToken)
+            .serializingValue(Auth.Responses.Full.self)
+        
+        $accessToken.withLock { $0 = value.accessToken }
+        $refreshToken.withLock { $0 = value.refreshToken }
+        
         return value.user
     }
     
     func logout() async throws {
         _ = try await requestsService
-            .request(
-                path: "/v1/logout",
-                method: .post,
-                requestType: .session
-            )
-            .serializingDecodable(Empty.self)
-            .value
-        secureStorageService.setAccess(token: nil)
-        secureStorageService.setRefresh(token: nil)
+            .logout()
+            .serializingValue(Empty.self)
+        $accessToken.withLock { $0 = nil }
+        $refreshToken.withLock { $0 = nil }
     }
 }
 
@@ -92,13 +88,11 @@ extension AuthService {
             .request(
                 path: "/v1/auth/test/\(token)",
                 method: .post,
-                parameters: ["token": "sldkmsdf"],
-                requestType: .session
+                parameters: ["token": "sldkmsdf"]
             )
-            .serializingDecodable(Auth.Responses.Full.self, decoder: coderService.decoder)
-            .value
-        secureStorageService.setAccess(token: value.accessToken)
-        secureStorageService.setRefresh(token: value.refreshToken)
+            .serializingValue(Auth.Responses.Full.self)
+        $accessToken.withLock { $0 = value.accessToken }
+        $refreshToken.withLock { $0 = value.refreshToken }
         return value.user
     }
 }

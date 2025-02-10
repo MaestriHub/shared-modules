@@ -41,10 +41,6 @@ public extension DependencyValues {
     
     enum SalonsServiceKey: DependencyKey {
         public static var liveValue: ISalonsService = SalonsService()
-//        public static let liveValue: ISalonsService = {
-//            @Dependency(\.toggleService) var toggleService
-//            return toggleService.isActive(.salonMocks) ? SalonsServiceMock() : SalonsService()
-//        }()
     }
 }
 
@@ -55,7 +51,6 @@ struct SalonsService: ISalonsService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -63,11 +58,9 @@ struct SalonsService: ISalonsService {
         try await requestsService
             .request(
                 path: "/v1/salons/workshops",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable([Salon.Responses.Partial].self, decoder: coderService.decoder)
-            .value
+            .serializingValue([Salon.Responses.Partial].self)
     }
     
     func create(parameters: Salon.Parameters.Create) async throws -> Salon.Responses.Full {
@@ -75,22 +68,18 @@ struct SalonsService: ISalonsService {
             .request(
                 path: "/v1/salons",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Salon.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Salon.Responses.Full.self)
     }
     
     func salon(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable(Salon.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Salon.Responses.Full.self)
     }
     
     func update(id: UUID, parameters: Salon.Parameters.Patch) async throws -> Salon.Responses.Full {
@@ -98,154 +87,35 @@ struct SalonsService: ISalonsService {
             .request(
                 path: "/v1/salons/\(id)",
                 method: .put,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Salon.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Salon.Responses.Full.self)
     }
     
     func activate(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)/activate",
-                method: .put,
-                requestType: .other
+                method: .put
             )
-            .serializingDecodable(Salon.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Salon.Responses.Full.self)
     }
     
     func deactivate(id: UUID) async throws -> Salon.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/salons/\(id)/deactivate",
-                method: .put,
-                requestType: .other
+                method: .put
             )
-            .serializingDecodable(Salon.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Salon.Responses.Full.self)
     }
     
     func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/salons/\(id)",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
-    }
-}
-
-final class SalonsServiceMock: ISalonsService {
-    
-    func workshops() async throws -> [Salon.Responses.Partial] {
-        []
-    }
-    
-    func salon(id: UUID) async throws -> Salon.Responses.Full {
-        try await Task.sleep(for: .seconds(10))
-        return .init(
-            id: UUID(),
-            name: "Салон №1",
-            type: .chain,
-            description: nil,
-            address: .init(address: "sd", city: "dsf", country: "asd", latitude: 52.123, longitude: 32.123),
-            isActive: true,
-            canEdit: false,
-            isFavorite: false,
-            localeId: "_RU",
-            timeZoneId: "America/Vancouver"
-        )
-    }
-    
-    func create(parameters: Salon.Parameters.Create) async throws -> Salon.Responses.Full {
-        .init(
-            id: UUID(),
-            name: "Салон №1",
-            type: .chain,
-            description: nil,
-            address: .init(
-                address: "sd",
-                city: "dsf",
-                country: "asd",
-                latitude: 52.123,
-                longitude: 32.123
-            ),
-            isActive: true,
-            canEdit: false,
-            isFavorite: false,
-            localeId: "_RU",
-            timeZoneId: "America/Vancouver"
-        )
-    }
-    
-    func update(id: UUID, parameters: Salon.Parameters.Patch) async throws -> Salon.Responses.Full {
-        .init(
-            id: UUID(),
-            name: "Салон №1",
-            type: .chain,
-            description: nil,
-            address: .init(
-                address: "sd",
-                city: "dsf",
-                country: "asd",
-                latitude: 52.123,
-                longitude: 32.123
-            ),
-            isActive: true,
-            canEdit: false,
-            isFavorite: false,
-            localeId: "_RU",
-            timeZoneId: "America/Vancouver"
-        )
-    }
-    
-    func activate(id: UUID) async throws -> Salon.Responses.Full {
-        .init(
-            id: UUID(),
-            name: "Салон №1",
-            type: .chain,
-            description: nil,
-            address: .init(
-                address: "sd",
-                city: "dsf",
-                country: "asd",
-                latitude: 52.123,
-                longitude: 32.123
-            ),
-            isActive: true,
-            canEdit: false,
-            isFavorite: false,
-            localeId: "_RU",
-            timeZoneId: "America/Vancouver"
-        )
-    }
-    
-    func deactivate(id: UUID) async throws -> Salon.Responses.Full {
-        .init(
-            id: UUID(),
-            name: "Салон №1",
-            type: .chain,
-            description: nil,
-            address: .init(
-                address: "sd",
-                city: "dsf",
-                country: "asd",
-                latitude: 52.123,
-                longitude: 32.123
-            ),
-            isActive: false,
-            canEdit: false,
-            isFavorite: false,
-            localeId: "_RU",
-            timeZoneId: "America/Vancouver"
-        )
-    }
-    
-    func delete(id: UUID) async throws {
-        try await Task.sleep(for: .seconds(10))
+            .serializingValue(Empty.self)
     }
 }

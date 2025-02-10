@@ -1,15 +1,29 @@
 import Foundation
+import UIKit
 import Alamofire
 import Dependencies
-
-enum RequestType {
-    case session
-    case other
-}
+import Sharing
+import DTOs
 
 public struct ErrorResponse: Error, Decodable {
     public let error: Bool
     public let reason: String
+}
+
+public extension DataRequest {
+    
+    func serializingValue<Value: Decodable>(
+        _ type: Value.Type = Value.self,
+        emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes
+    ) async throws -> Value {
+        try await self
+            .serializingDecodable(
+                Value.self,
+                decoder: JSONDecoder.decoder,
+                emptyResponseCodes: emptyResponseCodes
+            )
+            .value
+    }
 }
 
 // MARK: - Protocol
@@ -26,15 +40,15 @@ protocol IRequestsService {
     func request<Parameters: Encodable>(
         path: String,
         method: HTTPMethod,
-        parameters: Parameters?,
-        requestType: RequestType
+        parameters: Parameters?
     ) -> DataRequest
     
     func request(
         path: String,
-        method: HTTPMethod,
-        requestType: RequestType
+        method: HTTPMethod
     ) -> DataRequest
+    
+    func logout() -> DataRequest
 }
 
 // MARK: - DependencyValues
@@ -47,11 +61,18 @@ extension DependencyValues {
     }
     
     enum RequestsServiceKey: DependencyKey {
-        static var liveValue: IRequestsService {
+        static var liveValue: IRequestsService = {
             let monitors = [RequestsService.eventMonitor].compactMap { $0 }
             
+            let configuration = URLSessionConfiguration.default
+            configuration.headers = [
+                .defaultAcceptEncoding,
+                .defaultAcceptLanguage,
+                .defaultUserAgent
+            ]
+
             let session = Session(
-                configuration: URLSessionConfiguration.af.default,
+                configuration: configuration,
                 delegate: SessionDelegate(),
                 rootQueue: DispatchQueue(label: "app.maestri.session.rootQueue"),
                 startRequestsImmediately: true,
@@ -68,7 +89,7 @@ extension DependencyValues {
                 session: session,
                 authenticator: JWTAuthenticator()
             )
-        }
+        }()
     }
 }
 
@@ -76,13 +97,32 @@ extension DependencyValues {
 
 public struct RequestsService: IRequestsService {
     
+    //TODO: Вернуть переключение между серверами
     public static var baseURL = URL(string: "https://api.maestri.me")!
     public static var eventMonitor: EventMonitor?
     
-    // MARK: - Dependencies
+    @Shared(.iAmState) var requesterType: RequesterType?
+    @Shared(.accessJWT()) var accessToken: Token?
+    @Shared(.refreshJWT()) var refreshToken: Token?
+    @Shared(.deviceId) var deviceId: UUID = UIDevice.current.identifierForVendor ?? UUID()
     
-    @Dependency(\.secureStorageService) var secureStorageService
-    @Dependency(\.coderService) var coderService
+    private var decoder = JSONDecoder.decoder
+    private var bodyEncoder = JSONParameterEncoder.bodyEncoder
+    private var queryEncoder = URLEncodedFormParameterEncoder.queryEncoder
+    
+    private var validation: DataRequest.Validation = { request, response, data in
+        switch response.statusCode {
+        case 200...299:
+            return .success(())
+        case 400...499:
+            guard let data, let error = try? JSONDecoder().decode(ErrorResponse.self, from: data) else {
+                return .failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode)))
+            }
+            return .failure(error)
+        default:
+            return .failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode)))
+        }
+    }
     
     // MARK: - Init
     
@@ -99,50 +139,41 @@ extension RequestsService {
     
     func request(
         path: String,
-        method: HTTPMethod,
-        requestType: RequestType
+        method: HTTPMethod
     ) -> DataRequest {
         request(
             path: path,
             method: method,
-            parameters: nil as Empty?,
-            requestType: requestType
+            parameters: nil as Empty?
         )
     }
     
     func request<Parameters: Encodable>(
         path: String,
         method: HTTPMethod,
-        parameters: Parameters? = nil as Empty?,
-        requestType: RequestType
+        parameters: Parameters? = nil as Empty?
     ) -> DataRequest {
         
-        var url = RequestsService.baseURL
-        url.append(path: path)
+        let url = RequestsService.baseURL.appending(path: path)
         
         let encoder: ParameterEncoder
         switch method {
         case .post, .put, .patch:
-            encoder = coderService.bodyEncoder
+            encoder = bodyEncoder
         default:
-            encoder = coderService.queryEncoder
+            encoder = queryEncoder
         }
         
         // Обработка Headers
         var headers = HTTPHeaders()
-        headers.requesterType = secureStorageService.currentIAm
-        headers.deviceId = secureStorageService.deviceId
+        headers.requesterType = requesterType
+        headers.deviceId = deviceId.uuidString
         
         var interceptor: RequestInterceptor?
-        switch requestType {
-        case .session:
-            if let token = secureStorageService.refreshToken {
-                headers.add(.authorization(bearerToken: token.value))
-            }
-        case .other:
+        if let token = refreshToken {
             interceptor = AuthenticationInterceptor(
                 authenticator: authenticator,
-                credential: JWTCredential(token: secureStorageService.accessToken)
+                credential: JWTCredential(token: accessToken)
             )
         }
         
@@ -157,19 +188,7 @@ extension RequestsService {
             requestModifier: .none
         )
         return dataRequest
-            .validate({ _, response, data in
-                switch response.statusCode {
-                case 200...299:
-                    return .success(())
-                case 400...499:
-                    guard let data, let error = try? JSONDecoder().decode(ErrorResponse.self, from: data) else {
-                        return .failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode)))
-                    }
-                    return .failure(error)
-                default: 
-                    return .failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode)))
-                }
-            })
+            .validate(validation)
     }
     
     func upload(
@@ -184,10 +203,10 @@ extension RequestsService {
         
         // Обработка Headers
         var headers = HTTPHeaders()
-        headers.requesterType = secureStorageService.currentIAm
-        headers.deviceId = secureStorageService.deviceId
+        headers.requesterType = requesterType
+        headers.deviceId = deviceId.uuidString
         
-        return session.upload(
+        let uploadRequest = session.upload(
             multipartFormData: { multipart in
                 //withName: "image" является ключом по которому кладётся data
                 let keyName = "image"
@@ -196,9 +215,30 @@ extension RequestsService {
             to: url,
             headers: headers,
             interceptor: AuthenticationInterceptor(
-                authenticator: JWTAuthenticator(),
-                credential: JWTCredential(token: secureStorageService.accessToken)
+                authenticator: authenticator,
+                credential: JWTCredential(token: accessToken)
             )
         )
+        
+        return uploadRequest
+            .validate(validation)
+    }
+    
+    func logout() -> DataRequest {
+        var url = RequestsService.baseURL
+        url.append(path: "/v1/logout")
+        
+        // Обработка Headers
+        var headers = HTTPHeaders()
+        headers.requesterType = requesterType
+        headers.deviceId = deviceId.uuidString
+        
+        if let token = refreshToken {
+            headers.add(.authorization(bearerToken: token.value))
+        }
+        
+        let dataRequest = session.request(url, method: .post, headers: headers)
+        return dataRequest
+            .validate(validation)
     }
 }

@@ -33,18 +33,6 @@ public protocol IComplexService {
     
     /// Delete /complex/:id
     func delete(id: UUID) async throws
-    
-    /// Слушатель для событий внутри сервиса
-    var event: PublishedAction<ComplexServiceActionType> { get }
-}
-
-// MARK: - Events
-
-public enum ComplexServiceActionType {
-    case fetch
-    case create
-    case update
-    case delete
 }
 
 // MARK: - DependencyValues
@@ -68,74 +56,54 @@ struct ComplexService: IComplexService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
-    
-    var event = PublishedAction<ComplexServiceActionType>()
     
     // MARK: - Methods
     
     func procedures(parameters: Complex.Parameters.Retrieve) async throws -> [Complex.Responses.Partial] {
-        let result = try await requestsService
+        try await requestsService
             .request(
                 path: "/v1/complex",
                 method: .get,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable([Complex.Responses.Partial].self, decoder: coderService.decoder)
-            .value
-        event.send(.fetch)
-        return result
+            .serializingValue([Complex.Responses.Partial].self)
     }
     
     func create(parameters: Complex.Parameters.Create) async throws -> Complex.Responses.Full {
-        let result = try await requestsService
+        try await requestsService
             .request(
                 path: "/v1/complex",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Complex.Responses.Full.self, decoder: coderService.decoder)
-            .value
-        event.send(.create)
-        return result
+            .serializingValue(Complex.Responses.Full.self)
     }
     
     func procedure(id: UUID) async throws -> Complex.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/complex/\(id)",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable(Complex.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Complex.Responses.Full.self)
     }
     
     func update(id: UUID, parameters: Complex.Parameters.Patch) async throws -> Complex.Responses.Full {
-        let result = try await requestsService
+        try await requestsService
             .request(
                 path: "/v1/complex/\(id)",
                 method: .put,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Complex.Responses.Full.self, decoder: coderService.decoder)
-            .value
-        event.send(.update)
-        return result
+            .serializingValue(Complex.Responses.Full.self)
     }
     
     func delete(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/complex/\(id)",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
-        event.send(.delete)
+            .serializingValue(Empty.self)
     }
 }

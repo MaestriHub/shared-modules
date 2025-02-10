@@ -6,7 +6,7 @@ import DTOs
 // MARK: - Protocol
 
 public protocol IEmployeesService {
-        
+    
     /// Get /employees/:id
     func employees(parameters: Employee.Parameters.Retrieve) async throws -> [Employee.Responses.Partial]
     
@@ -36,18 +36,17 @@ public extension DependencyValues {
     }
     
     enum EmployeesServiceKey: DependencyKey {
-        public static let liveValue: IEmployeesService = EmployeesService() //EmployeesServiceMock()
+        public static let liveValue: IEmployeesService = EmployeesService()
     }
 }
 
 // MARK: - Live
 
 struct EmployeesService: IEmployeesService {
-
+    
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -56,22 +55,18 @@ struct EmployeesService: IEmployeesService {
             .request(
                 path: "/v1/employees",
                 method: .get,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable([Employee.Responses.Partial].self, decoder: coderService.decoder)
-            .value
+            .serializingValue([Employee.Responses.Partial].self)
     }
     
     func employees(id: UUID) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/\(id)",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable(Employee.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Employee.Responses.Full.self)
     }
     
     func invite(parameters: Employee.Parameters.Invite) async throws -> Employee.Responses.Full {
@@ -79,22 +74,18 @@ struct EmployeesService: IEmployeesService {
             .request(
                 path: "/v1/employees/invite",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Employee.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Employee.Responses.Full.self)
     }
     
     func handler(id: UUID) async throws -> Employee.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/employees/\(id)/handler",
-                method: .put,
-                requestType: .other
+                method: .put
             )
-            .serializingDecodable(Employee.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Employee.Responses.Full.self)
     }
     
     func update(id: UUID, parameters: Employee.Parameters.Patch) async throws -> Employee.Responses.Full {
@@ -102,21 +93,17 @@ struct EmployeesService: IEmployeesService {
             .request(
                 path: "/v1/employees/\(id)",
                 method: .put,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Employee.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Employee.Responses.Full.self)
     }
     
     func fire(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/employees/\(id)",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
+            .serializingValue(Empty.self)
     }
 }

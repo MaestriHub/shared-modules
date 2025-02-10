@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 import Dependencies
+import Sharing
 import DTOs
 
 public enum UserConstants {
@@ -45,11 +46,12 @@ public extension DependencyValues {
 
 struct UsersService: IUsersService {
     
+    @Shared(.accessJWT()) var accessToken: Token?
+    @Shared(.refreshJWT()) var refreshToken: Token?
+    
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
-    @Dependency(\.secureStorageService) var secureStorageService
     
     // MARK: - Methods
     
@@ -58,11 +60,9 @@ struct UsersService: IUsersService {
             .request(
                 path: "/v1/users/professional",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(User.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(User.Responses.Full.self)
     }
     
     func createCustomer(parameters: Customer.Parameters.Registration) async throws -> User.Responses.Full {
@@ -70,22 +70,18 @@ struct UsersService: IUsersService {
             .request(
                 path: "/v1/users/customer",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(User.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(User.Responses.Full.self)
     }
     
     func user() async throws -> User.Responses.Full {
         try await requestsService
             .request(
                 path: "/v1/users",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable(User.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(User.Responses.Full.self)
     }
     
     func update(parameters: User.Parameters.Patch) async throws -> User.Responses.Full {
@@ -93,22 +89,19 @@ struct UsersService: IUsersService {
             .request(
                 path: "/v1/users",
                 method: .put,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(User.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(User.Responses.Full.self)
     }
     
     func delete() async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/users",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
-        secureStorageService.setRefresh(token: nil)
+            .serializingValue(Empty.self)
+        $accessToken.withLock { $0 = nil }
+        $refreshToken.withLock { $0 = nil }
     }
 }

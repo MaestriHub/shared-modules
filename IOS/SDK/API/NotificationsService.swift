@@ -28,10 +28,6 @@ public extension DependencyValues {
     
     enum NoticesServiceKey: DependencyKey {
         public static var liveValue: INoticesService = NoticesService()
-//        public static let liveValue: INoticesService = {
-//            @Dependency(\.toggleService) var toggleService
-//            return toggleService.isActive(.noticesServiceMocks) ? NoticesServiceMock() : NoticesService()
-//        }()
     }
 }
 
@@ -42,7 +38,6 @@ struct NoticesService: INoticesService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -50,92 +45,26 @@ struct NoticesService: INoticesService {
         try await requestsService
             .request(
                 path: "/v1/notifications",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable([Notice.Responses.Full].self, decoder: coderService.decoder)
-            .value
+            .serializingValue([Notice.Responses.Full].self)
     }
     
     func readed(id: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/notifications/readed/\(id)",
-                method: .put,
-                requestType: .other
+                method: .put
             )
-            .serializingDecodable(Empty.self, emptyResponseCodes: [200])
-            .value
+            .serializingValue(Empty.self, emptyResponseCodes: [200])
     }
     
     func readedAll() async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/notifications/readed",
-                method: .put,
-                requestType: .other
+                method: .put
             )
-            .serializingDecodable(Empty.self, emptyResponseCodes: [200])
-            .value
+            .serializingValue(Empty.self, emptyResponseCodes: [200])
     }
-}
-
-// MARK: - Mock
-
-final class NoticesServiceMock: INoticesService {
-    static var notices: [Notice.Responses.Full] = [
-        Notice.Responses.Full(
-            id: UUID(),
-            titleKey: "Специальное предложение",
-            messageKey: "Купи один - получи второй в подарок!",
-            parameters: nil,
-            category: .appointmentCustomer,
-            isRead: false,
-            date: Date.now
-        ),
-        Notice.Responses.Full(
-            id: UUID(),
-            titleKey: "Уникальная акция",
-            messageKey: "Только сегодня! Покупай больше - плати меньше!",
-            parameters: nil,
-            category: .appointmentEmployee,
-            isRead: false,
-            date: Date.now
-        ),
-        Notice.Responses.Full(
-            id: UUID(),
-            titleKey: "Эксклюзивное предложение",
-            messageKey: "Сделай заказ прямо сейчас и получи скидку на следующую покупку!",
-            parameters: nil,
-            category: .appointmentCustomer,
-            isRead: false,
-            date: Date.now
-        ),
-        Notice.Responses.Full(
-            id: UUID(),
-            titleKey: "Бонусная программа",
-            messageKey: "Приведи друга и получи скидку на свою следующую покупку!",
-            parameters: nil,
-            category: .appointmentEmployee,
-            isRead: false,
-            date: Date.now
-        ),
-        Notice.Responses.Full(
-            id: UUID(),
-            titleKey: "Специальный дил",
-            messageKey: "Только для подписчиков! Получи уникальную скидку при покупке через приложение!",
-            parameters: nil,
-            category: .appointmentCustomer,
-            isRead: false,
-            date: Date.now
-        )
-    ]
-    
-    func notices() async throws -> [Notice.Responses.Full] {
-        NoticesServiceMock.notices
-    }
-    
-    func readed(id: UUID) async throws {}
-    
-    func readedAll() async throws {}
 }

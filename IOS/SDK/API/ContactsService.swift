@@ -5,17 +5,7 @@ import DTOs
 
 public protocol IContactService {
     
-    /// GET /contacts
-    /// Возвращает способы связи
     func contacts() async throws -> [Contact.Responses.Full]
-    
-//    /// Post /contacts/:id/send-code
-//    /// Отправка верификационного OTP
-//    func sendCode(id: UUID) async throws -> Contact.Responses.Send
-//    
-//    /// Post  /contacts/:id/verify
-//    /// Проверка правильности введённого OTP
-//    func verify(id: UUID, parameters: Contact.Parameters.Verify) async throws -> Contact.Responses.Verify
     
     func create(customerId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full
     
@@ -47,7 +37,6 @@ struct ContactService: IContactService {
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
-    @Dependency(\.coderService) var coderService
     
     // MARK: - Methods
     
@@ -55,11 +44,9 @@ struct ContactService: IContactService {
         try await requestsService
             .request(
                 path: "/v1/contacts",
-                method: .get,
-                requestType: .other
+                method: .get
             )
-            .serializingDecodable([Contact.Responses.Full].self, decoder: coderService.decoder)
-            .value
+            .serializingValue([Contact.Responses.Full].self)
     }
     
     func create(customerId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
@@ -67,22 +54,18 @@ struct ContactService: IContactService {
             .request(
                 path: "/v1/contacts/customer/\(customerId)",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Contact.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Contact.Responses.Full.self)
     }
     
     func delete(id: UUID, customerId: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/contacts/customer/\(customerId)/\(id)",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
+            .serializingValue(Empty.self)
     }
     
     func create(employeeId: UUID, parameters: Contact.Parameters.Create) async throws -> Contact.Responses.Full {
@@ -90,48 +73,17 @@ struct ContactService: IContactService {
             .request(
                 path: "/v1/contacts/employee/\(employeeId)",
                 method: .post,
-                parameters: parameters,
-                requestType: .other
+                parameters: parameters
             )
-            .serializingDecodable(Contact.Responses.Full.self, decoder: coderService.decoder)
-            .value
+            .serializingValue(Contact.Responses.Full.self)
     }
     
     func delete(id: UUID, employeeId: UUID) async throws {
         _ = try await requestsService
             .request(
                 path: "/v1/contacts/employee/\(employeeId)/\(id)",
-                method: .delete,
-                requestType: .other
+                method: .delete
             )
-            .serializingDecodable(Empty.self)
-            .value
+            .serializingValue(Empty.self)
     }
 }
-
-//TODO: Пока не используем
-//extension ContactService {
-//   
-//    public func sendCode(id: UUID) async throws -> Contact.Responses.Send {
-//        try await requestsService
-//            .request(
-//                path: "/v1/contacts/\(id)/send-code",
-//                method: .post,
-//                requestType: .other
-//            )
-//            .serializingDecodable(Contact.Responses.Send.self, decoder: coderService.decoder)
-//            .value
-//    }
-//
-//    public func verify(id: UUID, parameters: Contact.Parameters.Verify) async throws -> Contact.Responses.Verify {
-//        try await requestsService
-//            .request(
-//                path: "/v1/contacts/\(id)/verify",
-//                method: .post,
-//                parameters: parameters,
-//                requestType: .other
-//            )
-//            .serializingDecodable(Contact.Responses.Verify.self, decoder: coderService.decoder)
-//            .value
-//    }
-//}
