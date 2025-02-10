@@ -10,10 +10,6 @@ public protocol ISearchService {
     
     /// Get /search
     func search(parameters: Search.Parameters.Retrieve) async throws -> Search.Responses.Full
-    
-    var isLoadingPublished: PublishedAction<Bool> { get }
-    var searchResultPublished: PublishedAction<Search.Responses.Full> { get }
-    var searchCenterPublished: PublishedAction<CLLocationCoordinate2D> { get }
 }
 
 // MARK: - DependencyValues
@@ -38,23 +34,15 @@ struct SearchService: ISearchService {
     
     @Dependency(\.requestsService) var requestsService
     
-    var searchResultPublished = PublishedAction<Search.Responses.Full>()
-    var isLoadingPublished = PublishedAction<Bool>()
-    var searchCenterPublished = PublishedAction<CLLocationCoordinate2D>()
-    
     // MARK: - Methods
     
     func search(parameters: Search.Parameters.Retrieve) async throws -> Search.Responses.Full {
-        isLoadingPublished.send(true)
-        let result = try await requestsService
+        try await requestsService
             .request(
                 path: "/v1/search",
                 method: .get,
                 parameters: parameters
             )
             .serializingValue(Search.Responses.Full.self)
-        searchResultPublished.send(result)
-        isLoadingPublished.send(false)
-        return result
     }
 }
