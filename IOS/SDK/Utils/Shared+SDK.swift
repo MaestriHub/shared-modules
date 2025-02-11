@@ -15,18 +15,18 @@ public enum RequesterType: String, Sendable {
     case professional
 }
 
-public extension SharedKey where Self == AppStorageKey<RequesterType?> {
+extension SharedKey where Self == AppStorageKey<RequesterType?> {
     
-    static var iAmState: Self {
+    public static var iAmState: Self {
         appStorage("i_am_state", store: UserDefaults(suiteName: "group.maestri"))
     }
 }
 
 // MARK: - Tokens
 
-public extension SharedKey where Self == KeychainStorageKey<Token?> {
+extension SharedKey where Self == KeychainStorageKey<Token?> {
     
-    static func accessJWT(useAccessGroup: Bool = true) -> Self {
+    public static func accessJWT(useAccessGroup: Bool = true) -> Self {
         let keychain = Keychain(
             server: "https://maestri.me",
             protocolType: .https,
@@ -35,7 +35,7 @@ public extension SharedKey where Self == KeychainStorageKey<Token?> {
         return KeychainStorageKey("access_jwt", keychain: keychain)
     }
     
-    static func refreshJWT(useAccessGroup: Bool = true) -> Self  {
+    public static func refreshJWT(useAccessGroup: Bool = true) -> Self  {
         let keychain = Keychain(
             server: "https://maestri.me",
             protocolType: .https,
@@ -47,9 +47,9 @@ public extension SharedKey where Self == KeychainStorageKey<Token?> {
 
 // MARK: - Device UUID
 
-public extension SharedKey where Self == KeychainStorageKey<UUID> {
+extension SharedKey where Self == KeychainStorageKey<UUID> {
     
-    static var deviceId: Self {
+    public static var deviceId: Self {
         let keychain = Keychain(
             server: "https://maestri.me",
             protocolType: .https,
