@@ -248,6 +248,18 @@ public extension Complex.Helpers {
         public let optional: Bool
         public let title: String
         public let cases: [CaseResponse]
+        
+        public init(
+            id: UUID,
+            optional: Bool,
+            title: String,
+            cases: [CaseResponse]
+        ) {
+            self.id = id
+            self.optional = optional
+            self.title = title
+            self.cases = cases
+        }
     }
     
     struct CaseResponse: Codable {
@@ -255,6 +267,18 @@ public extension Complex.Helpers {
         public let title: String
         public let price: CasePrice
         public let duration: CaseDuration
+        
+        public init(
+            id: Int,
+            title: String,
+            price: CasePrice,
+            duration: CaseDuration
+        ) {
+            self.id = id
+            self.title = title
+            self.price = price
+            self.duration = duration
+        }
     }
 }
 

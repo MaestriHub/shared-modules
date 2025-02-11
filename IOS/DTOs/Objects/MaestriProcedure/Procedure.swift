@@ -268,24 +268,64 @@ public extension Procedure.Helpers  {
         public let id: UUID
         public let optional: Bool
         public let cases: [CreateCaseRequest]
+        
+        public init(
+            id: UUID,
+            optional: Bool,
+            cases: [CreateCaseRequest]
+        ) {
+            self.id = id
+            self.optional = optional
+            self.cases = cases
+        }
     }
     
     struct CreateCaseRequest: Codable {
         public let id: Int
         public let addPriceToProcedure: CasePrice
         public let addDurationToProcedure: CaseDuration
+        
+        public init(
+            id: Int,
+            addPriceToProcedure: CasePrice,
+            addDurationToProcedure: CaseDuration
+        ) {
+            self.id = id
+            self.addPriceToProcedure = addPriceToProcedure
+            self.addDurationToProcedure = addDurationToProcedure
+        }
     }
     
     struct UpdateParameterRequest: Codable {
         public let id: UUID
         public let optional: Bool?
         public let cases: [UpdateCaseRequest]?
+        
+        public init(
+            id: UUID,
+            optional: Bool?,
+            cases: [UpdateCaseRequest]?
+        ) {
+            self.id = id
+            self.optional = optional
+            self.cases = cases
+        }
     }
     
     struct UpdateCaseRequest: Codable {
         public let id: Int
         public let addPriceToProcedure: CasePrice?
         public let addDurationToProcedure: CaseDuration?
+        
+        public init(
+            id: Int,
+            addPriceToProcedure: CasePrice?,
+            addDurationToProcedure: CaseDuration?
+        ) {
+            self.id = id
+            self.addPriceToProcedure = addPriceToProcedure
+            self.addDurationToProcedure = addDurationToProcedure
+        }
     }
 }
 
@@ -295,6 +335,18 @@ public extension Procedure.Helpers {
         public let optional: Bool
         public let title: String
         public let cases: [CaseResponse]
+        
+        public init(
+            id: UUID,
+            optional: Bool,
+            title: String,
+            cases: [CaseResponse]
+        ) {
+            self.id = id
+            self.optional = optional
+            self.title = title
+            self.cases = cases
+        }
     }
     
     struct CaseResponse: Codable {
@@ -302,6 +354,18 @@ public extension Procedure.Helpers {
         public let title: String
         public let price: CasePrice
         public let duration: CaseDuration
+        
+        public init(
+            id: Int,
+            title: String,
+            price: CasePrice,
+            duration: CaseDuration
+        ) {
+            self.id = id
+            self.title = title
+            self.price = price
+            self.duration = duration
+        }
     }
 }
 
