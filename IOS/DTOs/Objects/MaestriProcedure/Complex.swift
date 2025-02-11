@@ -305,5 +305,13 @@ public extension Complex.Helpers { // TODO: вероятно здесь нужн
     struct ChunkRequest: Codable {
         let order: Int
         let proceduresIds: [UUID]
+        
+        public init(
+            order: Int,
+            proceduresIds: [UUID]
+        ) {
+            self.order = order
+            self.proceduresIds = proceduresIds
+        }
     }
 }
