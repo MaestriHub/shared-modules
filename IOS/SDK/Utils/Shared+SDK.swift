@@ -15,7 +15,7 @@ public enum RequesterType: String, Sendable {
     case professional
 }
 
-extension SharedKey where Self == AppStorageKey<RequesterType?> {
+public extension SharedKey where Self == AppStorageKey<RequesterType?> {
     
     static var iAmState: Self {
         appStorage("i_am_state", store: UserDefaults(suiteName: "group.maestri"))
@@ -24,7 +24,7 @@ extension SharedKey where Self == AppStorageKey<RequesterType?> {
 
 // MARK: - Tokens
 
-extension SharedKey where Self == KeychainStorageKey<Token?> {
+public extension SharedKey where Self == KeychainStorageKey<Token?> {
     
     static func accessJWT(useAccessGroup: Bool = true) -> Self {
         let keychain = Keychain(
@@ -47,7 +47,7 @@ extension SharedKey where Self == KeychainStorageKey<Token?> {
 
 // MARK: - Device UUID
 
-extension SharedKey where Self == KeychainStorageKey<UUID> {
+public extension SharedKey where Self == KeychainStorageKey<UUID> {
     
     static var deviceId: Self {
         let keychain = Keychain(
