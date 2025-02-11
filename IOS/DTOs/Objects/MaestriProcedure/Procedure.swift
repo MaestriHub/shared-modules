@@ -1,12 +1,10 @@
 import Foundation
 
 public enum Procedure {
+    public enum Helpers {}
+    
     public enum Parameters {}
     public enum Responses {}
-}
-
-public extension Procedure.Responses {
-    enum Helpers {}
 }
 
 // MARK: - Parameters -
@@ -40,6 +38,7 @@ public extension Procedure.Parameters {
         public let price: Price
         public var description: String?
         public var alias: String?
+        public let parameters: [Procedure.Helpers.CreateParameterRequest]
         public let serviceId: UUID
         public let employeeId: UUID
         
@@ -48,6 +47,7 @@ public extension Procedure.Parameters {
             price: Price,
             description: String?,
             alias: String?,
+            parameters: [Procedure.Helpers.CreateParameterRequest],
             serviceId: UUID,
             employeeId: UUID
         ) {
@@ -55,6 +55,7 @@ public extension Procedure.Parameters {
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.parameters = parameters
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
@@ -65,17 +66,20 @@ public extension Procedure.Parameters {
         public let duration: Int?
         public var description: String?
         public var alias: String?
+        public let parameters: [Procedure.Helpers.UpdateParameterRequest]?
         
         public init(
             price: Price?,
             duration: Int?,
             description: String?,
-            alias: String?
+            alias: String?,
+            parameters: [Procedure.Helpers.UpdateParameterRequest]?
         ) {
             self.price = price
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.parameters = parameters
         }
     }
 }
@@ -90,6 +94,7 @@ public extension Procedure.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
+        public var parameters: [Procedure.Helpers.ParameterResponse]
         public var serviceId: UUID
         public var employeeId: UUID
         
@@ -99,6 +104,7 @@ public extension Procedure.Responses {
             duration: Int,
             description: String?,
             alias: String?,
+            parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
             employeeId: UUID
         ) {
@@ -107,6 +113,7 @@ public extension Procedure.Responses {
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.parameters = parameters
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
@@ -118,6 +125,7 @@ public extension Procedure.Responses {
         public var duration: Int
         public var description: String?
         public var alias: String?
+        public var parameters: [Procedure.Helpers.ParameterResponse]
         public var serviceId: UUID
         public var employeeId: UUID
         
@@ -127,6 +135,7 @@ public extension Procedure.Responses {
             duration: Int,
             description: String?,
             alias: String?,
+            parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
             employeeId: UUID
         ) {
@@ -135,20 +144,21 @@ public extension Procedure.Responses {
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.parameters = parameters
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
     }
     
     struct All: Responsable {
-        public var procedures: [Helpers.Procedure]
-        public var services: [Helpers.Service]
-        public var masters: [Helpers.Masters]?
+        public var procedures: [Procedure.Helpers.ProcedureResponse]
+        public var services: [Procedure.Helpers.ServiceResponse]
+        public var masters: [Procedure.Helpers.MastersResponse]?
         
         public init(
-            procedures: [Helpers.Procedure],
-            services: [Helpers.Service],
-            masters: [Helpers.Masters]? = nil
+            procedures: [Procedure.Helpers.ProcedureResponse],
+            services: [Procedure.Helpers.ServiceResponse],
+            masters: [Procedure.Helpers.MastersResponse]? = nil
         ) {
             self.procedures = procedures
             self.services = services
@@ -162,6 +172,7 @@ public extension Procedure.Responses {
         public var price: Price
         public var alias: String?
         public var description: String?
+        public var parameters: [Procedure.Helpers.ParameterResponse]
         public var serviceId: UUID
         public var employeeId: UUID
         
@@ -171,6 +182,7 @@ public extension Procedure.Responses {
             duration: Int,
             description: String?,
             alias: String?,
+            parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
             employeeId: UUID
         ) {
@@ -179,19 +191,21 @@ public extension Procedure.Responses {
             self.duration = duration
             self.description = description
             self.alias = alias
+            self.parameters = parameters
             self.serviceId = serviceId
             self.employeeId = employeeId
         }
     }
 }
 
-public extension Procedure.Responses.Helpers {
-    struct Procedure: Codable {
+public extension Procedure.Helpers {
+    struct ProcedureResponse: Codable {
         public var id: UUID
         public var duration: Int
         public var price: Price
         public var alias: String?
         public var description: String?
+        public var parameters: Procedure.Helpers.ParameterResponse
         public var serviceId: UUID
         public var masterId: UUID
         
@@ -201,6 +215,7 @@ public extension Procedure.Responses.Helpers {
             price: Price,
             alias: String? = nil,
             description: String? = nil,
+            parameters: Procedure.Helpers.ParameterResponse,
             serviceId: UUID,
             masterId: UUID
         ) {
@@ -209,12 +224,13 @@ public extension Procedure.Responses.Helpers {
             self.price = price
             self.alias = alias
             self.description = description
+            self.parameters = parameters
             self.serviceId = serviceId
             self.masterId = masterId
         }
     }
     
-    struct Service: Codable {
+    struct ServiceResponse: Codable {
         public var id: UUID
         public var tags: [TranslatedServiceTag]
         public var title: String
@@ -230,7 +246,7 @@ public extension Procedure.Responses.Helpers {
         }
     }
     
-    struct Masters: Codable {
+    struct MastersResponse: Codable {
         public var id: UUID
         public var nickname: String?
         public var avatar: String?
@@ -244,5 +260,62 @@ public extension Procedure.Responses.Helpers {
             self.nickname = nickname
             self.avatar = avatar
         }
+    }
+}
+
+public extension Procedure.Helpers  {
+    struct CreateParameterRequest: Codable {
+        public let id: UUID
+        public let optional: Bool
+        public let cases: [CreateCaseRequest]
+    }
+    
+    struct CreateCaseRequest: Codable {
+        public let id: Int
+        public let addPriceToProcedure: CasePrice
+        public let addDurationToProcedure: CaseDuration
+    }
+    
+    struct UpdateParameterRequest: Codable {
+        public let id: UUID
+        public let optional: Bool?
+        public let cases: [UpdateCaseRequest]?
+    }
+    
+    struct UpdateCaseRequest: Codable {
+        public let id: Int
+        public let addPriceToProcedure: CasePrice?
+        public let addDurationToProcedure: CaseDuration?
+    }
+}
+
+public extension Procedure.Helpers {
+    struct ParameterResponse: Codable {
+        public let id: UUID
+        public let optional: Bool
+        public let title: String
+        public let cases: [CaseResponse]
+    }
+    
+    struct CaseResponse: Codable {
+        public let id: Int
+        public let title: String
+        public let price: CasePrice
+        public let duration: CaseDuration
+    }
+}
+
+
+public extension Procedure.Helpers { // TODO: декодеры
+    enum CasePrice: Codable {
+        case fixedValue(Decimal)
+        case multiKoeff(Decimal)
+        case none
+    }
+
+    enum CaseDuration: Codable {
+        case fixedValue(Decimal)
+        case multiKoeff(Decimal)
+        case none
     }
 }

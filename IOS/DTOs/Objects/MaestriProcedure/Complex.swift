@@ -4,26 +4,8 @@ public enum Complex {
     public enum Helpers {}
     
     public enum Parameters {}
-    
-    public enum Responses {
-        public enum Helpers {}
-    }
+    public enum Responses {}
 }
-
-// MARK: - Helpers -
-
-public extension Complex.Helpers {
-    enum Sale: Codable {
-        case percent(Decimal)
-        case absolute(Decimal)
-    }
-
-    enum ExecutionType: Codable {
-        case parallel
-        case sequential
-    }
-}
-
 
 // MARK: - Parameters -
 
@@ -50,37 +32,47 @@ public extension Complex.Parameters {
     /// Думаю что в будущем добавиться возможность создавать комплекс не с айдишниками процедур, а с его личными
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
     struct Create: Parametable {
-        public let sale: Complex.Helpers.Sale
+        public let sale: Complex.Helpers.PriceShift
         public let description: String?
         public let alias: String?
-        public let proceduresForCopy: [UUID]
+        public let chunks: [Complex.Helpers.ChunkRequest]
         
         public init(
-            sale: Complex.Helpers.Sale,
+            sale: Complex.Helpers.PriceShift,
             description: String?,
             alias: String?,
-            proceduresForCopy: [UUID]
+            chunks: [Complex.Helpers.ChunkRequest]
         ) {
             self.sale = sale
             self.description = description
             self.alias = alias
-            self.proceduresForCopy = proceduresForCopy
+            self.chunks = chunks
         }
     }
     
     struct Update: Parametable {
-        public let sale: Complex.Helpers.Sale?
+        public typealias ChunkPosition = Int
+        public typealias ChunkId = UUID
+        public typealias ProcedureId = UUID
+    
+        public let sale: Complex.Helpers.PriceShift?
         public var description: String?
         public var alias: String?
+        public var shuffleChunks: Dictionary<ChunkId, ChunkPosition>?
+        public var addProceduresToChunk: Dictionary<ChunkId, [ProcedureId]>?
         
         public init(
-            sale: Complex.Helpers.Sale?,
+            sale: Complex.Helpers.PriceShift?,
             description: String?,
-            alias: String?
+            alias: String?,
+            shuffleChunks: Dictionary<ChunkId, ChunkPosition>,
+            addProceduresToChunk: Dictionary<ChunkId, [ProcedureId]>
         ) {
             self.sale = sale
             self.description = description
             self.alias = alias
+            self.shuffleChunks = shuffleChunks
+            self.addProceduresToChunk = addProceduresToChunk
         }
     }
 }
@@ -91,121 +83,149 @@ public extension Complex.Responses {
     
     struct Create: Responsable {
         public var id: UUID
-        public var sale: Complex.Helpers.Sale
+        public var sale: Complex.Helpers.PriceShift
         public var description: String?
         public var alias: String?
-        public let procedureIds: [UUID]
+        public let chunks: [Complex.Helpers.ChunkResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.Sale,
+            sale: Complex.Helpers.PriceShift,
             description: String?,
             alias: String?,
-            procedureIds: [UUID]
+            chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
             self.sale = sale
             self.description = description
             self.alias = alias
-            self.procedureIds = procedureIds
+            self.chunks = chunks
         }
     }
     
     struct Update: Responsable {
         public var id: UUID
-        public var sale: Complex.Helpers.Sale
+        public var sale: Complex.Helpers.PriceShift
         public var description: String?
         public var alias: String?
+        public let chunks: [Complex.Helpers.ChunkResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.Sale,
+            sale: Complex.Helpers.PriceShift,
             description: String?,
-            alias: String?
+            alias: String?,
+            chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
             self.sale = sale
             self.description = description
             self.alias = alias
+            self.chunks = chunks
         }
     }
     
     struct All: Responsable {
-        public var complexes:  [Helpers.Complex]
-        public var procedures: [Helpers.Procedure]
-        public var services:   [Helpers.Service]
+        public var complexes:  [Complex.Helpers.ComplexResponse]
+        public var services:   [Complex.Helpers.ServiceResponse] // TODO: вероятно здесь может быть много повторов подумать потом
         
         public init(
-            complexes: [Helpers.Complex],
-            procedures: [Helpers.Procedure],
-            services: [Helpers.Service]
+            complexes: [Complex.Helpers.ComplexResponse],
+            services:  [Complex.Helpers.ServiceResponse]
         ) {
             self.complexes = complexes
-            self.procedures = procedures
             self.services = services
         }
     }
     
     struct Retrieve: Responsable {
         public var id: UUID
-        public var sale: Complex.Helpers.Sale
+        public var sale: Complex.Helpers.PriceShift
         public var description: String?
         public var alias: String?
+        public let chunks: [Complex.Helpers.ChunkResponse]
+        public let services: [Complex.Helpers.ServiceResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.Sale,
+            sale: Complex.Helpers.PriceShift,
             description: String?,
-            alias: String?
+            alias: String?,
+            chunks: [Complex.Helpers.ChunkResponse],
+            services: [Complex.Helpers.ServiceResponse]
         ) {
             self.id = id
             self.sale = sale
             self.description = description
             self.alias = alias
+            self.chunks = chunks
+            self.services = services
         }
     }
 }
 
-public extension Complex.Responses.Helpers {
-    struct Complex: Codable {
+public extension Complex.Helpers {
+    struct ComplexResponse: Codable {
         public var id: UUID
-        public var sale: DTOs.Complex.Helpers.Sale
+        public var sale: PriceShift
         public var description: String?
         public var alias: String?
+        public var chunks: [ChunkResponse]
         
         public init(
             id: UUID,
-            sale: DTOs.Complex.Helpers.Sale,
+            sale: PriceShift,
             description: String?,
-            alias: String?
+            alias: String?,
+            chunks: [ChunkResponse]
         ) {
             self.id = id
             self.sale = sale
             self.description = description
             self.alias = alias
+            self.chunks = chunks
         }
     }
     
-    struct Procedure: Codable {
+    struct ChunkResponse: Codable {
+        public var id: UUID
+        public var position: Int
+        public var procedures: [ProcedureResponse]
+        
+        public init(
+            id: UUID,
+            position: Int,
+            procedures: [ProcedureResponse]
+        ) {
+            self.id = id
+            self.position = position
+            self.procedures = procedures
+        }
+    }
+    
+    struct ProcedureResponse: Codable {
         public var id: UUID
         public var alias: String?
         public var description: String?
+        public var parameters: [ParameterResponse]
         public var serviceId: UUID
         
         public init(
             id: UUID,
             alias: String? = nil,
             description: String? = nil,
+            parameters: [ParameterResponse],
             serviceId: UUID
         ) {
             self.id = id
             self.alias = alias
             self.description = description
+            self.parameters = parameters
             self.serviceId = serviceId
         }
     }
     
-    struct Service: Codable {
+    struct ServiceResponse: Codable {
         public var id: UUID
         public var title: String
         public var tags: [TranslatedServiceTag]
@@ -219,5 +239,47 @@ public extension Complex.Responses.Helpers {
             self.title = title
             self.tags = tags
         }
+    }
+}
+
+public extension Complex.Helpers {
+    struct ParameterResponse: Codable {
+        public let id: UUID
+        public let optional: Bool
+        public let title: String
+        public let cases: [CaseResponse]
+    }
+    
+    struct CaseResponse: Codable {
+        public let id: Int
+        public let title: String
+        public let price: CasePrice
+        public let duration: CaseDuration
+    }
+}
+
+public extension Complex.Helpers { // TODO: вероятно здесь нужно будет добавить декодер ибо $0_
+    enum CasePrice: Codable {
+        case fixedValue(Decimal)
+        case multiKoeff(Decimal)
+        case none
+    }
+
+    enum CaseDuration: Codable {
+        case fixedValue(Decimal)
+        case multiKoeff(Decimal)
+        case none
+    }
+}
+
+public extension Complex.Helpers { // TODO: вероятно здесь нужно будет добавить декодер ибо $0_
+    enum PriceShift: Codable {
+        case percent(Decimal)
+        case absolute(Decimal)
+    }
+    
+    struct ChunkRequest: Codable {
+        let order: Int
+        let proceduresIds: [UUID]
     }
 }

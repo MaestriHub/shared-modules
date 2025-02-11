@@ -18,3 +18,15 @@ public enum ServiceTags: String, Codable, CaseIterable, Equatable {
     case lashes
 }
 
+public struct TranslatedServiceTag: Codable {
+    public let tag: ServiceTags
+    public let translate: String
+
+    public init(
+        tag: ServiceTags,
+        translate: String
+    ) {
+        self.tag = tag
+        self.translate = translate
+    }
+}

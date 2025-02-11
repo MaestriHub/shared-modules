@@ -1,12 +1,10 @@
 import Foundation
 
 public enum Service {
+    public enum Helpers {}
+    
     public enum Parameters {}
     public enum Responses {}
-}
-
-public extension Service.Responses {
-    enum Helpers {}
 }
 
 // MARK: - Parameters -
@@ -96,10 +94,10 @@ public extension Service.Responses {
     }
     
     struct All: Responsable {
-        public var services: [Helpers.Service]
+        public var services: [Service.Helpers.ServiceResponse]
         
         public init(
-            services: [Helpers.Service]
+            services: [Service.Helpers.ServiceResponse]
         ) {
             self.services = services
         }
@@ -108,22 +106,25 @@ public extension Service.Responses {
     struct Retrieve: Responsable {
         public var id: UUID
         public var title: String
+        public var parameters: [Service.Helpers.Parameter]
         public var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
             title: String,
+            parameters: [Service.Helpers.Parameter],
             tags: [TranslatedServiceTag]
         ) {
             self.id = id
             self.title = title
             self.tags = tags
+            self.parameters = parameters
         }
     }
 }
 
-public extension Service.Responses.Helpers {
-    struct Service: Codable {
+public extension Service.Helpers {
+    struct ServiceResponse: Codable {
         public var id: UUID
         public var title: String
         public var tags: [TranslatedServiceTag]
@@ -137,5 +138,16 @@ public extension Service.Responses.Helpers {
             self.title = title
             self.tags = tags
         }
+    }
+    
+    struct Parameter: Codable {
+        public let id: UUID
+        public let title: String
+        public let cases: [Case]
+    }
+
+    struct Case: Codable {
+        public let id: Int
+        public let title: String
     }
 }
