@@ -208,7 +208,7 @@ public extension Procedure.Helpers {
         public var price: Price
         public var alias: String?
         public var description: String?
-        public var parameters: Procedure.Helpers.ParameterResponse
+        public var parameters: [Procedure.Helpers.ParameterResponse]
         public var serviceId: UUID
         public var masterId: UUID
         
@@ -218,7 +218,7 @@ public extension Procedure.Helpers {
             price: Price,
             alias: String? = nil,
             description: String? = nil,
-            parameters: Procedure.Helpers.ParameterResponse,
+            parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
             masterId: UUID
         ) {
