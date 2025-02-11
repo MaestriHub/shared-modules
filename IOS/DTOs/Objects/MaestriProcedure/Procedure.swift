@@ -64,22 +64,25 @@ public extension Procedure.Parameters {
     struct Update: Parametable {
         public let price: Price?
         public let duration: Int?
-        public var description: String?
-        public var alias: String?
-        public let parameters: [Procedure.Helpers.UpdateParameterRequest]?
+        public var description: UpdateString?
+        public var alias: UpdateString?
+        public var newParameters: [Procedure.Helpers.CreateParameterRequest]?
+        public var oldParameters: [Procedure.Helpers.UpdateParameterRequest]?
         
         public init(
             price: Price?,
             duration: Int?,
-            description: String?,
-            alias: String?,
-            parameters: [Procedure.Helpers.UpdateParameterRequest]?
+            description: UpdateString?,
+            alias: UpdateString?,
+            newParameters: [Procedure.Helpers.CreateParameterRequest]?,
+            oldParameters: [Procedure.Helpers.UpdateParameterRequest]?
         ) {
             self.price = price
             self.duration = duration
             self.description = description
             self.alias = alias
-            self.parameters = parameters
+            self.newParameters = newParameters
+            self.oldParameters = oldParameters
         }
     }
 }
@@ -298,34 +301,25 @@ public extension Procedure.Helpers  {
     
     struct UpdateParameterRequest: Codable {
         public let id: UUID
-        public let optional: Bool?
-        public let cases: [UpdateCaseRequest]?
+        public let reason: UpdateParameterReason
         
         public init(
             id: UUID,
-            optional: Bool?,
-            cases: [UpdateCaseRequest]?
+            reason: UpdateParameterReason
         ) {
             self.id = id
-            self.optional = optional
-            self.cases = cases
+            self.reason = reason
         }
     }
     
-    struct UpdateCaseRequest: Codable {
-        public let id: Int
-        public let addPriceToProcedure: CasePrice?
-        public let addDurationToProcedure: CaseDuration?
+    enum UpdateParameterReason: Codable {
+        public typealias CaseId = Int
         
-        public init(
-            id: Int,
-            addPriceToProcedure: CasePrice?,
-            addDurationToProcedure: CaseDuration?
-        ) {
-            self.id = id
-            self.addPriceToProcedure = addPriceToProcedure
-            self.addDurationToProcedure = addDurationToProcedure
-        }
+        case setOptional(Bool)
+        case addCase(CreateCaseRequest)
+        case updateCasePrice(CaseId, CasePrice)
+        case updateCaseDuration(CaseId, CaseDuration)
+        case deleteCase(CaseId)
     }
 }
 
@@ -370,7 +364,7 @@ public extension Procedure.Helpers {
 }
 
 
-public extension Procedure.Helpers { // TODO: декодеры
+public extension Procedure.Helpers {
     enum CasePrice: Codable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)

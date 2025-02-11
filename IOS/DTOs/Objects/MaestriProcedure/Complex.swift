@@ -58,8 +58,8 @@ public extension Complex.Parameters {
         public let sale: Complex.Helpers.PriceShift?
         public var description: String?
         public var alias: String?
-        public var shuffleChunks: Dictionary<ChunkId, ChunkPosition>?
-        public var addProceduresToChunk: Dictionary<ChunkId, [ProcedureId]>?
+        public var shuffleChunks: [ChunkId : ChunkPosition]?
+        public var addProceduresToChunk: [ChunkId : [ProcedureId]]?
         
         public init(
             sale: Complex.Helpers.PriceShift?,
