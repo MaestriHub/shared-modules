@@ -144,10 +144,28 @@ public extension Service.Helpers {
         public let id: UUID
         public let title: String
         public let cases: [Case]
+        
+        public init(
+            id: UUID,
+            title: String,
+            cases: [Case]
+        ) {
+            self.id = id
+            self.title = title
+            self.cases = cases
+        }
     }
 
     struct Case: Codable {
         public let id: Int
         public let title: String
+        
+        public init(
+            id: Int,
+            title: String
+        ) {
+            self.id = id
+            self.title = title
+        }
     }
 }

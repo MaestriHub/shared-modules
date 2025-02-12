@@ -65,8 +65,8 @@ public extension Complex.Parameters {
             sale: Complex.Helpers.PriceShift?,
             description: String?,
             alias: String?,
-            shuffleChunks: Dictionary<ChunkId, ChunkPosition>,
-            addProceduresToChunk: Dictionary<ChunkId, [ProcedureId]>
+            shuffleChunks: [ChunkId : ChunkPosition],
+            addProceduresToChunk: [ChunkId : [ProcedureId]]
         ) {
             self.sale = sale
             self.description = description
