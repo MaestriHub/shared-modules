@@ -31,8 +31,8 @@ public extension Service.Parameters {
     }
 
     struct Create: Parametable {
-        public var title: String
-        public var tags: [ServiceTags]
+        public let title: String
+        public let tags: [ServiceTags]
         
         public init(
             title: String,
@@ -44,8 +44,8 @@ public extension Service.Parameters {
     }
 
     struct Update: Parametable {
-        public var title: String?
-        public var tags: [ServiceTags]?
+        public let title: String?
+        public let tags: [ServiceTags]?
         
         public init(
             title: String? = nil,
@@ -62,9 +62,9 @@ public extension Service.Parameters {
 public extension Service.Responses {
     
     struct Create: Responsable {
-        public var id: UUID
-        public var title: String
-        public var tags: [TranslatedServiceTag]
+        public let id: UUID
+        public let title: String
+        public let tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
@@ -78,9 +78,9 @@ public extension Service.Responses {
     }
     
     struct Update: Responsable {
-        public var id: UUID
-        public var title: String
-        public var tags: [TranslatedServiceTag]
+        public let id: UUID
+        public let title: String
+        public let tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
@@ -94,7 +94,7 @@ public extension Service.Responses {
     }
     
     struct All: Responsable {
-        public var services: [Service.Helpers.ServiceResponse]
+        public let services: [Service.Helpers.ServiceResponse]
         
         public init(
             services: [Service.Helpers.ServiceResponse]
@@ -104,10 +104,10 @@ public extension Service.Responses {
     }
     
     struct Retrieve: Responsable {
-        public var id: UUID
-        public var title: String
-        public var parameters: [Service.Helpers.Parameter]
-        public var tags: [TranslatedServiceTag]
+        public let id: UUID
+        public let title: String
+        public let parameters: [Service.Helpers.Parameter]
+        public let tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
@@ -125,9 +125,9 @@ public extension Service.Responses {
 
 public extension Service.Helpers {
     struct ServiceResponse: Codable {
-        public var id: UUID
-        public var title: String
-        public var tags: [TranslatedServiceTag]
+        public let id: UUID
+        public let title: String
+        public let tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,

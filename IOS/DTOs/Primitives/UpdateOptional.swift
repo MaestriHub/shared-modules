@@ -1,9 +1,9 @@
 import Foundation
 
 public struct UpdateString: Codable {
-    public let newValue: String?
+    public let value: String?
     
-    public init(newValue: String?) {
-        self.newValue = newValue
+    public init(value: String?) {
+        self.value = value
     }
 }

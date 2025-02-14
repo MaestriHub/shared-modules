@@ -15,32 +15,29 @@ public extension Procedure.Parameters {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let servicesFilter: [UUID]?
-        public let addMastersInfo: Bool
         public let pagination: Pagination?
         
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
             services: [UUID]? = nil,
-            addMastersInfo: Bool = false,
             pagination: Pagination? = nil
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
             self.servicesFilter = services
-            self.addMastersInfo = addMastersInfo
             self.pagination = pagination
         }
     }
-
+    
     struct Create: Parametable {
         public let duration: Int
         public let price: Price
-        public var description: String?
-        public var alias: String?
+        public let description: String?
+        public let alias: String?
         public let parameters: [Procedure.Helpers.CreateParameterRequest]
         public let serviceId: UUID
-        public let employeeId: UUID
+        public let employeeIds: [UUID]
         
         public init(
             duration: Int,
@@ -49,7 +46,7 @@ public extension Procedure.Parameters {
             alias: String?,
             parameters: [Procedure.Helpers.CreateParameterRequest],
             serviceId: UUID,
-            employeeId: UUID
+            employeeIds: [UUID]
         ) {
             self.price = price
             self.duration = duration
@@ -57,15 +54,15 @@ public extension Procedure.Parameters {
             self.alias = alias
             self.parameters = parameters
             self.serviceId = serviceId
-            self.employeeId = employeeId
+            self.employeeIds = employeeIds
         }
     }
-
+    
     struct Update: Parametable {
         public let price: Price?
         public let duration: Int?
-        public var description: UpdateString?
-        public var alias: UpdateString?
+        public let description: UpdateString?
+        public let alias: UpdateString?
         
         public init(
             price: Price?,
@@ -86,55 +83,42 @@ public extension Procedure.Parameters {
 public extension Procedure.Responses {
     
     struct Create: Responsable {
-        public var id: UUID
-        public var price: Price
-        public var duration: Int
-        public var description: String?
-        public var alias: String?
-        public var parameters: [Procedure.Helpers.ParameterResponse]
-        public var serviceId: UUID
-        public var employeeId: UUID
+        public let procedures: [Procedure.Helpers.CreateProcedureResponse]
         
         public init(
-            id: UUID,
-            price: Price,
-            duration: Int,
-            description: String?,
-            alias: String?,
-            parameters: [Procedure.Helpers.ParameterResponse],
-            serviceId: UUID,
-            employeeId: UUID
+            procedures: [Procedure.Helpers.CreateProcedureResponse]
         ) {
-            self.id = id
-            self.price = price
-            self.duration = duration
-            self.description = description
-            self.alias = alias
-            self.parameters = parameters
-            self.serviceId = serviceId
-            self.employeeId = employeeId
+            self.procedures = procedures
         }
     }
     
     struct Update: Responsable {
-        public var id: UUID
-        public var price: Price
-        public var duration: Int
-        public var description: String?
-        public var alias: String?
-        public var parameters: [Procedure.Helpers.ParameterResponse]
-        public var serviceId: UUID
-        public var employeeId: UUID
+        public let id: UUID
+        public let price: Price
+        public let duration: Int
+        public let description: String?
+        public let alias: String?
+        public let parameters: [Procedure.Helpers.ParameterResponse]
+        public let serviceId: UUID
+        public let serviceTags: [TranslatedServiceTag]
+        public let serviceTitle: String
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
         
         public init(
             id: UUID,
             price: Price,
             duration: Int,
-            description: String?,
-            alias: String?,
+            description: String? = nil,
+            alias: String? = nil,
             parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
-            employeeId: UUID
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL? = nil
         ) {
             self.id = id
             self.price = price
@@ -143,68 +127,37 @@ public extension Procedure.Responses {
             self.alias = alias
             self.parameters = parameters
             self.serviceId = serviceId
-            self.employeeId = employeeId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
         }
     }
     
     struct All: Responsable {
-        public var procedures: [Procedure.Helpers.ProcedureResponse]
-        public var services: [Procedure.Helpers.ServiceResponse]
-        public var masters: [Procedure.Helpers.MastersResponse]?
+        public let procedures: [Procedure.Helpers.ProcedureResponse]
         
         public init(
-            procedures: [Procedure.Helpers.ProcedureResponse],
-            services: [Procedure.Helpers.ServiceResponse],
-            masters: [Procedure.Helpers.MastersResponse]? = nil
+            procedures: [Procedure.Helpers.ProcedureResponse]
         ) {
             self.procedures = procedures
-            self.services = services
-            self.masters = masters
         }
     }
     
     struct Retrieve: Responsable {
-        public var id: UUID
-        public var duration: Int
-        public var price: Price
-        public var alias: String?
-        public var description: String?
-        public var parameters: [Procedure.Helpers.ParameterResponse]
-        public var serviceId: UUID
-        public var employeeId: UUID
-        
-        public init(
-            id: UUID,
-            price: Price,
-            duration: Int,
-            description: String?,
-            alias: String?,
-            parameters: [Procedure.Helpers.ParameterResponse],
-            serviceId: UUID,
-            employeeId: UUID
-        ) {
-            self.id = id
-            self.price = price
-            self.duration = duration
-            self.description = description
-            self.alias = alias
-            self.parameters = parameters
-            self.serviceId = serviceId
-            self.employeeId = employeeId
-        }
-    }
-}
-
-public extension Procedure.Helpers {
-    struct ProcedureResponse: Codable {
-        public var id: UUID
-        public var duration: Int
-        public var price: Price
-        public var alias: String?
-        public var description: String?
-        public var parameters: [Procedure.Helpers.ParameterResponse]
-        public var serviceId: UUID
-        public var masterId: UUID
+        public let id: UUID
+        public let duration: Int
+        public let price: Price
+        public let alias: String?
+        public let description: String?
+        public let parameters: [Procedure.Helpers.ParameterResponse]
+        public let serviceId: UUID
+        public let serviceTags: [TranslatedServiceTag]
+        public let serviceTitle: String
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
         
         public init(
             id: UUID,
@@ -214,7 +167,11 @@ public extension Procedure.Helpers {
             description: String? = nil,
             parameters: [Procedure.Helpers.ParameterResponse],
             serviceId: UUID,
-            masterId: UUID
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL? = nil
         ) {
             self.id = id
             self.duration = duration
@@ -223,39 +180,99 @@ public extension Procedure.Helpers {
             self.description = description
             self.parameters = parameters
             self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
             self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
         }
     }
-    
-    struct ServiceResponse: Codable {
-        public var id: UUID
-        public var tags: [TranslatedServiceTag]
-        public var title: String
+}
+
+public extension Procedure.Helpers {
+    struct CreateProcedureResponse: Codable {
+        public let id: UUID
+        public let duration: Int
+        public let price: Price
+        public let alias: String?
+        public let description: String?
+        public let parameters: [Procedure.Helpers.ParameterResponse]
+        public let serviceId: UUID
+        public let serviceTags: [TranslatedServiceTag]
+        public let serviceTitle: String
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
         
         public init(
             id: UUID,
-            tags: [TranslatedServiceTag],
-            title: String
+            duration: Int,
+            price: Price,
+            alias: String? = nil,
+            description: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL? = nil
         ) {
             self.id = id
-            self.tags = tags
-            self.title = title
+            self.duration = duration
+            self.price = price
+            self.alias = alias
+            self.description = description
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
         }
     }
     
-    struct MastersResponse: Codable {
-        public var id: UUID
-        public var nickname: String?
-        public var avatar: String?
+    struct ProcedureResponse: Codable {
+        public let id: UUID
+        public let duration: Int
+        public let price: Price
+        public let alias: String?
+        public let description: String?
+        public let parameters: [Procedure.Helpers.ParameterResponse]
+        public let serviceId: UUID
+        public let serviceTags: [TranslatedServiceTag]
+        public let serviceTitle: String
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
         
         public init(
             id: UUID,
-            nickname: String? = nil,
-            avatar: String? = nil
+            duration: Int,
+            price: Price,
+            alias: String? = nil,
+            description: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL? = nil
         ) {
             self.id = id
-            self.nickname = nickname
-            self.avatar = avatar
+            self.duration = duration
+            self.price = price
+            self.alias = alias
+            self.description = description
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
         }
     }
 }
@@ -279,17 +296,17 @@ public extension Procedure.Helpers  {
     
     struct CreateCaseRequest: Codable {
         public let id: Int
-        public let addPriceToProcedure: CasePrice
-        public let addDurationToProcedure: CaseDuration
+        public let casePrice: CasePrice
+        public let caseDuration: CaseDuration
         
         public init(
             id: Int,
-            addPriceToProcedure: CasePrice,
-            addDurationToProcedure: CaseDuration
+            casePrice: CasePrice,
+            caseDuration: CaseDuration
         ) {
             self.id = id
-            self.addPriceToProcedure = addPriceToProcedure
-            self.addDurationToProcedure = addDurationToProcedure
+            self.casePrice = casePrice
+            self.caseDuration = caseDuration
         }
     }
 }
@@ -341,7 +358,7 @@ public extension Procedure.Helpers {
         case multiKoeff(Decimal)
         case none
     }
-
+    
     enum CaseDuration: Codable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)

@@ -32,20 +32,20 @@ public extension Complex.Parameters {
     /// Думаю что в будущем добавиться возможность создавать комплекс не с айдишниками процедур, а с его личными
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
     struct Create: Parametable {
-        public let sale: Complex.Helpers.PriceShift
-        public let description: String?
         public let alias: String?
+        public let description: String?
+        public let priceShift: Complex.Helpers.PriceShift
         public let chunks: [Complex.Helpers.ChunkRequest]
         
         public init(
-            sale: Complex.Helpers.PriceShift,
-            description: String?,
             alias: String?,
+            description: String?,
+            priceShift: Complex.Helpers.PriceShift,
             chunks: [Complex.Helpers.ChunkRequest]
         ) {
-            self.sale = sale
-            self.description = description
             self.alias = alias
+            self.description = description
+            self.priceShift = priceShift
             self.chunks = chunks
         }
     }
@@ -54,18 +54,18 @@ public extension Complex.Parameters {
         public typealias ChunkPosition = Int
         public typealias ChunkId = UUID
     
-        public let sale: Complex.Helpers.PriceShift?
-        public var description: String?
-        public var alias: String?
-        public var shuffleChunks: [ChunkId : ChunkPosition]?
+        public let priceShift: Complex.Helpers.PriceShift?
+        public let description: String?
+        public let alias: String?
+        public let shuffleChunks: [ChunkId : ChunkPosition]?
         
         public init(
-            sale: Complex.Helpers.PriceShift?,
+            priceShift: Complex.Helpers.PriceShift?,
             description: String?,
             alias: String?,
             shuffleChunks: [ChunkId : ChunkPosition]
         ) {
-            self.sale = sale
+            self.priceShift = priceShift
             self.description = description
             self.alias = alias
             self.shuffleChunks = shuffleChunks
@@ -78,21 +78,21 @@ public extension Complex.Parameters {
 public extension Complex.Responses {
     
     struct Create: Responsable {
-        public var id: UUID
-        public var sale: Complex.Helpers.PriceShift
-        public var description: String?
-        public var alias: String?
+        public let id: UUID
+        public let priceShift: Complex.Helpers.PriceShift
+        public let description: String?
+        public let alias: String?
         public let chunks: [Complex.Helpers.ChunkResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.PriceShift,
+            priceShift: Complex.Helpers.PriceShift,
             description: String?,
             alias: String?,
             chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
-            self.sale = sale
+            self.priceShift = priceShift
             self.description = description
             self.alias = alias
             self.chunks = chunks
@@ -100,30 +100,29 @@ public extension Complex.Responses {
     }
     
     struct Update: Responsable {
-        public var id: UUID
-        public var sale: Complex.Helpers.PriceShift
-        public var description: String?
-        public var alias: String?
+        public let id: UUID
+        public let alias: String?
+        public let description: String?
+        public let priceShift: Complex.Helpers.PriceShift
         public let chunks: [Complex.Helpers.ChunkResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.PriceShift,
-            description: String?,
             alias: String?,
+            description: String?,
+            priceShift: Complex.Helpers.PriceShift,
             chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
-            self.sale = sale
-            self.description = description
             self.alias = alias
+            self.description = description
+            self.priceShift = priceShift
             self.chunks = chunks
         }
     }
     
     struct All: Responsable {
-        public var complexes:  [Complex.Helpers.ComplexResponse]
-        // TODO: виталя просил добавить мастера.
+        public let complexes: [Complex.Helpers.ComplexResponse]
         
         public init(
             complexes: [Complex.Helpers.ComplexResponse]
@@ -133,23 +132,23 @@ public extension Complex.Responses {
     }
     
     struct Retrieve: Responsable {
-        public var id: UUID
-        public var sale: Complex.Helpers.PriceShift
-        public var description: String?
-        public var alias: String?
+        public let id: UUID
+        public let alias: String?
+        public let description: String?
+        public let priceShift: Complex.Helpers.PriceShift
         public let chunks: [Complex.Helpers.ChunkResponse]
         
         public init(
             id: UUID,
-            sale: Complex.Helpers.PriceShift,
-            description: String?,
             alias: String?,
+            description: String?,
+            priceShift: Complex.Helpers.PriceShift,
             chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
-            self.sale = sale
-            self.description = description
             self.alias = alias
+            self.description = description
+            self.priceShift = priceShift
             self.chunks = chunks
         }
     }
@@ -157,21 +156,21 @@ public extension Complex.Responses {
 
 public extension Complex.Helpers {
     struct ComplexResponse: Codable {
-        public var id: UUID
-        public var sale: PriceShift
-        public var description: String?
-        public var alias: String?
-        public var chunks: [ChunkResponse]
+        public let id: UUID
+        public let alias: String?
+        public let description: String?
+        public let priceShift: PriceShift
+        public let chunks: [ChunkResponse]
         
         public init(
             id: UUID,
-            sale: PriceShift,
-            description: String?,
             alias: String?,
+            description: String?,
+            priceShift: PriceShift,
             chunks: [ChunkResponse]
         ) {
             self.id = id
-            self.sale = sale
+            self.priceShift = priceShift
             self.description = description
             self.alias = alias
             self.chunks = chunks
@@ -179,46 +178,49 @@ public extension Complex.Helpers {
     }
     
     struct ChunkResponse: Codable {
-        public var id: UUID
-        public var position: Int
-        public var procedures: [ProcedureResponse]
-        public var serviceId: UUID
-        public var serviceTitle: String
-        public var tags: [TranslatedServiceTag]
+        public let id: UUID
+        public let order: Int
+        public let procedures: [ProcedureResponse]
+        public let serviceId: UUID
+        public let serviceTitle: String
         
         public init(
             id: UUID,
-            position: Int,
+            order: Int,
             procedures: [ProcedureResponse],
             serviceId: UUID,
-            serviceTitle: String,
-            tags: [TranslatedServiceTag]
+            serviceTitle: String
         ) {
             self.id = id
-            self.position = position
+            self.order = order
             self.procedures = procedures
             self.serviceId = serviceId
             self.serviceTitle = serviceTitle
-            self.tags = tags
         }
     }
     
     struct ProcedureResponse: Codable {
-        public var id: UUID
-        public var alias: String?
-        public var description: String?
-        public var serviceId: UUID
+        public let id: UUID
+        public let alias: String?
+        public let description: String?
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
         
         public init(
             id: UUID,
             alias: String? = nil,
             description: String? = nil,
-            serviceId: UUID
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL? = nil
         ) {
             self.id = id
             self.alias = alias
             self.description = description
-            self.serviceId = serviceId
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
         }
     }
 }
