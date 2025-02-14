@@ -123,6 +123,7 @@ public extension Complex.Responses {
     
     struct All: Responsable {
         public var complexes:  [Complex.Helpers.ComplexResponse]
+        // TODO: виталя просил добавить мастера.
         
         public init(
             complexes: [Complex.Helpers.ComplexResponse]
