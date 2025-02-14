@@ -123,14 +123,11 @@ public extension Complex.Responses {
     
     struct All: Responsable {
         public var complexes:  [Complex.Helpers.ComplexResponse]
-        public var services:   [Complex.Helpers.ServiceResponse] // TODO: вероятно здесь может быть много повторов подумать потом
         
         public init(
-            complexes: [Complex.Helpers.ComplexResponse],
-            services:  [Complex.Helpers.ServiceResponse]
+            complexes: [Complex.Helpers.ComplexResponse]
         ) {
             self.complexes = complexes
-            self.services = services
         }
     }
     
@@ -187,15 +184,24 @@ public extension Complex.Helpers {
         public var id: UUID
         public var position: Int
         public var procedures: [ProcedureResponse]
+        public var serviceId: UUID
+        public var serviceTitle: String
+        public var tags: [TranslatedServiceTag]
         
         public init(
             id: UUID,
             position: Int,
-            procedures: [ProcedureResponse]
+            procedures: [ProcedureResponse],
+            serviceId: UUID,
+            serviceTitle: String,
+            tags: [TranslatedServiceTag]
         ) {
             self.id = id
             self.position = position
             self.procedures = procedures
+            self.serviceId = serviceId
+            self.serviceTitle = serviceTitle
+            self.tags = tags
         }
     }
     
@@ -215,22 +221,6 @@ public extension Complex.Helpers {
             self.alias = alias
             self.description = description
             self.serviceId = serviceId
-        }
-    }
-    
-    struct ServiceResponse: Codable {
-        public var id: UUID
-        public var title: String
-        public var tags: [TranslatedServiceTag]
-        
-        public init(
-            id: UUID,
-            title: String,
-            tags: [TranslatedServiceTag]
-        ) {
-            self.id = id
-            self.title = title
-            self.tags = tags
         }
     }
 }
