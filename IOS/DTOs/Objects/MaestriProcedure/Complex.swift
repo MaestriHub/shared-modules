@@ -137,22 +137,19 @@ public extension Complex.Responses {
         public var description: String?
         public var alias: String?
         public let chunks: [Complex.Helpers.ChunkResponse]
-        public let services: [Complex.Helpers.ServiceResponse]
         
         public init(
             id: UUID,
             sale: Complex.Helpers.PriceShift,
             description: String?,
             alias: String?,
-            chunks: [Complex.Helpers.ChunkResponse],
-            services: [Complex.Helpers.ServiceResponse]
+            chunks: [Complex.Helpers.ChunkResponse]
         ) {
             self.id = id
             self.sale = sale
             self.description = description
             self.alias = alias
             self.chunks = chunks
-            self.services = services
         }
     }
 }
