@@ -53,26 +53,22 @@ public extension Complex.Parameters {
     struct Update: Parametable {
         public typealias ChunkPosition = Int
         public typealias ChunkId = UUID
-        public typealias ProcedureId = UUID
     
         public let sale: Complex.Helpers.PriceShift?
         public var description: String?
         public var alias: String?
         public var shuffleChunks: [ChunkId : ChunkPosition]?
-        public var addProceduresToChunk: [ChunkId : [ProcedureId]]?
         
         public init(
             sale: Complex.Helpers.PriceShift?,
             description: String?,
             alias: String?,
-            shuffleChunks: [ChunkId : ChunkPosition],
-            addProceduresToChunk: [ChunkId : [ProcedureId]]
+            shuffleChunks: [ChunkId : ChunkPosition]
         ) {
             self.sale = sale
             self.description = description
             self.alias = alias
             self.shuffleChunks = shuffleChunks
-            self.addProceduresToChunk = addProceduresToChunk
         }
     }
 }
@@ -207,20 +203,17 @@ public extension Complex.Helpers {
         public var id: UUID
         public var alias: String?
         public var description: String?
-        public var parameters: [ParameterResponse]
         public var serviceId: UUID
         
         public init(
             id: UUID,
             alias: String? = nil,
             description: String? = nil,
-            parameters: [ParameterResponse],
             serviceId: UUID
         ) {
             self.id = id
             self.alias = alias
             self.description = description
-            self.parameters = parameters
             self.serviceId = serviceId
         }
     }
@@ -238,46 +231,6 @@ public extension Complex.Helpers {
             self.id = id
             self.title = title
             self.tags = tags
-        }
-    }
-}
-
-public extension Complex.Helpers {
-    struct ParameterResponse: Codable {
-        public let id: UUID
-        public let optional: Bool
-        public let title: String
-        public let cases: [CaseResponse]
-        
-        public init(
-            id: UUID,
-            optional: Bool,
-            title: String,
-            cases: [CaseResponse]
-        ) {
-            self.id = id
-            self.optional = optional
-            self.title = title
-            self.cases = cases
-        }
-    }
-    
-    struct CaseResponse: Codable {
-        public let id: Int
-        public let title: String
-        public let price: CasePrice
-        public let duration: CaseDuration
-        
-        public init(
-            id: Int,
-            title: String,
-            price: CasePrice,
-            duration: CaseDuration
-        ) {
-            self.id = id
-            self.title = title
-            self.price = price
-            self.duration = duration
         }
     }
 }
