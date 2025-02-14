@@ -55,14 +55,14 @@ public extension Complex.Parameters {
         public typealias ChunkId = UUID
     
         public let priceShift: Complex.Helpers.PriceShift?
-        public let description: String?
-        public let alias: String?
+        public let description: UpdateString?
+        public let alias: UpdateString?
         public let shuffleChunks: [ChunkId : ChunkPosition]?
         
         public init(
             priceShift: Complex.Helpers.PriceShift?,
-            description: String?,
-            alias: String?,
+            description: UpdateString?,
+            alias: UpdateString?,
             shuffleChunks: [ChunkId : ChunkPosition]
         ) {
             self.priceShift = priceShift
@@ -233,7 +233,7 @@ public extension Complex.Helpers { // TODO: вероятно здесь нужн
     }
 
     enum CaseDuration: Codable {
-        case fixedValue(Decimal)
+        case fixedValue(Minutes)
         case multiKoeff(Decimal)
         case none
     }

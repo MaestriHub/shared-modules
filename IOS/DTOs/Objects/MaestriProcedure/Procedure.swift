@@ -31,7 +31,7 @@ public extension Procedure.Parameters {
     }
     
     struct Create: Parametable {
-        public let duration: Int
+        public let duration: Minutes
         public let price: Price
         public let description: String?
         public let alias: String?
@@ -40,7 +40,7 @@ public extension Procedure.Parameters {
         public let employeeIds: [UUID]
         
         public init(
-            duration: Int,
+            duration: Minutes,
             price: Price,
             description: String?,
             alias: String?,
@@ -60,13 +60,13 @@ public extension Procedure.Parameters {
     
     struct Update: Parametable {
         public let price: Price?
-        public let duration: Int?
+        public let duration: Minutes?
         public let description: UpdateString?
         public let alias: UpdateString?
         
         public init(
             price: Price?,
-            duration: Int?,
+            duration: Minutes?,
             description: UpdateString?,
             alias: UpdateString?
         ) {
@@ -95,7 +95,7 @@ public extension Procedure.Responses {
     struct Update: Responsable {
         public let id: UUID
         public let price: Price
-        public let duration: Int
+        public let duration: Minutes
         public let description: String?
         public let alias: String?
         public let parameters: [Procedure.Helpers.ParameterResponse]
@@ -109,7 +109,7 @@ public extension Procedure.Responses {
         public init(
             id: UUID,
             price: Price,
-            duration: Int,
+            duration: Minutes,
             description: String? = nil,
             alias: String? = nil,
             parameters: [Procedure.Helpers.ParameterResponse],
@@ -147,7 +147,7 @@ public extension Procedure.Responses {
     
     struct Retrieve: Responsable {
         public let id: UUID
-        public let duration: Int
+        public let duration: Minutes
         public let price: Price
         public let alias: String?
         public let description: String?
@@ -161,7 +161,7 @@ public extension Procedure.Responses {
         
         public init(
             id: UUID,
-            duration: Int,
+            duration: Minutes,
             price: Price,
             alias: String? = nil,
             description: String? = nil,
@@ -192,7 +192,7 @@ public extension Procedure.Responses {
 public extension Procedure.Helpers {
     struct CreateProcedureResponse: Codable {
         public let id: UUID
-        public let duration: Int
+        public let duration: Minutes
         public let price: Price
         public let alias: String?
         public let description: String?
@@ -206,7 +206,7 @@ public extension Procedure.Helpers {
         
         public init(
             id: UUID,
-            duration: Int,
+            duration: Minutes,
             price: Price,
             alias: String? = nil,
             description: String? = nil,
@@ -235,7 +235,7 @@ public extension Procedure.Helpers {
     
     struct ProcedureResponse: Codable {
         public let id: UUID
-        public let duration: Int
+        public let duration: Minutes
         public let price: Price
         public let alias: String?
         public let description: String?
@@ -249,7 +249,7 @@ public extension Procedure.Helpers {
         
         public init(
             id: UUID,
-            duration: Int,
+            duration: Minutes,
             price: Price,
             alias: String? = nil,
             description: String? = nil,
@@ -360,7 +360,7 @@ public extension Procedure.Helpers {
     }
     
     enum CaseDuration: Codable {
-        case fixedValue(Decimal)
+        case fixedValue(Minutes)
         case multiKoeff(Decimal)
         case none
     }
