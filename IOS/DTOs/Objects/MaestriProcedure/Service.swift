@@ -71,7 +71,8 @@ public extension Service.Helpers {
     struct ServiceResponse: Codable {
         public let id: UUID
         public let title: String
-        public let tags: [TranslatedServiceTag]    }
+        public let tags: [TranslatedServiceTag]
+    }
     
     @MemberwiseInit(.public)
     struct Parameter: Codable {

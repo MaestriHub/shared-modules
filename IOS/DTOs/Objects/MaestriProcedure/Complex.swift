@@ -28,7 +28,7 @@ public extension Complex.Parameters {
         public let alias: String?
         public let description: String?
         public let priceShift: Complex.Helpers.PriceShift
-        public let chunks: [Complex.Helpers.ChunkRequest]
+        public let chunks: [Complex.Helpers.CreateChunkRequest]
     }
     
     @MemberwiseInit(.public)
@@ -83,6 +83,15 @@ public extension Complex.Responses {
 public extension Complex.Helpers {
     
     @MemberwiseInit(.public)
+    struct CreateChunkRequest: Codable {
+        public let order: Int
+        public let proceduresIds: [UUID]
+    }
+}
+
+public extension Complex.Helpers {
+    
+    @MemberwiseInit(.public)
     struct ComplexResponse: Codable {
         public let id: UUID
         public let alias: String?
@@ -129,11 +138,5 @@ public extension Complex.Helpers { // TODO: вероятно здесь нужн
     enum PriceShift: Codable {
         case percent(Decimal)
         case absolute(Decimal)
-    }
-    
-    @MemberwiseInit(.public)
-    struct ChunkRequest: Codable {
-        public let order: Int
-        public let proceduresIds: [UUID]
     }
 }

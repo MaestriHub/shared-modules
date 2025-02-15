@@ -49,6 +49,11 @@ public extension Procedure.Responses {
     }
     
     @MemberwiseInit(.public)
+    struct All: Responsable {
+        public let procedures: [Procedure.Helpers.AllProcedureResponse]
+    }
+    
+    @MemberwiseInit(.public)
     struct Update: Responsable {
         public let id: UUID
         public let price: Price
@@ -62,11 +67,6 @@ public extension Procedure.Responses {
         public let masterId: UUID
         public let masterNickname: String
         public let masterAvatar: URL?
-    }
-    
-    @MemberwiseInit(.public)
-    struct All: Responsable {
-        public let procedures: [Procedure.Helpers.ProcedureResponse]
     }
     
     @MemberwiseInit(.public)
@@ -89,23 +89,21 @@ public extension Procedure.Responses {
 public extension Procedure.Helpers {
     
     @MemberwiseInit(.public)
-    struct CreateProcedureResponse: Codable {
+    struct CreateParameterRequest: Codable {
         public let id: UUID
-        public let duration: Minutes
-        public let price: Price
-        public let alias: String?
-        public let description: String?
-        public let parameters: [Procedure.Helpers.ParameterResponse]
-        public let serviceId: UUID
-        public let serviceTags: [TranslatedServiceTag]
-        public let serviceTitle: String
-        public let masterId: UUID
-        public let masterNickname: String
-        public let masterAvatar: URL?
+        public let optional: Bool
+        public let cases: [CreateCaseRequest]
     }
     
     @MemberwiseInit(.public)
-    struct ProcedureResponse: Codable {
+    struct CreateCaseRequest: Codable {
+        public let id: Int
+        public let casePrice: CasePrice
+        public let caseDuration: CaseDuration
+    }
+    
+    @MemberwiseInit(.public)
+    struct CreateProcedureResponse: Codable {
         public let id: UUID
         public let duration: Minutes
         public let price: Price
@@ -124,22 +122,23 @@ public extension Procedure.Helpers {
 public extension Procedure.Helpers  {
     
     @MemberwiseInit(.public)
-    struct CreateParameterRequest: Codable {
+    struct AllProcedureResponse: Codable {
         public let id: UUID
-        public let optional: Bool
-        public let cases: [CreateCaseRequest]
-    }
-    
-    @MemberwiseInit(.public)
-    struct CreateCaseRequest: Codable {
-        public let id: Int
-        public let casePrice: CasePrice
-        public let caseDuration: CaseDuration
+        public let duration: Minutes
+        public let price: Price
+        public let alias: String?
+        public let description: String?
+        public let parameters: [Procedure.Helpers.ParameterResponse]
+        public let serviceId: UUID
+        public let serviceTags: [TranslatedServiceTag]
+        public let serviceTitle: String
+        public let masterId: UUID
+        public let masterNickname: String
+        public let masterAvatar: URL?
     }
 }
 
 public extension Procedure.Helpers {
-    
     @MemberwiseInit(.public)
     struct ParameterResponse: Codable {
         public let id: UUID
@@ -155,10 +154,7 @@ public extension Procedure.Helpers {
         public let price: CasePrice
         public let duration: CaseDuration
     }
-}
-
-
-public extension Procedure.Helpers {
+    
     enum CasePrice: Codable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)
