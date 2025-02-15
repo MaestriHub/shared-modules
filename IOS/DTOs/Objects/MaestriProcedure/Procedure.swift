@@ -14,18 +14,15 @@ public extension Procedure.Parameters {
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
-        public let servicesFilter: [UUID]?
         public let pagination: Pagination?
         
         public init(
             salons: [UUID]? = nil,
             employees: [UUID]? = nil,
-            services: [UUID]? = nil,
             pagination: Pagination? = nil
         ) {
             self.salonsFilter = salons
             self.employeesFilter = employees
-            self.servicesFilter = services
             self.pagination = pagination
         }
     }
