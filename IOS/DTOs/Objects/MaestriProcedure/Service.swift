@@ -20,30 +20,16 @@ public extension Service.Parameters {
         public let pagination: Pagination?
     }
 
+    @MemberwiseInit(.public)
     struct Create: Parametable {
         public let title: String
         public let tags: [ServiceTags]
-        
-        public init(
-            title: String,
-            tags: [ServiceTags]
-        ) {
-            self.title = title
-            self.tags = tags
-        }
     }
 
+    @MemberwiseInit(.public)
     struct Update: Parametable {
         public let title: String?
         public let tags: [ServiceTags]?
-        
-        public init(
-            title: String? = nil,
-            tags: [ServiceTags]? = nil
-        ) {
-            self.title = title
-            self.tags = tags
-        }
     }
 }
 
@@ -51,111 +37,52 @@ public extension Service.Parameters {
 
 public extension Service.Responses {
     
+    @MemberwiseInit(.public)
     struct Create: Responsable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
-        
-        public init(
-            id: UUID,
-            title: String,
-            tags: [TranslatedServiceTag]
-        ) {
-            self.id = id
-            self.title = title
-            self.tags = tags
-        }
     }
     
+    @MemberwiseInit(.public)
     struct Update: Responsable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
-        
-        public init(
-            id: UUID,
-            title: String,
-            tags: [TranslatedServiceTag]
-        ) {
-            self.id = id
-            self.title = title
-            self.tags = tags
-        }
     }
     
+    @MemberwiseInit(.public)
     struct All: Responsable {
         public let services: [Service.Helpers.ServiceResponse]
-        
-        public init(
-            services: [Service.Helpers.ServiceResponse]
-        ) {
-            self.services = services
-        }
     }
     
+    @MemberwiseInit(.public)
     struct Retrieve: Responsable {
         public let id: UUID
         public let title: String
         public let parameters: [Service.Helpers.Parameter]
         public let tags: [TranslatedServiceTag]
-        
-        public init(
-            id: UUID,
-            title: String,
-            parameters: [Service.Helpers.Parameter],
-            tags: [TranslatedServiceTag]
-        ) {
-            self.id = id
-            self.title = title
-            self.tags = tags
-            self.parameters = parameters
-        }
     }
 }
 
 public extension Service.Helpers {
+    
+    @MemberwiseInit(.public)
     struct ServiceResponse: Codable {
         public let id: UUID
         public let title: String
-        public let tags: [TranslatedServiceTag]
-        
-        public init(
-            id: UUID,
-            title: String,
-            tags: [TranslatedServiceTag]
-        ) {
-            self.id = id
-            self.title = title
-            self.tags = tags
-        }
-    }
+        public let tags: [TranslatedServiceTag]    }
     
+    @MemberwiseInit(.public)
     struct Parameter: Codable {
         public let id: UUID
         public let title: String
         public let cases: [Case]
-        
-        public init(
-            id: UUID,
-            title: String,
-            cases: [Case]
-        ) {
-            self.id = id
-            self.title = title
-            self.cases = cases
-        }
     }
 
+    @MemberwiseInit(.public)
     struct Case: Codable {
         public let id: Int
         public let title: String
-        
-        public init(
-            id: Int,
-            title: String
-        ) {
-            self.id = id
-            self.title = title
-        }
     }
 }
