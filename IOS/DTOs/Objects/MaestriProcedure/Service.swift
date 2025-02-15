@@ -1,4 +1,5 @@
 import Foundation
+import MemberwiseInit
 
 public enum Service {
     public enum Helpers {}
@@ -11,23 +12,12 @@ public enum Service {
 
 public extension Service.Parameters {
     
+    @MemberwiseInit(.public)
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let valueFilter: String?
         public let pagination: Pagination?
-        
-        public init(
-            salons: [UUID]? = nil,
-            employees: [UUID]? = nil,
-            value: String? = nil,
-            pagination: Pagination? = nil
-        ) {
-            self.salonsFilter = salons
-            self.employeesFilter = employees
-            self.valueFilter = value
-            self.pagination = pagination
-        }
     }
 
     struct Create: Parametable {

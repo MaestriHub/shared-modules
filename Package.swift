@@ -4,7 +4,8 @@ import PackageDescription
 let package = Package(
     name: "shared-modules",
     platforms: [
-      .iOS(.v16)
+      .iOS(.v16),
+      .macOS(.v10_15)
     ],
     products: [
         .library(
@@ -12,10 +13,15 @@ let package = Package(
             targets: ["DTOs"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.5.1")
+    ],
     targets: [
         .target(
             name: "DTOs",
-            dependencies: [],
+            dependencies: [
+                .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
+            ],
             path: "IOS/DTOs"
         )
     ]
