@@ -98,8 +98,8 @@ public extension Procedure.Helpers {
     @MemberwiseInit(.public)
     struct CreateCaseRequest: Codable {
         public let id: Int
-        public let casePrice: CasePrice
-        public let caseDuration: CaseDuration
+        public let casePrice: CasePrice?
+        public let caseDuration: CaseDuration?
     }
     
     @MemberwiseInit(.public)
@@ -151,19 +151,17 @@ public extension Procedure.Helpers {
     struct CaseResponse: Codable {
         public let id: Int
         public let title: String
-        public let price: CasePrice
-        public let duration: CaseDuration
+        public let price: CasePrice?
+        public let duration: CaseDuration?
     }
     
     enum CasePrice: Codable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)
-        case none
     }
     
     enum CaseDuration: Codable {
         case fixedValue(Minutes)
         case multiKoeff(Decimal)
-        case none
     }
 }

@@ -121,20 +121,6 @@ public extension Complex.Helpers {
 }
 
 public extension Complex.Helpers { // TODO: вероятно здесь нужно будет добавить декодер ибо $0_
-    enum CasePrice: Codable {
-        case fixedValue(Decimal)
-        case multiKoeff(Decimal)
-        case none
-    }
-
-    enum CaseDuration: Codable {
-        case fixedValue(Minutes)
-        case multiKoeff(Decimal)
-        case none
-    }
-}
-
-public extension Complex.Helpers { // TODO: вероятно здесь нужно будет добавить декодер ибо $0_
     enum PriceShift: Codable {
         case percent(Decimal)
         case absolute(Decimal)

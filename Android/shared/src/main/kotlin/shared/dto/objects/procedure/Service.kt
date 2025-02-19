@@ -54,24 +54,38 @@ object Service {
 
         @Serializable
         data class All(
-            val services: List<Helpers.Service>,
+            val services: List<Helpers.ServiceResponse>,
         ) : Responsable
 
         @Serializable
         data class Retrieve(
             val id: UUID,
             val title: String,
+            val parameters: Array<Helpers.Parameter>,
+            val tags: Array<TranslatedServiceTag>,
+        ) : Responsable
+    }
+
+    data object Helpers {
+
+        @Serializable
+        data class ServiceResponse(
+            val id: UUID,
+            val title: String,
             val tags: Array<TranslatedServiceTag>,
         ) : Responsable
 
-        data object Helpers {
+        @Serializable
+        data class Parameter(
+            val id: UUID,
+            val title: String,
+            val cases: Array<Case>
+        )
 
-            @Serializable
-            data class Service(
-                val id: UUID,
-                val title: String,
-                val tags: Array<TranslatedServiceTag>,
-            ) : Responsable
-        }
+        @Serializable
+        data class Case(
+            val id: UUID,
+            val title: String,
+        )
     }
 }

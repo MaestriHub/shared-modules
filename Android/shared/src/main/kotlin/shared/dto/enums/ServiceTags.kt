@@ -1,6 +1,7 @@
 package shared.dto.enums
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /// Описывает категории всех сервисов
 /// - `NAILS`          : Ногти
@@ -53,3 +54,8 @@ enum class ServiceTags {
     PERMANENTMAKEUP,
 }
 
+@Serializable
+data class TranslatedServiceTag(
+    val tag: ServiceTags,
+    val translate: String
+)
