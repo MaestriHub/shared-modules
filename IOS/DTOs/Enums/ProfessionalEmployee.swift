@@ -9,7 +9,7 @@ public enum ProfessionalEmployee: Responsable {
         case value = "value"
     }
 
-        // Декодирование
+    // Декодирование
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

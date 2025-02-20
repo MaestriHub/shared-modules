@@ -158,10 +158,74 @@ public extension Procedure.Helpers {
     enum CasePrice: Codable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)
+        
+        private enum CodingKeys: String, CodingKey {
+            case fixedValue
+            case multiKoeff
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            if let value = try? container.decode(Decimal.self, forKey: .fixedValue) {
+                self = .fixedValue(value)
+            } else if let value = try? container.decode(Decimal.self, forKey: .multiKoeff) {
+                self = .multiKoeff(value)
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    forKey: CodingKeys.fixedValue,
+                    in: container,
+                    debugDescription: "Unable to decode Foo enum"
+                )
+            }
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+
+            switch self {
+            case .fixedValue(let value):
+                try container.encode(value, forKey: .fixedValue)
+            case .multiKoeff(let value):
+                try container.encode(value, forKey: .multiKoeff)
+            }
+        }
     }
     
     enum CaseDuration: Codable {
         case fixedValue(Minutes)
         case multiKoeff(Decimal)
+        
+        private enum CodingKeys: String, CodingKey {
+            case fixedValue
+            case multiKoeff
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            if let value = try? container.decode(Minutes.self, forKey: .fixedValue) {
+                self = .fixedValue(value)
+            } else if let value = try? container.decode(Decimal.self, forKey: .multiKoeff) {
+                self = .multiKoeff(value)
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    forKey: CodingKeys.fixedValue,
+                    in: container,
+                    debugDescription: "Unable to decode Foo enum"
+                )
+            }
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+
+            switch self {
+            case .fixedValue(let value):
+                try container.encode(value, forKey: .fixedValue)
+            case .multiKoeff(let value):
+                try container.encode(value, forKey: .multiKoeff)
+            }
+        }
     }
 }

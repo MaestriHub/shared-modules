@@ -176,7 +176,7 @@ object Procedure {
         sealed class CaseDuration {
             @Serializable
             data class FixedValue(
-                val value: BigDecimal,
+                val value: Minutes,
             ): CaseDuration()
 
             @Serializable
