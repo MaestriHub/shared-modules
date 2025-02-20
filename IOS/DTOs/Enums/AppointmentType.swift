@@ -4,11 +4,19 @@ public enum AppointmentType: Codable {
     case complex(Complex)
     case procedure(UUID)
     
-    typealias ChunkId = UUID
-    typealias ProcedureId = UUID
+    public typealias ChunkId = UUID
+    public typealias ProcedureId = UUID
     public struct Complex: Codable {
-        let id: UUID
-        let order: [ChunkId : ProcedureId]
+        public let id: UUID
+        public let order: [ChunkId : ProcedureId]
+        
+        public init(
+            id: UUID,
+            order: [ChunkId : ProcedureId]
+        ) {
+            self.id = id
+            self.order = order
+        }
     }
     
     enum CodingKeys: String, CodingKey {
