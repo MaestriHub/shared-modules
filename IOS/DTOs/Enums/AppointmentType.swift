@@ -1,10 +1,15 @@
 import Foundation
 
-
-/// возможно это стоит вынести на сервер
-public enum AppointmentType: Codable, Hashable, Equatable {
-    case complex(UUID)
+public enum AppointmentType: Codable {
+    case complex(Complex)
     case procedure(UUID)
+    
+    typealias ChunkId = UUID
+    typealias ProcedureId = UUID
+    public struct Complex: Codable {
+        let id: UUID
+        let order: [ChunkId : ProcedureId]
+    }
     
     enum CodingKeys: String, CodingKey {
         case complex = "complex"
@@ -15,7 +20,7 @@ public enum AppointmentType: Codable, Hashable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let value = try? container.decode(UUID.self, forKey: .complex) {
+        if let value = try? container.decode(Complex.self, forKey: .complex) {
             self = .complex(value)
         } else if let value = try? container.decode(UUID.self, forKey: .procedure) {
             self = .procedure(value)
