@@ -9,6 +9,10 @@ public enum Search {
     public enum Responses {}
 }
 
+public extension Search.Responses {
+    enum Helpers {}
+}
+
 //MARK: - Parameters -
 
 public extension Search.Parameters {
@@ -30,8 +34,7 @@ public extension Search.Parameters {
         public let salonType: SalonType?
         public let latitude: Double?
         public let longitude: Double?
-        public let page: Int?
-        public let per: Int?
+        public let pagination: Pagination?
         
         /// - Parameters:
         ///    - value: Поисковый запрос пользователя в виде строки.
@@ -45,15 +48,13 @@ public extension Search.Parameters {
             salonType: SalonType?,
             latitude: Double?,
             longitude: Double?,
-            page: Int?,
-            per: Int?
+            pagination: Pagination?
         ) {
             self.value = value
             self.salonType = salonType
             self.latitude = latitude
             self.longitude = longitude
-            self.page = page
-            self.per = per
+            self.pagination = pagination
         }
     }
 }
@@ -61,12 +62,27 @@ public extension Search.Parameters {
 //MARK: - Responses -
 
 public extension Search.Responses {
-    
-    /// Ответ на поисковый запрос, содержащий предложения для автозаполнения.
-    /// Позволяет пользователю выбрать из предложенных вариантов, основанных на начальных символах запроса.
+    /// Полный ответ на поисковый запрос, включающий предложения и результаты поиска.
     ///
     /// ### Properties:
-    /// - value: Текст предложения, соответствующий части поискового запроса пользователя.
+    /// - suggests: Массив предложений для автозаполнения поискового запроса.
+    /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
+    struct Full: Responsable {
+        public var suggests: [Helpers.Suggest]
+        public var salons: [Helpers.Salon]
+        
+        public init(
+            suggests: [Helpers.Suggest],
+            salons: [Helpers.Salon]
+        ) {
+            self.suggests = suggests
+            self.salons = salons
+        }
+    }
+}
+
+public extension Search.Responses.Helpers {
+    
     struct Suggest: Responsable {
         public var value: String
         
@@ -75,21 +91,28 @@ public extension Search.Responses {
         }
     }
     
-    /// Полный ответ на поисковый запрос, включающий предложения и результаты поиска.
-    ///
-    /// ### Properties:
-    /// - suggests: Массив предложений для автозаполнения поискового запроса.
-    /// - salons: Массив салонов, соответствующих поисковому запросу, в упрощенном представлении (`Salon.Responses.Partial`).
-    struct Full: Responsable {
-        public var suggests: [Suggest]
-        public var salons: [Salon.Responses.Partial]
+    struct Salon: Codable {
+        public var id: UUID
+        public var name: String
+        public var type: SalonType
+        public var logo: URL?
+        public var address: Address
+        public var isFavorite: Bool = false
         
         public init(
-            suggests: [Suggest],
-            salons: [Salon.Responses.Partial]
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: URL? = nil,
+            address: Address,
+            isFavorite: Bool
         ) {
-            self.suggests = suggests
-            self.salons = salons
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.address = address
+            self.isFavorite = isFavorite
         }
     }
 }

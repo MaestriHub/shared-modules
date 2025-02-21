@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HandleInvite: Responsable, Hashable, Equatable {
+public enum HandleInvite: Responsable {
     case successCustomer(Customer.Responses.Full)
     case requestVerify(Customer.Responses.Verify)
     

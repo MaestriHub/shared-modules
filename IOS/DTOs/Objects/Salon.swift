@@ -91,7 +91,7 @@ public extension Salon.Responses {
     /// - isFavorite: Флаг, указывающий, отмечен ли салон как избранный у текущего пользователя.
     /// - timetable: Полная информация о расписании салона (`Timetable.Responses.Full`).
     /// - masters: Опциональный список мастеров салона с полной информацией (`Employee.Responses.Full`).
-    struct Full: Responsable, Identifiable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var name: String
         public var type: SalonType
@@ -140,7 +140,7 @@ public extension Salon.Responses {
     /// - logo: URL адрес логотипа салона, может быть `nil`.
     /// - address: Краткая информация об адресе или просто строка адреса.
     /// - isFavorite: Флаг, указывающий, отмечен ли салон как избранный у текущего пользователя.
-    struct Partial: Responsable, Identifiable, Hashable, Equatable {
+    struct Partial: Responsable {
         public var id: UUID
         public var name: String
         public var type: SalonType

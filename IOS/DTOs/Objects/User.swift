@@ -48,7 +48,7 @@ public extension User.Responses {
     ///  - nickname: Отображаемое имя пользователя.
     ///  - contact: Полная контактная информация, ассоциированная с профилем пользователя.
     ///  - options: Роли пользователя, определенные в системе.
-    struct Full: Responsable, Identifiable, Hashable, Equatable {
+    struct Full: Responsable {
         public var id: UUID
         public var avatar: URL?
         public var nickname: String
@@ -84,7 +84,7 @@ public extension User.Responses {
     /// ### Properties:
     ///  - avatar: Ссылка на изображение аватара пользователя, может быть не указана.
     ///  - nickname: Псевдоним пользователя для представления в пользовательском интерфейсе.
-    struct Partial: Responsable, Equatable, Hashable {
+    struct Partial: Responsable {
         public var avatar: URL?
         public var nickname: String
         
