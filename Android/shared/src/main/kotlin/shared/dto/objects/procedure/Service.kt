@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ServiceTags
 import shared.dto.primitives.Pagination
-import shared.dto.primitives.TranslatedServiceTag
+import shared.dto.enums.TranslatedServiceTag
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
