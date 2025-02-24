@@ -1,6 +1,7 @@
 @file:UseSerializers(
     UUIDSerializer::class,
-    DateISOSerializer::class
+    DateISOSerializer::class,
+    URISerializer::class
 )
 
 package shared.dto.objects
@@ -16,7 +17,9 @@ import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
+import shared.serializers.URISerializer
 import java.util.*
+import java.net.URI
 
 object AppointmentCustomer {
     data object Parameters {
@@ -67,15 +70,23 @@ object AppointmentCustomer {
                 val id: UUID,
                 val description: String?,
                 val alias: String?,
+                val master: Master,
                 var service: Service
-            )
+            ) : Responsable
 
             @Serializable
             data class Service(
                 val id: UUID,
                 val title: String,
                 val category: Array<ServiceTags>
-            )
+            ) : Responsable
+            
+            @Serializable
+            data class Master(
+                val id: UUID,
+                val nick: String,
+                val avatar: URI?
+            ) : Responsable
         }
     }
 }

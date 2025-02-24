@@ -167,17 +167,20 @@ public extension AppointmentCustomer.Responses.Helpers {
         public var id: UUID
         public var description: String?
         public var alias: String?
+        public var master: Master
         public var service: Service
         
         public init(
             id: UUID,
             description: String?,
             alias: String?,
+            master: Master,
             service: Service
         ) {
             self.id = id
             self.description = description
             self.alias = alias
+            self.master = master
             self.service = service
         }
     }
@@ -196,6 +199,12 @@ public extension AppointmentCustomer.Responses.Helpers {
             self.title = title
             self.category = category
         }
+    }
+    
+    struct Master: Codable {
+        public var id: UUID
+        public var nick: String
+        public var avatar: URL?
     }
 }
 
