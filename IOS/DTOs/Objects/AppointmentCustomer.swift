@@ -205,15 +205,34 @@ public extension AppointmentCustomer.Responses.Helpers {
         public var id: UUID
         public var nick: String
         public var avatar: URL?
+        public var contacts: [Contact]
         
         public init(
             id: UUID,
             nick: String,
-            avatar: URL? = nil
+            avatar: URL? = nil,
+            contacts: [Contact]
         ) {
             self.id = id
             self.nick = nick
             self.avatar = avatar
+            self.contacts = contacts
+        }
+    }
+    
+    struct Contact: Codable {
+        public var id: UUID
+        public var value: String
+        public var type: ContactType
+        
+        public init(
+            id: UUID,
+            value: String,
+            type: ContactType
+        ) {
+            self.id = id
+            self.value = value
+            self.type = type
         }
     }
 }

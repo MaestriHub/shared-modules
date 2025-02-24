@@ -11,6 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
+import shared.dto.enums.ContactType
 import shared.dto.enums.ServiceTags
 import shared.dto.primitives.Address
 import shared.dto.primitives.Price
@@ -87,6 +88,13 @@ object AppointmentCustomer {
                 val nick: String,
                 val avatar: URI?
             ) : Responsable
+            
+            @Serializable
+            data class Contact(
+                val id: UUID,
+                val value: String,
+                val type: ContactType
+            )
         }
     }
 }
