@@ -180,17 +180,20 @@ public extension AppointmentEmployee.Responses.Helpers {
         public var id: UUID
         public var description: String?
         public var alias: String?
+        public var master: Master
         public var service: Service
         
         public init(
             id: UUID,
             description: String?,
             alias: String?,
+            master: Master,
             service: Service
         ) {
             self.id = id
             self.description = description
             self.alias = alias
+            self.master = master
             self.service = service
         }
     }
@@ -208,6 +211,41 @@ public extension AppointmentEmployee.Responses.Helpers {
             self.id = id
             self.title = title
             self.category = category
+        }
+    }
+    
+    struct Master: Codable {
+        public var id: UUID
+        public var nick: String
+        public var avatar: URL?
+        public var contacts: [Contact]
+        
+        public init(
+            id: UUID,
+            nick: String,
+            avatar: URL? = nil,
+            contacts: [Contact]
+        ) {
+            self.id = id
+            self.nick = nick
+            self.avatar = avatar
+            self.contacts = contacts
+        }
+    }
+    
+    struct Contact: Codable {
+        public var id: UUID
+        public var value: String
+        public var type: ContactType
+        
+        public init(
+            id: UUID,
+            value: String,
+            type: ContactType
+        ) {
+            self.id = id
+            self.value = value
+            self.type = type
         }
     }
 }

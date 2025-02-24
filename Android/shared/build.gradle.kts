@@ -29,6 +29,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/MaestriHub/shared-modules")
             credentials {
                 username = "name"
+                username = "MeT3ger"
                 password = "password"
             }
         }
@@ -37,7 +38,7 @@ publishing {
         register<MavenPublication>("gpr") {
             from(components["kotlin"])
             groupId = "app.maestri"
-            version = "1.1.29"
+            version = "1.1.32"
             artifactId = "shared"
         }
     }
