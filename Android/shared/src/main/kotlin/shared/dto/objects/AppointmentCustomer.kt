@@ -86,7 +86,8 @@ object AppointmentCustomer {
             data class Master(
                 val id: UUID,
                 val nick: String,
-                val avatar: URI?
+                val avatar: URI?,
+                val contacts: Array<Contact>,
             ) : Responsable
             
             @Serializable

@@ -1,6 +1,7 @@
 @file:UseSerializers(
     UUIDSerializer::class,
-    DateISOSerializer::class
+    DateISOSerializer::class,
+    URISerializer::class,
 )
 
 package shared.dto.objects
@@ -10,12 +11,16 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
+import shared.dto.enums.ContactType
 import shared.dto.enums.ServiceTags
+import shared.dto.objects.AppointmentCustomer.Responses.Helpers.Master
 import shared.dto.primitives.Address
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
+import java.net.URI
 import java.util.*
 
 object AppointmentEmployee {
@@ -78,14 +83,30 @@ object AppointmentEmployee {
                 val id: UUID,
                 val description: String?,
                 val alias: String?,
+                val master: Master,
                 var service: Service
-            )
+            ) : Responsable
 
             @Serializable
             data class Service(
                 val id: UUID,
                 val title: String,
                 val category: Array<ServiceTags>
+            ) : Responsable
+
+            @Serializable
+            data class Master(
+                val id: UUID,
+                val nick: String,
+                val avatar: URI?,
+                val contacts: Array<Contact>,
+            ) : Responsable
+
+            @Serializable
+            data class Contact(
+                val id: UUID,
+                val value: String,
+                val type: ContactType
             )
         }
     }
