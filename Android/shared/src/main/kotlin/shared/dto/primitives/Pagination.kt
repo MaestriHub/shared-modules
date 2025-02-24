@@ -5,6 +5,6 @@ import shared.dto.protocols.Parametable
 
 @Serializable
 data class Pagination(
-    val amount: Int,
-    val currency: Int,
+    val page: Int,
+    val per: Int,
 ) : Parametable()
