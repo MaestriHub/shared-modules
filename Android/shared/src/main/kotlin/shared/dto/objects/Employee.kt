@@ -20,11 +20,11 @@ object Employee {
 
         @Serializable
         data class Invite(
+            val nickname: String?,
             val salonId: UUID,
             val positionId: UUID,
             val contacts: List<Contact.Parameters.Create>,
             val timetable: Timetable.Parameters.Create.Pattern?,
-            val description: String?,
         ) : Parametable()
 
         @Serializable
