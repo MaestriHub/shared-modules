@@ -17,6 +17,6 @@ object PermissionSetSerializer : KSerializer<PermissionSet> {
     }
 
     override fun serialize(encoder: Encoder, value: PermissionSet) {
-        encoder.encodeString(value.toString())
+        encoder.encodeInt(value.rawValue)
     }
 }

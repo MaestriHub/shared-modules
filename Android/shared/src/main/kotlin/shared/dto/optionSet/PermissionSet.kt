@@ -5,7 +5,7 @@ import shared.serializers.PermissionSetSerializer
 
 @Serializable(PermissionSetSerializer::class)
 @JvmInline
-value class PermissionSet(private val rawValue: Int) {
+value class PermissionSet(val rawValue: Int) {
     companion object {
         val owner = PermissionSet(1 shl 0)
         val appointments = PermissionSet(1 shl 1)
