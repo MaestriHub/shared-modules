@@ -1,4 +1,7 @@
-@file:UseSerializers(UUIDSerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    PermissionSetSerializer::class
+)
 
 package shared.dto.objects
 
@@ -7,6 +10,7 @@ import kotlinx.serialization.UseSerializers
 import shared.dto.optionSet.PermissionSet
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.PermissionSetSerializer
 import shared.serializers.UUIDSerializer
 import java.util.*
 
