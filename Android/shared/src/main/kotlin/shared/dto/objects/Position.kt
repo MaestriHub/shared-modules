@@ -23,7 +23,7 @@ object Position {
         data class Patch(
             val title: String?,
             val permissions: PermissionSet?,
-            val salary: Salary.Parameters.Rules.Create,
+            val salary: Salary.Parameters.Rules.Create?,
         ) : Parametable()
     }
 
