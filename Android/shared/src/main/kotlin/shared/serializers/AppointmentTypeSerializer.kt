@@ -36,7 +36,6 @@ object AppointmentTypeSerializer : KSerializer<AppointmentType> {
         }
 
         encoder.encodeSerializableValue(JsonElement.serializer(), json)
-        encoder.encodeString(value.toString())
     }
 
     override fun deserialize(decoder: Decoder): AppointmentType {
