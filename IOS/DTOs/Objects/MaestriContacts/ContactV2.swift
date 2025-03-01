@@ -3,6 +3,7 @@ import Foundation
 public enum ContactV2 {
     public enum Parameters {}
     public enum Responses {}
+    public enum Helpers {}
 }
 
 public extension ContactV2.Parameters {
@@ -22,7 +23,7 @@ public extension ContactV2.Parameters {
     }
     
     struct Get: Parametable {
-        public let consumer: ContactV2.Helpers.ContactConsumer
+        public let requester: ContactV2.Helpers.ContactConsumer
     }
 }
 
@@ -51,13 +52,11 @@ public extension ContactV2.Responses {
     }
 }
 
-public extension ContactV2 {
-    enum Helpers {
-        public enum ContactConsumer: Codable {
-            case user(UUID)
-            case salon(UUID)
-            case customer(UUID)
-            case employee(UUID)
-        }
+public extension ContactV2.Helpers {
+    enum ContactConsumer: Codable {
+        case user(UUID)
+        case salon(UUID)
+        case customer(UUID)
+        case employee(UUID)
     }
 }
