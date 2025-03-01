@@ -1,4 +1,5 @@
 import Foundation
+import MemberwiseInit
 
 public enum ContactV2 {
     public enum Parameters {}
@@ -9,19 +10,13 @@ public enum ContactV2 {
 public extension ContactV2.Parameters {
     
     // верификации пока нет потому что не понятно как она будет выглядеть
+    @MemberwiseInit(.public)
     struct Create: Parametable {
         public let value: String
         public let type: ContactType
-        
-        public init(
-            value: String,
-            type: ContactType
-        ) {
-            self.value = value
-            self.type = type
-        }
     }
     
+    @MemberwiseInit(.public)
     struct Get: Parametable {
         public let requester: ContactV2.Helpers.ContactConsumer
     }
@@ -31,22 +26,14 @@ public extension ContactV2.Parameters {
 
 public extension ContactV2.Responses {
 
+    @MemberwiseInit(.public)
     struct Contact: Responsable {
         public var id: UUID
         public var value: String
         public var type: ContactType
-        
-        public init(
-            id: UUID,
-            value: String,
-            type: ContactType
-        ) {
-            self.id = id
-            self.value = value
-            self.type = type
-        }
     }
     
+    @MemberwiseInit(.public)
     struct All: Responsable {
         public let allContacts: [Contact]
     }
