@@ -17,7 +17,7 @@ public extension ContactV2.Parameters {
     }
     
     @MemberwiseInit(.public)
-    struct UpdateActiveContact: Parametable {
+    struct UpdateContact: Parametable {
         public var setPhoneTypes: [PhoneTypes]?
     }
 }
@@ -27,7 +27,7 @@ public extension ContactV2.Parameters {
 public extension ContactV2.Responses {
     
     @MemberwiseInit(.public)
-    struct CreateContact: Responsable {
+    struct Create: Responsable {
         public var id: UUID
         public var value: String
         public var type: ContactType
