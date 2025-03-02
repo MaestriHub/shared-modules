@@ -12,14 +12,6 @@ public enum ContactType: String, Codable, CaseIterable, Hashable, Equatable {
     case instagram
 }
 
-
-public enum ConfiguratedContactType: Codable {
-    case phone(Set<PhoneTypes>)
-    case email
-    case instagram
-    case telegram
-}
-
 public enum PhoneTypes: String, Codable, CaseIterable, Hashable, Equatable {
     case whatsapp
     case message

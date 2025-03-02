@@ -18,7 +18,6 @@ public extension ContactV2.Parameters {
     
     @MemberwiseInit(.public)
     struct UpdateActiveContact: Parametable {
-        public var id: UUID
         public var setPhoneTypes: [PhoneTypes]?
     }
 }
@@ -35,36 +34,38 @@ public extension ContactV2.Responses {
     }
     
     @MemberwiseInit(.public)
-    struct GetUserContacts: Responsable {
-        public var contacts: [ContactV2.Helpers.UserContact]
+    struct GetRecoveryContacts: Responsable {
+        public var contacts: [ContactV2.Helpers.RecoveryContact]
     }
     
     @MemberwiseInit(.public)
-    struct GetActiveContacts: Responsable {
-        public var contacts: [ContactV2.Helpers.ActiveContact]
+    struct GetContacts: Responsable {
+        public var contacts: [ContactV2.Helpers.Contact]
     }
     
     @MemberwiseInit(.public)
-    struct UpdateActiveContact: Responsable {
+    struct UpdateContact: Responsable {
         public var id: UUID
         public var value: String
-        public var type: ConfiguratedContactType
+        public var type: ContactType
+        public var phonePreference: Set<PhoneTypes>
     }
 }
 
 public extension ContactV2.Helpers {
     
     @MemberwiseInit(.public)
-    struct UserContact: Responsable {
+    struct RecoveryContact: Responsable {
         public var id: UUID
         public var value: String
         public var type: ContactType
     }
     
     @MemberwiseInit(.public)
-    struct ActiveContact: Responsable {
+    struct Contact: Responsable {
         public var id: UUID
         public var value: String
-        public var type: ConfiguratedContactType
+        public var type: ContactType
+        public var phonePreference: Set<PhoneTypes>
     }
 }
