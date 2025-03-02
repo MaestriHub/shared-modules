@@ -15,35 +15,49 @@ public extension ContactV2.Parameters {
         public let value: String
         public let type: ContactType
     }
-    
-    @MemberwiseInit(.public)
-    struct Get: Parametable {
-        public let requester: ContactV2.Helpers.ContactConsumer
-    }
 }
 
 // MARK: - Responses -
 
 public extension ContactV2.Responses {
-
+    
     @MemberwiseInit(.public)
-    struct Contact: Responsable {
+    struct CreateContact: Responsable {
         public var id: UUID
         public var value: String
         public var type: ContactType
     }
     
     @MemberwiseInit(.public)
-    struct All: Responsable {
-        public let allContacts: [Contact]
+    struct GetUserContacts: Responsable {
+        public var contacts: [ContactV2.Helpers.UserContact]
+    }
+    
+    @MemberwiseInit(.public)
+    struct GetActiveContacts: Responsable {
+        public var contacts: [ContactV2.Helpers.ActiveContact]
+    }
+    
+    @MemberwiseInit(.public)
+    struct UpdateActiveContact: Responsable {
+        public var id: UUID
+        public var setPhoneTypes: [PhoneTypes]?
     }
 }
 
 public extension ContactV2.Helpers {
-    enum ContactConsumer: Codable {
-        case user(UUID)
-        case salon(UUID)
-        case customer(UUID)
-        case employee(UUID)
+    
+    @MemberwiseInit(.public)
+    struct UserContact: Responsable {
+        public var id: UUID
+        public var value: String
+        public var type: ContactType
+    }
+    
+    @MemberwiseInit(.public)
+    struct ActiveContact: Responsable {
+        public var id: UUID
+        public var value: String
+        public var type: ContactType
     }
 }
