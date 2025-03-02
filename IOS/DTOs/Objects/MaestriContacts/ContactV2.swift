@@ -18,7 +18,7 @@ public extension ContactV2.Parameters {
     
     @MemberwiseInit(.public)
     struct UpdateContact: Parametable {
-        public var setPhoneTypes: [PhoneTypes]?
+        public var setPhoneTypes: Set<PhoneTypes>?
     }
 }
 
