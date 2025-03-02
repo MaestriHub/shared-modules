@@ -66,6 +66,6 @@ public extension ContactV2.Helpers {
         public var id: UUID
         public var value: String
         public var type: ContactType
-        public var phonePreference: Set<PhoneTypes>
+        public var phonePreference: Set<PhoneTypes>?
     }
 }
