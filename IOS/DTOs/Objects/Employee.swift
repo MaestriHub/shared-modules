@@ -118,18 +118,21 @@ public extension Employee.Responses {
     /// - position: Position.Responses.Full - полная информация о дожности.
     struct Partial: Responsable {
         public var id: UUID
-        public var user: User.Responses.Partial?
+        public var nickname: String
+        public var avatar: URL?
         public var contacts: [Contact.Responses.Full]
         public var position: Position.Responses.Partial
         
         public init(
             id: UUID,
-            user: User.Responses.Partial?,
+            nickname: String,
+            avatar: URL?,
             contacts: [Contact.Responses.Full],
             position: Position.Responses.Partial
         ) {
             self.id = id
-            self.user = user
+            self.nickname = nickname
+            self.avatar = avatar
             self.contacts = contacts
             self.position = position
         }

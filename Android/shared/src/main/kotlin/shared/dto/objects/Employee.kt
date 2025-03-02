@@ -9,6 +9,7 @@ import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
+import java.net.URI
 import java.util.*
 
 object Employee {
@@ -48,7 +49,8 @@ object Employee {
         @Serializable
         data class Partial(
             val id: UUID,
-            val user: User.Responses.Partial? = null,
+            val nickname: String,
+            val avatar: URI?,
             val contacts: List<Contact.Responses.Full>,
             val position: Position.Responses.Partial,
         ) : Responsable
