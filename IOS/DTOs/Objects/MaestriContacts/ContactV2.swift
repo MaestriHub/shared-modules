@@ -15,6 +15,12 @@ public extension ContactV2.Parameters {
         public let value: String
         public let type: ContactType
     }
+    
+    @MemberwiseInit(.public)
+    struct UpdateActiveContact: Responsable {
+        public var id: UUID
+        public var setPhoneTypes: [PhoneTypes]?
+    }
 }
 
 // MARK: - Responses -
@@ -36,12 +42,6 @@ public extension ContactV2.Responses {
     @MemberwiseInit(.public)
     struct GetActiveContacts: Responsable {
         public var contacts: [ContactV2.Helpers.ActiveContact]
-    }
-    
-    @MemberwiseInit(.public)
-    struct UpdateActiveContact: Responsable {
-        public var id: UUID
-        public var setPhoneTypes: [PhoneTypes]?
     }
 }
 
