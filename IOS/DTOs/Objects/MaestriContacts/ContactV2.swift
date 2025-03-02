@@ -58,6 +58,6 @@ public extension ContactV2.Helpers {
     struct ActiveContact: Responsable {
         public var id: UUID
         public var value: String
-        public var type: ContactType
+        public var type: ConfiguratedContactType
     }
 }
