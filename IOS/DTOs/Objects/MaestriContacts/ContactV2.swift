@@ -48,7 +48,7 @@ public extension ContactV2.Responses {
         public var id: UUID
         public var value: String
         public var type: ContactType
-        public var phonePreference: Set<PhoneTypes>
+        public var phonePreference: Set<PhoneTypes>?
     }
 }
 
