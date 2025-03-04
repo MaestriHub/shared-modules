@@ -107,6 +107,7 @@ public extension Complex.Helpers {
         public let procedures: [ProcedureResponse]
         public let serviceId: UUID
         public let serviceTitle: String
+        public let serviceTags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public)
