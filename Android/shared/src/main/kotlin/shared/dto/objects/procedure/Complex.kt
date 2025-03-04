@@ -9,6 +9,8 @@ package shared.dto.objects.procedure
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.enums.ServiceTags
+import shared.dto.enums.TranslatedServiceTag
 import shared.dto.primitives.Pagination
 import java.math.BigDecimal
 import shared.dto.primitives.UpdateString
@@ -109,6 +111,7 @@ object Complex {
             val procedures: Array<ProcedureResponse>,
             val serviceId: UUID,
             val serviceTitle: String,
+            val serviceTags: Array<TranslatedServiceTag>
         )
 
         @Serializable
