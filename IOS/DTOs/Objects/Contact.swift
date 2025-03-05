@@ -25,7 +25,7 @@ public extension Contact.Parameters {
         
         public init(
             value: String,
-            type: ContactType,
+            type: ContactType
         ) {
             self.value = value
             self.type = type
