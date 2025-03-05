@@ -14,10 +14,10 @@ public enum Customer {
 public extension Customer.Parameters {
     
     struct Registration: Parametable {
-        public var contacts: Contact.Parameters.Create
+        public var contact: Contact.Parameters.Create
         
-        public init(contacts: Contact.Parameters.Create) {
-            self.contacts = contacts
+        public init(contact: Contact.Parameters.Create) {
+            self.contact = contact
         }
     }
     
