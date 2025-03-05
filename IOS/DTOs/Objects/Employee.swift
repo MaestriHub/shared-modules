@@ -36,20 +36,20 @@ public extension Employee.Parameters {
         public var nickname: String?
         public var salonId: UUID
         public var positionId: UUID
-        public var contacts: [Contact.Parameters.Create]
+        public var contact: Contact.Parameters.Create
         public var timetable: Timetable.Parameters.Create.Pattern?
         
         public init(
             nickname: String?,
             salonId: UUID,
             positionId: UUID,
-            contacts: [Contact.Parameters.Create],
+            contact: Contact.Parameters.Create,
             timetable: Timetable.Parameters.Create.Pattern?
         ) {
             self.nickname = nickname
             self.salonId = salonId
             self.positionId = positionId
-            self.contacts = contacts
+            self.contact = contact
             self.timetable = timetable
         }
     }

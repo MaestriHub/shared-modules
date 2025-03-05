@@ -24,7 +24,7 @@ public extension Salon.Parameters {
         public let description: String?
         public let timetable: Timetable.Parameters.Create.Pattern
         public let address: Address
-        public var contacts: [Contact.Parameters.Create]
+        public var contact: Contact.Parameters.Create
         
         public init(
             name: String, 
@@ -35,7 +35,7 @@ public extension Salon.Parameters {
             description: String?,
             timetable: Timetable.Parameters.Create.Pattern,
             address: Address,
-            contacts: [Contact.Parameters.Create]
+            contact: Contact.Parameters.Create
         ) {
             self.name = name
             self.type = type
@@ -45,7 +45,7 @@ public extension Salon.Parameters {
             self.localeId = localeId
             self.timetable = timetable
             self.address = address
-            self.contacts = contacts
+            self.contact = contact
         }
     }
 

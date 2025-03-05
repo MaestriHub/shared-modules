@@ -14,9 +14,9 @@ public enum Customer {
 public extension Customer.Parameters {
     
     struct Registration: Parametable {
-        public var contacts: [Contact.Parameters.Create]
+        public var contacts: Contact.Parameters.Create
         
-        public init(contacts: [Contact.Parameters.Create]) {
+        public init(contacts: Contact.Parameters.Create) {
             self.contacts = contacts
         }
     }
@@ -24,16 +24,16 @@ public extension Customer.Parameters {
     struct Create: Parametable {
         public var salonId: UUID?
         public var alias: String
-        public var contacts: [Contact.Parameters.Create]
+        public var contact: Contact.Parameters.Create
         
         public init(
             salonId: UUID?,
             alias: String,
-            contacts: [Contact.Parameters.Create]
+            contact: Contact.Parameters.Create
         ) {
             self.salonId = salonId
             self.alias = alias
-            self.contacts = contacts
+            self.contact = contact
         }
     }
     
