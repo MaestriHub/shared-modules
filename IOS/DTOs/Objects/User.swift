@@ -22,16 +22,13 @@ public extension User.Parameters {
     struct Patch: Parametable {
         public var nickname: String?
         public var avatar: URL?
-        public var contact: Contact.Parameters.Create?
         
         public init(
             nickname: String? = nil,
-            avatar: URL? = nil,
-            contact: Contact.Parameters.Create? = nil
+            avatar: URL? = nil
         ) {
             self.nickname = nickname
             self.avatar = avatar
-            self.contact = contact
         }
     }
 }
