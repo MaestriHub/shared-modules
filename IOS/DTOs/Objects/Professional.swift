@@ -18,3 +18,19 @@ public extension Professional.Parameters {
         public init() {}
     }
 }
+
+//MARK: - Responses -
+
+public extension Professional.Responses {
+    
+    struct Partial: Responsable {
+        
+        public var user: User.Responses.Partial
+        
+        public init(
+            user: User.Responses.Partial
+        ) {
+            self.user = user
+        }
+    }
+}
