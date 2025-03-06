@@ -72,18 +72,15 @@ public extension Contact.Responses {
     struct Full: Responsable {
         public var id: UUID
         public var value: String
-        public var isVerify: Bool
         public var type: ContactType
         
         public init(
             id: UUID,
             value: String,
-            isVerify: Bool,
             type: ContactType
         ) {
             self.id = id
             self.value = value
-            self.isVerify = isVerify
             self.type = type
         }
     }
