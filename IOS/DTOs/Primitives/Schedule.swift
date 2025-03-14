@@ -1,9 +1,5 @@
-//
-//  Schedule.swift
-//  Created by Алексей on 07.01.2024.
-//
-
 import Foundation
+import MemberwiseInit
 
 public struct Schedule {
 
@@ -58,7 +54,7 @@ public struct Schedule {
         }
     }
     
-    /// WorkSchedule: расписание которое содержит в себе одну неделю
+    @MemberwiseInit(.public)
     public struct Week: Parametable, Responsable, Equatable {
         public var monday: Day?
         public var tuesday: Day?
@@ -67,48 +63,18 @@ public struct Schedule {
         public var friday: Day?
         public var saturday: Day?
         public var sunday: Day?
-        
-        public init(
-            monday: Day? = nil,
-            tuesday: Day? = nil,
-            wednesday: Day? = nil,
-            thursday: Day? = nil,
-            friday: Day? = nil,
-            saturday: Day? = nil,
-            sunday: Day? = nil
-        ) {
-            self.monday = monday
-            self.tuesday = tuesday
-            self.wednesday = wednesday
-            self.thursday = thursday
-            self.friday = friday
-            self.saturday = saturday
-            self.sunday = sunday
-        }
     }
 
+    @MemberwiseInit(.public)
     public struct Cycled: Parametable, Responsable, Equatable {
-
         public var startDay: Date
         public var workDays: Dictionary<Int, Day>
         public var restDays: Int
-
-        public init(startDay: Date, workDays: Dictionary<Int, Day>, restDays: Int) {
-            self.startDay = startDay
-            self.workDays = workDays
-            self.restDays = restDays
-        }
     }
-
-
-     /// DaySchedule: модель одного дня в расписании
+    
+    @MemberwiseInit(.public)
     public struct Day: Parametable, Responsable, Equatable {
         public var workTime: String
         public var offTime: [String]
-        
-        public init(workTime: String, offTime: [String]) {
-            self.workTime = workTime
-            self.offTime = offTime
-        }
     }
 }

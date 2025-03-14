@@ -1,50 +1,23 @@
 import Foundation
+import MemberwiseInit
 
-/// Пространство имен `User` содержит типы данных для взаимодействия с информацией о салонах красоты.
-///
-/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
-/// используемые для обработки данных о салонах в системе.
 public enum User {
     public enum Parameters {}
     public enum Responses {}
 }
 
-// MARK: - Parameters -
-
 public extension User.Parameters {
-
-    /// Параметры для частичного обновления профиля пользователя.
-    ///
-    /// ### Properties:
-    ///   - nickname: Новый псевдоним пользователя, если требуется обновление.
-    ///  - avatar: Новая ссылка на изображение аватара пользователя, если требуется обновление.
-    ///  - contact: Контактная информация пользователя, для востонавления данных и так далее
+    
+    @MemberwiseInit(.public)
     struct Patch: Parametable {
         public var nickname: String?
         public var avatar: URL?
-        
-        public init(
-            nickname: String? = nil,
-            avatar: URL? = nil
-        ) {
-            self.nickname = nickname
-            self.avatar = avatar
-        }
     }
 }
 
-// MARK: - Responses -
-
 public extension User.Responses {
     
-    /// Полные данные о пользователе для отображения на странице профиля.
-    ///
-    /// ### Properties:
-    ///   - id: Уникальный идентификатор пользователя в системе.
-    ///  - avatar: Ссылка на изображение аватара пользователя, может быть не указана.
-    ///  - nickname: Отображаемое имя пользователя.
-    ///  - contact: Полная контактная информация, ассоциированная с профилем пользователя.
-    ///  - options: Роли пользователя, определенные в системе.
+    @MemberwiseInit(.public)
     struct Full: Responsable {
         public var id: UUID
         public var avatar: URL?
@@ -54,43 +27,11 @@ public extension User.Responses {
         public var permissions: MaestriPermissionSet
         public var customerId: UUID?
         public var professionalId: UUID?
-        
-        public init(
-            id: UUID,
-            avatar: URL? = nil,
-            nickname: String,
-            contact: Contact.Shared.RecoveryContact?,
-            options: UserRoleSet,
-            permissions: MaestriPermissionSet,
-            customerId: UUID? = nil,
-            professionalId: UUID? = nil
-        ) {
-            self.id = id
-            self.avatar = avatar
-            self.nickname = nickname
-            self.contact = contact
-            self.options = options
-            self.permissions = permissions
-            self.customerId = customerId
-            self.professionalId = professionalId
-        }
     }
     
-    /// Краткие данные о пользователе для отображения на главной странице.
-    ///
-    /// ### Properties:
-    ///  - avatar: Ссылка на изображение аватара пользователя, может быть не указана.
-    ///  - nickname: Псевдоним пользователя для представления в пользовательском интерфейсе.
+    @MemberwiseInit(.public)
     struct Partial: Responsable {
         public var avatar: URL?
         public var nickname: String
-        
-        public init(
-            avatar: URL? = nil,
-            nickname: String
-        ) {
-            self.avatar = avatar
-            self.nickname = nickname
-        }
     }
 }

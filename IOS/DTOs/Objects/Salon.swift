@@ -1,20 +1,14 @@
 import Foundation
+import MemberwiseInit
 
-/// Пространство имен `Salon` содержит типы данных для взаимодействия с информацией о салонах красоты.
-///
-/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
-/// используемые для обработки данных о салонах в системе.
 public enum Salon {
     public enum Parameters {}
     public enum Responses {}
 }
 
-//MARK: - Parameters -
-
 public extension Salon.Parameters {
-        
-    /// Параметры для создания салона.
-    /// Передаются в теле запроса при регистрации нового салона в системе.
+ 
+    @MemberwiseInit(.public)
     struct Create: Parametable {
         public let name: String
         public let type: SalonType
@@ -28,48 +22,18 @@ public extension Salon.Parameters {
         public let contactType: ContactType
     }
 
-    /// Параметры для обновления информации о салоне.
-    /// Передаются в теле запроса при изменении данных салона.
-    ///
-    /// ### Properties:
-    /// - name: Новое название салона, если требуется обновление.
-    /// - logo: Новый URL адрес логотипа, если требуется обновление.
+    @MemberwiseInit(.public)
     struct Patch: Parametable {
         public let name: String?
         public let type: SalonType?
         public let description: String?
         public let logo: URL?
-        
-        public init(
-            name: String? = nil,
-            type: SalonType? = nil,
-            description: String?,
-            logo: URL? = nil
-        ) {
-            self.name = name
-            self.type = type
-            self.description = description
-            self.logo = logo
-        }
     }
 }
 
-//MARK: - Responses -
-
 public extension Salon.Responses {
     
-    /// Полная информация о салоне для подробного отображения.
-    ///
-    /// ### Properties:
-    /// - id: Уникальный идентификатор салона.
-    /// - name: Название салона.
-    /// - type: Тип салона, определенный перечислением `SalonType`.
-    /// - logo: URL адрес логотипа салона, может быть `nil`.
-    /// - address: Полная информация об адресе (`Address.Responses.Full`).
-    /// - canEdit: Флаг, указывающий на возможность редактирования информации о салоне текущим пользователем.
-    /// - isFavorite: Флаг, указывающий, отмечен ли салон как избранный у текущего пользователя.
-    /// - timetable: Полная информация о расписании салона (`Timetable.Responses.Full`).
-    /// - masters: Опциональный список мастеров салона с полной информацией (`Employee.Responses.Full`).
+    @MemberwiseInit(.public)
     struct Full: Responsable {
         public var id: UUID
         public var name: String
@@ -82,66 +46,16 @@ public extension Salon.Responses {
         public var isFavorite: Bool = false
         public var localeId: String
         public var timeZoneId: String
-        
-        public init(
-            id: UUID,
-            name: String,
-            type: SalonType,
-            description: String?,
-            logo: URL? = nil,
-            address: Address,
-            isActive: Bool,
-            canEdit: Bool,
-            isFavorite: Bool,
-            localeId: String,
-            timeZoneId: String
-        ) {
-            self.id = id
-            self.name = name
-            self.type = type
-            self.description = description
-            self.logo = logo
-            self.address = address
-            self.isActive = isActive
-            self.canEdit = canEdit
-            self.isFavorite = isFavorite
-            self.localeId = localeId
-            self.timeZoneId = timeZoneId
-        }
     }
     
-    /// Упрощенная информация о салоне для краткого отображения.
-    ///
-    /// ### Properties:
-    /// - id: Уникальный идентификатор салона.
-    /// - name: Название салона.
-    /// - type: Тип салона, определенный перечислением `SalonType`.
-    /// - logo: URL адрес логотипа салона, может быть `nil`.
-    /// - address: Краткая информация об адресе или просто строка адреса.
-    /// - isFavorite: Флаг, указывающий, отмечен ли салон как избранный у текущего пользователя.
+    @MemberwiseInit(.public)
     struct Partial: Responsable {
         public var id: UUID
         public var name: String
         public var type: SalonType
         public var logo: URL?
-        public var address: Address // Может быть можно просто строку присылать, но тогда не понятно как на карте отображать
+        public var address: Address
         public var isFavorite: Bool = false
-        
-        public init(
-            id: UUID,
-            name: String,
-            type: SalonType,
-            logo: URL? = nil,
-            address: Address,
-            isFavorite: Bool
-        ) {
-            self.id = id
-            self.name = name
-            self.type = type
-            self.logo = logo
-            self.address = address
-            self.isFavorite = isFavorite
-        }
     }
 }
 
