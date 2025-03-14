@@ -35,7 +35,6 @@ public extension Employee.Responses {
     struct Full: Responsable {
         public var id: UUID
         public var user: ProfessionalEmployee
-        public var description: String?
         public var canEdit: Bool = false
         public var contacts: [Contact.Shared.PrimaryContact]
         public var salonId: UUID
