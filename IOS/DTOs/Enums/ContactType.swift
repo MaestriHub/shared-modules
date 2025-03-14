@@ -1,10 +1,5 @@
 import Foundation
 
-/// Перечисление, определяющее поддерживаемые типы контактных данных.
-/// - `phone`: Телефонный номер.
-/// - `email`: Электронная почта.
-/// - `telegram`: Идентификатор Telegram.
-/// - `instagram`: Идентификатор Instagram.
 public enum ContactType: String, Codable, CaseIterable, Hashable, Equatable {
     case phone
     case email

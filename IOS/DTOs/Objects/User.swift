@@ -49,7 +49,7 @@ public extension User.Responses {
         public var id: UUID
         public var avatar: URL?
         public var nickname: String
-        public var contact: Contact.Responses.Full?
+        public var contact: Contact.Shared.RecoveryContact?
         public var options: UserRoleSet
         public var permissions: MaestriPermissionSet
         public var customerId: UUID?
@@ -59,7 +59,7 @@ public extension User.Responses {
             id: UUID,
             avatar: URL? = nil,
             nickname: String,
-            contact: Contact.Responses.Full?,
+            contact: Contact.Shared.RecoveryContact?,
             options: UserRoleSet,
             permissions: MaestriPermissionSet,
             customerId: UUID? = nil,

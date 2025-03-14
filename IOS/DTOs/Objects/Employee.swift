@@ -1,9 +1,5 @@
 import Foundation
 
-/// Пространство имен `Employee` содержит типы данных для работы с информацией о сотрудниках.
-///
-/// Включает в себя параметры для запросов (`Parameters`) и модели ответов (`Responses`),
-/// которые применяются для обмена данными о сотрудниках между клиентскими приложениями и сервером.
 public enum Employee {
     public enum Parameters {}
     public enum Responses {}
@@ -13,11 +9,6 @@ public enum Employee {
 
 public extension Employee.Parameters {
     
-    /// Параметры запроса для получения списка сотрудников.
-    /// Позволяют фильтровать сотрудников по определенным салонам.
-    ///
-    /// ### Properties:
-    /// - `salons`: Список идентификаторов салонов для фильтрации сотрудников.
     struct Retrieve: Parametable {
         public let salonsId: [UUID]
         
@@ -28,30 +19,13 @@ public extension Employee.Parameters {
         }
     }
     
-    /// Параметры, передаваемые в теле запроса при приглашение нового сотрудника.
-    ///
-    /// ### Properties:
-    /// - `salondId`: Идентификатор салона
     struct Invite: Parametable {
         public var nickname: String?
         public var salonId: UUID
         public var positionId: UUID
-        public var contact: Contact.Parameters.Create
+        public let contactValue: String
+        public let contactType: ContactType
         public var timetable: Timetable.Parameters.Create.Pattern?
-        
-        public init(
-            nickname: String?,
-            salonId: UUID,
-            positionId: UUID,
-            contact: Contact.Parameters.Create,
-            timetable: Timetable.Parameters.Create.Pattern?
-        ) {
-            self.nickname = nickname
-            self.salonId = salonId
-            self.positionId = positionId
-            self.contact = contact
-            self.timetable = timetable
-        }
     }
     
     /// Параметры для частичного обновления Employee.
@@ -86,7 +60,7 @@ public extension Employee.Responses {
         public var user: ProfessionalEmployee
         public var description: String?
         public var canEdit: Bool = false
-        public var contacts: [Contact.Responses.Full]
+        public var contacts: [Contact.Shared.PrimaryContact]
         public var salonId: UUID
         public var position: Position.Responses.Full
         
@@ -95,7 +69,7 @@ public extension Employee.Responses {
             user: ProfessionalEmployee,
             description: String? = nil,
             canEdit: Bool,
-            contacts: [Contact.Responses.Full],
+            contacts: [Contact.Shared.PrimaryContact],
             salonId: UUID,
             position: Position.Responses.Full
         ) {
@@ -120,14 +94,14 @@ public extension Employee.Responses {
         public var id: UUID
         public var nickname: String
         public var avatar: URL?
-        public var contacts: [Contact.Responses.Full]
+        public var contacts: [Contact.Shared.PrimaryContact]
         public var position: Position.Responses.Partial
         
         public init(
             id: UUID,
             nickname: String,
             avatar: URL?,
-            contacts: [Contact.Responses.Full],
+            contacts: [Contact.Shared.PrimaryContact],
             position: Position.Responses.Partial
         ) {
             self.id = id

@@ -24,29 +24,8 @@ public extension Salon.Parameters {
         public let description: String?
         public let timetable: Timetable.Parameters.Create.Pattern
         public let address: Address
-        public var contact: Contact.Parameters.Create
-        
-        public init(
-            name: String, 
-            type: SalonType,
-            logo: URL? = nil,
-            timeZoneId: String,
-            localeId: String,
-            description: String?,
-            timetable: Timetable.Parameters.Create.Pattern,
-            address: Address,
-            contact: Contact.Parameters.Create
-        ) {
-            self.name = name
-            self.type = type
-            self.logo = logo
-            self.description = description
-            self.timeZoneId = timeZoneId
-            self.localeId = localeId
-            self.timetable = timetable
-            self.address = address
-            self.contact = contact
-        }
+        public let contactValue: String
+        public let contactType: ContactType
     }
 
     /// Параметры для обновления информации о салоне.
