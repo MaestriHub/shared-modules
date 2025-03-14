@@ -22,7 +22,7 @@ public extension User.Responses {
         public var id: UUID
         public var avatar: URL?
         public var nickname: String
-        public var contact: Contact.Shared.RecoveryContact?
+        public var contacts: [Contact.Shared.RecoveryContact]
         public var options: UserRoleSet
         public var permissions: MaestriPermissionSet
         public var customerId: UUID?
