@@ -4,6 +4,7 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.enums.ContactType
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
 import shared.dto.protocols.Parametable
@@ -25,7 +26,8 @@ object Salon {
             val description: String?,
             val timetable: Timetable.Parameters.Create.Pattern,
             val address: Address,
-            var contacts: List<Contact.Parameters.Create>,
+            val contactValue: String,
+            val contactType: ContactType,
         ) : Parametable()
 
         @Serializable

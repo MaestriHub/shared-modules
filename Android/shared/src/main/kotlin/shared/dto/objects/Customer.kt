@@ -4,7 +4,9 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.enums.ContactType
 import shared.dto.enums.CustomerUser
+import shared.dto.objects.contacts.Contact
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
@@ -14,14 +16,16 @@ object Customer {
     data object Parameters {
         @Serializable
         data class Registration(
-            var contacts: List<Contact.Parameters.Create>,
+            val contactValue: String,
+            val contactType: ContactType
         ) : Parametable()
 
         @Serializable
         data class Create(
-            var salonId: UUID?,
-            var alias: String,
-            var contacts: List<Contact.Parameters.Create>,
+            val salonId: UUID,
+            val alias: String,
+            val contactValue: String,
+            val contactType: ContactType
         ) : Parametable()
 
         @Serializable
@@ -32,7 +36,7 @@ object Customer {
 
         @Serializable
         data class HandleInvite(
-            var contact: String?,
+            val contactValue: String?
         ) : Parametable()
     }
 
@@ -42,20 +46,20 @@ object Customer {
             var id: UUID,
             var user: CustomerUser,
             var alias: String? = null,
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<Contact.Shared.PrimaryContact>,
         ) : Responsable
 
         @Serializable
         data class Partial(
-            @Serializable(with = UUIDSerializer::class) var id: UUID,
+            var id: UUID,
             var user: CustomerUser,
             var alias: String? = null,
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<Contact.Shared.PrimaryContact>,
         ) : Responsable
 
         @Serializable
         data class Verify(
-            var contacts: List<Contact.Responses.Full>,
+            var contacts: List<Contact.Shared.PrimaryContact>,
         ) : Responsable
     }
 }
