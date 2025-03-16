@@ -8,13 +8,13 @@ public enum Cashbox {
 
 public extension Cashbox.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public var salonId: UUID
         public var paymentType: PaymentType
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public var paymentType: PaymentType?
         public var startDate: Date?
@@ -24,7 +24,7 @@ public extension Cashbox.Parameters {
 
 public extension Cashbox.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var createDate: Date

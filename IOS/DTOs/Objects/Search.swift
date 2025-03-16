@@ -12,7 +12,7 @@ public extension Search.Responses {
 
 public extension Search.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public let value: String?
         public let salonType: SalonType?
@@ -24,7 +24,7 @@ public extension Search.Parameters {
 
 public extension Search.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var suggests: [Helpers.Suggest]
         public var salons: [Helpers.Salon]
@@ -33,12 +33,12 @@ public extension Search.Responses {
 
 public extension Search.Responses.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Suggest: Responsable {
         public var value: String
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Salon: Codable {
         public var id: UUID
         public var name: String

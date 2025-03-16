@@ -8,7 +8,7 @@ public enum Auth {
 
 public extension Auth.Parameters {
   
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct AppleToken: Parametable {
         public var token: String
         public var firstName: String?
@@ -17,7 +17,7 @@ public extension Auth.Parameters {
         public var emailVerified: Bool?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct GoogleToken: Parametable {
         public var token: String
         public var firstName: String?
@@ -27,14 +27,14 @@ public extension Auth.Parameters {
 
 public extension Auth.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public let accessToken: Token
         public let refreshToken: Token
         public let user: User.Responses.Full
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public let accessToken: Token
         public let refreshToken: Token?

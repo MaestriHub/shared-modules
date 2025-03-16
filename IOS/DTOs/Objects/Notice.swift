@@ -7,7 +7,7 @@ public enum Notice {
 
 public extension Notice.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var titleKey: String

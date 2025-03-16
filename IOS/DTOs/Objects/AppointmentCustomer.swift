@@ -12,7 +12,7 @@ public extension AppointmentCustomer.Responses {
 
 public extension AppointmentCustomer.Parameters {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public let startDate: Date?
         public let endDate: Date?
@@ -20,13 +20,13 @@ public extension AppointmentCustomer.Parameters {
         public let salons: [UUID]?
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let type: AppointmentType
         public let time: SafeDateInterval
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public let time: SafeDateInterval
     }
@@ -34,7 +34,7 @@ public extension AppointmentCustomer.Parameters {
 
 public extension AppointmentCustomer.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
@@ -45,7 +45,7 @@ public extension AppointmentCustomer.Responses {
         public var address: Address
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
@@ -57,7 +57,7 @@ public extension AppointmentCustomer.Responses {
 
 public extension AppointmentCustomer.Responses.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Procedure: Codable {
         public var id: UUID
         public var description: String?
@@ -66,14 +66,14 @@ public extension AppointmentCustomer.Responses.Helpers {
         public var service: Service
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Service: Codable {
         public var id: UUID
         public var title: String
         public var category: [ServiceTags]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Master: Codable {
         public var id: UUID
         public var nick: String

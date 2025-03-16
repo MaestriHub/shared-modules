@@ -12,7 +12,7 @@ public enum Complex {
 
 public extension Complex.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
@@ -23,7 +23,7 @@ public extension Complex.Parameters {
     /// При запросе на все процедуры их не получить, а при запросе по id, их можно получить и подправить. (Если очень хочется).
     /// Думаю что в будущем добавиться возможность создавать комплекс не с айдишниками процедур, а с его личными
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let alias: String?
         public let description: String?
@@ -31,7 +31,7 @@ public extension Complex.Parameters {
         public let chunks: [Complex.Helpers.CreateChunkRequest]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Parametable {
         public typealias ChunkPosition = Int
         public typealias ChunkId = UUID
@@ -47,7 +47,7 @@ public extension Complex.Parameters {
 
 public extension Complex.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Responsable {
         public let id: UUID
         public let priceShift: Complex.Helpers.PriceShift
@@ -56,7 +56,7 @@ public extension Complex.Responses {
         public let chunks: [Complex.Helpers.ChunkResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Responsable {
         public let id: UUID
         public let alias: String?
@@ -65,12 +65,12 @@ public extension Complex.Responses {
         public let chunks: [Complex.Helpers.ChunkResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Responsable {
         public let complexes: [Complex.Helpers.ComplexResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Responsable {
         public let id: UUID
         public let alias: String?
@@ -82,7 +82,7 @@ public extension Complex.Responses {
 
 public extension Complex.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateChunkRequest: Codable {
         public let order: Int
         public let proceduresIds: [UUID]
@@ -91,7 +91,7 @@ public extension Complex.Helpers {
 
 public extension Complex.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ComplexResponse: Codable {
         public let id: UUID
         public let alias: String?
@@ -100,7 +100,7 @@ public extension Complex.Helpers {
         public let chunks: [ChunkResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ChunkResponse: Codable {
         public let id: UUID
         public let order: Int
@@ -110,7 +110,7 @@ public extension Complex.Helpers {
         public let serviceTags: [TranslatedServiceTag]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ProcedureResponse: Codable {
         public let id: UUID
         public let alias: String?

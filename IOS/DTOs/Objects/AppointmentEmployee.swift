@@ -12,7 +12,7 @@ public extension AppointmentEmployee.Responses {
 
 public extension AppointmentEmployee.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public let startDate: Date?
         public let endDate: Date?
@@ -21,19 +21,19 @@ public extension AppointmentEmployee.Parameters {
         public let customer: UUID?
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let customerId: UUID
         public let type: AppointmentType
         public let time: SafeDateInterval
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Approve: Parametable {
         public let appointmentsEmployeeId: [UUID]
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public let time: SafeDateInterval
     }
@@ -41,7 +41,7 @@ public extension AppointmentEmployee.Parameters {
 
 public extension AppointmentEmployee.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var salon: Salon.Responses.Partial
         public var customer: Customer.Responses.Partial
@@ -49,13 +49,13 @@ public extension AppointmentEmployee.Responses {
         public var associative: [Base]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var customer: Customer.Responses.Partial
         public var associative: [Base]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Base: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
@@ -67,7 +67,7 @@ public extension AppointmentEmployee.Responses {
 
 public extension AppointmentEmployee.Responses.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Procedure: Codable {
         public var id: UUID
         public var description: String?
@@ -76,14 +76,14 @@ public extension AppointmentEmployee.Responses.Helpers {
         public var service: Service
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Service: Codable {
         public var id: UUID
         public var title: String
         public var category: [ServiceTags]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Master: Codable {
         public var id: UUID
         public var nick: String

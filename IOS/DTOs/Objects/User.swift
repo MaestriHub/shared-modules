@@ -8,7 +8,7 @@ public enum User {
 
 public extension User.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public var nickname: String?
         public var avatar: URL?
@@ -17,7 +17,7 @@ public extension User.Parameters {
 
 public extension User.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var avatar: URL?
@@ -29,7 +29,7 @@ public extension User.Responses {
         public var professionalId: UUID?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var avatar: URL?
         public var nickname: String

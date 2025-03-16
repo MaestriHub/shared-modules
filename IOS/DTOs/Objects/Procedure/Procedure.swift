@@ -12,14 +12,14 @@ public enum Procedure {
 
 public extension Procedure.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let duration: Minutes
         public let price: Price
@@ -30,7 +30,7 @@ public extension Procedure.Parameters {
         public let employeeIds: [UUID]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Parametable {
         public let price: Price?
         public let duration: Minutes?
@@ -43,17 +43,17 @@ public extension Procedure.Parameters {
 
 public extension Procedure.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Responsable {
         public let procedures: [Procedure.Helpers.CreateProcedureResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Responsable {
         public let procedures: [Procedure.Helpers.AllProcedureResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Responsable {
         public let id: UUID
         public let price: Price
@@ -69,7 +69,7 @@ public extension Procedure.Responses {
         public let masterAvatar: URL?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Responsable {
         public let id: UUID
         public let duration: Minutes
@@ -88,21 +88,21 @@ public extension Procedure.Responses {
 
 public extension Procedure.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateParameterRequest: Codable {
         public let id: UUID
         public let optional: Bool
         public let cases: [CreateCaseRequest]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateCaseRequest: Codable {
         public let id: Int
         public let casePrice: CasePrice?
         public let caseDuration: CaseDuration?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateProcedureResponse: Codable {
         public let id: UUID
         public let duration: Minutes
@@ -121,7 +121,7 @@ public extension Procedure.Helpers {
 
 public extension Procedure.Helpers  {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct AllProcedureResponse: Codable {
         public let id: UUID
         public let duration: Minutes
@@ -139,7 +139,7 @@ public extension Procedure.Helpers  {
 }
 
 public extension Procedure.Helpers {
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ParameterResponse: Codable {
         public let id: UUID
         public let optional: Bool
@@ -147,7 +147,7 @@ public extension Procedure.Helpers {
         public let cases: [CaseResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CaseResponse: Codable {
         public let id: Int
         public let title: String

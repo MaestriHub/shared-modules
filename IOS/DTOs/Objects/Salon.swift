@@ -8,7 +8,7 @@ public enum Salon {
 
 public extension Salon.Parameters {
  
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let name: String
         public let type: SalonType
@@ -22,7 +22,7 @@ public extension Salon.Parameters {
         public let contactType: ContactType
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public let name: String?
         public let type: SalonType?
@@ -33,7 +33,7 @@ public extension Salon.Parameters {
 
 public extension Salon.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var name: String
@@ -48,7 +48,7 @@ public extension Salon.Responses {
         public var timeZoneId: String
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var name: String

@@ -8,14 +8,14 @@ public enum Position {
 
 public extension Position.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public var title: String
         public var permissions: PermissionSet
         public var salary: Salary.Parameters.Rules.Create
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public var title: String?
         public var permissions: PermissionSet?
@@ -25,7 +25,7 @@ public extension Position.Parameters {
 
 public extension Position.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var title: String
@@ -33,7 +33,7 @@ public extension Position.Responses {
         public var salary: Salary.Responses.Rules.Full
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var title: String

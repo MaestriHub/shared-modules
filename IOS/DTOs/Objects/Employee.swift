@@ -8,12 +8,12 @@ public enum Employee {
 
 public extension Employee.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public let salonsId: [UUID]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Invite: Parametable {
         public var nickname: String?
         public var salonId: UUID
@@ -23,7 +23,7 @@ public extension Employee.Parameters {
         public var timetable: Timetable.Parameters.Create.Pattern?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public var positionId: UUID?
     }
@@ -31,7 +31,7 @@ public extension Employee.Parameters {
 
 public extension Employee.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var user: ProfessionalEmployee
@@ -41,7 +41,7 @@ public extension Employee.Responses {
         public var position: Position.Responses.Full
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var nickname: String

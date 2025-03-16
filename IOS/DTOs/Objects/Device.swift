@@ -8,7 +8,7 @@ public enum Device {
 
 public extension Device.Parameters {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct System: Parametable {
         public var manufacturer : String?
         public var model: String?
@@ -21,7 +21,7 @@ public extension Device.Parameters {
 
 public extension Device.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var version: VersionType?

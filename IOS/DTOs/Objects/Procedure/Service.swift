@@ -12,7 +12,7 @@ public enum Service {
 
 public extension Service.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Parametable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
@@ -20,13 +20,13 @@ public extension Service.Parameters {
         public let pagination: Pagination?
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let title: String
         public let tags: [ServiceTags]
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Parametable {
         public let title: String?
         public let tags: [ServiceTags]?
@@ -37,26 +37,26 @@ public extension Service.Parameters {
 
 public extension Service.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Responsable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Responsable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Responsable {
         public let services: [Service.Helpers.ServiceResponse]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Responsable {
         public let id: UUID
         public let title: String
@@ -67,21 +67,21 @@ public extension Service.Responses {
 
 public extension Service.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ServiceResponse: Codable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Parameter: Codable {
         public let id: UUID
         public let title: String
         public let cases: [Case]
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Case: Codable {
         public let id: Int
         public let title: String

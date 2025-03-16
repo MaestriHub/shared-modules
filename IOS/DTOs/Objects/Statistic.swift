@@ -8,7 +8,7 @@ public enum Statistic {
 
 public extension Statistic.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct AppointmentsQuery: Parametable {
         public let startDate: Date
         public let endDate: Date
@@ -19,7 +19,7 @@ public extension Statistic.Parameters {
 
 public extension Statistic.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Appointments: Responsable {
         public var price: Price
         public var count: Int

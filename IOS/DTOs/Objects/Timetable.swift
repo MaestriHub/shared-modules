@@ -9,26 +9,26 @@ public enum Timetable {
 public extension Timetable.Parameters {
 
     struct Create {
-        @MemberwiseInit(.public)
+        @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Pattern: Parametable, Equatable {
             public var schedule: Schedule.Pattern
             public var startAt: Date
             public var endAt: Date?
         }
         
-        @MemberwiseInit(.public)
+        @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Flexible: Parametable, Equatable {
             public var workDays: Dictionary<Date, Schedule.Day>
         }
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct SearchSlot: Parametable {
         public var appointmentType: AppointmentType
         public var customerId: UUID?
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public var owners: [TimetableOwner]
         //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
@@ -40,13 +40,13 @@ public extension Timetable.Responses {
     
     typealias Intervals = [SafeDateInterval]
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Slots: Responsable {
         public var intervals: Intervals
         public var timeZoneId: String
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Schedule: Parametable, Responsable, Equatable {
         public var owner: TimetableOwner
         // Для недели 7 дней для месяца 28-31

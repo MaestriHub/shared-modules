@@ -1,7 +1,7 @@
 import Foundation
 import MemberwiseInit
 
-@MemberwiseInit(.public)
+@MemberwiseInit(.public, _optionalsDefaultNil: true)
 public struct Address: Parametable, Responsable, Hashable, Equatable {
     public var address: String
     public var city: String

@@ -8,13 +8,13 @@ public enum Professional {
 
 public extension Professional.Parameters {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {}
 }
 
 public extension Professional.Responses {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var user: User.Responses.Partial
     }

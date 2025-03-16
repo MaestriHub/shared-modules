@@ -53,7 +53,7 @@ public extension Operation.Parameters {
         }
     }
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public var startDate: Date?
         public var endDate: Date?
@@ -64,7 +64,7 @@ public extension Operation.Parameters {
 
 public extension Operation.Responses {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var createDate: Date

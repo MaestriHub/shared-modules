@@ -8,13 +8,13 @@ public enum Contact {
 }
 
 public extension Contact.Parameters {
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let value: String
         public let type: ContactType
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct UpdateContact: Parametable {
         public var setPhoneTypes: Set<PhoneTypes>?
     }
@@ -34,7 +34,7 @@ public extension Contact.Shared {
     typealias ContactId = UUID
 
     // MARK: контакты используемые для восстановления
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct RecoveryContact: Codable {
         public let id: ContactId
         public let value: String
@@ -43,7 +43,7 @@ public extension Contact.Shared {
 
 
     // MARK: контакты используемые для отображения
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct PrimaryContact: Codable {
         public let id: ContactId
         public let value: String

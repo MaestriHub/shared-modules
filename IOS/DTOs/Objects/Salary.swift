@@ -21,7 +21,7 @@ public extension Salary.Parameters {
 
 public extension Salary.Parameters.Rules {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public var percent: Int?
         public var grid: [UUID : SalaryPaymentType]?
@@ -31,13 +31,13 @@ public extension Salary.Parameters.Rules {
 
 public extension Salary.Parameters.Balance {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Payout: Parametable {
         public var paymentType: PaymentType
         public var dateTo: Date
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Calculate: Parametable {
         public var dateTo: Date
     }
@@ -45,7 +45,7 @@ public extension Salary.Parameters.Balance {
 
 public extension Salary.Responses.Rules {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var percent: Int?
         public var grid: [Salary.Responses.Helpers.ServiceWithPaymentType]?
@@ -55,7 +55,7 @@ public extension Salary.Responses.Rules {
 
 public extension Salary.Responses.Balance {
 
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var wage: Price?
         public var grid: [Price]?
@@ -66,13 +66,13 @@ public extension Salary.Responses.Balance {
 
 public extension Salary.Responses.Helpers {
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ServiceWithPaymentType: Codable {
         public var service: Service
         public var paymentType: SalaryPaymentType
     }
     
-    @MemberwiseInit(.public)
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Service: Codable {
         public var id: UUID
         public var title: String
