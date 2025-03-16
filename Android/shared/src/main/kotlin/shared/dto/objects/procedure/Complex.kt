@@ -11,7 +11,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ServiceTags
 import shared.dto.enums.TranslatedServiceTag
+import shared.dto.primitives.Minutes
 import shared.dto.primitives.Pagination
+import shared.dto.primitives.Price
 import java.math.BigDecimal
 import shared.dto.primitives.UpdateString
 import shared.dto.protocols.Parametable
@@ -122,6 +124,8 @@ object Complex {
             val masterId: UUID,
             val masterNickname: String,
             val masterAvatar: URI? = null,
+            val duration: Minutes,
+            val price: Price
         )
 
         sealed class PriceShift {
