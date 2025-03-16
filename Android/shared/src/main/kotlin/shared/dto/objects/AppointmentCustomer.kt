@@ -13,6 +13,7 @@ import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
 import shared.dto.enums.ContactType
 import shared.dto.enums.ServiceTags
+import shared.dto.objects.contacts.Contact
 import shared.dto.primitives.Address
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
@@ -87,15 +88,8 @@ object AppointmentCustomer {
                 val id: UUID,
                 val nick: String,
                 val avatar: URI?,
-                val contacts: Array<Contact>,
+                val contacts: Array<Contact.Shared.PrimaryContact>,
             ) : Responsable
-            
-            @Serializable
-            data class Contact(
-                val id: UUID,
-                val value: String,
-                val type: ContactType
-            )
         }
     }
 }

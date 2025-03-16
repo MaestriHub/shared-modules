@@ -4,6 +4,7 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.objects.contacts.Contact
 import shared.dto.optionSet.MaestriPermissionSet
 import shared.dto.optionSet.UserRoleSet
 import shared.dto.protocols.Parametable
@@ -19,7 +20,6 @@ object User {
         data class Patch(
             val nickname: String?,
             val avatar: URI?,
-            val contact: Contact.Parameters.Create?,
         ) : Parametable()
     }
 
@@ -29,7 +29,7 @@ object User {
             val id: UUID,
             val avatar: URI?,
             val nickname: String,
-            val contact: Contact.Responses.Full?,
+            val contacts: List<Contact.Shared.RecoveryContact>,
             val options: UserRoleSet,
             val permissions: MaestriPermissionSet,
             val customerId: UUID? = null,

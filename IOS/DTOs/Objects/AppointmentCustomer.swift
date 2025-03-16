@@ -1,9 +1,6 @@
 import Foundation
+import MemberwiseInit
 
-/// Пространство имен `AppointmentCustomer` содержит типы данных для работы с записями на прием.
-///
-/// В него входят как параметры для запросов (`Parameters`), так и модели ответов (`Responses`),
-/// которые используются для сериализации данных, отправляемых и получаемых от API.
 public enum AppointmentCustomer {
     public enum Parameters {}
     public enum Responses {}
@@ -13,95 +10,31 @@ public extension AppointmentCustomer.Responses {
     enum Helpers {}
 }
 
-//MARK: - Parameters -
-
 public extension AppointmentCustomer.Parameters {
-    
-    /// Параметры запроса `Retrieve` определяют фильтры для получения записей на прием
-    /// за определенный временной интервал с возможной фильтрацией по сотрудникам и салонам.
-    ///
-    /// ### Properties:
-    ///   - startDate: `Date?` - начало временного интервала для выборки данных.
-    ///  - endDate: `Date?` - конец временного интервала для выборки данных.
-    ///  - employees: `[UUID]?` - необязательный массив идентификаторов сотрудников для фильтрации.
-    ///  - salons: `[UUID]?` - необязательный массив идентификаторов салонов для фильтрации.
-    /// Если массив не предоставлен, выборка осуществляется по всем сущностям.
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public let startDate: Date?
         public let endDate: Date?
         public let employees: [UUID]?
         public let salons: [UUID]?
-        
-        public init(
-            startDate: Date?,
-            endDate: Date?,
-            employees: [UUID]? = nil,
-            salons: [UUID]? = nil
-        ) {
-            self.startDate = startDate
-            self.endDate = endDate
-            self.employees = employees
-            self.salons = salons
-        }
     }
-    
-    /// `Create` описывает параметры тела запроса для создания новой записи на прием.
-    ///
-    /// ### Properties:
-    ///   - salon: `UUID` - идентификатор салона.
-    ///  - master: `UUID` - идентификатор мастера. Если нету то значит Appointment открыт к подтверждению любым клиентом у которого будет доступ к ссылке
-    ///  - customer: `UUID?` - идентификатор клиента.
-    ///  - procedures: `[UUID]` - массив идентификаторов процедур.
-    ///  - time: `Interval` - временной интервал записи на прием.
-    ///  - price: `Price` - цена записи на прием.
-    ///  - address: `UUID` - идентификатор адреса салона.
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public let type: AppointmentType
         public let time: SafeDateInterval
-        
-        public init(
-            type: AppointmentType,
-            time: SafeDateInterval
-        ) {
-            self.type = type
-            self.time = time
-        }
     }
 
-    /// ???
-    /// `Patch` определяет параметры для частичного обновления данных записи на прием.
-    ///
-    /// ### Properties:
-    ///   - time: ``Interval?`` - новый временной интервал для записи, если требуется изменение.
-    ///  - price: ``Price?`` - новая цена для записи, если требуется изменение.
-    ///  - procedures: `[UUID]?` - новый список идентификаторов процедур, если требуется изменение.
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Parametable {
         public let time: SafeDateInterval
-        
-        public init(
-            time: SafeDateInterval
-        ) {
-            self.time = time
-        }
     }
 }
 
-//MARK: - Responses -
-
 public extension AppointmentCustomer.Responses {
-    
-    /// `Full` представляет полную информацию о записи на прием, включая все связанные данные.
-    ///
-    /// ### Properties:
-    ///   - id: `UUID` - уникальный идентификатор записи на прием.
-    ///  - salon: ``Salon.Responses.Partial`` - информация о салоне.
-    ///  - customer: ``Customer.Responses.Partial`` - информация о клиенте.
-    ///  - customerLink: ``URL`` - ссылка на назначения клиента.
-    ///  - master: ``Employee.Responses.Partial`` - информация о мастере.
-    ///  - procedures: ``[Procedure.Responses.Partial]`` - список процедур.
-    ///  - time: ``Interval`` - временной интервал записи.
-    ///  - price: ``Price`` - цена записи.
-    ///  - address: ``Address.Responses.Full`` - полная информация об адресе салона.
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
@@ -110,130 +43,42 @@ public extension AppointmentCustomer.Responses {
         public var time: SafeDateInterval
         public var price: Price
         public var address: Address
-        
-        public init(
-            id: UUID,
-            status: AppointmentStatus,
-            salon: Salon.Responses.Partial,
-            procedures: [Helpers.Procedure],
-            time: SafeDateInterval,
-            price: Price,
-            address: Address
-        ) {
-            self.id = id
-            self.status = status
-            self.salon = salon
-            self.procedures = procedures
-            self.time = time
-            self.price = price
-            self.address = address
-        }
     }
     
-    /// `Partial` содержит частичную информацию о записи на прием, обычно используемую для списков и обзоров.
-    ///
-    /// ### Properties:
-    ///   - id: `UUID` - уникальный идентификатор записи.
-    ///  - customer: ``Customer.Responses.Partial`` - информация о клиенте.
-    ///  - master: ``Employee.Responses.Partial`` - информация о мастере.
-    ///  - time: ``Interval`` - временной интервал записи.
-    ///  - price: ``Price`` - цена записи.
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
         public var time: SafeDateInterval
         public var price: Price
         public var procedures: [Helpers.Procedure]
-        
-        public init(
-            id: UUID,
-            status: AppointmentStatus,
-            time: SafeDateInterval,
-            price: Price,
-            procedures: [Helpers.Procedure]
-        ) {
-            self.id = id
-            self.status = status
-            self.time = time
-            self.price = price
-            self.procedures = procedures
-        }
     }
 }
 
 public extension AppointmentCustomer.Responses.Helpers {
     
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Procedure: Codable {
         public var id: UUID
         public var description: String?
         public var alias: String?
         public var master: Master
         public var service: Service
-        
-        public init(
-            id: UUID,
-            description: String?,
-            alias: String?,
-            master: Master,
-            service: Service
-        ) {
-            self.id = id
-            self.description = description
-            self.alias = alias
-            self.master = master
-            self.service = service
-        }
     }
     
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Service: Codable {
         public var id: UUID
         public var title: String
         public var category: [ServiceTags]
-        
-        public init(
-            id: UUID,
-            title: String,
-            category: [ServiceTags]
-        ) {
-            self.id = id
-            self.title = title
-            self.category = category
-        }
     }
     
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Master: Codable {
         public var id: UUID
         public var nick: String
         public var avatar: URL?
-        public var contacts: [Contact]
-        
-        public init(
-            id: UUID,
-            nick: String,
-            avatar: URL? = nil,
-            contacts: [Contact]
-        ) {
-            self.id = id
-            self.nick = nick
-            self.avatar = avatar
-            self.contacts = contacts
-        }
-    }
-    
-    struct Contact: Codable {
-        public var id: UUID
-        public var value: String
-        public var type: ContactType
-        
-        public init(
-            id: UUID,
-            value: String,
-            type: ContactType
-        ) {
-            self.id = id
-            self.value = value
-            self.type = type
-        }
+        public var contacts: [Contact.Shared.PrimaryContact]
     }
 }
 

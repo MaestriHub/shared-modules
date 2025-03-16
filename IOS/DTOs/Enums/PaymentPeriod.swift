@@ -1,8 +1,3 @@
-//
-//  PaymentPeriod.swift
-//  Created by Алексей on 05.08.2024.
-//
-
 import Foundation
 
 public enum PaymentPeriod: String, Codable, Hashable {

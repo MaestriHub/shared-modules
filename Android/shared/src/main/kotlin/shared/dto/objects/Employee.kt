@@ -4,7 +4,9 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import shared.dto.enums.ContactType
 import shared.dto.enums.ProfessionalEmployee
+import shared.dto.objects.contacts.Contact
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
@@ -24,7 +26,8 @@ object Employee {
             val nickname: String?,
             val salonId: UUID,
             val positionId: UUID,
-            val contacts: List<Contact.Parameters.Create>,
+            val contactValue: String,
+            val contactType: ContactType,
             val timetable: Timetable.Parameters.Create.Pattern?,
         ) : Parametable()
 
@@ -39,9 +42,8 @@ object Employee {
         data class Full(
             val id: UUID,
             val user: ProfessionalEmployee,
-            val description: String? = null,
             val canEdit: Boolean = false,
-            val contacts: List<Contact.Responses.Full>,
+            val contacts: List<Contact.Shared.PrimaryContact>,
             val salonId: UUID,
             val position: Position.Responses.Full,
         ) : Responsable
@@ -51,7 +53,7 @@ object Employee {
             val id: UUID,
             val nickname: String,
             val avatar: URI?,
-            val contacts: List<Contact.Responses.Full>,
+            val contacts: List<Contact.Shared.PrimaryContact>,
             val position: Position.Responses.Partial,
         ) : Responsable
     }

@@ -1,8 +1,3 @@
-//
-//  TimetableOwner.swift
-//  Created by Vitalii Shevtsov on 2/20/24.
-//
-
 import Foundation
 
 public enum TimetableOwner: Parametable, Responsable, LosslessStringConvertible, Equatable {
@@ -41,8 +36,6 @@ public enum TimetableOwner: Parametable, Responsable, LosslessStringConvertible,
             return "employee:\(id)"
         }
     }
-    
-    //MARK: Codable
     
     public init(from decoder: any Decoder) throws {
         let value = try decoder.singleValueContainer().decode(String.self)

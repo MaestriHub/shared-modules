@@ -1,89 +1,42 @@
 import Foundation
+import MemberwiseInit
 
-/// Пространство имен `Offtime` содержит типы данных для взаимодействия с информацией о салонах красоты.
-///
-/// Включает параметры для запросов (`Parameters`) и модели ответов (`Responses`),
-/// используемые для обработки данных о салонах в системе.
 public enum Offtime {
     public enum Parameters {}
     public enum Responses {}
 }
 
-// MARK: - Parameters -
-
 public extension Offtime.Parameters {
     
-    /// Параметры для определения временных промежутков, когда услуги не будут доступны.
-    /// Используется для учета периодов отгулов, отпусков и других нерабочих интервалов.
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public var interval: SafeDateInterval
         public var reason: String?
         public var coefficient: Decimal
-
-        public init(
-            interval: SafeDateInterval,
-            reason: String?,
-            coefficient: Decimal
-        ) {
-            self.interval = interval
-            self.reason = reason
-            self.coefficient = coefficient
-        }
     }
     
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
         public var owners: [TimetableOwner]
         //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
         public var period: SafeDateInterval
-        
-        public init(
-            owners: [TimetableOwner],
-            period: SafeDateInterval
-        ) {
-            self.owners = owners
-            self.period = period
-        }
     }
 }
 
-// MARK: - Responses -
-
 public extension Offtime.Responses {
-    
-    /// Структура полного ответа, содержащая расписание работы на неделю.
-    /// Включает статус работы и расписание по дням недели в текстовом формате.
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
         public var interval: SafeDateInterval
         public var reason: String?
         public var timeZoneId: String
         public var coefficient: Decimal
-
-        public init(
-            id: UUID,
-            interval: SafeDateInterval,
-            reason: String?,
-            timeZoneId: String,
-            coefficient: Decimal
-        ) {
-            self.id = id
-            self.interval = interval
-            self.reason = reason
-            self.timeZoneId = timeZoneId
-            self.coefficient = coefficient
-        }
     }
     
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
         public var id: UUID
         public var interval: SafeDateInterval
-
-        public init(
-            id: UUID,
-            interval: SafeDateInterval
-        ) {
-            self.id = id
-            self.interval = interval
-        }
     }
 }
