@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
 import shared.dto.enums.PhoneTypes
-import shared.dto.objects.procedure.Complex
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
@@ -22,12 +21,12 @@ object Contact {
         data class Create(
             val value: String,
             val type: ContactType
-        ) : Parametable()
+        ): Parametable()
 
         @Serializable
         data class UpdateContact(
             val setPhoneTypes: PhoneTypes? = null,
-        )
+        ): Parametable()
     }
 
     data object Shared {
@@ -37,7 +36,7 @@ object Contact {
             val id: ContactId,
             val value: String,
             val type: ContactType,
-        )
+        ): Responsable
 
         // MARK: контакты используемые для отображения
         @Serializable
@@ -46,6 +45,6 @@ object Contact {
             val value: String,
             val type: ContactType,
             val setPhoneTypes: Set<PhoneTypes>?
-        )
+        ): Responsable
     }
 }
