@@ -28,9 +28,11 @@ public extension Contact.Parameters {
 }
 
 public extension Contact.Responses {
-    typealias Create = Contact.Shared.RecoveryContact
+    typealias CreateRecovery = Contact.Shared.RecoveryContact
     
     typealias RecoveryContacts = [Contact.Shared.RecoveryContact]
+    
+    typealias CreatePrimary = Contact.Shared.PrimaryContact
     
     typealias PrimaryContacts  = [Contact.Shared.PrimaryContact]
     
