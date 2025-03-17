@@ -9,14 +9,21 @@ public enum Contact {
 
 public extension Contact.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct CreateRecovery: Parametable {
         public let value: String
         public let type: ContactType
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct CreatePrimary: Parametable {
+        public let value: String
+        public let type: ContactType
+        public let phoneTypes: Set<PhoneTypes>?
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct UpdateContact: Parametable {
-        public var setPhoneTypes: Set<PhoneTypes>?
+        public var phoneTypes: Set<PhoneTypes>?
     }
 }
 
@@ -48,6 +55,6 @@ public extension Contact.Shared {
         public let id: ContactId
         public let value: String
         public let type: ContactType
-        public var setPhoneTypes: Set<PhoneTypes>?
+        public let phoneTypes: Set<PhoneTypes>?
     }
 }
