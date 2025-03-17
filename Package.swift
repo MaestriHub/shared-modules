@@ -14,7 +14,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.5.1")
+        .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.5.2")
     ],
     targets: [
         .target(
