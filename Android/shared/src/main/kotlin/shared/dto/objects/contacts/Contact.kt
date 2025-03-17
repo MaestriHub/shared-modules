@@ -18,14 +18,21 @@ typealias ContactId = UUID
 object Contact {
     data object Parameters {
         @Serializable
-        data class Create(
+        data class CreateRecovery(
             val value: String,
             val type: ContactType
         ): Parametable()
 
         @Serializable
+        data class CreatePrimary(
+            val value: String,
+            val type: ContactType,
+            val phoneTypes: Set<PhoneTypes>? = null
+        ): Parametable()
+
+        @Serializable
         data class UpdateContact(
-            val setPhoneTypes: PhoneTypes? = null,
+            val phoneTypes: PhoneTypes? = null,
         ): Parametable()
     }
 
@@ -44,7 +51,7 @@ object Contact {
             val id: ContactId,
             val value: String,
             val type: ContactType,
-            val setPhoneTypes: Set<PhoneTypes>?
+            val phoneTypes: Set<PhoneTypes>?
         ): Responsable
     }
 }
