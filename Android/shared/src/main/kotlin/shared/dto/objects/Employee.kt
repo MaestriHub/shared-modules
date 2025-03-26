@@ -52,7 +52,7 @@ object Employee {
         data class Partial(
             val id: UUID,
             val nickname: String,
-            val avatar: URI?,
+            val avatar: URI? = null,
             val contacts: List<Contact.Shared.PrimaryContact>,
             val position: Position.Responses.Partial,
         ) : Responsable
