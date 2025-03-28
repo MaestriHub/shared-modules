@@ -16,7 +16,7 @@ public extension Salon.Parameters {
         public let timeZoneId: String
         public let localeId: String
         public let description: String?
-        public let timetable: Timetable.Parameters.Create.Pattern
+        public let timetable: Timetable.Parameters.Create.Pattern?
         public let address: Address
         public let contactValue: String
         public let contactType: ContactType
