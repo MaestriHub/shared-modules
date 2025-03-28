@@ -4,6 +4,8 @@ import MemberwiseInit
 public enum Salon {
     public enum Parameters {}
     public enum Responses {}
+    
+    public enum Internal {}
 }
 
 public extension Salon.Parameters {
@@ -17,9 +19,8 @@ public extension Salon.Parameters {
         public let localeId: String
         public let description: String?
         public let timetable: Timetable.Parameters.Create.Pattern?
+        public let contact: Salon.Internal.Contact?
         public let address: Address
-        public let contactValue: String
-        public let contactType: ContactType
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
@@ -59,3 +60,10 @@ public extension Salon.Responses {
     }
 }
 
+public extension Salon.Internal {
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Contact: Codable {
+        public var value: String
+        public var type: ContactType
+    }
+}

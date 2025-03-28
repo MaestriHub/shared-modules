@@ -24,7 +24,7 @@ object Salon {
             val timeZoneId: String,
             val localeId: String,
             val description: String?,
-            val timetable: Timetable.Parameters.Create.Pattern,
+            val timetable: Timetable.Parameters.Create.Pattern?,
             val address: Address,
             val contactValue: String,
             val contactType: ContactType,
