@@ -24,10 +24,9 @@ object Salon {
             val timeZoneId: String,
             val localeId: String,
             val description: String?,
-            val timetable: Timetable.Parameters.Create.Pattern?,
             val address: Address,
-            val contactValue: String,
-            val contactType: ContactType,
+            val contact: Internal.Contact? = null,
+            val timetable: Timetable.Parameters.Create.Pattern? = null
         ) : Parametable()
 
         @Serializable
@@ -64,6 +63,14 @@ object Salon {
             var address: Address,
             var isFavorite: Boolean = false,
         ) : Responsable
+    }
+
+    data object Internal {
+        @Serializable
+        data class Contact(
+            var value: String,
+            var type: ContactType
+        )
     }
 }
 

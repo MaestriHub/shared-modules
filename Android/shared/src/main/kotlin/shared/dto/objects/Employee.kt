@@ -26,9 +26,8 @@ object Employee {
             val nickname: String?,
             val salonId: UUID,
             val positionId: UUID,
-            val contactValue: String,
-            val contactType: ContactType,
-            val timetable: Timetable.Parameters.Create.Pattern?,
+            val contact: Internal.Contact? = null,
+            val timetable: Timetable.Parameters.Create.Pattern? = null,
         ) : Parametable()
 
         @Serializable
@@ -56,5 +55,13 @@ object Employee {
             val contacts: List<Contact.Shared.PrimaryContact>,
             val position: Position.Responses.Partial,
         ) : Responsable
+    }
+
+    data object Internal {
+        @Serializable
+        data class Contact(
+            var value: String,
+            var type: ContactType
+        )
     }
 }
