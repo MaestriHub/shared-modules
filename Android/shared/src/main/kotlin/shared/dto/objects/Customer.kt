@@ -16,16 +16,14 @@ object Customer {
     data object Parameters {
         @Serializable
         data class Registration(
-            val contactValue: String,
-            val contactType: ContactType
+            val contact: Internal.Contact? = null
         ) : Parametable()
 
         @Serializable
         data class Create(
             val salonId: UUID,
             val alias: String,
-            val contactValue: String,
-            val contactType: ContactType
+            val contact: Internal.Contact? = null
         ) : Parametable()
 
         @Serializable
@@ -61,5 +59,13 @@ object Customer {
         data class Verify(
             var contacts: List<Contact.Shared.PrimaryContact>,
         ) : Responsable
+    }
+
+    data object Internal {
+        @Serializable
+        data class Contact(
+            var value: String,
+            var type: ContactType
+        )
     }
 }

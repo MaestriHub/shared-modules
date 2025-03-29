@@ -4,6 +4,8 @@ import MemberwiseInit
 public enum Employee {
     public enum Parameters {}
     public enum Responses {}
+    
+    public enum Internal {}
 }
 
 public extension Employee.Parameters {
@@ -18,8 +20,7 @@ public extension Employee.Parameters {
         public var nickname: String?
         public var salonId: UUID
         public var positionId: UUID
-        public let contactValue: String
-        public let contactType: ContactType
+        public var contact: Employee.Internal.Contact?
         public var timetable: Timetable.Parameters.Create.Pattern?
     }
     
@@ -48,5 +49,13 @@ public extension Employee.Responses {
         public var avatar: URL?
         public var contacts: [Contact.Shared.PrimaryContact]
         public var position: Position.Responses.Partial
+    }
+}
+
+public extension Employee.Internal {
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Contact: Codable {
+        public var value: String
+        public var type: ContactType
     }
 }
