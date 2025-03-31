@@ -9,7 +9,6 @@ package shared.dto.objects.procedure
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.enums.ServiceTags
 import shared.dto.enums.TranslatedServiceTag
 import shared.dto.primitives.Minutes
 import shared.dto.primitives.Pagination
@@ -95,7 +94,7 @@ object Complex {
         data class CreateChunkRequest(
             val order: Int,
             val proceduresIds: List<UUID>,
-        )
+        ) : Parametable()
 
         @Serializable
         data class ComplexResponse(

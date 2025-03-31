@@ -70,8 +70,8 @@ object AppointmentCustomer {
             @Serializable
             data class Procedure(
                 val id: UUID,
-                val description: String?,
-                val alias: String?,
+                val description: String? = null,
+                val alias: String? = null,
                 val master: Master,
                 var service: Service
             ) : Responsable
@@ -87,7 +87,7 @@ object AppointmentCustomer {
             data class Master(
                 val id: UUID,
                 val nick: String,
-                val avatar: URI?,
+                val avatar: URI? = null,
                 val contacts: Array<Contact.Shared.PrimaryContact>,
             ) : Responsable
         }

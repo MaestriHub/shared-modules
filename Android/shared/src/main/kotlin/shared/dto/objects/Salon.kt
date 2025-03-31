@@ -65,5 +65,13 @@ object Salon {
             var isFavorite: Boolean = false,
         ) : Responsable
     }
+    
+    data object Internal {
+        @Serializable
+        data class Contact(
+            var value: String,
+            var type: ContactType
+        ) : Parametable()
+    }
 }
 

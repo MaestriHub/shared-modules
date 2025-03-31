@@ -57,4 +57,12 @@ object Employee {
             val position: Position.Responses.Partial,
         ) : Responsable
     }
+
+    data object Internal {
+        @Serializable
+        data class Contact(
+            var value: String,
+            var type: ContactType
+        ) : Parametable()
+    }
 }
