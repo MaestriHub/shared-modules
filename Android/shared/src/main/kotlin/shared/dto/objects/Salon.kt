@@ -25,6 +25,8 @@ object Salon {
             val localeId: String,
             val description: String?,
             val address: Address,
+            val contact: Internal.Contact? = null,
+            val timetable: Timetable.Parameters.Create.Pattern? = null
         ) : Parametable()
 
         @Serializable
