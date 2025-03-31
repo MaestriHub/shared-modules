@@ -26,9 +26,6 @@ object Employee {
             val nickname: String?,
             val salonId: UUID,
             val positionId: UUID,
-            val contactValue: String,
-            val contactType: ContactType,
-            val timetable: Timetable.Parameters.Create.Pattern?,
         ) : Parametable()
 
         @Serializable

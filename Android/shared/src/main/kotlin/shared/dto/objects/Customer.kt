@@ -16,16 +16,12 @@ object Customer {
     data object Parameters {
         @Serializable
         data class Registration(
-            val contactValue: String,
-            val contactType: ContactType
         ) : Parametable()
 
         @Serializable
         data class Create(
             val salonId: UUID,
             val alias: String,
-            val contactValue: String,
-            val contactType: ContactType
         ) : Parametable()
 
         @Serializable

@@ -50,7 +50,6 @@ public extension Contact.Shared {
         public let type: ContactType
     }
 
-
     // MARK: контакты используемые для отображения
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct PrimaryContact: Codable {
