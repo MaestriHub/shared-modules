@@ -80,12 +80,12 @@ object Service {
             val id: UUID,
             val title: String,
             val cases: Array<Case>
-        )
+        ) : Responsable
 
         @Serializable
         data class Case(
             val id: UUID,
             val title: String,
-        )
+        ) : Responsable
     }
 }

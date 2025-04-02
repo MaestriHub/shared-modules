@@ -21,11 +21,11 @@ object Search {
     data object Parameters {
         @Serializable
         data class Retrieve(
-            val value: String?,
-            val salonType: SalonType?,
-            val latitude: Double?,
-            val longitude: Double?,
-            val pagination: Pagination?
+            val value: String? = null,
+            val salonType: SalonType? = null,
+            val latitude: Double? = null,
+            val longitude: Double? = null,
+            val pagination: Pagination? = null,
         ) : Parametable()
     }
 
@@ -42,10 +42,10 @@ object Search {
                 val id: UUID,
                 val name: String,
                 val type: SalonType,
-                val logo: URI?,
+                val logo: URI? = null,
                 val address: Address,
                 val isFavorite: Boolean
-            )
+            ) : Responsable
 
             @Serializable
             data class Suggest(

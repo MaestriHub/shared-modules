@@ -18,8 +18,8 @@ object User {
     data object Parameters {
         @Serializable
         data class Patch(
-            val nickname: String?,
-            val avatar: URI?,
+            val nickname: String? = null,
+            val avatar: URI? = null,
         ) : Parametable()
     }
 
@@ -27,7 +27,7 @@ object User {
         @Serializable
         data class Full(
             val id: UUID,
-            val avatar: URI?,
+            val avatar: URI? = null,
             val nickname: String,
             val contacts: List<Contact.Shared.RecoveryContact>,
             val options: UserRoleSet,

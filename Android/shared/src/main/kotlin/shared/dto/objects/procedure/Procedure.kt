@@ -126,7 +126,7 @@ object Procedure {
             val masterId: UUID,
             val masterNickname: String,
             val masterAvatar: URI? = null,
-        ): Responsable
+        ) : Responsable
 
 
         @Serializable
@@ -143,7 +143,7 @@ object Procedure {
             val masterId: UUID,
             val masterNickname: String,
             val masterAvatar: URI? = null,
-        )
+        ) : Responsable
 
         @Serializable
         data class ParameterResponse(
@@ -151,7 +151,7 @@ object Procedure {
             val optional: Boolean,
             val title: String,
             val cases: Array<CaseResponse>,
-        )
+        ) : Responsable
 
         @Serializable
         data class CaseResponse(
@@ -159,7 +159,7 @@ object Procedure {
             val name: String,
             val price: CasePrice,
             val duration: CaseDuration,
-        )
+        ) : Responsable
 
         sealed class CasePrice {
             @Serializable

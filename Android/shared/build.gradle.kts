@@ -29,7 +29,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/MaestriHub/shared-modules")
             credentials {
                 username = "MeT3ger"
-                password = "pass"
+                password = "a"
             }
         }
     }

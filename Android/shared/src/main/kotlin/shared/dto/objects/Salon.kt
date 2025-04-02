@@ -20,10 +20,10 @@ object Salon {
         data class Create(
             val name: String,
             val type: SalonType,
-            val logo: URI?,
+            val logo: URI? = null,
             val timeZoneId: String,
             val localeId: String,
-            val description: String?,
+            val description: String? = null,
             val address: Address,
             val contact: Internal.Contact? = null,
             val timetable: Timetable.Parameters.Create.Pattern? = null
@@ -31,9 +31,9 @@ object Salon {
 
         @Serializable
         data class Patch(
-            val name: String?,
-            val type: SalonType?,
-            val description: String?,
+            val name: String? = null,
+            val type: SalonType? = null,
+            val description: String? = null,
             val logo: URI?,
         ) : Parametable()
     }

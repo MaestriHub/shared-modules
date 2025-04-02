@@ -4,7 +4,6 @@
 
 package shared.dto.objects.contacts
 
-import kotlinx.serialization.SerialInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
@@ -44,7 +43,7 @@ object Contact {
             val id: ContactId,
             val value: String,
             val type: ContactType,
-        ): Responsable
+        ) : Responsable
 
         // MARK: контакты используемые для отображения
         @Serializable
@@ -53,6 +52,6 @@ object Contact {
             val value: String,
             val type: ContactType,
             val phoneTypes: Set<PhoneTypes>? = null,
-        ): Responsable
+        ) : Responsable
     }
 }

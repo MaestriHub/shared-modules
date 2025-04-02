@@ -20,8 +20,8 @@ object Statistic {
         data class AppointmentsQuery(
             val startDate: Date,
             val endDate: Date,
-            val employees: List<UUID>?,
-            val salons: List<UUID>?,
+            val employees: List<UUID>? = null,
+            val salons: List<UUID>? = null,
         ) : Parametable()
     }
 

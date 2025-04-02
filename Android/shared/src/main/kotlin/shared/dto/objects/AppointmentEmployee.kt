@@ -11,9 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
-import shared.dto.enums.ContactType
 import shared.dto.enums.ServiceTags
-import shared.dto.objects.AppointmentCustomer.Responses.Helpers.Master
 import shared.dto.objects.contacts.Contact
 import shared.dto.primitives.Address
 import shared.dto.primitives.Price
