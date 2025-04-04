@@ -1,8 +1,10 @@
 import Foundation
 
+public typealias UserId = UUID
+
 public enum ProfessionalEmployee: Responsable {
     case link(URL)
-    case value(Professional.Responses.Partial)
+    case value(UserId)
     
     enum CodingKeys: String, CodingKey {
         case link = "link"
@@ -15,7 +17,7 @@ public enum ProfessionalEmployee: Responsable {
 
         if let value = try? container.decode(URL.self, forKey: .link) {
             self = .link(value)
-        } else if let value = try? container.decode(Professional.Responses.Partial.self, forKey: .value) {
+        } else if let value = try? container.decode(UserId.self, forKey: .value) {
             self = .value(value)
         } else {
             throw DecodingError.dataCorruptedError(
