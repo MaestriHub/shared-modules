@@ -44,9 +44,4 @@ public extension Auth.Responses {
         public let accessToken: Token
         public let refreshToken: Token?
     }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct EmployeeToken: Responsable {
-        public let accessToken: Token
-    }
 }
