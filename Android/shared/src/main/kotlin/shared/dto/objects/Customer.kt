@@ -28,13 +28,13 @@ object Customer {
 
         @Serializable
         data class Retrieve(
-            val salons: List<UUID>?,
-            val employees: List<UUID>?,
+            val salons: List<UUID>? = null,
+            val employees: List<UUID>? = null,
         ) : Parametable()
 
         @Serializable
         data class HandleInvite(
-            val contactValue: String?
+            val contactValue: String? = null
         ) : Parametable()
     }
 
