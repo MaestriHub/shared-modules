@@ -23,6 +23,11 @@ public extension Auth.Parameters {
         public var firstName: String?
         public var lastName: String?
     }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct RefreshToken: Parametable {
+        public var token: String
+    }
 }
 
 public extension Auth.Responses {
