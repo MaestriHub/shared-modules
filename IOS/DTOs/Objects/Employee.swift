@@ -11,11 +11,6 @@ public enum Employee {
 public extension Employee.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
-        public let salonsId: [UUID]
-    }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Invite: Parametable {
         public var nickname: String?
         public var salonId: UUID
