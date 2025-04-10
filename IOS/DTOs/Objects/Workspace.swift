@@ -1,14 +1,14 @@
 import Foundation
 import MemberwiseInit
 
-public enum Workplace {
+public enum Workspace {
     public enum Parameters {}
     public enum Responses {}
     
     public enum Internal {}
 }
 
-public extension Workplace.Parameters {
+public extension Workspace.Parameters {
  
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
@@ -19,7 +19,7 @@ public extension Workplace.Parameters {
         public let localeId: String
         public let description: String?
         public let timetable: Timetable.Parameters.Create.Pattern?
-        public let contact: Workplace.Internal.Contact?
+        public let contact: Workspace.Internal.Contact?
         public let address: Address
     }
 
@@ -32,7 +32,7 @@ public extension Workplace.Parameters {
     }
 }
 
-public extension Workplace.Responses {
+public extension Workspace.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
@@ -59,7 +59,7 @@ public extension Workplace.Responses {
     }
 }
 
-public extension Workplace.Internal {
+public extension Workspace.Internal {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Contact: Codable {
         public var value: String
