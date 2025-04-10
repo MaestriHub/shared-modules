@@ -43,7 +43,7 @@ public extension AppointmentEmployee.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
-        public var salon: Workplace.Responses.Partial
+        public var salon: Workspace.Responses.Partial
         public var customer: Customer.Responses.Partial
         public var address: Address
         public var associative: [Base]

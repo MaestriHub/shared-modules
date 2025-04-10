@@ -38,7 +38,7 @@ public extension AppointmentCustomer.Responses {
     struct Full: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var salon: Workplace.Responses.Partial
+        public var salon: Workspace.Responses.Partial // TODO:
         public var procedures: [Helpers.Procedure]
         public var time: SafeDateInterval
         public var price: Price
