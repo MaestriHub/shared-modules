@@ -37,6 +37,4 @@ public enum CustomerUser: Responsable {
             try container.encode(value, forKey: .value)
         }
     }
-
-    
 }

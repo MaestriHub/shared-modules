@@ -11,14 +11,12 @@ public enum Client {
 public extension Client.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
-        public var salonId: UUID
         public var alias: String
         public var contact: Client.Internal.Contact?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
-        public let salons: [UUID]?
         public let employees: [UUID]?
     }
 
@@ -31,17 +29,9 @@ public extension Client.Parameters {
 public extension Client.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct ClientInfo: Responsable {
         public var id: UUID
-        public var user: CustomerUser
-        public var alias: String?
-        public var contacts: [Contact.Shared.PrimaryContact]
-    }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
-        public var id: UUID
-        public var user: CustomerUser
+        public var user: Client.Internal.ClientUserOneOf
         public var alias: String?
         public var contacts: [Contact.Shared.PrimaryContact]
     }
@@ -57,5 +47,16 @@ public extension Client.Internal {
     struct Contact: Codable {
         public var value: String
         public var type: ContactType
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct ClientUserOneOf: Codable {
+        public let link: URL?
+        public let value: UserInfo?
+        
+        public struct UserInfo: Codable {
+            public var avatar: URL?
+            public var nickname: String
+        }
     }
 }
