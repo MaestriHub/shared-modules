@@ -43,15 +43,14 @@ public extension Assigment.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
-        public var salon: Workspace.Responses.Partial
-        public var customer: Client.Responses.Partial
+        public var customer: Assigment.Responses.Helpers.Client
         public var address: Address
         public var associative: [Base]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
-        public var customer: Client.Responses.Partial
+        public var customer: Assigment.Responses.Helpers.Client
         public var associative: [Base]
     }
     
@@ -85,6 +84,14 @@ public extension Assigment.Responses.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Master: Codable {
+        public var id: UUID
+        public var nick: String
+        public var avatar: URL?
+        public var contacts: [Contact.Shared.PrimaryContact]
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Client: Codable {
         public var id: UUID
         public var nick: String
         public var avatar: URL?
