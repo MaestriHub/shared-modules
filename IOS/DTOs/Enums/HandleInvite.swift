@@ -1,8 +1,8 @@
 import Foundation
 
 public enum HandleInvite: Responsable {
-    case successCustomer(Customer.Responses.Full)
-    case requestVerify(Customer.Responses.Verify)
+    case successCustomer(Client.Responses.Full)
+    case requestVerify(Client.Responses.Verify)
     
     enum CodingKeys: String, CodingKey {
         case successCustomer = "successCustomer"
@@ -13,9 +13,9 @@ public enum HandleInvite: Responsable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let value = try? container.decode(Customer.Responses.Full.self, forKey: .successCustomer) {
+        if let value = try? container.decode(Client.Responses.Full.self, forKey: .successCustomer) {
             self = .successCustomer(value)
-        } else if let value = try? container.decode(Customer.Responses.Verify.self, forKey: .requestVerify) {
+        } else if let value = try? container.decode(Client.Responses.Verify.self, forKey: .requestVerify) {
             self = .requestVerify(value)
         } else {
             throw DecodingError.dataCorruptedError(
