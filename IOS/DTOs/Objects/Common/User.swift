@@ -24,6 +24,5 @@ public extension User.Responses {
         public var nickname: String
         public let haveCustomer: Bool
         public let haveEmployee: Bool
-        public let permissions: MaestriPermissionSet
     }
 }
