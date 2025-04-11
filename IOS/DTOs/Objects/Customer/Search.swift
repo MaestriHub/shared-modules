@@ -3,9 +3,9 @@ import MemberwiseInit
 
 public enum Search {
     public enum Parameters {}
-    public enum Responses {}
-    
-    enum Helpers {}
+    public enum Responses {
+        public enum Helpers {}
+    }
 }
 
 public extension Search.Parameters {
