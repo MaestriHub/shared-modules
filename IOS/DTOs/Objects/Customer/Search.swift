@@ -4,9 +4,7 @@ import MemberwiseInit
 public enum Search {
     public enum Parameters {}
     public enum Responses {}
-}
-
-public extension Search.Responses {
+    
     enum Helpers {}
 }
 

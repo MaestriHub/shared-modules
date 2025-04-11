@@ -2,7 +2,6 @@ import Foundation
 import MemberwiseInit
 
 public enum Salon {
-    public enum Parameters {}
     public enum Responses {}
 }
 
