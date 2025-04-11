@@ -4,6 +4,7 @@ import MemberwiseInit
 public enum Auth {
     public enum Parameters {}
     public enum Responses {}
+    public enum Internal {}
 }
 
 public extension Auth.Parameters {
@@ -33,15 +34,28 @@ public extension Auth.Parameters {
 public extension Auth.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct SuccessAuth: Responsable {
         public let accessToken: Token
         public let refreshToken: Token
-        public let user: User.Responses.Full
+        public let user: Auth.Internal.UserInfo
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Refresh: Responsable {
         public let accessToken: Token
         public let refreshToken: Token?
+    }
+}
+
+public extension Auth.Internal {
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct UserInfo: Responsable {
+        public let id: UUID
+        public let avatar: URL?
+        public let nickname: String
+        public let haveCustomer: Bool
+        public let haveEmployee: Bool
+        public let permissions: MaestriPermissionSet
     }
 }

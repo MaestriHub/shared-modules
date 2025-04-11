@@ -15,7 +15,6 @@ public extension Salary.Responses {
 public extension Salary.Parameters {
     enum Rules {}
     enum Balance {}
-    
     enum Helpers {}
 }
 

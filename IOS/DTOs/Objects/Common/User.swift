@@ -18,20 +18,12 @@ public extension User.Parameters {
 public extension User.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct UserInfo: Responsable {
         public var id: UUID
         public var avatar: URL?
         public var nickname: String
-        public var contacts: [Contact.Shared.RecoveryContact]
-        public var options: UserRoleSet
-        public var permissions: MaestriPermissionSet
-        public var customerId: UUID?
-        public var professionalId: UUID?
-    }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
-        public var avatar: URL?
-        public var nickname: String
+        public let haveCustomer: Bool
+        public let haveEmployee: Bool
+        public let permissions: MaestriPermissionSet
     }
 }
