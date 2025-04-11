@@ -54,10 +54,11 @@ public extension Client.Internal {
     struct ClientUserOneOf: Codable {
         public let link: URL?
         public let value: UserInfo?
-        
-        public struct UserInfo: Codable {
-            public var avatar: URL?
-            public var nickname: String
-        }
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct UserInfo: Codable {
+        public var avatar: URL?
+        public var nickname: String
     }
 }
