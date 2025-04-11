@@ -44,7 +44,7 @@ public extension HandleInvite.Internal {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Client: Responsable {
-        public let alias: String
+        public let alias: String?
     }
 }
 
