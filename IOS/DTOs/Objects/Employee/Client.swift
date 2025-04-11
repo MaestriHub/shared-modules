@@ -27,6 +27,7 @@ public extension Client.Parameters {
 }
 
 public extension Client.Responses {
+    typealias Clients = [ClientInfo]
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ClientInfo: Responsable {
