@@ -1,16 +1,16 @@
 import Foundation
 import MemberwiseInit
 
-public enum AppointmentEmployee {
+public enum Assigment {
     public enum Parameters {}
     public enum Responses {}
 }
 
-public extension AppointmentEmployee.Responses {
+public extension Assigment.Responses {
     enum Helpers {}
 }
 
-public extension AppointmentEmployee.Parameters {
+public extension Assigment.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
@@ -39,19 +39,19 @@ public extension AppointmentEmployee.Parameters {
     }
 }
 
-public extension AppointmentEmployee.Responses {
+public extension Assigment.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var salon: Workspace.Responses.Partial
-        public var customer: Customer.Responses.Partial
+        public var customer: Client.Responses.Partial
         public var address: Address
         public var associative: [Base]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Responsable {
-        public var customer: Customer.Responses.Partial
+        public var customer: Client.Responses.Partial
         public var associative: [Base]
     }
     
@@ -65,7 +65,7 @@ public extension AppointmentEmployee.Responses {
     }
 }
 
-public extension AppointmentEmployee.Responses.Helpers {
+public extension Assigment.Responses.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Procedure: Codable {

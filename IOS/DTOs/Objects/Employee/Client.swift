@@ -1,25 +1,19 @@
 import Foundation
 import MemberwiseInit
 
-public enum Customer {
+public enum Client {
     public enum Parameters {}
     public enum Responses {}
     
     public enum Internal {}
 }
 
-public extension Customer.Parameters {
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Registration: Parametable {
-        public var contact: Customer.Internal.Contact?
-    }
-    
+public extension Client.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Parametable {
         public var salonId: UUID
         public var alias: String
-        public var contact: Customer.Internal.Contact?
+        public var contact: Client.Internal.Contact?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
@@ -34,7 +28,7 @@ public extension Customer.Parameters {
     }
 }
 
-public extension Customer.Responses {
+public extension Client.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
@@ -58,7 +52,7 @@ public extension Customer.Responses {
     }
 }
 
-public extension Customer.Internal {
+public extension Client.Internal {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Contact: Codable {
         public var value: String

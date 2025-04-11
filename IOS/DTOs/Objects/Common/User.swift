@@ -34,10 +34,4 @@ public extension User.Responses {
         public var avatar: URL?
         public var nickname: String
     }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateCustomer: Responsable {
-        public var customerId: UUID
-        public var accessToken: String
-    }
 }

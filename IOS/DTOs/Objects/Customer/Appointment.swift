@@ -1,16 +1,16 @@
 import Foundation
 import MemberwiseInit
 
-public enum AppointmentCustomer {
+public enum Appointment {
     public enum Parameters {}
     public enum Responses {}
 }
 
-public extension AppointmentCustomer.Responses {
+public extension Appointment.Responses {
     enum Helpers {}
 }
 
-public extension AppointmentCustomer.Parameters {
+public extension Appointment.Parameters {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Parametable {
@@ -32,7 +32,7 @@ public extension AppointmentCustomer.Parameters {
     }
 }
 
-public extension AppointmentCustomer.Responses {
+public extension Appointment.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
@@ -55,7 +55,7 @@ public extension AppointmentCustomer.Responses {
     }
 }
 
-public extension AppointmentCustomer.Responses.Helpers {
+public extension Appointment.Responses.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Procedure: Codable {
