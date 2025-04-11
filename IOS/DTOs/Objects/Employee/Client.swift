@@ -19,11 +19,6 @@ public extension Client.Parameters {
     struct Retrieve: Parametable {
         public let employees: [UUID]?
     }
-
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct HandleInvite: Parametable {
-        public var contactValue: String?
-    }
 }
 
 public extension Client.Responses {
