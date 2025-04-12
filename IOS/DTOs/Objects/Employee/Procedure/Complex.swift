@@ -117,7 +117,7 @@ public extension Complex.Helpers {
         public let description: String?
         public let masterId: UUID
         public let masterNickname: String
-        public let masterAvatar: URL?
+        public let masterAvatar: URL
         public let duration: Minutes
         public let price: Price
     }

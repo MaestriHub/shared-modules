@@ -20,7 +20,7 @@ public extension User.Responses {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct UserInfo: Responsable {
         public var id: UUID
-        public var avatar: URL?
+        public var avatar: URL
         public var nickname: String
         public let haveCustomer: Bool
         public let haveEmployee: Bool

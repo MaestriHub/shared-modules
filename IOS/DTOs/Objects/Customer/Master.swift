@@ -12,7 +12,7 @@ public extension Master.Responses {
     struct Master: Responsable {
         public var id: UUID
         public var nickName: String
-        public var logo: URL?
+        public var logo: URL
         public var position: String
     }
 }

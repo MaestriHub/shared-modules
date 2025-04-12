@@ -28,7 +28,7 @@ public extension Workspace.Parameters {
         public let name: String?
         public let type: SalonType?
         public let description: String?
-        public let logo: URL?
+        public let logo: URL
     }
 }
 
@@ -40,7 +40,7 @@ public extension Workspace.Responses {
         public var name: String
         public var type: SalonType
         public var description: String?
-        public var logo: URL?
+        public var logo: URL
         public var address: Address
         public var isActive: Bool
         public var canEdit: Bool = false
@@ -54,7 +54,7 @@ public extension Workspace.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
-        public var logo: URL?
+        public var logo: URL
         public var address: Address
     }
 }

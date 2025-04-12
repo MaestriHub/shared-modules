@@ -86,7 +86,7 @@ public extension Assigment.Responses.Helpers {
     struct Master: Codable {
         public var id: UUID
         public var nick: String
-        public var avatar: URL?
+        public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
     }
     
@@ -94,7 +94,7 @@ public extension Assigment.Responses.Helpers {
     struct Client: Codable {
         public var id: UUID
         public var nick: String
-        public var avatar: URL?
+        public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
     }
 }

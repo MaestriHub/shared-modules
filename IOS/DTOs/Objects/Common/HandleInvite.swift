@@ -24,7 +24,7 @@ public extension HandleInvite.Responses {
     struct EmployeeSuccess: Responsable {
         public let id: UUID
         public let nickname: String
-        public let logo: URL?
+        public let logo: URL
         public let position: String
     }
     

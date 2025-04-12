@@ -41,7 +41,7 @@ public extension Employee.Responses {
     struct Partial: Responsable {
         public var id: UUID
         public var nickname: String
-        public var avatar: URL?
+        public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
         public var position: Position.Responses.Partial
     }

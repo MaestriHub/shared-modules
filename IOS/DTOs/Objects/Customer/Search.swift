@@ -41,7 +41,7 @@ public extension Search.Responses.Helpers {
         public var id: UUID
         public var name: String
         public var type: SalonType
-        public var logo: URL?
+        public var logo: URL
         public var address: Address
         public var isFavorite: Bool = false
     }

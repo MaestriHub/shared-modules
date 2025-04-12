@@ -13,7 +13,7 @@ public extension Favorite.Responses {
         public var id: UUID
         public var name: String
         public var type: SalonType
-        public var logo: URL?
+        public var logo: URL
         public var address: Address
         public var isActive: Bool
     }

@@ -53,7 +53,7 @@ public extension Client.Internal {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct UserInfo: Codable {
-        public var avatar: URL?
+        public var avatar: URL
         public var nickname: String
     }
 }

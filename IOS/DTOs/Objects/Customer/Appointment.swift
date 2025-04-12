@@ -77,7 +77,7 @@ public extension Appointment.Responses.Helpers {
     struct Master: Codable {
         public var id: UUID
         public var nick: String
-        public var avatar: URL?
+        public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
     }
     
