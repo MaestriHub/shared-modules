@@ -38,7 +38,7 @@ public extension Appointment.Responses {
     struct Full: Responsable {
         public var id: UUID
         public var status: AppointmentStatus
-        public var salon: Workspace.Responses.Partial // TODO:
+        public var salon: Helpers.Salon
         public var procedures: [Helpers.Procedure]
         public var time: SafeDateInterval
         public var price: Price
@@ -79,6 +79,15 @@ public extension Appointment.Responses.Helpers {
         public var nick: String
         public var avatar: URL?
         public var contacts: [Contact.Shared.PrimaryContact]
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Salon: Codable {
+        public var id: UUID
+        public var name: String
+        public var type: SalonType
+        public var logo: URL
+        public var address: Address
     }
 }
 

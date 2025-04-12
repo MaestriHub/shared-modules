@@ -26,7 +26,7 @@ public extension Auth.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct RefreshToken: Parametable {
+    struct RefreshingToken: Parametable {
         public var token: String
     }
 }
@@ -53,7 +53,7 @@ public extension Auth.Internal {
     struct UserInfo: Responsable {
         public let id: UUID
         public let avatar: URL?
-        public let nickname: String
+        public let nickname: String?
         public let haveCustomer: Bool
         public let haveEmployee: Bool
     }
