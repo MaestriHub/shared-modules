@@ -28,7 +28,7 @@ public extension Workspace.Parameters {
         public let name: String?
         public let type: SalonType?
         public let description: String?
-        public let logo: URL
+        public let logo: URL?
     }
 }
 
