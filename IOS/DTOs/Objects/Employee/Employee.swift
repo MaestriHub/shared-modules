@@ -30,7 +30,7 @@ public extension Employee.Responses {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Responsable {
         public var id: UUID
-        public var user: ProfessionalEmployee
+        public var user: Employee.Internal.EmploeeUserOneOf
         public var canEdit: Bool = false
         public var contacts: [Contact.Shared.PrimaryContact]
         public var salonId: UUID
@@ -52,5 +52,18 @@ public extension Employee.Internal {
     struct Contact: Codable {
         public var value: String
         public var type: ContactType
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct EmploeeUserOneOf: Codable {
+        public let link: URL?
+        public let value: EmployeeUserInfo?
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct EmployeeUserInfo: Codable {
+        public var id: UUID
+        public var nickname: String
+        public var avatar: URL
     }
 }
