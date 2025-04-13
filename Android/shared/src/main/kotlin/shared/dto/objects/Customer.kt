@@ -5,12 +5,9 @@ package shared.dto.objects
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
-import shared.dto.enums.CustomerUser
-import shared.dto.objects.contacts.Contact
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.UUIDSerializer
-import java.util.*
 
 object Customer {
     data object Parameters {
@@ -18,46 +15,12 @@ object Customer {
         data class Registration(
             val contact: Internal.Contact? = null
         ) : Parametable()
-
-        @Serializable
-        data class Create(
-            val salonId: UUID,
-            val alias: String,
-            val contact: Internal.Contact? = null
-        ) : Parametable()
-
-        @Serializable
-        data class Retrieve(
-            val salons: List<UUID>?,
-            val employees: List<UUID>?,
-        ) : Parametable()
-
-        @Serializable
-        data class HandleInvite(
-            val contactValue: String?
-        ) : Parametable()
     }
 
     data object Responses {
         @Serializable
-        data class Full(
-            var id: UUID,
-            var user: CustomerUser,
-            var alias: String? = null,
-            var contacts: List<Contact.Shared.PrimaryContact>,
-        ) : Responsable
-
-        @Serializable
-        data class Partial(
-            var id: UUID,
-            var user: CustomerUser,
-            var alias: String? = null,
-            var contacts: List<Contact.Shared.PrimaryContact>,
-        ) : Responsable
-
-        @Serializable
-        data class Verify(
-            var contacts: List<Contact.Shared.PrimaryContact>,
+        data class Registration(
+            val accessToken: String,
         ) : Responsable
     }
     data object Internal {

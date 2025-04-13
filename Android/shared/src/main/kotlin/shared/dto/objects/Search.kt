@@ -42,7 +42,7 @@ object Search {
                 val id: UUID,
                 val name: String,
                 val type: SalonType,
-                val logo: URI? = null,
+                val logo: URI,
                 val address: Address,
                 val isFavorite: Boolean
             ) : Responsable

@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
 import shared.dto.enums.AppointmentType
-import shared.dto.enums.ContactType
+import shared.dto.enums.SalonType
 import shared.dto.enums.ServiceTags
 import shared.dto.objects.contacts.Contact
 import shared.dto.primitives.Address
@@ -23,7 +23,7 @@ import shared.serializers.URISerializer
 import java.util.*
 import java.net.URI
 
-object AppointmentCustomer {
+object Appointment {
     data object Parameters {
         @Serializable
         data class Retrieve(
@@ -50,7 +50,7 @@ object AppointmentCustomer {
         data class Full(
             val id: UUID,
             val status: AppointmentStatus,
-            val salon: Salon.Responses.Partial,
+            val salon: Helpers.Salon,
             val procedures: List<Helpers.Procedure>,
             val time: DateInterval,
             val price: Price,
@@ -87,9 +87,18 @@ object AppointmentCustomer {
             data class Master(
                 val id: UUID,
                 val nick: String,
-                val avatar: URI? = null,
+                val avatar: URI,
                 val contacts: Array<Contact.Shared.PrimaryContact>,
             ) : Responsable
+
+            @Serializable
+            data class Salon(
+                val id: UUID,
+                val name: String,
+                val type: SalonType,
+                val logo: URI,
+                val address: Address,
+            )
         }
     }
 }

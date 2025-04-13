@@ -66,7 +66,7 @@ public extension Procedure.Responses {
         public let serviceTitle: String
         public let masterId: UUID
         public let masterNickname: String
-        public let masterAvatar: URL?
+        public let masterAvatar: URL
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)

@@ -25,21 +25,12 @@ object User {
 
     data object Responses {
         @Serializable
-        data class Full(
+        data class UserInfo(
             val id: UUID,
-            val avatar: URI? = null,
+            val avatar: URI,
             val nickname: String,
-            val contacts: List<Contact.Shared.RecoveryContact>,
-            val options: UserRoleSet,
-            val permissions: MaestriPermissionSet,
-            val customerId: UUID? = null,
-            val professionalId: UUID? = null,
-        ) : Responsable
-
-        @Serializable
-        data class Partial(
-            val avatar: URI? = null,
-            val nickname: String,
+            val haveCustomer: Boolean,
+            val haveEmployee: Boolean,
         ) : Responsable
     }
 }

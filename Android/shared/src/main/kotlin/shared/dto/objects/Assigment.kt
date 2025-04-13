@@ -22,9 +22,8 @@ import shared.serializers.UUIDSerializer
 import java.net.URI
 import java.util.*
 
-object AppointmentEmployee {
+object Assigment {
     data object Parameters {
-
         @Serializable
         data class Retrieve(
             val startDate: Date?,
@@ -55,15 +54,14 @@ object AppointmentEmployee {
     data object Responses {
         @Serializable
         data class Full(
-            val salon: Salon.Responses.Partial,
-            val customer: Customer.Responses.Partial,
+            val customer: Helpers.Client,
             val address: Address,
             val associative: List<Base>,
         ) : Responsable
 
         @Serializable
         data class Partial(
-            val customer: Customer.Responses.Partial,
+            val customer: Helpers.Client,
             val associative: List<Base>,
         ) : Responsable
 
@@ -97,7 +95,15 @@ object AppointmentEmployee {
             data class Master(
                 val id: UUID,
                 val nick: String,
-                val avatar: URI? = null,
+                val avatar: URI,
+                val contacts: Array<Contact.Shared.PrimaryContact>,
+            ) : Responsable
+
+            @Serializable
+            data class Client(
+                val id: UUID,
+                val nick: String,
+                val avatar: URI,
                 val contacts: Array<Contact.Shared.PrimaryContact>,
             ) : Responsable
         }

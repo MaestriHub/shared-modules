@@ -71,7 +71,7 @@ object Procedure {
             val serviceTitle: String,
             val masterId: UUID,
             val masterNickname: String,
-            val masterAvatar: URI? = null,
+            val masterAvatar: URI,
         ): Responsable
 
         @Serializable
@@ -92,7 +92,7 @@ object Procedure {
             val serviceTitle: String,
             val masterId: UUID,
             val masterNickname: String,
-            val masterAvatar: URI? = null,
+            val masterAvatar: URI,
         ): Responsable
     }
 
@@ -125,7 +125,7 @@ object Procedure {
             val serviceTitle: String,
             val masterId: UUID,
             val masterNickname: String,
-            val masterAvatar: URI? = null,
+            val masterAvatar: URI,
         ) : Responsable
 
 
@@ -142,7 +142,7 @@ object Procedure {
             val serviceTitle: String,
             val masterId: UUID,
             val masterNickname: String,
-            val masterAvatar: URI? = null,
+            val masterAvatar: URI,
         ) : Responsable
 
         @Serializable

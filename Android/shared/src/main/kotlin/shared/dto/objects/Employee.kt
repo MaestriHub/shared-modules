@@ -5,7 +5,6 @@ package shared.dto.objects
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
-import shared.dto.enums.ProfessionalEmployee
 import shared.dto.objects.contacts.Contact
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
@@ -16,11 +15,6 @@ import java.util.*
 
 object Employee {
     data object Parameters {
-        @Serializable
-        data class Retrieve(
-            val salonsId: List<UUID>,
-        ) : Parametable()
-
         @Serializable
         data class Invite(
             val nickname: String?,
@@ -40,7 +34,7 @@ object Employee {
         @Serializable
         data class Full(
             val id: UUID,
-            val user: ProfessionalEmployee,
+            val user: Internal.EmployeeUserOneOf,
             val canEdit: Boolean = false,
             val contacts: List<Contact.Shared.PrimaryContact>,
             val salonId: UUID,
@@ -51,7 +45,7 @@ object Employee {
         data class Partial(
             val id: UUID,
             val nickname: String,
-            val avatar: URI? = null,
+            val avatar: URI,
             val contacts: List<Contact.Shared.PrimaryContact>,
             val position: Position.Responses.Partial,
         ) : Responsable
@@ -62,6 +56,19 @@ object Employee {
         data class Contact(
             var value: String,
             var type: ContactType
+        ) : Parametable()
+
+        @Serializable
+        data class EmployeeUserOneOf(
+            val link: URI? = null,
+            val value: EmployeeUserInfo? = null,
+        ) : Parametable()
+
+        @Serializable
+        data class EmployeeUserInfo(
+            val id: UUID,
+            val nickname: String,
+            val avatar: URI,
         ) : Parametable()
     }
 }
