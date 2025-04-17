@@ -46,7 +46,7 @@ public extension Workspace.Responses {
         public var canEdit: Bool = false
         public var localeId: String
         public var timeZoneId: String
-        public var employeeToken: String
+        public var employeeToken: Token
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)

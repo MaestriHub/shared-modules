@@ -20,7 +20,7 @@ public extension Customer.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Registration: Responsable {
-        public var accessToken: String
+        public var accessToken: Token
     }
 }
 
