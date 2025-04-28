@@ -27,7 +27,7 @@ public extension Client.Responses {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ClientInfo: Responsable {
         public var id: UUID
-        public var user: Client.Internal.ClientUserOneOf
+        public var user: Client.Internal.UserInfo?
         public var alias: String?
         public var contacts: [Contact.Shared.PrimaryContact]
     }
@@ -43,12 +43,6 @@ public extension Client.Internal {
     struct Contact: Codable {
         public var value: String
         public var type: ContactType
-    }
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ClientUserOneOf: Codable {
-        public let link: URL?
-        public let value: UserInfo?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
