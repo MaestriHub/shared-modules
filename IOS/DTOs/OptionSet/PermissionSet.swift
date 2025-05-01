@@ -1,15 +1,15 @@
 public struct CredentialsSet: Codable, Hashable {
-    public var clientCreds: Set<ClientCredentials>
-    public var salonCreds: Set<SalonCredentials>
-    public var employeeCreds: Set<EmployeeCredentials>
-    public var procedureCreds: Set<ProcedureCredentials>
-    public var positionCreds: Set<PositionCredentials>
-    public var worktimeCreds: Set<WorktimeCredentials>
+    public var clientCreds     : Set<ClientCredentials>
+    public var salonCreds      : Set<SalonCredentials>
+    public var employeeCreds   : Set<EmployeeCredentials>
+    public var procedureCreds  : Set<ProcedureCredentials>
+    public var positionCreds   : Set<PositionCredentials>
+    public var worktimeCreds   : Set<WorktimeCredentials>
     public var appointmentCreds: Set<AppointmentCredentials>
-    public var statisticCreds: Set<StatisticCredentials>
-    public var notifyCreds: Set<NotificationCredentials>
-    public var financeCreds: Set<FinanceCredentials>
-    public var salaryCreds: Set<SalaryCredentials>
+    public var statisticCreds  : Set<StatisticCredentials>
+    public var notifyCreds     : Set<NotificationCredentials>
+    public var financeCreds    : Set<FinanceCredentials>
+    public var salaryCreds     : Set<SalaryCredentials>
     
     public enum ClientCredentials: Codable {
         case edit
@@ -61,6 +61,36 @@ public struct CredentialsSet: Codable, Hashable {
     public enum SalaryCredentials: Codable {
         case all
     }
+}
+
+public extension CredentialsSet {
+    static var all: CredentialsSet = .init(
+        clientCreds: [.edit, .visibleBaseInfo, .visibleContacts],
+        salonCreds: [.editBaseInfo],
+        employeeCreds: [.edit, .visible],
+        procedureCreds: [.otherCreate, .ownCreate],
+        positionCreds: [.edit],
+        worktimeCreds: [.otherEdit, .ownEdit],
+        appointmentCreds: [.all],
+        statisticCreds: [.all],
+        notifyCreds: [.all],
+        financeCreds: [.all],
+        salaryCreds: [.all]
+    )
+    
+    static var none: CredentialsSet = .init(
+        clientCreds: [],
+        salonCreds: [],
+        employeeCreds: [],
+        procedureCreds: [],
+        positionCreds: [],
+        worktimeCreds: [],
+        appointmentCreds: [],
+        statisticCreds: [],
+        notifyCreds: [],
+        financeCreds: [],
+        salaryCreds: []
+    )
 }
 
 public extension CredentialsSet {
