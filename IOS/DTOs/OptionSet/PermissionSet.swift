@@ -1,3 +1,4 @@
+/// Если вы правите это обязательно поправьте маппер в приложении.
 public struct CredentialsSet: Codable, Hashable {
     public var clientCreds     : Set<ClientCredentials>
     public var salonCreds      : Set<SalonCredentials>
