@@ -9,7 +9,7 @@ public enum Device {
 public extension Device.Parameters {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct System: Parametable {
+    struct System: Codable {
         public var manufacturer : String?
         public var model: String?
         public var system: SystemType?
@@ -22,7 +22,7 @@ public extension Device.Parameters {
 public extension Device.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var id: UUID
         public var version: VersionType?
     }

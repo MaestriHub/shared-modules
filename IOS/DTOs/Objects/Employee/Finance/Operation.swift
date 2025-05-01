@@ -7,7 +7,7 @@ public enum Operation {
 }
 
 public extension Operation.Parameters {
-    struct Create: Parametable {
+    struct Create: Codable {
         public var price: Price
         public var paymentType: PaymentType
         public var salonId: UUID
@@ -54,7 +54,7 @@ public extension Operation.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
+    struct Retrieve: Codable {
         public var startDate: Date?
         public var endDate: Date?
         public var paymentType: PaymentType?
@@ -65,7 +65,7 @@ public extension Operation.Parameters {
 public extension Operation.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable, Identifiable, Hashable, Equatable {
+    struct Full: Codable, Identifiable, Hashable, Equatable {
         public var id: UUID
         public var createDate: Date
         public var price: Price

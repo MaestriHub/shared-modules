@@ -10,18 +10,18 @@ public enum HandleInvite {
 public extension HandleInvite.Parameters {
   
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Customer: Parametable {
+    struct Customer: Codable {
         public var contactValue: String?
     }
     
-    // struct Employee: Parametable
+    // struct Employee: Codable
     // Nothing!
 }
 
 public extension HandleInvite.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct EmployeeSuccess: Responsable {
+    struct EmployeeSuccess: Codable {
         public let id: UUID
         public let nickname: String
         public let logo: URL
@@ -29,7 +29,7 @@ public extension HandleInvite.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CustomerSuccessOneOf: Responsable {
+    struct CustomerSuccessOneOf: Codable {
         public let verify: HandleInvite.Internal.Verify?
         public let client: HandleInvite.Internal.Client?
     }
@@ -38,12 +38,12 @@ public extension HandleInvite.Responses {
 public extension HandleInvite.Internal {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Verify: Responsable {
+    struct Verify: Codable {
         public let contacts: [Contact.Shared.PrimaryContact]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Client: Responsable {
+    struct Client: Codable {
         public let alias: String?
     }
 }

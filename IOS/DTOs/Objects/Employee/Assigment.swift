@@ -13,7 +13,7 @@ public extension Assigment.Responses {
 public extension Assigment.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
+    struct Retrieve: Codable {
         public let startDate: Date?
         public let endDate: Date?
         public let employees: [UUID]?
@@ -22,19 +22,19 @@ public extension Assigment.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public let customerId: UUID
         public let type: AppointmentType
         public let time: SafeDateInterval
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Approve: Parametable {
+    struct Approve: Codable {
         public let appointmentsEmployeeId: [UUID]
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Parametable {
+    struct Patch: Codable {
         public let time: SafeDateInterval
     }
 }
@@ -42,20 +42,20 @@ public extension Assigment.Parameters {
 public extension Assigment.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var customer: Assigment.Responses.Helpers.Client
         public var address: Address
         public var associative: [Base]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Partial: Codable {
         public var customer: Assigment.Responses.Helpers.Client
         public var associative: [Base]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Base: Responsable {
+    struct Base: Codable {
         public var id: UUID
         public var status: AppointmentStatus
         public var procedure: Helpers.Procedure

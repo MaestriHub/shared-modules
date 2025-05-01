@@ -9,20 +9,20 @@ public enum Contact {
 
 public extension Contact.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateRecovery: Parametable {
+    struct CreateRecovery: Codable {
         public let value: String
         public let type: ContactType
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreatePrimary: Parametable {
+    struct CreatePrimary: Codable {
         public let value: String
         public let type: ContactType
         public let phoneTypes: Set<PhoneTypes>?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct UpdateContact: Parametable {
+    struct UpdateContact: Codable {
         public var phoneTypes: Set<PhoneTypes>?
     }
 }

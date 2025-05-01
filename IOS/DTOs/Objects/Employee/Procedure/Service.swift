@@ -13,7 +13,7 @@ public enum Service {
 public extension Service.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Parametable {
+    struct All: Codable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let valueFilter: String?
@@ -21,13 +21,13 @@ public extension Service.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public let title: String
         public let tags: [ServiceTags]
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Parametable {
+    struct Update: Codable {
         public let title: String?
         public let tags: [ServiceTags]?
     }
@@ -38,26 +38,26 @@ public extension Service.Parameters {
 public extension Service.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Responsable {
+    struct Create: Codable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Responsable {
+    struct Update: Codable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Responsable {
+    struct All: Codable {
         public let services: [Service.Helpers.ServiceResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Responsable {
+    struct Retrieve: Codable {
         public let id: UUID
         public let title: String
         public let parameters: [Service.Helpers.Parameter]

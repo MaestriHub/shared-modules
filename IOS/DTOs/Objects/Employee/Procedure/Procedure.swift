@@ -13,14 +13,14 @@ public enum Procedure {
 public extension Procedure.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Parametable {
+    struct All: Codable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public let duration: Minutes
         public let price: Price
         public let description: String?
@@ -31,7 +31,7 @@ public extension Procedure.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Parametable {
+    struct Update: Codable {
         public let price: Price?
         public let duration: Minutes?
         public let description: UpdateString?
@@ -44,17 +44,17 @@ public extension Procedure.Parameters {
 public extension Procedure.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Responsable {
+    struct Create: Codable {
         public let procedures: [Procedure.Helpers.CreateProcedureResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Responsable {
+    struct All: Codable {
         public let procedures: [Procedure.Helpers.AllProcedureResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Responsable {
+    struct Update: Codable {
         public let id: UUID
         public let price: Price
         public let duration: Minutes
@@ -70,7 +70,7 @@ public extension Procedure.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Responsable {
+    struct Retrieve: Codable {
         public let id: UUID
         public let duration: Minutes
         public let price: Price

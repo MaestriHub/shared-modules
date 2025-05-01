@@ -9,16 +9,17 @@ public enum Position {
 public extension Position.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public var title: String
-        public var permissions: PermissionSet
+        public var creds: CredentialsSet
+        public var makeOwner: Bool
         public var salary: Salary.Parameters.Rules.Create
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Parametable {
+    struct Patch: Codable {
         public var title: String?
-        public var permissions: PermissionSet?
+        public var creds: CredentialsSet?
         public var salary: Salary.Parameters.Rules.Create?
     }
 }
@@ -26,15 +27,16 @@ public extension Position.Parameters {
 public extension Position.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var id: UUID
         public var title: String
-        public var permissions: PermissionSet
+        public var creds: CredentialsSet
+        public var owner: Bool
         public var salary: Salary.Responses.Rules.Full
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Partial: Codable {
         public var id: UUID
         public var title: String
     }

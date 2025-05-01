@@ -1,39 +1,90 @@
-import Foundation
-
-public struct PermissionSet: OptionSet, Codable, Hashable {
-    
-    public static let owner = PermissionSet(rawValue: 1 << 0)
-
-    public static let appointments = PermissionSet(rawValue: 1 << 1)
-    public static let statistic = PermissionSet(rawValue: 1 << 2)
-    public static let employee = PermissionSet(rawValue: 1 << 3)
-    public static let timetable = PermissionSet(rawValue: 1 << 4)
-    public static let notifications = PermissionSet(rawValue: 1 << 5)
-    public static let salon = PermissionSet(rawValue: 1 << 6)
-    public static let finance = PermissionSet(rawValue: 1 << 7)
-    public static let procedure = PermissionSet(rawValue: 1 << 8)
-    public static let contact = PermissionSet(rawValue: 1 << 9)
-    public static let position = PermissionSet(rawValue: 1 << 10)
-    public static let salary = PermissionSet(rawValue: 1 << 11)
-
-    public static let none: PermissionSet = []
-    public static let all: PermissionSet = [
-        .appointments,
-        .statistic, 
-        .employee, 
-        .timetable, 
-        .notifications,
-        .salon, 
-        .finance,
-        .procedure,
-        .contact,
-        .position,
-        .salary
-    ]
-
+public struct CredentialsSet: OptionSet, Codable, Hashable {
     public var rawValue: Int
-    
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
+    
+    public enum Client {
+        static let edit = CredentialsSet(rawValue: 0)
+        static let visibleBaseInfo = CredentialsSet(rawValue: 1)
+        static let visibleContacts = CredentialsSet(rawValue: 2)
+    }
+    
+    public enum Salon {
+        static let editBaseInfo = CredentialsSet(rawValue: 3)
+    }
+    
+    public enum Employee {
+        static let edit = CredentialsSet(rawValue: 4)
+        static let visible = CredentialsSet(rawValue: 5)
+    }
+    
+    public enum Procedure {
+        static let ownCreate = CredentialsSet(rawValue: 6)
+        static let otherCreate = CredentialsSet(rawValue: 7)
+    }
+    
+    public enum Position {
+        static let edit = CredentialsSet(rawValue: 8)
+    }
+    
+    public enum Worktime {
+        static let ownEdit = CredentialsSet(rawValue: 9)
+        static let otherEdit = CredentialsSet(rawValue: 10)
+    }
+    
+    /// ----------------------
+    
+    public enum Appointment {
+        static let all = CredentialsSet(rawValue: 11)
+    }
+    
+    public enum Statistic {
+        static let all = CredentialsSet(rawValue: 12)
+    }
+    
+    public enum Notification {
+        static let all = CredentialsSet(rawValue: 13)
+    }
+    
+    public enum Finance {
+        static let all = CredentialsSet(rawValue: 14)
+    }
+    
+    public enum Salary {
+        static let all = CredentialsSet(rawValue: 15)
+    }
+}
+
+public extension CredentialsSet {
+    static let none: CredentialsSet = []
+    
+    static let all: CredentialsSet = [
+        Client.edit,
+        Client.visibleBaseInfo,
+        Client.visibleContacts,
+        
+        Salon.editBaseInfo,
+        
+        Employee.edit,
+        Employee.visible,
+        
+        Procedure.otherCreate,
+        Procedure.ownCreate,
+        
+        Position.edit,
+        
+        Worktime.otherEdit,
+        Worktime.ownEdit,
+        
+        Appointment.all,
+        
+        Statistic.all,
+        
+        Notification.all,
+        
+        Finance.all,
+        
+        Salary.all,
+    ]
 }

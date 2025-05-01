@@ -13,7 +13,7 @@ public extension Appointment.Responses {
 public extension Appointment.Parameters {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
+    struct Retrieve: Codable {
         public let startDate: Date?
         public let endDate: Date?
         public let employees: [UUID]?
@@ -21,13 +21,13 @@ public extension Appointment.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public let type: AppointmentType
         public let time: SafeDateInterval
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Parametable {
+    struct Patch: Codable {
         public let time: SafeDateInterval
     }
 }
@@ -35,7 +35,7 @@ public extension Appointment.Parameters {
 public extension Appointment.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var id: UUID
         public var status: AppointmentStatus
         public var salon: Helpers.Salon
@@ -46,7 +46,7 @@ public extension Appointment.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Partial: Codable {
         public var id: UUID
         public var status: AppointmentStatus
         public var time: SafeDateInterval

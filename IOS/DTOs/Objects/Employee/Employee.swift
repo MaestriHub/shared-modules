@@ -11,7 +11,7 @@ public enum Employee {
 public extension Employee.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Invite: Parametable {
+    struct Invite: Codable {
         public var nickname: String?
         public var salonId: UUID
         public var positionId: UUID
@@ -20,7 +20,7 @@ public extension Employee.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Parametable {
+    struct Patch: Codable {
         public var positionId: UUID?
     }
 }
@@ -28,7 +28,7 @@ public extension Employee.Parameters {
 public extension Employee.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var id: UUID
         public var user: Employee.Internal.UserInfo?
         public var contacts: [Contact.Shared.PrimaryContact]
@@ -37,7 +37,7 @@ public extension Employee.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Partial: Codable {
         public var id: UUID
         public var nickname: String
         public var avatar: URL

@@ -13,7 +13,7 @@ public enum Complex {
 public extension Complex.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Parametable {
+    struct All: Codable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
@@ -24,7 +24,7 @@ public extension Complex.Parameters {
     /// Думаю что в будущем добавиться возможность создавать комплекс не с айдишниками процедур, а с его личными
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public let alias: String?
         public let description: String?
         public let priceShift: Complex.Helpers.PriceShift
@@ -32,7 +32,7 @@ public extension Complex.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Parametable {
+    struct Update: Codable {
         public typealias ChunkPosition = Int
         public typealias ChunkId = UUID
     
@@ -48,7 +48,7 @@ public extension Complex.Parameters {
 public extension Complex.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Responsable {
+    struct Create: Codable {
         public let id: UUID
         public let priceShift: Complex.Helpers.PriceShift
         public let description: String?
@@ -57,7 +57,7 @@ public extension Complex.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Responsable {
+    struct Update: Codable {
         public let id: UUID
         public let alias: String?
         public let description: String?
@@ -66,12 +66,12 @@ public extension Complex.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Responsable {
+    struct All: Codable {
         public let complexes: [Complex.Helpers.ComplexResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Responsable {
+    struct Retrieve: Codable {
         public let id: UUID
         public let alias: String?
         public let description: String?

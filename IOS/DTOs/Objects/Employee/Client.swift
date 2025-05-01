@@ -10,13 +10,13 @@ public enum Client {
 
 public extension Client.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public var alias: String
         public var contact: Client.Internal.Contact?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
+    struct Retrieve: Codable {
         public let employees: [UUID]?
     }
 }
@@ -25,7 +25,7 @@ public extension Client.Responses {
     typealias Clients = [ClientInfo]
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ClientInfo: Responsable {
+    struct ClientInfo: Codable {
         public var id: UUID
         public var user: Client.Internal.UserInfo?
         public var alias: String?
@@ -33,7 +33,7 @@ public extension Client.Responses {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Verify: Responsable {
+    struct Verify: Codable {
         public var contacts: [Contact.Shared.PrimaryContact]
     }
 }

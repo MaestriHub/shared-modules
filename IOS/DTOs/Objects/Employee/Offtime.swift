@@ -9,14 +9,14 @@ public enum Offtime {
 public extension Offtime.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Parametable {
+    struct Create: Codable {
         public var interval: SafeDateInterval
         public var reason: String?
         public var coefficient: Decimal
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Parametable {
+    struct Retrieve: Codable {
         public var owners: [TimetableOwner]
         //Идеально отправлять в salon time zone с 00:00-00:00 что бы были только дни
         public var period: SafeDateInterval
@@ -26,7 +26,7 @@ public extension Offtime.Parameters {
 public extension Offtime.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Responsable {
+    struct Full: Codable {
         public var id: UUID
         public var interval: SafeDateInterval
         public var reason: String?
@@ -35,7 +35,7 @@ public extension Offtime.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Responsable {
+    struct Partial: Codable {
         public var id: UUID
         public var interval: SafeDateInterval
     }
