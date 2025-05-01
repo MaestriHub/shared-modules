@@ -42,7 +42,8 @@ public extension Search.Responses.Helpers {
         public var name: String
         public var type: SalonType
         public var logo: URL
-        public var address: Address
         public var isFavorite: Bool = false
+        public var address: Address
+        public var point: CoordinatePoint
     }
 }

@@ -43,6 +43,7 @@ public extension Appointment.Responses {
         public var time: SafeDateInterval
         public var price: Price
         public var address: Address
+        public var point: CoordinatePoint
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
@@ -88,6 +89,7 @@ public extension Appointment.Responses.Helpers {
         public var type: SalonType
         public var logo: URL
         public var address: Address
+        public var point: CoordinatePoint
     }
 }
 

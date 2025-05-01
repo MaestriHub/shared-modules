@@ -14,10 +14,11 @@ public extension Salon.Responses {
         public var type: SalonType
         public var description: String?
         public var logo: URL
-        public var address: Address
         public var isActive: Bool
         public var isFavorite: Bool = false
         public var localeId: String
         public var timeZoneId: String
+        public var address: Address
+        public var point: CoordinatePoint
     }
 }

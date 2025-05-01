@@ -21,6 +21,7 @@ public extension Workspace.Parameters {
         public let timetable: Timetable.Parameters.Create.Pattern?
         public let contact: Workspace.Internal.Contact?
         public let address: Address
+        public var point: CoordinatePoint
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
@@ -42,6 +43,7 @@ public extension Workspace.Responses {
         public var description: String?
         public var logo: URL
         public var address: Address
+        public var point: CoordinatePoint
         public var isActive: Bool
         public var localeId: String
         public var timeZoneId: String
@@ -55,6 +57,7 @@ public extension Workspace.Responses {
         public var type: SalonType
         public var logo: URL
         public var address: Address
+        public var point: CoordinatePoint
     }
 }
 

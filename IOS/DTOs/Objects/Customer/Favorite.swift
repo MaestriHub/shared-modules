@@ -14,7 +14,8 @@ public extension Favorite.Responses {
         public var name: String
         public var type: SalonType
         public var logo: URL
-        public var address: Address
         public var isActive: Bool
+        public var address: Address
+        public var point: CoordinatePoint
     }
 }

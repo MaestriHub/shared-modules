@@ -44,8 +44,9 @@ public extension Assigment.Responses {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable {
         public var customer: Assigment.Responses.Helpers.Client
-        public var address: Address
         public var associative: [Base]
+        public var address: Address
+        public var point: CoordinatePoint
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
