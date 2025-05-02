@@ -69,7 +69,7 @@ public extension CredentialsSet {
         clientCreds: [.edit, .visibleBaseInfo, .visibleContacts],
         salonCreds: [.editBaseInfo],
         employeeCreds: [.edit, .visible],
-        procedureCreds: [.otherCreate, .ownCreate],
+        procedureCreds: [.otherEdit, .ownEdit],
         positionCreds: [.edit],
         worktimeCreds: [.otherEdit, .ownEdit],
         appointmentCreds: [.all],
