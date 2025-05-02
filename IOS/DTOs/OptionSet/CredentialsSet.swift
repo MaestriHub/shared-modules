@@ -28,8 +28,8 @@ public struct CredentialsSet: Codable, Hashable {
     }
 
     public enum ProcedureCredentials: Codable {
-        case ownCreate
-        case otherCreate
+        case ownEdit
+        case otherEdit
     }
 
     public enum PositionCredentials: Codable {
