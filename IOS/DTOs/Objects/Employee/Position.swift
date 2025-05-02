@@ -20,6 +20,7 @@ public extension Position.Parameters {
     struct Patch: Codable {
         public var title: String?
         public var creds: CredentialsSet?
+        public var makeOwner: Bool
         public var salary: Salary.Parameters.Rules.Create?
     }
 }
