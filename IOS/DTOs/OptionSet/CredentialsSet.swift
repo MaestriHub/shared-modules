@@ -66,68 +66,68 @@ public struct CredentialsSet: Codable, Hashable {
 
 public extension CredentialsSet {
     static var all: CredentialsSet = .init(
-        clientCreds: [.edit, .visibleBaseInfo, .visibleContacts],
-        salonCreds: [.editBaseInfo],
-        employeeCreds: [.edit, .visible],
-        procedureCreds: [.otherEdit, .ownEdit],
-        positionCreds: [.edit],
-        worktimeCreds: [.otherEdit, .ownEdit],
+        clientCreds     : [.edit, .visibleBaseInfo, .visibleContacts],
+        salonCreds      : [.editBaseInfo],
+        employeeCreds   : [.edit, .visible],
+        procedureCreds  : [.otherEdit, .ownEdit],
+        positionCreds   : [.edit],
+        worktimeCreds   : [.otherEdit, .ownEdit],
         appointmentCreds: [.all],
-        statisticCreds: [.all],
-        notifyCreds: [.all],
-        financeCreds: [.all],
-        salaryCreds: [.all]
+        statisticCreds  : [.all],
+        notifyCreds     : [.all],
+        financeCreds    : [.all],
+        salaryCreds     : [.all]
     )
     
     static var none: CredentialsSet = .init(
-        clientCreds: [],
-        salonCreds: [],
-        employeeCreds: [],
-        procedureCreds: [],
-        positionCreds: [],
-        worktimeCreds: [],
+        clientCreds     : [],
+        salonCreds      : [],
+        employeeCreds   : [],
+        procedureCreds  : [],
+        positionCreds   : [],
+        worktimeCreds   : [],
         appointmentCreds: [],
-        statisticCreds: [],
-        notifyCreds: [],
-        financeCreds: [],
-        salaryCreds: []
+        statisticCreds  : [],
+        notifyCreds     : [],
+        financeCreds    : [],
+        salaryCreds     : []
     )
 }
 
 public extension CredentialsSet {
-    mutating func insert(c: ClientCredentials)       { self.clientCreds.insert(c) }
-    mutating func insert(c: SalonCredentials)        { self.salonCreds.insert(c) }
-    mutating func insert(c: EmployeeCredentials)     { self.employeeCreds.insert(c) }
-    mutating func insert(c: ProcedureCredentials)    { self.procedureCreds.insert(c) }
-    mutating func insert(c: PositionCredentials)     { self.positionCreds.insert(c) }
-    mutating func insert(c: WorktimeCredentials)     { self.worktimeCreds.insert(c) }
-    mutating func insert(c: AppointmentCredentials)  { self.appointmentCreds.insert(c) }
-    mutating func insert(c: StatisticCredentials)    { self.statisticCreds.insert(c) }
-    mutating func insert(c: NotificationCredentials) { self.notifyCreds.insert(c) }
-    mutating func insert(c: SalaryCredentials)       { self.salaryCreds.insert(c) }
-    mutating func insert(c: FinanceCredentials)      { self.financeCreds.insert(c) }
+    mutating func insert(_ c: ClientCredentials)       { self.clientCreds.insert(c) }
+    mutating func insert(_ c: SalonCredentials)        { self.salonCreds.insert(c) }
+    mutating func insert(_ c: EmployeeCredentials)     { self.employeeCreds.insert(c) }
+    mutating func insert(_ c: ProcedureCredentials)    { self.procedureCreds.insert(c) }
+    mutating func insert(_ c: PositionCredentials)     { self.positionCreds.insert(c) }
+    mutating func insert(_ c: WorktimeCredentials)     { self.worktimeCreds.insert(c) }
+    mutating func insert(_ c: AppointmentCredentials)  { self.appointmentCreds.insert(c) }
+    mutating func insert(_ c: StatisticCredentials)    { self.statisticCreds.insert(c) }
+    mutating func insert(_ c: NotificationCredentials) { self.notifyCreds.insert(c) }
+    mutating func insert(_ c: SalaryCredentials)       { self.salaryCreds.insert(c) }
+    mutating func insert(_ c: FinanceCredentials)      { self.financeCreds.insert(c) }
     
-    mutating func remove(c: ClientCredentials)       { self.clientCreds.remove(c) }
-    mutating func remove(c: SalonCredentials)        { self.salonCreds.remove(c) }
-    mutating func remove(c: EmployeeCredentials)     { self.employeeCreds.remove(c) }
-    mutating func remove(c: ProcedureCredentials)    { self.procedureCreds.remove(c) }
-    mutating func remove(c: PositionCredentials)     { self.positionCreds.remove(c) }
-    mutating func remove(c: WorktimeCredentials)     { self.worktimeCreds.remove(c) }
-    mutating func remove(c: AppointmentCredentials)  { self.appointmentCreds.remove(c) }
-    mutating func remove(c: StatisticCredentials)    { self.statisticCreds.remove(c) }
-    mutating func remove(c: NotificationCredentials) { self.notifyCreds.remove(c) }
-    mutating func remove(c: SalaryCredentials)       { self.salaryCreds.remove(c) }
-    mutating func remove(c: FinanceCredentials)      { self.financeCreds.remove(c) }
+    mutating func remove(_ c: ClientCredentials)       { self.clientCreds.remove(c) }
+    mutating func remove(_ c: SalonCredentials)        { self.salonCreds.remove(c) }
+    mutating func remove(_ c: EmployeeCredentials)     { self.employeeCreds.remove(c) }
+    mutating func remove(_ c: ProcedureCredentials)    { self.procedureCreds.remove(c) }
+    mutating func remove(_ c: PositionCredentials)     { self.positionCreds.remove(c) }
+    mutating func remove(_ c: WorktimeCredentials)     { self.worktimeCreds.remove(c) }
+    mutating func remove(_ c: AppointmentCredentials)  { self.appointmentCreds.remove(c) }
+    mutating func remove(_ c: StatisticCredentials)    { self.statisticCreds.remove(c) }
+    mutating func remove(_ c: NotificationCredentials) { self.notifyCreds.remove(c) }
+    mutating func remove(_ c: SalaryCredentials)       { self.salaryCreds.remove(c) }
+    mutating func remove(_ c: FinanceCredentials)      { self.financeCreds.remove(c) }
     
-    mutating func contains(c: ClientCredentials)       -> Bool { self.clientCreds.contains(c) }
-    mutating func contains(c: SalonCredentials)        -> Bool { self.salonCreds.contains(c) }
-    mutating func contains(c: EmployeeCredentials)     -> Bool { self.employeeCreds.contains(c) }
-    mutating func contains(c: ProcedureCredentials)    -> Bool { self.procedureCreds.contains(c) }
-    mutating func contains(c: PositionCredentials)     -> Bool { self.positionCreds.contains(c) }
-    mutating func contains(c: WorktimeCredentials)     -> Bool { self.worktimeCreds.contains(c) }
-    mutating func contains(c: AppointmentCredentials)  -> Bool { self.appointmentCreds.contains(c) }
-    mutating func contains(c: StatisticCredentials)    -> Bool { self.statisticCreds.contains(c) }
-    mutating func contains(c: NotificationCredentials) -> Bool { self.notifyCreds.contains(c) }
-    mutating func contains(c: SalaryCredentials)       -> Bool { self.salaryCreds.contains(c) }
-    mutating func contains(c: FinanceCredentials)      -> Bool { self.financeCreds.contains(c) }
+    mutating func contains(_ c: ClientCredentials)       -> Bool { self.clientCreds.contains(c) }
+    mutating func contains(_ c: SalonCredentials)        -> Bool { self.salonCreds.contains(c) }
+    mutating func contains(_ c: EmployeeCredentials)     -> Bool { self.employeeCreds.contains(c) }
+    mutating func contains(_ c: ProcedureCredentials)    -> Bool { self.procedureCreds.contains(c) }
+    mutating func contains(_ c: PositionCredentials)     -> Bool { self.positionCreds.contains(c) }
+    mutating func contains(_ c: WorktimeCredentials)     -> Bool { self.worktimeCreds.contains(c) }
+    mutating func contains(_ c: AppointmentCredentials)  -> Bool { self.appointmentCreds.contains(c) }
+    mutating func contains(_ c: StatisticCredentials)    -> Bool { self.statisticCreds.contains(c) }
+    mutating func contains(_ c: NotificationCredentials) -> Bool { self.notifyCreds.contains(c) }
+    mutating func contains(_ c: SalaryCredentials)       -> Bool { self.salaryCreds.contains(c) }
+    mutating func contains(_ c: FinanceCredentials)      -> Bool { self.financeCreds.contains(c) }
 }
