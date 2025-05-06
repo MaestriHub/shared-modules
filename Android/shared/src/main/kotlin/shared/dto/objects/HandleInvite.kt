@@ -33,8 +33,8 @@ object HandleInvite {
 
         @Serializable
         data class CustomerSuccessOneOff(
-            val verify: Internal.Verify,
-            val client: Internal.Client,
+            val verify: Internal.Verify? = null,
+            val client: Internal.Client? = null,
         ) : Responsable
     }
 

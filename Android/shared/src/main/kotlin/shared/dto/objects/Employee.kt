@@ -34,7 +34,7 @@ object Employee {
         @Serializable
         data class Full(
             val id: UUID,
-            val user: Internal.EmployeeUserOneOf,
+            val user: Internal.UserInfo? = null,
             val canEdit: Boolean = false,
             val contacts: List<Contact.Shared.PrimaryContact>,
             val salonId: UUID,
@@ -59,13 +59,7 @@ object Employee {
         ) : Parametable()
 
         @Serializable
-        data class EmployeeUserOneOf(
-            val link: URI? = null,
-            val value: EmployeeUserInfo? = null,
-        ) : Parametable()
-
-        @Serializable
-        data class EmployeeUserInfo(
+        data class UserInfo(
             val id: UUID,
             val nickname: String,
             val avatar: URI,

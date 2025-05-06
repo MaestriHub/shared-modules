@@ -7,6 +7,7 @@ import kotlinx.serialization.UseSerializers
 import shared.dto.enums.ContactType
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
+import shared.dto.primitives.CoordinatePoint
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
@@ -24,9 +25,10 @@ object Workspace {
             val timeZoneId: String,
             val localeId: String,
             val description: String? = null,
-            val address: Address,
             val contact: Internal.Contact? = null,
-            val timetable: Timetable.Parameters.Create.Pattern? = null
+            val timetable: Timetable.Parameters.Create.Pattern? = null,
+            val address: Address,
+            val point: CoordinatePoint,
         ) : Parametable()
 
         @Serializable
@@ -47,6 +49,7 @@ object Workspace {
             var description: String? = null,
             var logo: URI,
             var address: Address,
+            var point: CoordinatePoint,
             var isActive: Boolean,
             var canEdit: Boolean = false,
             var localeId: String,
@@ -61,6 +64,7 @@ object Workspace {
             var type: SalonType,
             var logo: URI,
             var address: Address,
+            val point: CoordinatePoint,
         ) : Responsable
     }
 

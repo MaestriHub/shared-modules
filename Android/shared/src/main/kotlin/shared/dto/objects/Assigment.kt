@@ -14,6 +14,7 @@ import shared.dto.enums.AppointmentType
 import shared.dto.enums.ServiceTags
 import shared.dto.objects.contacts.Contact
 import shared.dto.primitives.Address
+import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
@@ -55,8 +56,9 @@ object Assigment {
         @Serializable
         data class Full(
             val customer: Helpers.Client,
-            val address: Address,
             val associative: List<Base>,
+            val address: Address,
+            val point: CoordinatePoint,
         ) : Responsable
 
         @Serializable
@@ -88,7 +90,7 @@ object Assigment {
             data class Service(
                 val id: UUID,
                 val title: String,
-                val category: Array<ServiceTags>
+                val category: List<ServiceTags>
             ) : Responsable
 
             @Serializable
@@ -96,7 +98,7 @@ object Assigment {
                 val id: UUID,
                 val nick: String,
                 val avatar: URI,
-                val contacts: Array<Contact.Shared.PrimaryContact>,
+                val contacts: List<Contact.Shared.PrimaryContact>,
             ) : Responsable
 
             @Serializable
@@ -104,7 +106,7 @@ object Assigment {
                 val id: UUID,
                 val nick: String,
                 val avatar: URI,
-                val contacts: Array<Contact.Shared.PrimaryContact>,
+                val contacts: List<Contact.Shared.PrimaryContact>,
             ) : Responsable
         }
     }

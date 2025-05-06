@@ -4,9 +4,6 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.objects.contacts.Contact
-import shared.dto.optionSet.MaestriPermissionSet
-import shared.dto.optionSet.UserRoleSet
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer

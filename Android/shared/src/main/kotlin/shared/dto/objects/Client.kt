@@ -13,6 +13,8 @@ import shared.serializers.UUIDSerializer
 import java.net.URI
 import java.util.*
 
+typealias Clients = List<Client.Responses.ClientInfo>
+
 object Client {
     data object Parameters {
         @Serializable
@@ -31,7 +33,7 @@ object Client {
         @Serializable
         data class ClientInfo(
             val id: UUID,
-            val user: Internal.ClientUserOneOf,
+            val user: Internal.UserInfo? = null,
             val alias: String?,
             val contacts: List<Contact.Shared.PrimaryContact>
         ) : Responsable
@@ -47,12 +49,6 @@ object Client {
         data class Contact(
             val value: String,
             val type: ContactType
-        ) : Parametable()
-
-        @Serializable
-        data class ClientUserOneOf(
-            val link: URI? = null,
-            val value: UserInfo? = null,
         ) : Parametable()
 
         @Serializable

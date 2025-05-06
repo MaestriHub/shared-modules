@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
+import shared.dto.primitives.CoordinatePoint
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
@@ -21,11 +22,12 @@ object Salon {
             var type: SalonType,
             var description: String? = null,
             var logo: URI? = null,
-            var address: Address,
             var isActive: Boolean,
             var isFavorite: Boolean = false,
             var localeId: String,
-            var timeZoneId: String
+            var timeZoneId: String,
+            var address: Address,
+            var point: CoordinatePoint,
         ) : Responsable
     }
 }

@@ -15,6 +15,7 @@ import shared.dto.enums.SalonType
 import shared.dto.enums.ServiceTags
 import shared.dto.objects.contacts.Contact
 import shared.dto.primitives.Address
+import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
@@ -98,6 +99,7 @@ object Appointment {
                 val type: SalonType,
                 val logo: URI,
                 val address: Address,
+                val point: CoordinatePoint,
             )
         }
     }
