@@ -4,25 +4,23 @@ public typealias Seconds = TimeInterval
 
 public extension Date {
     @inlinable
-    @discardableResult
-    func apply(_ component: TimeComponent, _ operation: TimeOperation) -> Date {
-        return addingTimeInterval(operation.unwrap() * component.unwrap())
+    func apply(_ c: TimeComponent, _ o: TimeOperation) -> Date {
+        return addingTimeInterval(o.unwrap() * c.unwrap())
     }
     
     @inlinable
-    @discardableResult
-    func plus(_ component: TimeComponent) -> Date {
-        return apply(component, .plus)
+    func plus(_ c: TimeComponent) -> Date {
+        return apply(c, .plus)
     }
     
     @inlinable
-    @discardableResult
-    func minus(_ component: TimeComponent) -> Date {
-        return apply(component, .minus)
+    func minus(_ c: TimeComponent) -> Date {
+        return apply(c, .minus)
     }
 }
 
 public extension Date {
+    
     enum TimeComponent: Sendable {
          case seconds(Int)
         
@@ -38,8 +36,8 @@ public extension Date {
          @inlinable
          func unwrap() -> Seconds {
              switch self {
-                 case .seconds(let v):
-                     return Seconds(v)
+                 case .seconds(let s):
+                     return Seconds(s)
              }
          }
     }
