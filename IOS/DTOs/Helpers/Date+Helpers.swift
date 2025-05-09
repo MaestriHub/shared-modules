@@ -3,17 +3,14 @@ import Foundation
 public typealias Seconds = TimeInterval
 
 public extension Date {
-    @inlinable
     func apply(_ c: TimeComponent, _ o: TimeOperation) -> Date {
         return addingTimeInterval(o.unwrap() * c.unwrap())
     }
     
-    @inlinable
     func plus(_ c: TimeComponent) -> Date {
         return apply(c, .plus)
     }
-    
-    @inlinable
+
     func minus(_ c: TimeComponent) -> Date {
         return apply(c, .minus)
     }
@@ -22,31 +19,26 @@ public extension Date {
 public extension Date {
     
     enum TimeComponent: Sendable {
-         case seconds(Int)
+        case seconds(Int)
         
-         @inlinable
-         public static func minute(_ count: Int) -> Self { .seconds(count * 60) }
+        public static func minute(_ count: Int) -> Self { .seconds(count * 60) }
         
-         @inlinable
-         public static func hour(_ count: Int) -> Self { .minute(count * 60) }
+        public static func hour(_ count: Int) -> Self { .minute(count * 60) }
         
-         @inlinable
-         public static func day(_ count: Int) -> Self { .hour(count * 24) }
+        public static func day(_ count: Int) -> Self { .hour(count * 24) }
          
-         @inlinable
-         func unwrap() -> Seconds {
-             switch self {
-                 case .seconds(let s):
+        func unwrap() -> Seconds {
+            switch self {
+                case .seconds(let s):
                      return Seconds(s)
-             }
-         }
+            }
+        }
     }
     
     enum TimeOperation: Sendable {
         case minus
         case plus
         
-        @inlinable
         func unwrap() -> Double {
             switch self {
                 case .minus:
