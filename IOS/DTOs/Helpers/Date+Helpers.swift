@@ -19,13 +19,13 @@ public extension Date {
 public extension Date {
     
     enum TimeComponent: Sendable {
-        case seconds(Int)
+        case seconds(Int = 1)
         
-        public static func minute(_ count: Int) -> Self { .seconds(count * 60) }
+        public static func minute(_ count: Int = 1) -> Self { .seconds(count * 60) }
         
-        public static func hour(_ count: Int) -> Self { .minute(count * 60) }
+        public static func hour(_ count: Int = 1) -> Self { .minute(count * 60) }
         
-        public static func day(_ count: Int) -> Self { .hour(count * 24) }
+        public static func day(_ count: Int = 1) -> Self { .hour(count * 24) }
          
         func unwrap() -> Seconds {
             switch self {
