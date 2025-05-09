@@ -3,7 +3,7 @@ import XCTest
 
 final class DateExtensionsTests: XCTestCase {
     
-    func testFOO() {
+    func testChangeDate() {
         let date = Date
             .now
             .plus(.day(10))
@@ -18,14 +18,24 @@ final class DateExtensionsTests: XCTestCase {
         let backendGMTDate = Date.now
         
         let myLocalBSTDate = backendGMTDate.convertFromUTC(to: TimeZone(identifier: "BST")!)
-        XCTAssertEqual(myLocalBSTDate.timeIntervalSince1970, Date.now.timeIntervalSince1970 - 6*60*60, accuracy: 0.1)
+        
+        XCTAssertEqual(
+            myLocalBSTDate.timeIntervalSince1970,
+            Date.now.timeIntervalSince1970 - 6*60*60,
+            accuracy: 0.1
+        )
     }
     
     func testLocalToUTCConversion() {
         let myLocalBSTDate = Date.now
         
         let backendGMTDate = myLocalBSTDate.convertToUTC(from: TimeZone(identifier: "BST")!)
-        XCTAssertEqual(backendGMTDate.timeIntervalSince1970, Date.now.timeIntervalSince1970 + 6*60*60, accuracy: 0.1)
+        
+        XCTAssertEqual(
+            backendGMTDate.timeIntervalSince1970,
+            Date.now.timeIntervalSince1970 + 6*60*60,
+            accuracy: 0.1
+        )
     }
     
     func testApplyPerformance() {
