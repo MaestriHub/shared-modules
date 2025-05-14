@@ -32,6 +32,7 @@ public extension HandleInvite.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ClientMergeSuccess: Codable {
+        public let id: UUID
         public let alias: String?
     }
 }
