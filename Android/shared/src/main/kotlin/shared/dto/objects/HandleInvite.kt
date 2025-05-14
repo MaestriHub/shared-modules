@@ -6,7 +6,6 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.objects.contacts.Contact
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
@@ -17,8 +16,8 @@ import java.util.*
 object HandleInvite {
     data object Parameters {
         @Serializable
-        data class Customer(
-            val contactValue: String? = null,
+        data class ClientMerge(
+            val contact: String,
         ) : Parametable()
     }
 
@@ -32,20 +31,13 @@ object HandleInvite {
         ) : Responsable
 
         @Serializable
-        data class CustomerSuccessOneOff(
-            val verify: Internal.Verify? = null,
-            val client: Internal.Client? = null,
-        ) : Responsable
-    }
-
-    data object Internal {
-        @Serializable
-        data class Verify(
-            val contacts: List<Contact.Shared.PrimaryContact>,
+        data class MaskedContacts(
+            val contacts : List<String>,
         ) : Responsable
 
         @Serializable
-        data class Client(
+        data class ClientMergeSuccess(
+            val id: UUID,
             val alias: String? = null,
         ) : Responsable
     }
