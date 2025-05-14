@@ -10,16 +10,13 @@ public enum HandleInvite {
 public extension HandleInvite.Parameters {
   
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Customer: Codable {
-        public var contactValue: String?
+    struct ClientMerge: Codable {
+        public var contact: String
     }
-    
-    // struct Employee: Codable
-    // Nothing!
 }
 
 public extension HandleInvite.Responses {
-
+    
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct EmployeeSuccess: Codable {
         public let id: UUID
@@ -29,22 +26,13 @@ public extension HandleInvite.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CustomerSuccessOneOf: Codable {
-        public let verify: HandleInvite.Internal.Verify?
-        public let client: HandleInvite.Internal.Client?
-    }
-}
-
-public extension HandleInvite.Internal {
-    
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Verify: Codable {
-        public let contacts: [Contact.Shared.PrimaryContact]
+    struct MaskedContacts: Codable {
+        public let contacts: [String]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Client: Codable {
+    struct ClientMergeSuccess: Codable {
+        public let id: UUID
         public let alias: String?
     }
 }
-

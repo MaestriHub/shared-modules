@@ -23,6 +23,13 @@ let package = Package(
                 .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
             ],
             path: "IOS/DTOs"
-        )
+        ),
+        .testTarget(
+            name: "Tests",
+            dependencies: [
+                .target(name: "DTOs"),
+            ],
+            path: "IOS/Tests"
+        ),
     ]
 )
