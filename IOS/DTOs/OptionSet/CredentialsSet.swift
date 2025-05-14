@@ -12,54 +12,54 @@ public struct CredentialsSet: Codable, Hashable {
     public var financeCreds    : Set<FinanceCredentials>
     public var salaryCreds     : Set<SalaryCredentials>
     
-    public enum ClientCredentials: Codable {
+    public enum ClientCredentials: String, Codable {
         case edit
         case visibleBaseInfo
         case visibleContacts
     }
 
-    public enum SalonCredentials: Codable {
+    public enum SalonCredentials: String, Codable {
         case editBaseInfo
     }
 
-    public enum EmployeeCredentials: Codable {
+    public enum EmployeeCredentials: String, Codable {
         case edit
         case visible
     }
 
-    public enum ProcedureCredentials: Codable {
+    public enum ProcedureCredentials: String, Codable {
         case ownEdit
         case otherEdit
     }
 
-    public enum PositionCredentials: Codable {
+    public enum PositionCredentials: String, Codable {
         case edit
     }
 
-    public enum WorktimeCredentials: Codable {
+    public enum WorktimeCredentials: String, Codable {
         case ownEdit
         case otherEdit
     }
 
     /// ----------------------
 
-    public enum AppointmentCredentials: Codable {
+    public enum AppointmentCredentials: String, Codable {
        case all
     }
 
-    public enum StatisticCredentials: Codable {
+    public enum StatisticCredentials: String, Codable {
         case all
     }
 
-    public enum NotificationCredentials: Codable {
+    public enum NotificationCredentials: String, Codable {
         case all
     }
 
-    public enum FinanceCredentials: Codable {
+    public enum FinanceCredentials: String, Codable {
         case all
     }
 
-    public enum SalaryCredentials: Codable {
+    public enum SalaryCredentials: String, Codable {
         case all
     }
 }
