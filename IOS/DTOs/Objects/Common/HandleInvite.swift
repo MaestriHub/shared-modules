@@ -26,7 +26,7 @@ public extension HandleInvite.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct MaskedContact: Codable {
+    struct MaskedContacts: Codable {
         public let contacts: [String]
     }
     
