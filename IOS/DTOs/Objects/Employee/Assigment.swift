@@ -18,12 +18,12 @@ public extension Assigment.Parameters {
         public let endDate: Date?
         public let employees: [UUID]?
         public let salons: [UUID]?
-        public let customer: UUID?
+        public let clientId: UUID?
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable {
-        public let customerId: UUID
+        public let clientId: UUID
         public let type: AppointmentType
         public let time: SafeDateInterval
     }
@@ -43,7 +43,7 @@ public extension Assigment.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable {
-        public var customer: Assigment.Responses.Helpers.Client
+        public var client: Assigment.Responses.Helpers.Client
         public var associative: [Base]
         public var address: Address
         public var point: CoordinatePoint
@@ -51,7 +51,7 @@ public extension Assigment.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Codable {
-        public var customer: Assigment.Responses.Helpers.Client
+        public var client: Assigment.Responses.Helpers.Client
         public var associative: [Base]
     }
     
@@ -94,7 +94,7 @@ public extension Assigment.Responses.Helpers {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Client: Codable {
         public var id: UUID
-        public var nick: String
+        public var alias: String
         public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
     }
