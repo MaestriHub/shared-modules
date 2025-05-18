@@ -31,12 +31,12 @@ object Assigment {
             val endDate: Date?,
             val employees: List<UUID>?,
             val salons: List<UUID>?,
-            val customer: UUID?
+            val clientId: UUID?
         ) : Parametable()
 
         @Serializable
         data class Create(
-            val customerId: UUID,
+            val clientId: UUID,
             val type: AppointmentType,
             val time: DateInterval,
         ) : Parametable()
@@ -55,7 +55,7 @@ object Assigment {
     data object Responses {
         @Serializable
         data class Full(
-            val customer: Helpers.Client,
+            val client: Helpers.Client,
             val associative: List<Base>,
             val address: Address,
             val point: CoordinatePoint,
@@ -63,7 +63,7 @@ object Assigment {
 
         @Serializable
         data class Partial(
-            val customer: Helpers.Client,
+            val client: Helpers.Client,
             val associative: List<Base>,
         ) : Responsable
 
@@ -104,7 +104,7 @@ object Assigment {
             @Serializable
             data class Client(
                 val id: UUID,
-                val nick: String,
+                val alias: String,
                 val avatar: URI,
                 val contacts: List<Contact.Shared.PrimaryContact>,
             ) : Responsable
