@@ -8,6 +8,7 @@ import shared.dto.enums.ContactType
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
 import shared.dto.primitives.CoordinatePoint
+import shared.dto.primitives.Token
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
@@ -54,7 +55,7 @@ object Workspace {
             var canEdit: Boolean = false,
             var localeId: String,
             var timeZoneId: String,
-            var employeeToken: String,
+            var employeeToken: Token,
         ) : Responsable
 
         @Serializable
