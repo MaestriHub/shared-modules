@@ -1,4 +1,8 @@
-@file:UseSerializers(UUIDSerializer::class, URISerializer::class)
+@file:UseSerializers(
+    UUIDSerializer::class,
+    URISerializer::class,
+    DateISOSerializer::class
+)
 
 package shared.dto.objects
 
@@ -11,6 +15,7 @@ import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Token
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.DateISOSerializer
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
 import java.net.URI

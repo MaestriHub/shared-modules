@@ -24,6 +24,7 @@ object Customer {
             val accessToken: Token,
         ) : Responsable
     }
+
     data object Internal {
         @Serializable
         data class Contact(
