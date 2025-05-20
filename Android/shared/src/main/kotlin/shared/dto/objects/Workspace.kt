@@ -1,6 +1,7 @@
 @file:UseSerializers(
     UUIDSerializer::class,
-    URISerializer::class
+    URISerializer::class,
+    DateISOSerializer::class,
 )
 
 package shared.dto.objects
@@ -11,13 +12,14 @@ import shared.dto.enums.ContactType
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
 import shared.dto.primitives.CoordinatePoint
-import shared.dto.primitives.Token
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.DateISOSerializer
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
 import java.net.URI
-import java.util.*
+import java.util.Date
+import java.util.UUID
 
 object Workspace {
     data object Parameters {
@@ -55,11 +57,17 @@ object Workspace {
             var address: Address,
             var point: CoordinatePoint,
             var isActive: Boolean,
-            var canEdit: Boolean = false,
             var localeId: String,
             var timeZoneId: String,
-            var employeeToken: Token,
+            var token: LocalToken
         ) : Responsable
+
+        @Serializable
+        data class LocalToken(
+            val value: String,
+            val expiration: Date,
+        ) : Responsable, Parametable()
+
 
         @Serializable
         data class Partial(
@@ -76,7 +84,7 @@ object Workspace {
         @Serializable
         data class Contact(
             var value: String,
-            var type: ContactType
+            var type: ContactType,
         ) : Parametable()
     }
 }
