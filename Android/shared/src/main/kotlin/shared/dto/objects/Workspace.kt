@@ -14,6 +14,7 @@ import shared.dto.primitives.Address
 import shared.dto.primitives.CoordinatePoint
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.dto.primitives.Token
 import shared.serializers.DateISOSerializer
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
@@ -59,7 +60,7 @@ object Workspace {
             var isActive: Boolean,
             var localeId: String,
             var timeZoneId: String,
-            var token: LocalToken
+            var token: LocalToken,
         ) : Responsable
 
         @Serializable
@@ -77,6 +78,7 @@ object Workspace {
             var logo: URI,
             var address: Address,
             val point: CoordinatePoint,
+            val token: Token,
         ) : Responsable
     }
 
