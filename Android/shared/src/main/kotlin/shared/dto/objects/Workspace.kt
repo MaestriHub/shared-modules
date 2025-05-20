@@ -19,7 +19,6 @@ import shared.serializers.DateISOSerializer
 import shared.serializers.URISerializer
 import shared.serializers.UUIDSerializer
 import java.net.URI
-import java.util.Date
 import java.util.UUID
 
 object Workspace {
@@ -60,15 +59,8 @@ object Workspace {
             var isActive: Boolean,
             var localeId: String,
             var timeZoneId: String,
-            var token: LocalToken,
+            var employeeToken: Token,
         ) : Responsable
-
-        @Serializable
-        data class LocalToken(
-            val value: String,
-            val expiration: Date,
-        ) : Responsable, Parametable()
-
 
         @Serializable
         data class Partial(
@@ -78,7 +70,6 @@ object Workspace {
             var logo: URI,
             var address: Address,
             val point: CoordinatePoint,
-            val token: Token,
         ) : Responsable
     }
 
