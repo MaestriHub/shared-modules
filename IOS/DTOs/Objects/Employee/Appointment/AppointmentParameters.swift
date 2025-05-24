@@ -2,20 +2,20 @@ import Foundation
 import MemberwiseInit
 
 public struct Appointment_NewParameters {
-    public struct Create {
+    public struct Create: Codable {
         public let clientId: UUID
         public let complexes: [ComplexAppointment]
         public let procedures: [ProcedureAppointment]
     }
     
-    public struct All {
+    public struct All: Codable {
         public let startDate: Date
         public var pagination: Pagination? = nil
         public var endDate: Date? = nil
         public var reversed: Bool = false
     }
     
-    public struct Delete {
+    public struct Delete: Codable {
         public var complexAppointmentId: UUID?
         public var procedureAppointmentId: UUID?
     }
@@ -44,12 +44,12 @@ public extension Appointment_NewParameters.All {
 }
 
 public extension Appointment_NewParameters.Create {
-    struct ProcedureAppointment {
+    struct ProcedureAppointment: Codable {
         var time: SafeDateInterval
         var procedureId: UUID
     }
     
-    struct ComplexAppointment {
+    struct ComplexAppointment: Codable {
         var complexId: UUID
         var procedures: [ProcedureAppointment]
     }
