@@ -44,14 +44,16 @@ public extension Appointment_NewParameters.All {
 }
 
 public extension Appointment_NewParameters.Create {
+    @MemberwiseInit(.public)
     struct ProcedureAppointment: Codable {
-        var time: SafeDateInterval
-        var procedureId: UUID
+        public var time: SafeDateInterval
+        public var procedureId: UUID
     }
     
+    @MemberwiseInit(.public)
     struct ComplexAppointment: Codable {
-        var complexId: UUID
-        var procedures: [ProcedureAppointment]
+        public var complexId: UUID
+        public var procedures: [ProcedureAppointment]
     }
 }
 
