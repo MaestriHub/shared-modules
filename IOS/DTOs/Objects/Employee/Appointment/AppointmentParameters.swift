@@ -58,6 +58,16 @@ public extension Appointment_NewParameters.All {
         case endDate(Date)              // EndDate.jpeg
         case reversed(Bool, Pagination) // Reversed.jpeg (maybe paginated in past)
     }
+    
+    var sortType: SortType? {
+        if let endDate {
+            return .endDate(endDate)
+        }
+        if let pagination {
+            return .reversed(reversed, pagination)
+        }
+        return nil
+    }
 }
 
 public extension Appointment_NewParameters.Delete {
@@ -73,6 +83,16 @@ public extension Appointment_NewParameters.Delete {
     enum Which {
         case complex(UUID)
         case procedure(UUID)
+    }
+    
+    var which: Which? {
+        if let complexAppointmentId {
+            return .complex(complexAppointmentId)
+        }
+        if let procedureAppointmentId {
+            return .procedure(procedureAppointmentId)
+        }
+        return nil
     }
 }
 
