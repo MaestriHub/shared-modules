@@ -33,7 +33,6 @@ extension Appointment_NewResponses.All {
             public var id: UUID
             public var title: String
             public var time: SafeDateInterval
-            public var procedureId: UUID
         }
     }
     
