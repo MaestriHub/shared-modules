@@ -2,9 +2,10 @@ import Foundation
 import MemberwiseInit
 
 public struct Appointment_NewResponses {
+    @MemberwiseInit(.public)
     public struct All: Codable {
-        let complexes : [ComplexAppointment]
-        let procedures: [ProcedureAppointment]
+        public let complexes : [ComplexAppointment]
+        public let procedures: [ProcedureAppointment]
     }
 }
 
