@@ -18,14 +18,16 @@ object Position {
         data class Create(
             val title: String,
             val permissions: CredentialsSet,
+            val makeOwner: Boolean = false,
             val salary: Salary.Parameters.Rules.Create,
         ) : Parametable()
 
         @Serializable
         data class Patch(
-            val title: String?,
-            val permissions: CredentialsSet?,
-            val salary: Salary.Parameters.Rules.Create?,
+            val title: String? = null,
+            val permissions: CredentialsSet? = null,
+            val makeOwner: Boolean? = null,
+            val salary: Salary.Parameters.Rules.Create? = null,
         ) : Parametable()
     }
 

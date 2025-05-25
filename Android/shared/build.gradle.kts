@@ -37,7 +37,7 @@ publishing {
         register<MavenPublication>("gpr") {
             from(components["kotlin"])
             groupId = "app.maestri"
-            version = "1.1.64"
+            version = "1.1.65"
             artifactId = "shared"
         }
     }
