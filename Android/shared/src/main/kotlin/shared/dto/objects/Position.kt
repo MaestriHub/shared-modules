@@ -37,6 +37,7 @@ object Position {
             val id: UUID,
             val title: String,
             val permissions: CredentialsSet,
+            val owner: Boolean,
             val salary: Salary.Responses.Rules.Full,
         ) : Responsable
 
