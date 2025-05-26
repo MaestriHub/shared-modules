@@ -5,8 +5,8 @@ public struct Appointment_NewParameters {
     @MemberwiseInit(.public)
     public struct Create: Codable {
         public let clientId: UUID
-        public let complexes: [ComplexAppointment]
-        public let procedures: [ProcedureAppointment]
+        public let complexes: [Complex]
+        public let procedures: [Procedure]
     }
     
     @MemberwiseInit(.public)
@@ -26,15 +26,15 @@ public struct Appointment_NewParameters {
 
 public extension Appointment_NewParameters.Create {
     @MemberwiseInit(.public)
-    struct ProcedureAppointment: Codable {
+    struct Procedure: Codable {
         public var time: SafeDateInterval
-        public var procedureId: UUID
+        public var id: UUID
     }
     
     @MemberwiseInit(.public)
-    struct ComplexAppointment: Codable {
-        public var complexId: UUID
-        public var procedures: [ProcedureAppointment]
+    struct Complex: Codable {
+        public var id: UUID
+        public var procedures: [Procedure]
     }
 }
 
