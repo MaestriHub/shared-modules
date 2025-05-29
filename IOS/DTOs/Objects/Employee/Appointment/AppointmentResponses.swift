@@ -25,7 +25,7 @@ extension Appointment_NewResponses.All {
     @MemberwiseInit(.public)
     public struct ComplexAppointment: Codable {
         public var id: UUID
-        public var title: String
+        public var alias: String?
         public var price: Decimal
         public var clientId: UUID
         public var salonId: UUID
