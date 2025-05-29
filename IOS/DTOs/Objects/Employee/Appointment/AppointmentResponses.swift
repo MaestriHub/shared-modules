@@ -14,9 +14,11 @@ extension Appointment_NewResponses.All {
     public struct ProcedureAppointment: Codable {
         public var id: UUID
         public var title: String
-        public var amount: Decimal
+        public var price: Decimal
+        public var clientId: UUID
+        public var salonId: UUID
+        public var currency: String
         public var time: SafeDateInterval
-        public var summary: AppointmentSummary
         public var procedureId: UUID
     }
     
@@ -25,7 +27,9 @@ extension Appointment_NewResponses.All {
         public var id: UUID
         public var title: String
         public var price: Decimal
-        public var summary: AppointmentSummary
+        public var clientId: UUID
+        public var salonId: UUID
+        public var currency: String
         public var procedures: [Procedure]
         
         @MemberwiseInit(.public)
@@ -34,12 +38,5 @@ extension Appointment_NewResponses.All {
             public var title: String
             public var time: SafeDateInterval
         }
-    }
-    
-    @MemberwiseInit(.public)
-    public struct AppointmentSummary: Codable {
-        public var clientId: UUID
-        public var salonId: UUID
-        public var currency: String
     }
 }
