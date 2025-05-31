@@ -54,6 +54,7 @@ public extension Auth.Internal {
         public let id: UUID
         public let avatar: URL?
         public let nickname: String?
+        public let haveContact: Bool
         public let haveCustomer: Bool
         public let haveEmployee: Bool
     }
