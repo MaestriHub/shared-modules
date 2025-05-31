@@ -18,6 +18,16 @@ public extension User.Parameters {
 public extension User.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct AuthUser: Codable {
+        public var id: UUID
+        public var avatar: URL? // при первой регистрации эти поля могут не дойти
+        public var nickname: String?
+        public let contactExists: Bool
+        public let haveCustomer: Bool
+        public let haveEmployee: Bool
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct UserInfo: Codable {
         public var id: UUID
         public var avatar: URL
