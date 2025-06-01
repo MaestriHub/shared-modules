@@ -17,7 +17,7 @@ object Position {
         @Serializable
         data class Create(
             val title: String,
-            val permissions: CredentialsSet,
+            val creds: CredentialsSet,
             val makeOwner: Boolean = false,
             val salary: Salary.Parameters.Rules.Create,
         ) : Parametable()
@@ -25,7 +25,7 @@ object Position {
         @Serializable
         data class Patch(
             val title: String? = null,
-            val permissions: CredentialsSet? = null,
+            val creds: CredentialsSet? = null,
             val makeOwner: Boolean? = null,
             val salary: Salary.Parameters.Rules.Create? = null,
         ) : Parametable()
@@ -36,7 +36,7 @@ object Position {
         data class Full(
             val id: UUID,
             val title: String,
-            val permissions: CredentialsSet,
+            val creds: CredentialsSet,
             val owner: Boolean,
             val salary: Salary.Responses.Rules.Full,
         ) : Responsable
