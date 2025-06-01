@@ -9,7 +9,7 @@ public struct Appointment_NewResponses {
     }
 }
 
-extension Appointment_NewResponses.All {
+extension Appointment_NewResponses {
     @MemberwiseInit(.public)
     public struct ProcedureAppointment: Codable {
         public var id: UUID
