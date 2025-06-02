@@ -16,10 +16,11 @@ extension Appointment_NewResponses {
         public var title: String
         public var price: Decimal
         public var clientId: UUID
-        public var salonId: UUID
+        public var clientName: String
         public var currency: String
         public var time: SafeDateInterval
         public var procedureId: UUID
+        public var employeeId: UUID
     }
     
     @MemberwiseInit(.public)
@@ -28,7 +29,7 @@ extension Appointment_NewResponses {
         public var alias: String?
         public var price: Decimal
         public var clientId: UUID
-        public var salonId: UUID
+        public var clientName: String
         public var currency: String
         public var procedures: [Procedure]
         
@@ -36,6 +37,7 @@ extension Appointment_NewResponses {
         public struct Procedure: Codable {
             public var id: UUID
             public var title: String
+            public var employeeId: UUID
             public var time: SafeDateInterval
         }
     }
