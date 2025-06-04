@@ -25,7 +25,7 @@ public extension Timetable.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct SearchSlot: Codable {
         public var appointmentType: AppointmentType
-        public var customerId: UUID?
+        public var clientId: UUID?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
