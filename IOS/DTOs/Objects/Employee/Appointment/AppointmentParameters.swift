@@ -21,12 +21,14 @@ public struct Appointment_NewParameters {
     public struct AllByDates: Codable {
         public let startDate: Date
         public let endDate: Date
+        public let clientId: UUID?
     }
     
     // Reversed.jpeg (maybe paginated in past)
     @MemberwiseInit(.public)
     public struct AllByPagination: Codable {
         public let startDate: Date
+        public let clientId: UUID?
         public var pagination: Pagination
         public let reversed: Bool
     }
