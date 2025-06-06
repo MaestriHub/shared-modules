@@ -1,6 +1,8 @@
 import Foundation
 import MemberwiseInit
 
+public typealias ProcedureId = UUID
+
 public enum Timetable {
     public enum Parameters {}
     public enum Responses {}
@@ -22,10 +24,18 @@ public extension Timetable.Parameters {
         }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct SearchSlot: Codable {
-        public var appointmentType: AppointmentType
-        public var clientId: UUID?
+    enum SearchSlot {
+        @MemberwiseInit(.public, _optionalsDefaultNil: true)
+        public struct Procedure {
+            public var id: UUID
+            public var time: SafeDateInterval
+        }
+        
+        @MemberwiseInit(.public, _optionalsDefaultNil: true)
+        public struct Complex {
+            public var id: UUID
+            public var proceduresTimes: [ProcedureId : SafeDateInterval]
+        }
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
