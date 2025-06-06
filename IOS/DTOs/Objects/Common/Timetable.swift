@@ -24,17 +24,17 @@ public extension Timetable.Parameters {
         }
     }
     
-    enum SearchSlot {
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct SearchSlot {
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Procedure: Codable {
-            public var id: UUID
-            public var procedureTime: SafeDateInterval
+            public var procedureId: UUID
         }
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Complex: Codable {
-            public var id: UUID
-            public var proceduresTimes: [ProcedureId : SafeDateInterval]
+            public var complexId: UUID
+            public var procedures: [ProcedureId]
         }
     }
     
