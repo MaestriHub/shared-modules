@@ -26,13 +26,13 @@ public extension Timetable.Parameters {
     
     enum SearchSlot {
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
-        public struct Procedure {
+        public struct Procedure: Codable {
             public var id: UUID
             public var procedureTime: SafeDateInterval
         }
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
-        public struct Complex {
+        public struct Complex: Codable {
             public var id: UUID
             public var proceduresTimes: [ProcedureId : SafeDateInterval]
         }
