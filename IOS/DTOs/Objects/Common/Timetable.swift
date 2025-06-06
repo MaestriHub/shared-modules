@@ -31,12 +31,12 @@ public extension Timetable.Parameters {
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Procedure: Codable {
-            public var procedureId: UUID
+            public var id: UUID
         }
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Complex: Codable {
-            public var complexId: UUID
+            public var id: UUID
             public var procedures: [ProcedureId]
         }
     }
