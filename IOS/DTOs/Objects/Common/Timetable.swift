@@ -26,6 +26,9 @@ public extension Timetable.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct SearchSlot {
+        public var procedure: SearchSlot.Procedure?
+        public var complex: SearchSlot.Complex?
+        
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Procedure: Codable {
             public var procedureId: UUID
