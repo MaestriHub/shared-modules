@@ -25,7 +25,7 @@ public extension Timetable.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct SearchSlot {
+    struct SearchSlot: Codable {
         public var procedure: SearchSlot.Procedure?
         public var complex: SearchSlot.Complex?
         
