@@ -28,7 +28,7 @@ public extension Timetable.Parameters {
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Procedure {
             public var id: UUID
-            public var time: SafeDateInterval
+            public var procedureTime: SafeDateInterval
         }
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
