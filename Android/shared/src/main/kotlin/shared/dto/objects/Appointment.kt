@@ -1,12 +1,11 @@
 @file:UseSerializers(
     UUIDSerializer::class,
-    DateISOSerializer::class,
+    DateUNIXSerializer::class,
     URISerializer::class
 )
 
 package shared.dto.objects
 
-import shared.serializers.DateISOSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.AppointmentStatus
@@ -19,6 +18,7 @@ import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
+import shared.serializers.DateUNIXSerializer
 import shared.serializers.UUIDSerializer
 import shared.serializers.URISerializer
 import java.util.*
