@@ -4,14 +4,14 @@ import MemberwiseInit
 public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
     struct All: Codable {
-        public let complexes : [ComplexAppointment]
-        public let procedures: [ProcedureAppointment]
+        public let complexes : [Complex]
+        public let procedures: [Procedure]
     }
 }
 
 public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    struct ProcedureAppointment: Codable {
+    struct Procedure: Codable {
         public var id: UUID
         public var title: String
         public var price: Decimal
@@ -24,7 +24,7 @@ public extension EmployeeAPI.Appointment.Responses {
     }
     
     @MemberwiseInit(.public)
-    struct ComplexAppointment: Codable {
+    struct Complex: Codable {
         public var id: UUID
         public var alias: String?
         public var price: Decimal
