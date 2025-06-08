@@ -1,15 +1,27 @@
 import Foundation
 import MemberwiseInit
 
-public struct Appointment_NewParameters {
+extension EmployeeAPI {
+    public enum Appointment {
+        public enum Parameters {
+            public enum Create {}
+            public enum All {}
+        }
+        public enum Responses {}
+    }
+}
+
+public extension EmployeeAPI.Appointment.Parameters.Create {
     @MemberwiseInit(.public)
-    public struct CreateProcedure: Codable {
+    struct Procedure: Codable {
+        public let clientId: UUID
         public let procedureId: UUID
         public let time: SafeDateInterval
     }
     
     @MemberwiseInit(.public)
-    public struct CreateComplex: Codable {
+    struct Complex: Codable {
+        public let clientId: UUID
         public let complexId: UUID
         public let chunks: [Chunk]
         
@@ -20,10 +32,12 @@ public struct Appointment_NewParameters {
             public var time: SafeDateInterval
         }
     }
-    
+}
+
+public extension EmployeeAPI.Appointment.Parameters.All {
     // EndDate.jpeg
     @MemberwiseInit(.public)
-    public struct AllByDates: Codable {
+    struct ByDates: Codable {
         public let startDate: Date
         public let endDate: Date
         public let clientId: UUID?
@@ -31,7 +45,7 @@ public struct Appointment_NewParameters {
     
     // Reversed.jpeg (maybe paginated in past)
     @MemberwiseInit(.public)
-    public struct AllByPagination: Codable {
+    struct ByPagination: Codable {
         public let startDate: Date
         public let clientId: UUID?
         public var pagination: Pagination

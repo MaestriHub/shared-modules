@@ -1,17 +1,17 @@
 import Foundation
 import MemberwiseInit
 
-public struct Appointment_NewResponses {
+public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    public struct All: Codable {
+    struct All: Codable {
         public let complexes : [ComplexAppointment]
         public let procedures: [ProcedureAppointment]
     }
 }
 
-extension Appointment_NewResponses {
+public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    public struct ProcedureAppointment: Codable {
+    struct ProcedureAppointment: Codable {
         public var id: UUID
         public var title: String
         public var price: Decimal
@@ -24,7 +24,7 @@ extension Appointment_NewResponses {
     }
     
     @MemberwiseInit(.public)
-    public struct ComplexAppointment: Codable {
+    struct ComplexAppointment: Codable {
         public var id: UUID
         public var alias: String?
         public var price: Decimal
