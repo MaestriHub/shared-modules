@@ -5,7 +5,6 @@ extension CustomerAPI {
     public enum Appointment {
         public enum Parameters {
             public enum Create {}
-            public enum All {}
         }
         public enum Responses {}
     }
@@ -31,23 +30,3 @@ public extension CustomerAPI.Appointment.Parameters.Create {
         }
     }
 }
-
-public extension CustomerAPI.Appointment.Parameters.All {
-    // EndDate.jpeg
-    @MemberwiseInit(.public)
-    struct ByDates: Codable {
-        public let startDate: Date
-        public let endDate: Date
-        public let clientId: UUID?
-    }
-    
-    // Reversed.jpeg (maybe paginated in past)
-    @MemberwiseInit(.public)
-    struct ByPagination: Codable {
-        public let startDate: Date
-        public let clientId: UUID?
-        public var pagination: Pagination
-        public let reversed: Bool
-    }
-}
-

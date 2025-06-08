@@ -3,14 +3,6 @@ import MemberwiseInit
 
 public extension CustomerAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    struct All: Codable {
-        public let complexes : [Complex]
-        public let procedures: [Procedure]
-    }
-}
-
-public extension CustomerAPI.Appointment.Responses {
-    @MemberwiseInit(.public)
     struct Procedure: Codable {
         public var id: UUID
         public var title: String
