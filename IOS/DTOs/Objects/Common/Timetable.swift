@@ -24,10 +24,7 @@ public extension Timetable.Parameters {
         }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct SearchSlot: Codable {
-        public var procedure: SearchSlot.Procedure?
-        public var complex: SearchSlot.Complex?
+    enum SearchSlot {
         
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Procedure: Codable {
@@ -37,7 +34,7 @@ public extension Timetable.Parameters {
         @MemberwiseInit(.public, _optionalsDefaultNil: true)
         public struct Complex: Codable {
             public var id: UUID
-            public var procedures: [ProcedureId]
+            public var chunks: [ComplexChunkId : ProcedureId]
         }
     }
     
@@ -51,19 +48,36 @@ public extension Timetable.Parameters {
 
 public extension Timetable.Responses {
     
-    typealias Intervals = [SafeDateInterval]
-
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Slots: Codable {
-        public var intervals: Intervals
+    struct ProcedureSlots: Codable {
+        public var intervals: [SafeDateInterval]
         public var timeZoneId: String
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct ComplexSlots: Codable {
+        public var slots: [Slot]
+        public var timeZoneId: String
+        
+        @MemberwiseInit(.public)
+        public struct Slot: Codable {
+            public var total: SafeDateInterval
+            public var chunks: [Chunk]
+            
+            @MemberwiseInit(.public)
+            public struct Chunk: Codable {
+                public var id: UUID
+                public var procedureId: UUID
+                public var time: SafeDateInterval
+            }
+        }
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Schedule: Codable, Equatable {
         public var owner: TimetableOwner
         // Для недели 7 дней для месяца 28-31
-        public var intervals: Intervals
+        public var intervals: [SafeDateInterval]
         public var timeZoneId: String
     }
 }

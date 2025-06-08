@@ -8,6 +8,8 @@ public enum Complex {
     public enum Responses {}
 }
 
+public typealias ComplexChunkId = UUID
+
 // MARK: - Parameters -
 
 public extension Complex.Parameters {
@@ -34,12 +36,11 @@ public extension Complex.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Codable {
         public typealias ChunkPosition = Int
-        public typealias ChunkId = UUID
     
         public let priceShift: Complex.Helpers.PriceShift?
         public let description: UpdateString?
         public let alias: UpdateString?
-        public let shuffleChunks: [ChunkId : ChunkPosition]?
+        public let shuffleChunks: [ComplexChunkId : ChunkPosition]?
     }
 }
 
