@@ -13,7 +13,14 @@ public struct Appointment_NewParameters {
     public struct CreateComplex: Codable {
         public let clientId: UUID
         public let complexId: UUID
-        public let procedureTimes: [UUID: SafeDateInterval]
+        public let chunks: [Chunk]
+        
+        @MemberwiseInit(.public)
+        public struct Chunk: Codable {
+            public var id: UUID
+            public var procedureId: UUID
+            public var time: SafeDateInterval
+        }
     }
     
     // EndDate.jpeg
