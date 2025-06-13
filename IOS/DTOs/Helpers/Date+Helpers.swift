@@ -3,17 +3,15 @@ import Foundation
 public typealias Seconds = TimeInterval
 
 public extension Date {
-    @discardableResult
+    
     func apply(_ c: TimeComponent, _ o: TimeOperation) -> Date {
         return addingTimeInterval(o.unwrap() * c.unwrap())
     }
     
-    @discardableResult
     func plus(_ c: TimeComponent) -> Date {
         return apply(c, .plus)
     }
 
-    @discardableResult
     func minus(_ c: TimeComponent) -> Date {
         return apply(c, .minus)
     }
