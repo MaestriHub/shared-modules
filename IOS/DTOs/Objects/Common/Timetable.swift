@@ -60,16 +60,13 @@ public extension Timetable.Responses {
         public var timeZoneId: String
         public var oneSlotSize: SafeDateInterval
         
+        public typealias Slot = [Chunk]
+        
         @MemberwiseInit(.public)
-        public struct Slot: Codable {
-            public var chunks: [Chunk]
-            
-            @MemberwiseInit(.public)
-            public struct Chunk: Codable {
-                public var id: UUID
-                public var procedureId: UUID
-                public var time: SafeDateInterval
-            }
+        public struct Chunk: Codable {
+            public var id: UUID
+            public var procedureId: UUID
+            public var time: SafeDateInterval
         }
     }
     
