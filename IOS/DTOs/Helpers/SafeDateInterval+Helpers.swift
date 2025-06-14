@@ -28,4 +28,13 @@ public extension SafeDateInterval {
         
         return SafeDateInterval(dateinterval: .init(start: newStart, end: newEnd))
     }
+        
+    /// engaged   -      |---|
+    /// consumer -  |----------|
+    /// result - ok if consumer consume engaged
+    func consumedBy(_ consumer: SafeDateInterval) -> Bool {
+        guard consumer.start <= self.start else { return false }
+        guard consumer.end >= self.end else { return false }
+        return true
+    }
 }
