@@ -58,10 +58,10 @@ public extension Timetable.Responses {
     struct ComplexSlots: Codable {
         public var slots: [Slot]
         public var timeZoneId: String
+        public var oneSlotSize: SafeDateInterval
         
         @MemberwiseInit(.public)
         public struct Slot: Codable {
-            public var total: SafeDateInterval
             public var chunks: [Chunk]
             
             @MemberwiseInit(.public)
