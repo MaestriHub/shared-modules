@@ -20,10 +20,14 @@ public extension JSONDecoder {
 
 public extension JSONDecoder {
     static func withRoundedMilliseconds(_ d: JSONDecoder) -> JSONDecoder {
-        return withMilliseconds(d, round: true)
+        return millisecondsStrategy(d, round: true)
     }
     
-    static func withMilliseconds(_ d: JSONDecoder, round: Bool = false) -> JSONDecoder {
+    static func withMilliseconds(_ d: JSONDecoder) -> JSONDecoder {
+        return millisecondsStrategy(d, round: false)
+    }
+    
+    static func millisecondsStrategy(_ d: JSONDecoder, round: Bool) -> JSONDecoder {
         d.dateDecodingStrategy = .custom { decoder in
             let container = try decoder.singleValueContainer()
             let dateString = try container.decode(String.self)
