@@ -62,3 +62,11 @@ public extension Date {
         plus(.seconds(timeZone.secondsFromGMT(for: self)))
     }
 }
+
+public extension Date {
+    func roundMilliseconds() -> Date {
+        let timeInterval = self.timeIntervalSince1970
+        let roundedTimeInterval = floor(timeInterval)
+        return Date(timeIntervalSince1970: roundedTimeInterval)
+    }
+}
