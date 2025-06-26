@@ -9,75 +9,85 @@ public extension DateFormatter {
 }
 
 public extension JSONDecoder {
-    static func build(_ params: (JSONDecoder) -> JSONDecoder...) -> JSONDecoder {
-        var decoder = JSONDecoder()
-        for p in params {
-            decoder = p(decoder)
+    static let `default`: JSONDecoder = JSONDecoder
+        .with(.roundedDate(.millisecondsAndSeconds))
+}
+
+public extension JSONEncoder {
+    static let `default`: JSONEncoder = JSONEncoder
+        .with(.roundedDate(.millisecondsAndSeconds))
+}
+
+public extension JSONDecoder {
+    enum Param {
+        case roundedDate(Date.RoundingPrecision)
+        case custom((JSONDecoder) -> JSONDecoder)
+        
+        func apply(decoder: JSONDecoder) -> JSONDecoder {
+            switch self {
+            case .roundedDate(let precision):
+                withRoundedDate(decoder, precision)
+            case .custom(let functor):
+                functor(decoder)
+            }
         }
+    }
+}
+    
+public extension JSONDecoder {
+    static func with(_ params: Param...) -> JSONDecoder {
+        params.reduce(into: JSONDecoder()) { $0 = $1.apply(decoder: $0) }
+    }
+    
+    static func withRoundedDate(_ decoder: JSONDecoder, _ precision: Date.RoundingPrecision) -> JSONDecoder {
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+            
+            guard let date = DateFormatter.iso8601.date(from: dateString) else {
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "Invalid ISO8601 date format with fractional seconds"
+                )
+            }
+            
+            return date.rounded(precision)
+        }
+        
         return decoder
     }
 }
 
-public extension JSONDecoder {
-    static func withRoundedMilliseconds(_ d: JSONDecoder) -> JSONDecoder {
-        return millisecondsStrategy(d, round: true)
-    }
-    
-    static func withMilliseconds(_ d: JSONDecoder) -> JSONDecoder {
-        return millisecondsStrategy(d, round: false)
-    }
-    
-    static func millisecondsStrategy(_ d: JSONDecoder, round: Bool) -> JSONDecoder {
-        d.dateDecodingStrategy = .custom { decoder in
-            let container = try decoder.singleValueContainer()
-            let dateString = try container.decode(String.self)
-            guard var date = DateFormatter.iso8601.date(from: dateString) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
-            }
-            
-            if round {
-                date = date.roundMilliseconds()
-            }
-            
-            return date
-        }
+public extension JSONEncoder {
+    enum Param {
+        case roundedDate(Date.RoundingPrecision)
+        case custom((JSONEncoder) -> JSONEncoder)
         
-        return d
-    }
-}
-
-public extension JSONEncoder {
-    static func build(_ params: (JSONEncoder) -> JSONEncoder...) -> JSONEncoder {
-        var encoder = JSONEncoder()
-        for p in params {
-            encoder = p(encoder)
-        }
-        return encoder
-    }
-}
-
-public extension JSONEncoder {
-    static func withRoundedMilliseconds(_ e: JSONEncoder) -> JSONEncoder {
-        return millisecondsStrategy(e, round: true)
-    }
-    
-    static func withMilliseconds(_ e: JSONEncoder) -> JSONEncoder {
-        return millisecondsStrategy(e, round: false)
-    }
-    
-    static func millisecondsStrategy(_ e: JSONEncoder, round: Bool) -> JSONEncoder {
-        e.dateEncodingStrategy = .custom { date, encoder in
-            var formattedDate = date
-            
-            if round {
-                formattedDate = date.roundMilliseconds()
+        func apply(encoder: JSONEncoder) -> JSONEncoder {
+            switch self {
+            case .roundedDate(let precision):
+                withRoundedDate(encoder, precision)
+            case .custom(let functor):
+                functor(encoder)
             }
+        }
+    }
+}
+    
+public extension JSONEncoder {
+    static func with(_ params: Param...) -> JSONEncoder {
+        params.reduce(into: JSONEncoder()) { $0 = $1.apply(encoder: $0) }
+    }
+    
+    static func withRoundedDate(_ encoder: JSONEncoder, _ precision: Date.RoundingPrecision) -> JSONEncoder {
+        encoder.dateEncodingStrategy = .custom { date, encoder in
+            let formattedDate = date.rounded(precision)
             
             let dateString = DateFormatter.iso8601.string(from: formattedDate)
             var container = encoder.singleValueContainer()
             try container.encode(dateString)
         }
         
-        return e
+        return encoder
     }
 }

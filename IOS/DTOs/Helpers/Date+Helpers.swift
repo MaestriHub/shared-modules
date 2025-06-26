@@ -64,9 +64,34 @@ public extension Date {
 }
 
 public extension Date {
+    enum RoundingPrecision {
+        case none
+        case milliseconds
+        case millisecondsAndSeconds
+    }
+    
+    func rounded(_ precision: RoundingPrecision) -> Date {
+        switch precision {
+        case .none:
+            return self
+        case .milliseconds:
+            return self.roundMilliseconds()
+        case .millisecondsAndSeconds:
+            return self.roundMillisecondsAndSeconds()
+        }
+    }
+    
     func roundMilliseconds() -> Date {
         let timeInterval = self.timeIntervalSince1970
         let roundedTimeInterval = floor(timeInterval)
         return Date(timeIntervalSince1970: roundedTimeInterval)
+    }
+    
+    func roundMillisecondsAndSeconds() -> Date {
+        let kSecondsInMinute: Int = 60
+        
+        let timeInterval = Int(self.timeIntervalSince1970)
+        let seconds = timeInterval % kSecondsInMinute
+        return Date(timeIntervalSince1970: TimeInterval(timeInterval - seconds))
     }
 }
