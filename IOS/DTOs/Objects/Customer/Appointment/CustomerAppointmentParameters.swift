@@ -32,7 +32,7 @@ public extension CustomerAPI.Appointment.Parameters.Create {
     }
 }
 
-public extension CustomerAPI.Appointment.Parameters {
+public extension CustomerAPI.Appointment.Parameters.All {
     // Reversed.jpeg (maybe paginated in past)
     @MemberwiseInit(.public)
     struct ByPagination: Codable {
