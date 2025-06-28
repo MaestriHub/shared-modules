@@ -21,12 +21,12 @@ public extension JSONEncoder {
 public extension JSONDecoder {
     enum Param {
         case roundedDate(Date.RoundingPrecision)
-        case custom((JSONDecoder) -> JSONDecoder)
+        case custom((JSONDecoder) -> Void)
         
-        func apply(decoder: JSONDecoder) -> JSONDecoder {
+        func apply(decoder: JSONDecoder) -> Void {
             switch self {
             case .roundedDate(let precision):
-                withRoundedDate(decoder, precision)
+                decoder.withRoundedDate(precision)
             case .custom(let functor):
                 functor(decoder)
             }
@@ -36,11 +36,11 @@ public extension JSONDecoder {
     
 public extension JSONDecoder {
     static func with(_ params: Param...) -> JSONDecoder {
-        params.reduce(into: JSONDecoder()) { $0 = $1.apply(decoder: $0) }
+        params.reduce(into: JSONDecoder()) { $1.apply(decoder: $0) }
     }
     
-    static func withRoundedDate(_ decoder: JSONDecoder, _ precision: Date.RoundingPrecision) -> JSONDecoder {
-        decoder.dateDecodingStrategy = .custom { decoder in
+    func withRoundedDate(_ precision: Date.RoundingPrecision) -> Void {
+        dateDecodingStrategy = .custom { decoder in
             let container = try decoder.singleValueContainer()
             let dateString = try container.decode(String.self)
             
@@ -53,20 +53,18 @@ public extension JSONDecoder {
             
             return date.rounded(precision)
         }
-        
-        return decoder
     }
 }
 
 public extension JSONEncoder {
     enum Param {
         case roundedDate(Date.RoundingPrecision)
-        case custom((JSONEncoder) -> JSONEncoder)
+        case custom((JSONEncoder) -> Void)
         
-        func apply(encoder: JSONEncoder) -> JSONEncoder {
+        func apply(encoder: JSONEncoder) -> Void {
             switch self {
             case .roundedDate(let precision):
-                withRoundedDate(encoder, precision)
+                encoder.withRoundedDate(precision)
             case .custom(let functor):
                 functor(encoder)
             }
@@ -76,18 +74,16 @@ public extension JSONEncoder {
     
 public extension JSONEncoder {
     static func with(_ params: Param...) -> JSONEncoder {
-        params.reduce(into: JSONEncoder()) { $0 = $1.apply(encoder: $0) }
+        params.reduce(into: JSONEncoder()) { $1.apply(encoder: $0) }
     }
     
-    static func withRoundedDate(_ encoder: JSONEncoder, _ precision: Date.RoundingPrecision) -> JSONEncoder {
-        encoder.dateEncodingStrategy = .custom { date, encoder in
+    func withRoundedDate(_ precision: Date.RoundingPrecision) -> Void {
+        dateEncodingStrategy = .custom { date, encoder in
             let formattedDate = date.rounded(precision)
             
             let dateString = DateFormatter.iso8601.string(from: formattedDate)
             var container = encoder.singleValueContainer()
             try container.encode(dateString)
         }
-        
-        return encoder
     }
 }
