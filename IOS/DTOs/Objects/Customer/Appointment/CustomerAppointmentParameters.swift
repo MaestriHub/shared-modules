@@ -5,6 +5,7 @@ extension CustomerAPI {
     public enum Appointment {
         public enum Parameters {
             public enum Create {}
+            public enum All {}
         }
         public enum Responses {}
     }
@@ -28,5 +29,15 @@ public extension CustomerAPI.Appointment.Parameters.Create {
             public var procedureId: UUID
             public var time: SafeDateInterval
         }
+    }
+}
+
+public extension CustomerAPI.Appointment.Parameters {
+    // Reversed.jpeg (maybe paginated in past)
+    @MemberwiseInit(.public)
+    struct ByPagination: Codable {
+        public let startDate: Date
+        public var pagination: Pagination
+        public let reversed: Bool
     }
 }
