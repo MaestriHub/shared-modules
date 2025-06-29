@@ -1,6 +1,6 @@
 @file:UseSerializers(
     UUIDSerializer::class,
-    DateUNIXSerializer::class,
+    DateISOSerializer::class,
     URISerializer::class
 )
 
@@ -18,7 +18,7 @@ import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Price
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
-import shared.serializers.DateUNIXSerializer
+import shared.serializers.DateISOSerializer
 import shared.serializers.UUIDSerializer
 import shared.serializers.URISerializer
 import java.util.*
