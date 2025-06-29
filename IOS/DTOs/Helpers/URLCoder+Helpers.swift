@@ -11,8 +11,11 @@ func URLDateEncode(_ formatter: ISO8601DateFormatter, _ kDefaultPresicion: Date.
         let formattedDate = date.rounded(kDefaultPresicion)
         
         var dateString = formatter.string(from: formattedDate)
-        dateString.replace(":", with: kMagicASCIISymbol)
+//        dateString.replace(":", with: kMagicASCIISymbol)
         
         return dateString
     }
 }
+
+//start%5D=2025-06-28T00%253A00%253A00.000Z
+// 2025-06-28 00:00:00.000Z
