@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import shared.dto.enums.SalonType
 import shared.dto.primitives.Address
+import shared.dto.primitives.CoordinatePoint
 import shared.dto.primitives.Pagination
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
@@ -42,9 +43,10 @@ object Search {
                 val id: UUID,
                 val name: String,
                 val type: SalonType,
-                val logo: URI? = null,
+                val logo: URI,
+                val isFavorite: Boolean,
                 val address: Address,
-                val isFavorite: Boolean
+                val point: CoordinatePoint,
             ) : Responsable
 
             @Serializable

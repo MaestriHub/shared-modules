@@ -19,8 +19,8 @@ public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case duration = "duration"
         case start = "start"
+        case end = "end"
     }
 
     public init(dateinterval: DateInterval) {
@@ -29,58 +29,29 @@ public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let start = try container.decode(Date.self, forKey: .start)
+        let end   = try container.decode(Date.self, forKey: .end)
 
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime]
-        var start: Date?
-        
-        // Пробуем декодировать start как строку (ISO8601)
-        if let startString = try? container.decode(String.self, forKey: .start) {
-            start = dateFormatter.date(from: startString)
+        guard start <= end else {
+            throw SafeDateIntervalError(reason: "start > end")
         }
         
-        // Пробуем декодировать start как Double (Unix-время)
-        if let startTimestamp = try? container.decode(Double.self, forKey: .start) {
-            start = Date(timeIntervalSince1970: startTimestamp)
-        }
-        
-        guard let start = start else {
-            throw DecodingError.dataCorruptedError(
-                forKey: CodingKeys.start,
-                in: container,
-                debugDescription: "Start date is neither a valid ISO8601 string nor a Unix timestamp"
-            )   
-        }
-        guard let duration = try? container.decode(Double.self, forKey: .duration) else {
-             throw DecodingError.dataCorruptedError(
-                forKey: CodingKeys.duration,
-                in: container,
-                debugDescription: "duration is nil"
-            )
-        }
-        guard duration > 0 else {
-             throw DecodingError.dataCorruptedError(
-                forKey: CodingKeys.duration,
-                in: container,
-                debugDescription: "duration is negative"
-            )
-        }
-        self.interval = DateInterval(start: start, duration: TimeInterval(duration))
+        self.interval = DateInterval(start: start, end: end)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        // Используем ISO8601DateFormatter для преобразования даты в строку
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime]
-        
-        let startString = dateFormatter.string(from: interval.start)
-        try container.encode(startString, forKey: .start)
-        try container.encode(interval.duration, forKey: .duration)
+        try container.encode(interval.start, forKey: .start)
+        try container.encode(interval.end, forKey: .end)
     }
 
     public static func < (lhs: SafeDateInterval, rhs: SafeDateInterval) -> Bool {
         return lhs.start < rhs.start
     }
+}
+
+public struct SafeDateIntervalError: Error {
+    let reason: String
 }

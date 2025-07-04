@@ -122,7 +122,7 @@ object Complex {
             val description: String? = null,
             val masterId: UUID,
             val masterNickname: String,
-            val masterAvatar: URI? = null,
+            val masterAvatar: URI,
             val duration: Minutes,
             val price: Price
         )

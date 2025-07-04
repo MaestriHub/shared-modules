@@ -4,9 +4,6 @@ package shared.dto.objects
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import shared.dto.objects.contacts.Contact
-import shared.dto.optionSet.MaestriPermissionSet
-import shared.dto.optionSet.UserRoleSet
 import shared.dto.protocols.Parametable
 import shared.dto.protocols.Responsable
 import shared.serializers.URISerializer
@@ -25,21 +22,12 @@ object User {
 
     data object Responses {
         @Serializable
-        data class Full(
+        data class UserInfo(
             val id: UUID,
-            val avatar: URI? = null,
+            val avatar: URI,
             val nickname: String,
-            val contacts: List<Contact.Shared.RecoveryContact>,
-            val options: UserRoleSet,
-            val permissions: MaestriPermissionSet,
-            val customerId: UUID? = null,
-            val professionalId: UUID? = null,
-        ) : Responsable
-
-        @Serializable
-        data class Partial(
-            val avatar: URI? = null,
-            val nickname: String,
+            val haveCustomer: Boolean,
+            val haveEmployee: Boolean,
         ) : Responsable
     }
 }

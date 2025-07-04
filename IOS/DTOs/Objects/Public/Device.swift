@@ -1,0 +1,29 @@
+import Foundation
+import MemberwiseInit
+
+public enum Device {
+    public enum Parameters {}
+    public enum Responses {}
+}
+
+public extension Device.Parameters {
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct System: Codable {
+        public var manufacturer : String?
+        public var model: String?
+        public var system: SystemType?
+        public var appVersion: String?
+        public var country: String?
+        public let fcmToken: String?
+    }
+}
+
+public extension Device.Responses {
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Full: Codable {
+        public var id: UUID
+        public var version: VersionType?
+    }
+}

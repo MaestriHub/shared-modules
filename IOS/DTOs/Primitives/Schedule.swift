@@ -55,7 +55,7 @@ public struct Schedule {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Week: Parametable, Responsable, Equatable {
+    public struct Week: Codable, Equatable {
         public var monday: Day?
         public var tuesday: Day?
         public var wednesday: Day?
@@ -66,14 +66,14 @@ public struct Schedule {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Cycled: Parametable, Responsable, Equatable {
+    public struct Cycled: Codable, Equatable {
         public var startDay: Date
         public var workDays: Dictionary<Int, Day>
         public var restDays: Int
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Day: Parametable, Responsable, Equatable {
+    public struct Day: Codable, Equatable {
         public var workTime: String
         public var offTime: [String]
     }

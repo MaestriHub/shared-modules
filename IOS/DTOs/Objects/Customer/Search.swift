@@ -1,0 +1,49 @@
+import Foundation
+import MemberwiseInit
+
+public enum Search {
+    public enum Parameters {}
+    public enum Responses {
+        public enum Helpers {}
+    }
+}
+
+public extension Search.Parameters {
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Retrieve: Codable {
+        public let value: String?
+        public let salonType: SalonType?
+        public let latitude: Double?
+        public let longitude: Double?
+        public let pagination: Pagination?
+    }
+}
+
+public extension Search.Responses {
+
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Full: Codable {
+        public var suggests: [Helpers.Suggest]
+        public var salons: [Helpers.Salon]
+    }
+}
+
+public extension Search.Responses.Helpers {
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Suggest: Codable {
+        public var value: String
+    }
+    
+    @MemberwiseInit(.public, _optionalsDefaultNil: true)
+    struct Salon: Codable {
+        public var id: UUID
+        public var name: String
+        public var type: SalonType
+        public var logo: URL
+        public var isFavorite: Bool = false
+        public var address: Address
+        public var point: CoordinatePoint
+    }
+}
