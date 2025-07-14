@@ -5,8 +5,10 @@ extension EmployeeAPI {
     public enum Appointment {
         public enum Parameters {
             public enum Create {}
-            public enum All {}
+            public enum All    {}
+            public enum Update {}
         }
+        
         public enum Responses {}
     }
 }
@@ -50,5 +52,12 @@ public extension EmployeeAPI.Appointment.Parameters.All {
         public let clientId: UUID?
         public var pagination: Pagination
         public let reversed: Bool
+    }
+}
+
+public extension EmployeeAPI.Appointment.Parameters.Update {
+    @MemberwiseInit(.public)
+    struct Procedure {
+        public let time: SafeDateInterval
     }
 }
