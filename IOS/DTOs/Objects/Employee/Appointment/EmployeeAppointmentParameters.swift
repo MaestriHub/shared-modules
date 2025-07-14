@@ -57,7 +57,7 @@ public extension EmployeeAPI.Appointment.Parameters.All {
 
 public extension EmployeeAPI.Appointment.Parameters.Update {
     @MemberwiseInit(.public)
-    struct Procedure {
+    struct Procedure: Codable {
         public let time: SafeDateInterval
     }
 }
