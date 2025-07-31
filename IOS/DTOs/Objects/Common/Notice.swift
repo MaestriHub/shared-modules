@@ -12,7 +12,7 @@ public extension Notice.Responses {
         public var id: UUID
         public var titleKey: String
         public var messageKey: String
-        public var parameters: String?
+        public var parameters: [String: String]
         public var category: NoticeCategory
         public var isRead: Bool
         public var date: Date?
