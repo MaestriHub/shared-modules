@@ -1,7 +1,7 @@
 import Foundation
 
+// MARK: titles used for notification. If you want to change naming, keep it.
 public enum NoticeCategory: String, Codable, Hashable, Equatable {
-    
     // for employee
     case appointment
     
