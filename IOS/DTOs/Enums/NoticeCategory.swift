@@ -6,7 +6,7 @@ public enum NoticeCategory: String, Codable, Hashable, Equatable {
     case appointment
     
     // for client
-    case assigment
+    case assignment
     
     case employee
     case position
