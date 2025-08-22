@@ -3,18 +3,18 @@ package shared.dto.enums
 import kotlinx.serialization.SerialName
 
 /// Описывает категорию уведомлений
-/// - `APPOINTMENT_EMPLOYEE`: Уведомления о рабочих аппоинтментах
-/// - `APPOINTMENT_CUSTOMER`: Уведомления о кастомерских аппоинтментах
+/// - `APPOINTMENT`: Уведомления о рабочих аппоинтментах
+/// - `ASSIGNMENT`: Уведомления о кастомерских аппоинтментах
 /// - `EMPLOYEE`            : Уведомления рабочему (мб оверхед)
 /// - `POSITION`            : Уведомления о изменении позиции
 /// - `SALARY`              : Уведомления о зарплате
 /// - `SUGGEST`             : Предложение о смерживании контактов
 enum class NoticeCategory {
-    @SerialName("appointmentEmployee")
-    APPOINTMENT_EMPLOYEE,
+    @SerialName("appointment")
+    APPOINTMENT,
 
-    @SerialName("appointmentCustomer")
-    APPOINTMENT_CUSTOMER,
+    @SerialName("assignment")
+    ASSIGNMENT,
 
     @SerialName("employee")
     EMPLOYEE,
