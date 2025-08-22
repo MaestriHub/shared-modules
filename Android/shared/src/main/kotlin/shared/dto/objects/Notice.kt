@@ -20,7 +20,7 @@ object Notice {
             val id: UUID,
             val titleKey: String,
             val messageKey: String,
-            val parameters: String? = null,
+            val parameters: Map<String, String>,
             val category: NoticeCategory,
             val isRead: Boolean,
             val date: Date? = null,
