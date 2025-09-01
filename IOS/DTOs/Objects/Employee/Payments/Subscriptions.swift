@@ -1,8 +1,8 @@
 import Foundation
 
-typealias SubscriptionListResponse = [SubscriptionResponse]
+public typealias SubscriptionListResponse = [SubscriptionResponse]
 
-struct SubscriptionResponse: Codable {
+public struct SubscriptionResponse: Codable {
     var title         : String
     var logoURL       : String
     var description   : String
