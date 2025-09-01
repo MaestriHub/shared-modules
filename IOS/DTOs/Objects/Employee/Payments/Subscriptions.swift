@@ -1,8 +1,6 @@
 import Foundation
 import MemberwiseInit
 
-public typealias SubscriptionListResponse = [SubscriptionResponse]
-
 @MemberwiseInit(.public)
 public struct SubscriptionResponse: Codable {
     public var title         : String
