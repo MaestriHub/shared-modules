@@ -2,7 +2,7 @@ import Foundation
 import MemberwiseInit
 
 @MemberwiseInit(.public)
-public struct SubscriptionResponse: Codable {
+public struct PaymentSubscriptionResponse: Codable {
     public var title         : String
     public var logoURL       : String
     public var description   : String
@@ -12,4 +12,10 @@ public struct SubscriptionResponse: Codable {
     
     public var monthlyPrice  : Int
     public var monthlyPayURL : String
+}
+
+public struct SubscriptionResponse: Codable {
+    public var id: UUID
+    public var startDate: Date
+    public var endDate: Date
 }
