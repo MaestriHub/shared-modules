@@ -17,6 +17,7 @@ public struct PaymentSubscriptionResponse: Codable {
 @MemberwiseInit(.public)
 public struct SubscriptionResponse: Codable {
     public var id: UUID
+    public var stripeId: String?
     public var startDate: Date
     public var endDate: Date
 }
