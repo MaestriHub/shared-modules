@@ -14,6 +14,7 @@ public struct PaymentSubscriptionResponse: Codable {
     public var monthlyPayURL : String
 }
 
+@MemberwiseInit(.public)
 public struct SubscriptionResponse: Codable {
     public var id: UUID
     public var startDate: Date
