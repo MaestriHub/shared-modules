@@ -14,11 +14,6 @@ public struct PaymentSubscriptionResponse: Codable {
     public var monthlyPayURL : String
 }
 
-public enum SubscriptionPeriodType: String, Codable {
-    case year
-    case month
-}
-
 @MemberwiseInit(.public)
 public struct SubscriptionResponse: Codable {
     public var id: UUID
@@ -26,6 +21,5 @@ public struct SubscriptionResponse: Codable {
     public var title: String
     public var startDate: Date
     public var endDate: Date
-    public var periodType: SubscriptionPeriodType
     public var price: Price
 }
