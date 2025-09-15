@@ -18,6 +18,8 @@ public struct PaymentSubscriptionResponse: Codable {
 public struct SubscriptionResponse: Codable {
     public var id: UUID
     public var stripeId: String?
+    public var title: String
     public var startDate: Date
     public var endDate: Date
+    public var price: Price
 }
