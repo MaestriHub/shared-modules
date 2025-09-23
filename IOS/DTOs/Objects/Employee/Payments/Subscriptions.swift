@@ -7,10 +7,10 @@ public struct PaymentSubscriptionResponse: Codable {
     public var logoURL       : String
     public var description   : String
     
-    public var yearlyPrice   : Int
+    public var yearlyPrice   : Decimal
     public var yearlyPayURL  : String
     
-    public var monthlyPrice  : Int
+    public var monthlyPrice  : Decimal
     public var monthlyPayURL : String
 }
 
