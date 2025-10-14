@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Salon {
     public enum Responses {}
@@ -7,7 +6,6 @@ public enum Salon {
 
 public extension Salon.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable, Sendable {
         public var id: UUID
         public var name: String
@@ -20,5 +18,31 @@ public extension Salon.Responses {
         public var timeZoneId: String
         public var address: Address
         public var point: CoordinatePoint
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            description: String? = nil,
+            logo: URL,
+            isActive: Bool,
+            isFavorite: Bool = false,
+            localeId: String,
+            timeZoneId: String,
+            address: Address,
+            point: CoordinatePoint
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.description = description
+            self.logo = logo
+            self.isActive = isActive
+            self.isFavorite = isFavorite
+            self.localeId = localeId
+            self.timeZoneId = timeZoneId
+            self.address = address
+            self.point = point
+        }
     }
 }

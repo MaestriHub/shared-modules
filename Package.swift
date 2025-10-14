@@ -13,14 +13,11 @@ let package = Package(
             targets: ["DTOs"]
         )
     ],
-    dependencies: [
-        .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.5.2")
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "DTOs",
             dependencies: [
-                .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
             ],
             path: "IOS/DTOs",
             swiftSettings: [

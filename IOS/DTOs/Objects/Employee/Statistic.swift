@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Statistic {
     public enum Parameters {}
@@ -8,20 +7,30 @@ public enum Statistic {
 
 public extension Statistic.Parameters {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct AppointmentsQuery: Codable, Sendable {
         public let startDate: Date
         public let endDate: Date
         public let employees: [UUID]?
         public let salons: [UUID]?
+        
+        public init(startDate: Date, endDate: Date, employees: [UUID]? = nil, salons: [UUID]? = nil) {
+            self.startDate = startDate
+            self.endDate = endDate
+            self.employees = employees
+            self.salons = salons
+        }
     }
 }
 
 public extension Statistic.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Appointments: Codable, Sendable {
         public var price: Price
         public var count: Int
+        
+        public init(price: Price, count: Int) {
+            self.price = price
+            self.count = count
+        }
     }
 }

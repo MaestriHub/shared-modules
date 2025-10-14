@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Search {
     public enum Parameters {}
@@ -10,33 +9,52 @@ public enum Search {
 
 public extension Search.Parameters {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Codable, Sendable {
         public let value: String?
         public let salonType: SalonType?
         public let latitude: Double?
         public let longitude: Double?
         public let pagination: Pagination?
+        
+        public init(
+            value: String? = nil,
+            salonType: SalonType? = nil,
+            latitude: Double? = nil,
+            longitude: Double? = nil,
+            pagination: Pagination? = nil
+        ) {
+            self.value = value
+            self.salonType = salonType
+            self.latitude = latitude
+            self.longitude = longitude
+            self.pagination = pagination
+        }
     }
 }
 
 public extension Search.Responses {
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable, Sendable {
         public var suggests: [Helpers.Suggest]
         public var salons: [Helpers.Salon]
+        
+        public init(suggests: [Helpers.Suggest], salons: [Helpers.Salon]) {
+            self.suggests = suggests
+            self.salons = salons
+        }
     }
 }
 
 public extension Search.Responses.Helpers {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Suggest: Codable, Sendable {
         public var value: String
+        
+        public init(value: String) {
+            self.value = value
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Salon: Codable, Sendable {
         public var id: UUID
         public var name: String
@@ -45,5 +63,23 @@ public extension Search.Responses.Helpers {
         public var isFavorite: Bool = false
         public var address: Address
         public var point: CoordinatePoint
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: URL,
+            isFavorite: Bool = false,
+            address: Address,
+            point: CoordinatePoint
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.isFavorite = isFavorite
+            self.address = address
+            self.point = point
+        }
     }
 }

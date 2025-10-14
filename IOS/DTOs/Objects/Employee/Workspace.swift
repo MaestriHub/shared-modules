@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Workspace {
     public enum Parameters {}
@@ -10,7 +9,6 @@ public enum Workspace {
 
 public extension Workspace.Parameters {
  
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable, Sendable {
         public let name: String
         public let type: SalonType
@@ -22,20 +20,54 @@ public extension Workspace.Parameters {
         public let contact: Workspace.Internal.Contact?
         public let address: Address
         public var point: CoordinatePoint
+        
+        public init(
+            name: String,
+            type: SalonType,
+            logo: URL? = nil,
+            timeZoneId: String,
+            localeId: String,
+            description: String? = nil,
+            timetable: Timetable.Parameters.Create.Pattern? = nil,
+            contact: Workspace.Internal.Contact? = nil,
+            address: Address,
+            point: CoordinatePoint
+        ) {
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.timeZoneId = timeZoneId
+            self.localeId = localeId
+            self.description = description
+            self.timetable = timetable
+            self.contact = contact
+            self.address = address
+            self.point = point
+        }
     }
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Patch: Codable, Sendable {
         public let name: String?
         public let type: SalonType?
         public let description: String?
         public let logo: URL?
+        
+        public init(
+            name: String? = nil,
+            type: SalonType? = nil,
+            description: String? = nil,
+            logo: URL? = nil
+        ) {
+            self.name = name
+            self.type = type
+            self.description = description
+            self.logo = logo
+        }
     }
 }
 
 public extension Workspace.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable, Sendable {
         public var id: UUID
         public var name: String
@@ -48,9 +80,34 @@ public extension Workspace.Responses {
         public var localeId: String
         public var timeZoneId: String
         public var employeeToken: Token
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            description: String? = nil,
+            logo: URL,
+            address: Address,
+            point: CoordinatePoint,
+            isActive: Bool,
+            localeId: String,
+            timeZoneId: String,
+            employeeToken: Token
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.description = description
+            self.logo = logo
+            self.address = address
+            self.point = point
+            self.isActive = isActive
+            self.localeId = localeId
+            self.timeZoneId = timeZoneId
+            self.employeeToken = employeeToken
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Partial: Codable, Sendable {
         public var id: UUID
         public var name: String
@@ -58,13 +115,33 @@ public extension Workspace.Responses {
         public var logo: URL
         public var address: Address
         public var point: CoordinatePoint
+        
+        public init(
+            id: UUID,
+            name: String,
+            type: SalonType,
+            logo: URL,
+            address: Address,
+            point: CoordinatePoint
+        ) {
+            self.id = id
+            self.name = name
+            self.type = type
+            self.logo = logo
+            self.address = address
+            self.point = point
+        }
     }
 }
 
 public extension Workspace.Internal {
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Contact: Codable, Sendable {
         public var value: String
         public var type: ContactType
+        
+        public init(value: String, type: ContactType) {
+            self.value = value
+            self.type = type
+        }
     }
 }

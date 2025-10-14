@@ -1,16 +1,18 @@
 import Foundation
-import MemberwiseInit
 
 public extension EmployeeAPI.Appointment.Responses {
-    @MemberwiseInit(.public)
     struct All: Codable, Sendable {
         public let complexes : [Complex]
         public let procedures: [Procedure]
+        
+        public init(complexes: [Complex], procedures: [Procedure]) {
+            self.complexes = complexes
+            self.procedures = procedures
+        }
     }
 }
 
 public extension EmployeeAPI.Appointment.Responses {
-    @MemberwiseInit(.public)
     struct Procedure: Codable, Sendable {
         public var id: UUID
         public var title: String
@@ -30,9 +32,48 @@ public extension EmployeeAPI.Appointment.Responses {
         public var employeeName: String
         public var employeeAvatar: URL
         public var employeeContacts: [Contact.Shared.PrimaryContact]
+        
+        public init(
+            id: UUID,
+            title: String,
+            price: Decimal,
+            clientId: UUID,
+            clientName: String,
+            clientAvatar: URL,
+            clientContacts: [Contact.Shared.PrimaryContact],
+            currency: String,
+            time: SafeDateInterval,
+            procedureId: UUID,
+            salonLogo: URL,
+            salonId: UUID,
+            point: CoordinatePoint,
+            address: Address,
+            employeeId: UUID,
+            employeeName: String,
+            employeeAvatar: URL,
+            employeeContacts: [Contact.Shared.PrimaryContact]
+        ) {
+            self.id = id
+            self.title = title
+            self.price = price
+            self.clientId = clientId
+            self.clientName = clientName
+            self.clientAvatar = clientAvatar
+            self.clientContacts = clientContacts
+            self.currency = currency
+            self.time = time
+            self.procedureId = procedureId
+            self.salonLogo = salonLogo
+            self.salonId = salonId
+            self.point = point
+            self.address = address
+            self.employeeId = employeeId
+            self.employeeName = employeeName
+            self.employeeAvatar = employeeAvatar
+            self.employeeContacts = employeeContacts
+        }
     }
     
-    @MemberwiseInit(.public)
     struct Complex: Codable, Sendable {
         public var id: UUID
         public var alias: String?
@@ -48,7 +89,36 @@ public extension EmployeeAPI.Appointment.Responses {
         public var address: Address
         public var procedures: [Procedure]
         
-        @MemberwiseInit(.public)
+        public init(
+            id: UUID,
+            alias: String?,
+            price: Decimal,
+            currency: String,
+            clientId: UUID,
+            clientName: String,
+            clientAvatar: URL,
+            clientContacts: [Contact.Shared.PrimaryContact],
+            salonLogo: URL,
+            salonId: UUID,
+            point: CoordinatePoint,
+            address: Address,
+            procedures: [Procedure]
+        ) {
+            self.id = id
+            self.alias = alias
+            self.price = price
+            self.currency = currency
+            self.clientId = clientId
+            self.clientName = clientName
+            self.clientAvatar = clientAvatar
+            self.clientContacts = clientContacts
+            self.salonLogo = salonLogo
+            self.salonId = salonId
+            self.point = point
+            self.address = address
+            self.procedures = procedures
+        }
+        
         public struct Procedure: Codable, Sendable {
             public var id: UUID
             public var title: String
@@ -57,6 +127,24 @@ public extension EmployeeAPI.Appointment.Responses {
             public var employeeName: String
             public var employeeAvatar: URL
             public var employeeContacts: [Contact.Shared.PrimaryContact]
+            
+            public init(
+                id: UUID,
+                title: String,
+                time: SafeDateInterval,
+                employeeId: UUID,
+                employeeName: String,
+                employeeAvatar: URL,
+                employeeContacts: [Contact.Shared.PrimaryContact]
+            ) {
+                self.id = id
+                self.title = title
+                self.time = time
+                self.employeeId = employeeId
+                self.employeeName = employeeName
+                self.employeeAvatar = employeeAvatar
+                self.employeeContacts = employeeContacts
+            }
         }
     }
 }

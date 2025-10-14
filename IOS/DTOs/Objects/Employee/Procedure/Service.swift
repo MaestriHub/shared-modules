@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Service {
     public enum Helpers {}
@@ -12,24 +11,43 @@ public enum Service {
 
 public extension Service.Parameters {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Codable, Sendable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let valueFilter: String?
         public let pagination: Pagination?
+        
+        public init(
+            salonsFilter: [UUID]? = nil,
+            employeesFilter: [UUID]? = nil,
+            valueFilter: String? = nil,
+            pagination: Pagination? = nil
+        ) {
+            self.salonsFilter = salonsFilter
+            self.employeesFilter = employeesFilter
+            self.valueFilter = valueFilter
+            self.pagination = pagination
+        }
     }
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable, Sendable {
         public let title: String
         public let tags: [ServiceTags]
+        
+        public init(title: String, tags: [ServiceTags]) {
+            self.title = title
+            self.tags = tags
+        }
     }
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Codable, Sendable {
         public let title: String?
         public let tags: [ServiceTags]?
+        
+        public init(title: String? = nil, tags: [ServiceTags]? = nil) {
+            self.title = title
+            self.tags = tags
+        }
     }
 }
 
@@ -37,53 +55,86 @@ public extension Service.Parameters {
 
 public extension Service.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
+        
+        public init(id: UUID, title: String, tags: [TranslatedServiceTag]) {
+            self.id = id
+            self.title = title
+            self.tags = tags
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
+        
+        public init(id: UUID, title: String, tags: [TranslatedServiceTag]) {
+            self.id = id
+            self.title = title
+            self.tags = tags
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Codable, Sendable {
         public let services: [Service.Helpers.ServiceResponse]
+        
+        public init(services: [Service.Helpers.ServiceResponse]) {
+            self.services = services
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let parameters: [Service.Helpers.Parameter]
         public let tags: [TranslatedServiceTag]
+        
+        public init(id: UUID, title: String, parameters: [Service.Helpers.Parameter], tags: [TranslatedServiceTag]) {
+            self.id = id
+            self.title = title
+            self.parameters = parameters
+            self.tags = tags
+        }
     }
 }
 
 public extension Service.Helpers {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ServiceResponse: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
+        
+        public init(id: UUID, title: String, tags: [TranslatedServiceTag]) {
+            self.id = id
+            self.title = title
+            self.tags = tags
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Parameter: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let cases: [Case]
+        
+        public init(id: UUID, title: String, cases: [Case]) {
+            self.id = id
+            self.title = title
+            self.cases = cases
+        }
     }
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Case: Codable, Sendable {
         public let id: Int
         public let title: String
+        
+        public init(id: Int, title: String) {
+            self.id = id
+            self.title = title
+        }
     }
 }

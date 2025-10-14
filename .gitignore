@@ -11,3 +11,4 @@ node_modules
 *.js
 *.js.map
 *.resolved
+docs/maetry-openapi.json

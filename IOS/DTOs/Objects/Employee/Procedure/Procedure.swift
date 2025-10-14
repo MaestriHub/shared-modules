@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Procedure {
     public enum Helpers {}
@@ -12,14 +11,18 @@ public enum Procedure {
 
 public extension Procedure.Parameters {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Codable, Sendable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
+        
+        public init(salonsFilter: [UUID]? = nil, employeesFilter: [UUID]? = nil, pagination: Pagination? = nil) {
+            self.salonsFilter = salonsFilter
+            self.employeesFilter = employeesFilter
+            self.pagination = pagination
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable, Sendable {
         public let duration: Minutes
         public let price: Price
@@ -28,14 +31,43 @@ public extension Procedure.Parameters {
         public let parameters: [Procedure.Helpers.CreateParameterRequest]
         public let serviceId: UUID
         public let employeeIds: [UUID]
+        
+        public init(
+            duration: Minutes,
+            price: Price,
+            description: String? = nil,
+            alias: String? = nil,
+            parameters: [Procedure.Helpers.CreateParameterRequest],
+            serviceId: UUID,
+            employeeIds: [UUID]
+        ) {
+            self.duration = duration
+            self.price = price
+            self.description = description
+            self.alias = alias
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.employeeIds = employeeIds
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Codable, Sendable {
         public let price: Price?
         public let duration: Minutes?
         public let description: UpdateString?
         public let alias: UpdateString?
+        
+        public init(
+            price: Price? = nil,
+            duration: Minutes? = nil,
+            description: UpdateString? = nil,
+            alias: UpdateString? = nil
+        ) {
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+        }
     }
 }
 
@@ -43,17 +75,22 @@ public extension Procedure.Parameters {
 
 public extension Procedure.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Create: Codable, Sendable {
         public let procedures: [Procedure.Helpers.CreateProcedureResponse]
+        
+        public init(procedures: [Procedure.Helpers.CreateProcedureResponse]) {
+            self.procedures = procedures
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct All: Codable, Sendable {
         public let procedures: [Procedure.Helpers.AllProcedureResponse]
+        
+        public init(procedures: [Procedure.Helpers.AllProcedureResponse]) {
+            self.procedures = procedures
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Update: Codable, Sendable {
         public let id: UUID
         public let price: Price
@@ -67,9 +104,36 @@ public extension Procedure.Responses {
         public let masterId: UUID
         public let masterNickname: String
         public let masterAvatar: URL
+        
+        public init(
+            id: UUID,
+            price: Price,
+            duration: Minutes,
+            description: String? = nil,
+            alias: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL
+        ) {
+            self.id = id
+            self.price = price
+            self.duration = duration
+            self.description = description
+            self.alias = alias
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Retrieve: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
@@ -83,26 +147,63 @@ public extension Procedure.Responses {
         public let masterId: UUID
         public let masterNickname: String
         public let masterAvatar: URL
+        
+        public init(
+            id: UUID,
+            duration: Minutes,
+            price: Price,
+            alias: String? = nil,
+            description: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL
+        ) {
+            self.id = id
+            self.duration = duration
+            self.price = price
+            self.alias = alias
+            self.description = description
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
+        }
     }
 }
 
 public extension Procedure.Helpers {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateParameterRequest: Codable, Sendable {
         public let id: UUID
         public let optional: Bool
         public let cases: [CreateCaseRequest]
+        
+        public init(id: UUID, optional: Bool, cases: [CreateCaseRequest]) {
+            self.id = id
+            self.optional = optional
+            self.cases = cases
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateCaseRequest: Codable, Sendable {
         public let id: Int
         public let casePrice: CasePrice?
         public let caseDuration: CaseDuration?
+        
+        public init(id: Int, casePrice: CasePrice? = nil, caseDuration: CaseDuration? = nil) {
+            self.id = id
+            self.casePrice = casePrice
+            self.caseDuration = caseDuration
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CreateProcedureResponse: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
@@ -116,12 +217,39 @@ public extension Procedure.Helpers {
         public let masterId: UUID
         public let masterNickname: String
         public let masterAvatar: URL
+        
+        public init(
+            id: UUID,
+            duration: Minutes,
+            price: Price,
+            alias: String? = nil,
+            description: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL
+        ) {
+            self.id = id
+            self.duration = duration
+            self.price = price
+            self.alias = alias
+            self.description = description
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
+        }
     }
 }
 
 public extension Procedure.Helpers  {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct AllProcedureResponse: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
@@ -135,24 +263,64 @@ public extension Procedure.Helpers  {
         public let masterId: UUID
         public let masterNickname: String
         public let masterAvatar: URL
+        
+        public init(
+            id: UUID,
+            duration: Minutes,
+            price: Price,
+            alias: String? = nil,
+            description: String? = nil,
+            parameters: [Procedure.Helpers.ParameterResponse],
+            serviceId: UUID,
+            serviceTags: [TranslatedServiceTag],
+            serviceTitle: String,
+            masterId: UUID,
+            masterNickname: String,
+            masterAvatar: URL
+        ) {
+            self.id = id
+            self.duration = duration
+            self.price = price
+            self.alias = alias
+            self.description = description
+            self.parameters = parameters
+            self.serviceId = serviceId
+            self.serviceTags = serviceTags
+            self.serviceTitle = serviceTitle
+            self.masterId = masterId
+            self.masterNickname = masterNickname
+            self.masterAvatar = masterAvatar
+        }
     }
 }
 
 public extension Procedure.Helpers {
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct ParameterResponse: Codable, Sendable {
         public let id: UUID
         public let optional: Bool
         public let title: String
         public let cases: [CaseResponse]
+        
+        public init(id: UUID, optional: Bool, title: String, cases: [CaseResponse]) {
+            self.id = id
+            self.optional = optional
+            self.title = title
+            self.cases = cases
+        }
     }
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct CaseResponse: Codable, Sendable {
         public let id: Int
         public let title: String
         public let price: CasePrice?
         public let duration: CaseDuration?
+        
+        public init(id: Int, title: String, price: CasePrice? = nil, duration: CaseDuration? = nil) {
+            self.id = id
+            self.title = title
+            self.price = price
+            self.duration = duration
+        }
     }
     
     enum CasePrice: Codable, Sendable {

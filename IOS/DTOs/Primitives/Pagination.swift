@@ -1,7 +1,9 @@
-import MemberwiseInit
-
-@MemberwiseInit(.public, _optionalsDefaultNil: true)
 public struct Pagination: Codable, Sendable {
     public let page: Int
     public let per: Int
+    
+    public init(page: Int, per: Int) {
+        self.page = page
+        self.per = per
+    }
 }

@@ -1,5 +1,4 @@
 import Foundation
-import MemberwiseInit
 
 public enum Device {
     public enum Parameters {}
@@ -8,7 +7,6 @@ public enum Device {
 
 public extension Device.Parameters {
 
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct System: Codable, Sendable {
         public var manufacturer : String?
         public var model: String?
@@ -16,14 +14,34 @@ public extension Device.Parameters {
         public var appVersion: String?
         public var country: String?
         public let fcmToken: String?
+        
+        public init(
+            manufacturer: String? = nil,
+            model: String? = nil,
+            system: SystemType? = nil,
+            appVersion: String? = nil,
+            country: String? = nil,
+            fcmToken: String? = nil
+        ) {
+            self.manufacturer = manufacturer
+            self.model = model
+            self.system = system
+            self.appVersion = appVersion
+            self.country = country
+            self.fcmToken = fcmToken
+        }
     }
 }
 
 public extension Device.Responses {
     
-    @MemberwiseInit(.public, _optionalsDefaultNil: true)
     struct Full: Codable, Sendable {
         public var id: UUID
         public var version: VersionType?
+        
+        public init(id: UUID, version: VersionType? = nil) {
+            self.id = id
+            self.version = version
+        }
     }
 }
