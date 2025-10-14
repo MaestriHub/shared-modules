@@ -1,9 +1,9 @@
 import Foundation
 import MemberwiseInit
 
-public struct Schedule {
+public struct Schedule: Sendable {
 
-    public enum Pattern: Equatable, Decodable, Encodable { 
+    public enum Pattern: Equatable, Decodable, Encodable, Sendable { 
         case weekly(Week)
         case cycled(Cycled)
         case daily(Day)
@@ -55,7 +55,7 @@ public struct Schedule {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Week: Codable, Equatable {
+    public struct Week: Codable, Equatable, Sendable {
         public var monday: Day?
         public var tuesday: Day?
         public var wednesday: Day?
@@ -66,14 +66,14 @@ public struct Schedule {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Cycled: Codable, Equatable {
+    public struct Cycled: Codable, Equatable, Sendable {
         public var startDay: Date
         public var workDays: Dictionary<Int, Day>
         public var restDays: Int
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    public struct Day: Codable, Equatable {
+    public struct Day: Codable, Equatable, Sendable {
         public var workTime: String
         public var offTime: [String]
     }

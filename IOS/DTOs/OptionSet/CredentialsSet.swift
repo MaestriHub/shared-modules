@@ -1,5 +1,5 @@
 /// Если вы правите это обязательно поправьте маппер в приложении.
-public struct CredentialsSet: Codable, Hashable {
+public struct CredentialsSet: Codable, Hashable, Sendable {
     public var clientCreds     : Set<ClientCredentials>
     public var salonCreds      : Set<SalonCredentials>
     public var employeeCreds   : Set<EmployeeCredentials>
@@ -12,60 +12,60 @@ public struct CredentialsSet: Codable, Hashable {
     public var financeCreds    : Set<FinanceCredentials>
     public var salaryCreds     : Set<SalaryCredentials>
     
-    public enum ClientCredentials: String, Codable {
+    public enum ClientCredentials: String, Codable, Sendable {
         case edit
         case visibleBaseInfo
         case visibleContacts
     }
 
-    public enum SalonCredentials: String, Codable {
+    public enum SalonCredentials: String, Codable, Sendable {
         case editBaseInfo
     }
 
-    public enum EmployeeCredentials: String, Codable {
+    public enum EmployeeCredentials: String, Codable, Sendable {
         case edit
         case visible
     }
 
-    public enum ProcedureCredentials: String, Codable {
+    public enum ProcedureCredentials: String, Codable, Sendable {
         case ownEdit
         case otherEdit
     }
 
-    public enum PositionCredentials: String, Codable {
+    public enum PositionCredentials: String, Codable, Sendable {
         case edit
     }
 
-    public enum WorktimeCredentials: String, Codable {
+    public enum WorktimeCredentials: String, Codable, Sendable {
         case ownEdit
         case otherEdit
     }
 
     /// ----------------------
 
-    public enum AppointmentCredentials: String, Codable {
+    public enum AppointmentCredentials: String, Codable, Sendable {
        case all
     }
 
-    public enum StatisticCredentials: String, Codable {
+    public enum StatisticCredentials: String, Codable, Sendable {
         case all
     }
 
-    public enum NotificationCredentials: String, Codable {
+    public enum NotificationCredentials: String, Codable, Sendable {
         case all
     }
 
-    public enum FinanceCredentials: String, Codable {
+    public enum FinanceCredentials: String, Codable, Sendable {
         case all
     }
 
-    public enum SalaryCredentials: String, Codable {
+    public enum SalaryCredentials: String, Codable, Sendable {
         case all
     }
 }
 
 public extension CredentialsSet {
-    static var all: CredentialsSet = .init(
+    nonisolated(unsafe) static var all: CredentialsSet = .init(
         clientCreds     : [.edit, .visibleBaseInfo, .visibleContacts],
         salonCreds      : [.editBaseInfo],
         employeeCreds   : [.edit, .visible],
@@ -79,7 +79,7 @@ public extension CredentialsSet {
         salaryCreds     : [.all]
     )
     
-    static var none: CredentialsSet = .init(
+    nonisolated(unsafe) static var none: CredentialsSet = .init(
         clientCreds     : [],
         salonCreds      : [],
         employeeCreds   : [],

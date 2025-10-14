@@ -1,9 +1,9 @@
 import Foundation
 
 // TODO: шо то какая-то пизда надо будет потом переделывать операции
-public struct OperationInfo: Codable, Hashable {
+public struct OperationInfo: Codable, Hashable, Sendable {
     
-    public struct AppointmentOperation: Codable, Hashable {
+    public struct AppointmentOperation: Codable, Hashable, Sendable {
         public var realizerId: UUID
         public var appointmentId: UUID
 
@@ -16,7 +16,7 @@ public struct OperationInfo: Codable, Hashable {
         }
     }
 
-    public struct SalaryOperation: Codable, Hashable {
+    public struct SalaryOperation: Codable, Hashable, Sendable {
         
         public var initiatorId: UUID
         public var receiverId: UUID
@@ -33,7 +33,7 @@ public struct OperationInfo: Codable, Hashable {
         }
     }
 
-    public struct OtherOperation: Codable, Hashable {
+    public struct OtherOperation: Codable, Hashable, Sendable {
         
         public var realizerId: UUID
         public var description: String
@@ -47,7 +47,7 @@ public struct OperationInfo: Codable, Hashable {
         }
     }
     
-    public enum Keys: Codable, Hashable {
+    public enum Keys: Codable, Hashable, Sendable {
         case appointment(AppointmentOperation)
         case salary(SalaryOperation)
         case other(OtherOperation)

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum SalaryPaymentType: Codable, Hashable {
+public enum SalaryPaymentType: Codable, Hashable, Sendable {
     case percent(Int)
     case value(Price)
     

@@ -64,7 +64,7 @@ public extension Date {
 }
 
 public extension Date {
-    enum RoundingPrecision {
+    enum RoundingPrecision: Sendable {
         case none
         case milliseconds
         case millisecondsAndSeconds

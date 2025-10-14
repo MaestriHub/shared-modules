@@ -9,7 +9,7 @@ public enum Statistic {
 public extension Statistic.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct AppointmentsQuery: Codable {
+    struct AppointmentsQuery: Codable, Sendable {
         public let startDate: Date
         public let endDate: Date
         public let employees: [UUID]?
@@ -20,7 +20,7 @@ public extension Statistic.Parameters {
 public extension Statistic.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Appointments: Codable {
+    struct Appointments: Codable, Sendable {
         public var price: Price
         public var count: Int
     }

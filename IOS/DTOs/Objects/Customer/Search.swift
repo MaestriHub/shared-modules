@@ -11,7 +11,7 @@ public enum Search {
 public extension Search.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Codable {
+    struct Retrieve: Codable, Sendable {
         public let value: String?
         public let salonType: SalonType?
         public let latitude: Double?
@@ -23,7 +23,7 @@ public extension Search.Parameters {
 public extension Search.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var suggests: [Helpers.Suggest]
         public var salons: [Helpers.Salon]
     }
@@ -32,12 +32,12 @@ public extension Search.Responses {
 public extension Search.Responses.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Suggest: Codable {
+    struct Suggest: Codable, Sendable {
         public var value: String
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Salon: Codable {
+    struct Salon: Codable, Sendable {
         public var id: UUID
         public var name: String
         public var type: SalonType

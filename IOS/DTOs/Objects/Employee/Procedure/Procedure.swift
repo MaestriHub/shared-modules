@@ -13,14 +13,14 @@ public enum Procedure {
 public extension Procedure.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let duration: Minutes
         public let price: Price
         public let description: String?
@@ -31,7 +31,7 @@ public extension Procedure.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public let price: Price?
         public let duration: Minutes?
         public let description: UpdateString?
@@ -44,17 +44,17 @@ public extension Procedure.Parameters {
 public extension Procedure.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let procedures: [Procedure.Helpers.CreateProcedureResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let procedures: [Procedure.Helpers.AllProcedureResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public let id: UUID
         public let price: Price
         public let duration: Minutes
@@ -70,7 +70,7 @@ public extension Procedure.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Codable {
+    struct Retrieve: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
         public let price: Price
@@ -89,21 +89,21 @@ public extension Procedure.Responses {
 public extension Procedure.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateParameterRequest: Codable {
+    struct CreateParameterRequest: Codable, Sendable {
         public let id: UUID
         public let optional: Bool
         public let cases: [CreateCaseRequest]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateCaseRequest: Codable {
+    struct CreateCaseRequest: Codable, Sendable {
         public let id: Int
         public let casePrice: CasePrice?
         public let caseDuration: CaseDuration?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateProcedureResponse: Codable {
+    struct CreateProcedureResponse: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
         public let price: Price
@@ -122,7 +122,7 @@ public extension Procedure.Helpers {
 public extension Procedure.Helpers  {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct AllProcedureResponse: Codable {
+    struct AllProcedureResponse: Codable, Sendable {
         public let id: UUID
         public let duration: Minutes
         public let price: Price
@@ -140,7 +140,7 @@ public extension Procedure.Helpers  {
 
 public extension Procedure.Helpers {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ParameterResponse: Codable {
+    struct ParameterResponse: Codable, Sendable {
         public let id: UUID
         public let optional: Bool
         public let title: String
@@ -148,14 +148,14 @@ public extension Procedure.Helpers {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CaseResponse: Codable {
+    struct CaseResponse: Codable, Sendable {
         public let id: Int
         public let title: String
         public let price: CasePrice?
         public let duration: CaseDuration?
     }
     
-    enum CasePrice: Codable {
+    enum CasePrice: Codable, Sendable {
         case fixedValue(Decimal)
         case multiKoeff(Decimal)
         
@@ -192,7 +192,7 @@ public extension Procedure.Helpers {
         }
     }
     
-    enum CaseDuration: Codable {
+    enum CaseDuration: Codable, Sendable {
         case fixedValue(Minutes)
         case multiKoeff(Decimal)
         

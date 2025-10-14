@@ -7,7 +7,9 @@ func defaultURLDateEncode() -> (Date) throws -> String? {
 func URLDateEncode(_ formatter: ISO8601DateFormatter, _ kDefaultPresicion: Date.RoundingPrecision) -> (Date) -> String? {
     return { date in
         let formattedDate = date.rounded(kDefaultPresicion)
-        var dateString = formatter.string(from: formattedDate)
-        return dateString
+        let dateString = formatter.string(from: formattedDate)
+        var allowedCharacters = CharacterSet.urlQueryAllowed
+        allowedCharacters.remove(charactersIn: ":")
+        return dateString.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
     }
 }

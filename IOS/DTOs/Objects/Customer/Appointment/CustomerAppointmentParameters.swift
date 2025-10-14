@@ -13,18 +13,18 @@ extension CustomerAPI {
 
 public extension CustomerAPI.Appointment.Parameters.Create {
     @MemberwiseInit(.public)
-    struct Procedure: Codable {
+    struct Procedure: Codable, Sendable {
         public let procedureId: UUID
         public let time: SafeDateInterval
     }
     
     @MemberwiseInit(.public)
-    struct Complex: Codable {
+    struct Complex: Codable, Sendable {
         public let complexId: UUID
         public let chunks: [Chunk]
         
         @MemberwiseInit(.public)
-        public struct Chunk: Codable {
+        public struct Chunk: Codable, Sendable {
             public var id: UUID
             public var procedureId: UUID
             public var time: SafeDateInterval
@@ -35,7 +35,7 @@ public extension CustomerAPI.Appointment.Parameters.Create {
 public extension CustomerAPI.Appointment.Parameters.All {
     // Reversed.jpeg (maybe paginated in past)
     @MemberwiseInit(.public)
-    struct ByPagination: Codable {
+    struct ByPagination: Codable, Sendable {
         public let startDate: Date
         public var pagination: Pagination
         public let reversed: Bool

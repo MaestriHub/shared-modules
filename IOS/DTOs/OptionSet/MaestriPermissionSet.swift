@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MaestriPermissionSet: OptionSet, Codable, Hashable {
+public struct MaestriPermissionSet: OptionSet, Codable, Hashable, Sendable {
     
     public static let none: MaestriPermissionSet = []
     public static let service = MaestriPermissionSet(rawValue: 1 << 0) // разрешаем создавать свои сервайсы

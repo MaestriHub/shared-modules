@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable {
+public struct SafeDateInterval: Codable, Equatable, Hashable, Comparable, Sendable {
     public var interval: DateInterval  
 
     public var start: Date {

@@ -13,7 +13,7 @@ public enum Service {
 public extension Service.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let valueFilter: String?
@@ -21,13 +21,13 @@ public extension Service.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let title: String
         public let tags: [ServiceTags]
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public let title: String?
         public let tags: [ServiceTags]?
     }
@@ -38,26 +38,26 @@ public extension Service.Parameters {
 public extension Service.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let services: [Service.Helpers.ServiceResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Codable {
+    struct Retrieve: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let parameters: [Service.Helpers.Parameter]
@@ -68,21 +68,21 @@ public extension Service.Responses {
 public extension Service.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ServiceResponse: Codable {
+    struct ServiceResponse: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let tags: [TranslatedServiceTag]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Parameter: Codable {
+    struct Parameter: Codable, Sendable {
         public let id: UUID
         public let title: String
         public let cases: [Case]
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Case: Codable {
+    struct Case: Codable, Sendable {
         public let id: Int
         public let title: String
     }

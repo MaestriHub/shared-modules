@@ -1,4 +1,4 @@
-public enum SystemType: Codable, Equatable {
+public enum SystemType: Codable, Equatable, Sendable {
     case ios(version: String)   
     case android(version: String)
     case chrome(version: String)

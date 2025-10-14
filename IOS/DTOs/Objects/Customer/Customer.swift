@@ -11,7 +11,7 @@ public enum Customer {
 public extension Customer.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Registration: Codable {
+    struct Registration: Codable, Sendable {
         public var contact: Customer.Internal.Contact?
     }
 }
@@ -19,14 +19,14 @@ public extension Customer.Parameters {
 public extension Customer.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Registration: Codable {
+    struct Registration: Codable, Sendable {
         public var accessToken: Token
     }
 }
 
 public extension Customer.Internal {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Contact: Codable {
+    struct Contact: Codable, Sendable {
         public var value: String
         public var type: ContactType
     }

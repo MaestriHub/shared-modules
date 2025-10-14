@@ -1,4 +1,4 @@
-public enum ServiceTags: String, Codable, CaseIterable, Equatable {
+public enum ServiceTags: String, Codable, CaseIterable, Equatable, Sendable {
     case barbershop
     case nails
     case massage
@@ -13,7 +13,7 @@ public enum ServiceTags: String, Codable, CaseIterable, Equatable {
     case lashes
 }
 
-public struct TranslatedServiceTag: Codable {
+public struct TranslatedServiceTag: Codable, Sendable {
     public let tag: ServiceTags
     public let translate: String
 

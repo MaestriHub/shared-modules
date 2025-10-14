@@ -21,7 +21,7 @@ public extension Salary.Parameters {
 public extension Salary.Parameters.Rules {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public var percent: Int?
         public var grid: [UUID : SalaryPaymentType]?
         public var wage: Wage?
@@ -31,13 +31,13 @@ public extension Salary.Parameters.Rules {
 public extension Salary.Parameters.Balance {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Payout: Codable {
+    struct Payout: Codable, Sendable {
         public var paymentType: PaymentType
         public var dateTo: Date
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Calculate: Codable {
+    struct Calculate: Codable, Sendable {
         public var dateTo: Date
     }
 }
@@ -45,7 +45,7 @@ public extension Salary.Parameters.Balance {
 public extension Salary.Responses.Rules {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var percent: Int?
         public var grid: [Salary.Responses.Helpers.ServiceWithPaymentType]?
         public var wage: Wage?
@@ -55,7 +55,7 @@ public extension Salary.Responses.Rules {
 public extension Salary.Responses.Balance {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var wage: Price?
         public var grid: [Price]?
         public var procent: [Price]?
@@ -66,13 +66,13 @@ public extension Salary.Responses.Balance {
 public extension Salary.Responses.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ServiceWithPaymentType: Codable {
+    struct ServiceWithPaymentType: Codable, Sendable {
         public var service: Service
         public var paymentType: SalaryPaymentType
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Service: Codable {
+    struct Service: Codable, Sendable {
         public var id: UUID
         public var title: String
         public var description: String

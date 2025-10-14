@@ -9,7 +9,7 @@ public extension Favorite.Responses {
     typealias Salons = [Salon]
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Salon: Codable {
+    struct Salon: Codable, Sendable {
         public var id: UUID
         public var name: String
         public var type: SalonType

@@ -8,7 +8,7 @@ public enum Catalog {
 public extension Catalog.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Catalog: Codable {
+    struct Catalog: Codable, Sendable {
         public let services: [Service.Helpers.ServiceResponse]
         public let procedures: [Procedure.Helpers.AllProcedureResponse]
         public let complexes: [Complex.Helpers.ComplexResponse]

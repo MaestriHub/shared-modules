@@ -3,7 +3,7 @@ import MemberwiseInit
 
 public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let complexes : [Complex]
         public let procedures: [Procedure]
     }
@@ -11,7 +11,7 @@ public extension EmployeeAPI.Appointment.Responses {
 
 public extension EmployeeAPI.Appointment.Responses {
     @MemberwiseInit(.public)
-    struct Procedure: Codable {
+    struct Procedure: Codable, Sendable {
         public var id: UUID
         public var title: String
         public var price: Decimal
@@ -33,7 +33,7 @@ public extension EmployeeAPI.Appointment.Responses {
     }
     
     @MemberwiseInit(.public)
-    struct Complex: Codable {
+    struct Complex: Codable, Sendable {
         public var id: UUID
         public var alias: String?
         public var price: Decimal
@@ -49,7 +49,7 @@ public extension EmployeeAPI.Appointment.Responses {
         public var procedures: [Procedure]
         
         @MemberwiseInit(.public)
-        public struct Procedure: Codable {
+        public struct Procedure: Codable, Sendable {
             public var id: UUID
             public var title: String
             public var time: SafeDateInterval

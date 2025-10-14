@@ -10,7 +10,7 @@ public enum Auth {
 public extension Auth.Parameters {
   
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct AppleToken: Codable {
+    struct AppleToken: Codable, Sendable {
         public var token: String
         public var firstName: String?
         public var lastName: String?
@@ -19,14 +19,14 @@ public extension Auth.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct GoogleToken: Codable {
+    struct GoogleToken: Codable, Sendable {
         public var token: String
         public var firstName: String?
         public var lastName: String?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct RefreshingToken: Codable {
+    struct RefreshingToken: Codable, Sendable {
         public var token: String
     }
 }
@@ -34,14 +34,14 @@ public extension Auth.Parameters {
 public extension Auth.Responses {
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct SuccessAuth: Codable {
+    struct SuccessAuth: Codable, Sendable {
         public let accessToken: Token
         public let refreshToken: Token
         public let user: Auth.Internal.UserInfo
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Refresh: Codable {
+    struct Refresh: Codable, Sendable {
         public let accessToken: Token
         public let refreshToken: Token?
     }
@@ -50,7 +50,7 @@ public extension Auth.Responses {
 public extension Auth.Internal {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct UserInfo: Codable {
+    struct UserInfo: Codable, Sendable {
         public let id: UUID
         public let avatar: URL?
         public let nickname: String?

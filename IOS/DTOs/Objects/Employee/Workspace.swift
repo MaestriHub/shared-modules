@@ -11,7 +11,7 @@ public enum Workspace {
 public extension Workspace.Parameters {
  
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let name: String
         public let type: SalonType
         public let logo: URL?
@@ -25,7 +25,7 @@ public extension Workspace.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Codable {
+    struct Patch: Codable, Sendable {
         public let name: String?
         public let type: SalonType?
         public let description: String?
@@ -36,7 +36,7 @@ public extension Workspace.Parameters {
 public extension Workspace.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var id: UUID
         public var name: String
         public var type: SalonType
@@ -51,7 +51,7 @@ public extension Workspace.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Codable {
+    struct Partial: Codable, Sendable {
         public var id: UUID
         public var name: String
         public var type: SalonType
@@ -63,7 +63,7 @@ public extension Workspace.Responses {
 
 public extension Workspace.Internal {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Contact: Codable {
+    struct Contact: Codable, Sendable {
         public var value: String
         public var type: ContactType
     }

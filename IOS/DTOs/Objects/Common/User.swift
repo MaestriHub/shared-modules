@@ -9,7 +9,7 @@ public enum User {
 public extension User.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Codable {
+    struct Patch: Codable, Sendable {
         public var nickname: String?
         public var avatar: URL?
     }
@@ -18,7 +18,7 @@ public extension User.Parameters {
 public extension User.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct UserInfo: Codable {
+    struct UserInfo: Codable, Sendable {
         public var id: UUID
         public var avatar: URL
         public var nickname: String

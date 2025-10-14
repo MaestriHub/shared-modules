@@ -1,6 +1,6 @@
 import Foundation
 
-public enum TimetableOwner: Codable, LosslessStringConvertible, Equatable {
+public enum TimetableOwner: Codable, LosslessStringConvertible, Equatable, Sendable {
     
     case salon(UUID)
     case employee(UUID)

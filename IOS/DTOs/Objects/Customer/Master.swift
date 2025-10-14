@@ -9,7 +9,7 @@ public extension Master.Responses {
     typealias Masters = [Master]
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Master: Codable {
+    struct Master: Codable, Sendable {
         public var id: UUID
         public var nickName: String
         public var logo: URL

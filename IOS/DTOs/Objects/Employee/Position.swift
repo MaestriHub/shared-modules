@@ -9,7 +9,7 @@ public enum Position {
 public extension Position.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public var title: String
         public var creds: CredentialsSet
         public var makeOwner: Bool
@@ -17,7 +17,7 @@ public extension Position.Parameters {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Patch: Codable {
+    struct Patch: Codable, Sendable {
         public var title: String?
         public var creds: CredentialsSet?
         public var makeOwner: Bool?
@@ -28,7 +28,7 @@ public extension Position.Parameters {
 public extension Position.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var id: UUID
         public var title: String
         public var creds: CredentialsSet
@@ -37,7 +37,7 @@ public extension Position.Responses {
     }
 
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Partial: Codable {
+    struct Partial: Codable, Sendable {
         public var id: UUID
         public var title: String
     }

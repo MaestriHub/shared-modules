@@ -15,7 +15,7 @@ public typealias ComplexChunkId = UUID
 public extension Complex.Parameters {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let salonsFilter: [UUID]?
         public let employeesFilter: [UUID]?
         public let pagination: Pagination?
@@ -26,7 +26,7 @@ public extension Complex.Parameters {
     /// Думаю что в будущем добавиться возможность создавать комплекс не с айдишниками процедур, а с его личными
     /// процедурами, это в том случае, если таких процедур нет как явления, но в комплексе они существуют
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let alias: String?
         public let description: String?
         public let priceShift: Complex.Helpers.PriceShift
@@ -34,7 +34,7 @@ public extension Complex.Parameters {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public typealias ChunkPosition = Int
     
         public let priceShift: Complex.Helpers.PriceShift?
@@ -49,7 +49,7 @@ public extension Complex.Parameters {
 public extension Complex.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Create: Codable {
+    struct Create: Codable, Sendable {
         public let id: UUID
         public let priceShift: Complex.Helpers.PriceShift
         public let description: String?
@@ -58,7 +58,7 @@ public extension Complex.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Update: Codable {
+    struct Update: Codable, Sendable {
         public let id: UUID
         public let alias: String?
         public let description: String?
@@ -67,12 +67,12 @@ public extension Complex.Responses {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct All: Codable {
+    struct All: Codable, Sendable {
         public let complexes: [Complex.Helpers.ComplexResponse]
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Retrieve: Codable {
+    struct Retrieve: Codable, Sendable {
         public let id: UUID
         public let alias: String?
         public let description: String?
@@ -84,7 +84,7 @@ public extension Complex.Responses {
 public extension Complex.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateChunkRequest: Codable {
+    struct CreateChunkRequest: Codable, Sendable {
         public let order: Int
         public let proceduresIds: [UUID]
     }
@@ -93,7 +93,7 @@ public extension Complex.Helpers {
 public extension Complex.Helpers {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ComplexResponse: Codable {
+    struct ComplexResponse: Codable, Sendable {
         public let id: UUID
         public let alias: String?
         public let description: String?
@@ -102,7 +102,7 @@ public extension Complex.Helpers {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ChunkResponse: Codable {
+    struct ChunkResponse: Codable, Sendable {
         public let id: UUID
         public let order: Int
         public let procedures: [ProcedureResponse]
@@ -112,7 +112,7 @@ public extension Complex.Helpers {
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct ProcedureResponse: Codable {
+    struct ProcedureResponse: Codable, Sendable {
         public let id: UUID
         public let alias: String?
         public let description: String?
@@ -125,7 +125,7 @@ public extension Complex.Helpers {
 }
 
 public extension Complex.Helpers {
-    enum PriceShift: Codable {
+    enum PriceShift: Codable, Sendable {
         case percent(Decimal)
         case absolute(Decimal)
         

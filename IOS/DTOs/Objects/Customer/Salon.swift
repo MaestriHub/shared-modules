@@ -8,7 +8,7 @@ public enum Salon {
 public extension Salon.Responses {
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct Full: Codable {
+    struct Full: Codable, Sendable {
         public var id: UUID
         public var name: String
         public var type: SalonType

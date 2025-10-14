@@ -9,20 +9,20 @@ public enum Contact {
 
 public extension Contact.Parameters {
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreateRecovery: Codable {
+    struct CreateRecovery: Codable, Sendable {
         public let value: String
         public let type: ContactType
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct CreatePrimary: Codable {
+    struct CreatePrimary: Codable, Sendable {
         public let value: String
         public let type: ContactType
         public let phoneTypes: Set<PhoneTypes>?
     }
     
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct UpdateContact: Codable {
+    struct UpdateContact: Codable, Sendable {
         public var phoneTypes: Set<PhoneTypes>?
     }
 }
@@ -44,7 +44,7 @@ public extension Contact.Shared {
 
     // MARK: контакты используемые для восстановления
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct RecoveryContact: Codable {
+    struct RecoveryContact: Codable, Sendable {
         public let id: ContactId
         public let value: String
         public let type: ContactType
@@ -52,7 +52,7 @@ public extension Contact.Shared {
 
     // MARK: контакты используемые для отображения
     @MemberwiseInit(.public, _optionalsDefaultNil: true)
-    struct PrimaryContact: Codable {
+    struct PrimaryContact: Codable, Sendable {
         public let id: ContactId
         public let value: String
         public let type: ContactType
