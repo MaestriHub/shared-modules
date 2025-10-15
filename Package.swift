@@ -20,8 +20,7 @@ let package = Package(
             dependencies: [
             ],
             path: "IOS/DTOs",
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
+            swiftSettings: 
                 .swiftLanguageMode(.v6)
             ]
         ),
@@ -32,7 +31,6 @@ let package = Package(
             ],
             path: "IOS/Tests",
             swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
                 .swiftLanguageMode(.v6)
             ]
         ),
