@@ -20,7 +20,7 @@ let package = Package(
             dependencies: [
             ],
             path: "IOS/DTOs",
-            swiftSettings: 
+            swiftSettings: [
                 .swiftLanguageMode(.v6)
             ]
         ),
