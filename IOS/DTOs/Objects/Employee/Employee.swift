@@ -48,19 +48,22 @@ public extension Employee.Responses {
         public var contacts: [Contact.Shared.PrimaryContact]
         public var salonId: UUID
         public var position: Position.Responses.Full
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
             user: Employee.Internal.UserInfo? = nil,
             contacts: [Contact.Shared.PrimaryContact],
             salonId: UUID,
-            position: Position.Responses.Full
+            position: Position.Responses.Full,
+            inviteLink: URL? = nil
         ) {
             self.id = id
             self.user = user
             self.contacts = contacts
             self.salonId = salonId
             self.position = position
+            self.inviteLink = inviteLink
         }
     }
     

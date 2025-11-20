@@ -35,17 +35,20 @@ public extension Client.Responses {
         public var user: Client.Internal.UserInfo?
         public var alias: String?
         public var contacts: [Contact.Shared.PrimaryContact]
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
             user: Client.Internal.UserInfo? = nil,
             alias: String? = nil,
-            contacts: [Contact.Shared.PrimaryContact]
+            contacts: [Contact.Shared.PrimaryContact],
+            inviteLink: URL? = nil
         ) {
             self.id = id
             self.user = user
             self.alias = alias
             self.contacts = contacts
+            self.inviteLink = inviteLink
         }
     }
 
