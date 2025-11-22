@@ -80,6 +80,7 @@ public extension Workspace.Responses {
         public var localeId: String
         public var timeZoneId: String
         public var employeeToken: Token
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
@@ -92,7 +93,8 @@ public extension Workspace.Responses {
             isActive: Bool,
             localeId: String,
             timeZoneId: String,
-            employeeToken: Token
+            employeeToken: Token,
+            inviteLink: URL?
         ) {
             self.id = id
             self.name = name
@@ -105,6 +107,7 @@ public extension Workspace.Responses {
             self.localeId = localeId
             self.timeZoneId = timeZoneId
             self.employeeToken = employeeToken
+            self.inviteLink = inviteLink
         }
     }
     
@@ -115,6 +118,7 @@ public extension Workspace.Responses {
         public var logo: URL
         public var address: Address
         public var point: CoordinatePoint
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
@@ -122,7 +126,8 @@ public extension Workspace.Responses {
             type: SalonType,
             logo: URL,
             address: Address,
-            point: CoordinatePoint
+            point: CoordinatePoint,
+            inviteLink: URL?
         ) {
             self.id = id
             self.name = name
@@ -130,6 +135,7 @@ public extension Workspace.Responses {
             self.logo = logo
             self.address = address
             self.point = point
+            self.inviteLink = inviteLink
         }
     }
 }

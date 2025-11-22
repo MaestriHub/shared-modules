@@ -18,6 +18,7 @@ public extension Salon.Responses {
         public var timeZoneId: String
         public var address: Address
         public var point: CoordinatePoint
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
@@ -30,7 +31,8 @@ public extension Salon.Responses {
             localeId: String,
             timeZoneId: String,
             address: Address,
-            point: CoordinatePoint
+            point: CoordinatePoint,
+            inviteLink: URL?
         ) {
             self.id = id
             self.name = name
@@ -43,6 +45,7 @@ public extension Salon.Responses {
             self.timeZoneId = timeZoneId
             self.address = address
             self.point = point
+            self.inviteLink = inviteLink
         }
     }
 }

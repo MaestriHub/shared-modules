@@ -73,19 +73,22 @@ public extension Employee.Responses {
         public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
         public var position: Position.Responses.Partial
+        public var inviteLink: URL?
         
         public init(
             id: UUID,
             nickname: String,
             avatar: URL,
             contacts: [Contact.Shared.PrimaryContact],
-            position: Position.Responses.Partial
+            position: Position.Responses.Partial,
+            inviteLink: URL? = nil
         ) {
             self.id = id
             self.nickname = nickname
             self.avatar = avatar
             self.contacts = contacts
             self.position = position
+            self.inviteLink = inviteLink
         }
     }
 }
