@@ -95,8 +95,8 @@ public extension MarketingCampaign.Responses {
         public let linkId: String?
         public let clicksCount: Int
         public let appointmentsCreated: Int
-        public let clicksByDay: [String: Int]?
-        public let appointmentsByDay: [String: Int]?
+        public let clicksByDay: [Date: Int]?
+        public let appointmentsByDay: [Date: Int]?
         public let createdAt: Date?
         
         public init(
@@ -106,8 +106,8 @@ public extension MarketingCampaign.Responses {
             linkId: String? = nil,
             clicksCount: Int,
             appointmentsCreated: Int,
-            clicksByDay: [String: Int]? = nil,
-            appointmentsByDay: [String: Int]? = nil,
+            clicksByDay: [Date: Int]? = nil,
+            appointmentsByDay: [Date: Int]? = nil,
             createdAt: Date? = nil
         ) {
             self.campaignId = campaignId
