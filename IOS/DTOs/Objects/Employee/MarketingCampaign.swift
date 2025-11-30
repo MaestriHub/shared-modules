@@ -8,27 +8,15 @@ public enum MarketingCampaign {
 public extension MarketingCampaign.Parameters {
     
     struct Create: Codable, Sendable {
-        public let salonId: UUID
-        public let type: CampaignType
         public let name: String
         public let description: String?
-        public let affiliateOfferId: UUID?
-        public let influencerContactId: UUID?
         
         public init(
-            salonId: UUID,
-            type: CampaignType,
             name: String,
             description: String? = nil,
-            affiliateOfferId: UUID? = nil,
-            influencerContactId: UUID? = nil
         ) {
-            self.salonId = salonId
-            self.type = type
             self.name = name
             self.description = description
-            self.affiliateOfferId = affiliateOfferId
-            self.influencerContactId = influencerContactId
         }
     }
     

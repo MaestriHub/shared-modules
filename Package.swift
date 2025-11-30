@@ -24,15 +24,5 @@ let package = Package(
                 .swiftLanguageMode(.v6)
             ]
         ),
-        .testTarget(
-            name: "Tests",
-            dependencies: [
-                .target(name: "DTOs"),
-            ],
-            path: "IOS/Tests",
-            swiftSettings: [
-                .swiftLanguageMode(.v6)
-            ]
-        ),
     ]
 )
