@@ -7,16 +7,13 @@ public enum Catalog {
 public extension Catalog.Responses {
     
     struct Catalog: Codable, Sendable {
-        public let services: [Service.Helpers.ServiceResponse]
-        public let procedures: [Procedure.Helpers.AllProcedureResponse]
+        public let procedures: [Procedure.Helpers.ProcedureResponse]
         public let complexes: [Complex.Helpers.ComplexResponse]
         
         public init(
-            services: [Service.Helpers.ServiceResponse],
-            procedures: [Procedure.Helpers.AllProcedureResponse],
+            procedures: [Procedure.Helpers.ProcedureResponse],
             complexes: [Complex.Helpers.ComplexResponse]
         ) {
-            self.services = services
             self.procedures = procedures
             self.complexes = complexes
         }
