@@ -48,6 +48,8 @@ public extension Service.Parameters {
 // MARK: - Responses -
 
 public extension Service.Responses {
+
+    typealias All = [Service.Helpers.ServiceResponse]
     
     struct Create: Codable, Sendable {
         public let id: UUID
@@ -70,14 +72,6 @@ public extension Service.Responses {
             self.id = id
             self.title = title
             self.tags = tags
-        }
-    }
-    
-    struct All: Codable, Sendable {
-        public let services: [Service.Helpers.ServiceResponse]
-        
-        public init(services: [Service.Helpers.ServiceResponse]) {
-            self.services = services
         }
     }
     
