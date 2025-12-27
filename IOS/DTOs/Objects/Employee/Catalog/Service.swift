@@ -12,19 +12,13 @@ public enum Service {
 public extension Service.Parameters {
     
     struct All: Codable, Sendable {
-        public let salonsFilter: [UUID]?
-        public let employeesFilter: [UUID]?
         public let valueFilter: String?
         public let pagination: Pagination?
         
         public init(
-            salonsFilter: [UUID]? = nil,
-            employeesFilter: [UUID]? = nil,
             valueFilter: String? = nil,
             pagination: Pagination? = nil
         ) {
-            self.salonsFilter = salonsFilter
-            self.employeesFilter = employeesFilter
             self.valueFilter = valueFilter
             self.pagination = pagination
         }
