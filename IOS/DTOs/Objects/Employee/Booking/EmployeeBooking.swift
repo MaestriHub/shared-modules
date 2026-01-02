@@ -24,7 +24,6 @@ public extension EmployeeBooking.Parameters {
         // Init для Procedure (с clientId)
         public init(
             clientId: UUID,
-            salonId: UUID,
             procedureId: UUID,
             executionId: UUID?,
             startTime: Date?,
@@ -33,7 +32,6 @@ public extension EmployeeBooking.Parameters {
             discountId: UUID?
         ) {
             self.clientId = clientId
-            self.salonId = salonId
             self.procedureId = procedureId
             self.complexId = nil
             self.executionId = executionId
@@ -47,14 +45,12 @@ public extension EmployeeBooking.Parameters {
         // Init для Complex (с clientId и items)
         public init(
             clientId: UUID,
-            salonId: UUID,
             complexId: UUID,
             items: [EmployeeBooking.Helpers.ComplexItem],
             addressId: UUID?,
             discountId: UUID?
         ) {
             self.clientId = clientId
-            self.salonId = salonId
             self.procedureId = nil
             self.complexId = complexId
             self.executionId = nil
@@ -68,7 +64,6 @@ public extension EmployeeBooking.Parameters {
     }
     
     struct RequestOpenBooking: Codable, Sendable {
-        public let salonId: UUID
         public let procedureId: UUID?
         public let complexId: UUID?
         public let executionId: UUID?
@@ -80,7 +75,6 @@ public extension EmployeeBooking.Parameters {
         
         // Init для Open Procedure
         public init(
-            salonId: UUID,
             procedureId: UUID,
             executionId: UUID?,
             startTime: Date?,
@@ -89,7 +83,6 @@ public extension EmployeeBooking.Parameters {
             addressId: UUID?,
             discountId: UUID?
         ) {
-            self.salonId = salonId
             self.procedureId = procedureId
             self.complexId = nil
             self.executionId = executionId
@@ -102,13 +95,11 @@ public extension EmployeeBooking.Parameters {
         
         // Init для Open Complex
         public init(
-            salonId: UUID,
             complexId: UUID,
             items: [EmployeeBooking.Helpers.ComplexItem],
             addressId: UUID?,
             discountId: UUID?
         ) {
-            self.salonId = salonId
             self.procedureId = nil
             self.complexId = complexId
             self.executionId = nil
