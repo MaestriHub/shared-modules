@@ -11,7 +11,6 @@ public enum EmployeeBooking {
 public extension EmployeeBooking.Parameters {
     struct Create: Codable, Sendable {
         public let clientId: UUID?
-        public let salonId: UUID
         public let procedureId: UUID?
         public let complexId: UUID?
         public let executionId: UUID?
