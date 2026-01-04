@@ -123,6 +123,7 @@ public extension Procedure.Helpers  {
     
     /// Структура execution в процедуре
     struct ExecutionResponse: Codable, Sendable {
+        public let id: UUID
         public let price: Decimal
         public let duration: Minutes
         public let currency: String
@@ -131,6 +132,7 @@ public extension Procedure.Helpers  {
         public let masterAvatar: URL
         
         public init(
+            id: UUID,
             price: Decimal,
             duration: Minutes,
             currency: String,
@@ -138,6 +140,7 @@ public extension Procedure.Helpers  {
             masterName: String,
             masterAvatar: URL
         ) {
+            self.id = id
             self.price = price
             self.duration = duration
             self.currency = currency
