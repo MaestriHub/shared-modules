@@ -13,7 +13,7 @@ public extension Salon.Responses {
         public let description: String?
         public let logo: URL
         public let isActive: Bool
-        public let isFavorite: Bool = false
+        public let isFavorite: Bool
         public let localeId: String
         public let timeZoneId: String
         public let address: Address
