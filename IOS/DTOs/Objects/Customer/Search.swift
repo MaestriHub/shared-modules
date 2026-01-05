@@ -60,7 +60,7 @@ public extension Search.Responses.Helpers {
         public let name: String
         public let type: SalonType
         public let logo: URL
-        public let isFavorite: Bool = false
+        public let isFavorite: Bool
         public let address: Address
         
         public init(
