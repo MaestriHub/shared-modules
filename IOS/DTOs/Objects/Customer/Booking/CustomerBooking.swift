@@ -105,7 +105,6 @@ public extension CustomerBooking.Responses {
         public let salonId: UUID
         public let salonName: String
         public let salonLogo: URL
-        public let addressId: UUID?
         public let address: Address?
         public let startTime: Date?
         public let endTime: Date?
@@ -120,7 +119,6 @@ public extension CustomerBooking.Responses {
             salonId: UUID,
             salonName: String,
             salonLogo: URL,
-            addressId: UUID?,
             address: Address?,
             startTime: Date?,
             endTime: Date?,
@@ -134,7 +132,6 @@ public extension CustomerBooking.Responses {
             self.salonId = salonId
             self.salonName = salonName
             self.salonLogo = salonLogo
-            self.addressId = addressId
             self.address = address
             self.startTime = startTime
             self.endTime = endTime

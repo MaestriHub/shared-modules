@@ -48,17 +48,20 @@ public extension Workspace.Parameters {
         public let type: SalonType?
         public let description: String?
         public let logo: URL?
+        public let address: Address?
         
         public init(
             name: String? = nil,
             type: SalonType? = nil,
             description: String? = nil,
-            logo: URL? = nil
+            logo: URL? = nil,
+            address: Address? = nil
         ) {
             self.name = name
             self.type = type
             self.description = description
             self.logo = logo
+            self.address = address
         }
     }
 }
