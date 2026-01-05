@@ -132,6 +132,8 @@ public extension ModelProfile.Responses {
             availabilityTagsMask: AvailabilityTagsMask?,
             restrictionsMask: RestrictionsMask,
             favoritesOnly: Bool,
+            agreeToShootingAndMaterialUsage: Bool,
+            agreeToPlatformRules: Bool,
             createdAt: Date,
             updatedAt: Date? = nil
         ) {
