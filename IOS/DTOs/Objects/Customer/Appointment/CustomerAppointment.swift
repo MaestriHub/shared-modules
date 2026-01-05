@@ -44,9 +44,9 @@ public extension CustomerAppointment.Responses {
         public let currency: String
         public let timezoneId: String
         public let salonId: UUID
-        public let salonName: String?
-        public let salonLogo: URL?
-        public let address: DTOs.Address
+        public let salonName: String
+        public let salonLogo: URL
+        public let address: Address
         public let assignments: [Assignment]
         
         public init(
@@ -62,9 +62,9 @@ public extension CustomerAppointment.Responses {
             currency: String,
             timezoneId: String,
             salonId: UUID,
-            salonName: String?,
-            salonLogo: URL?,
-            address: DTOs.Address,
+            salonName: String,
+            salonLogo: URL,
+            address: Address,
             assignments: [Assignment]
         ) {
             self.id = id
@@ -95,7 +95,7 @@ public extension CustomerAppointment.Responses {
         public let endTime: Date
         public let procedureId: UUID?
         public let employeeId: UUID
-        public let employeeName: String?
+        public let employeeName: String
         public let employeeAvatar: URL?
         
         public init(
@@ -107,7 +107,7 @@ public extension CustomerAppointment.Responses {
             endTime: Date,
             procedureId: UUID?,
             employeeId: UUID,
-            employeeName: String?,
+            employeeName: String,
             employeeAvatar: URL?
         ) {
             self.id = id

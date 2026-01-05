@@ -19,7 +19,6 @@ public extension Workspace.Parameters {
         public let timetable: Timetable.Parameters.Create.Pattern?
         public let contact: Workspace.Internal.Contact?
         public let address: Address
-        public var point: CoordinatePoint
         
         public init(
             name: String,
@@ -30,8 +29,7 @@ public extension Workspace.Parameters {
             description: String? = nil,
             timetable: Timetable.Parameters.Create.Pattern? = nil,
             contact: Workspace.Internal.Contact? = nil,
-            address: Address,
-            point: CoordinatePoint
+            address: Address
         ) {
             self.name = name
             self.type = type
@@ -42,7 +40,6 @@ public extension Workspace.Parameters {
             self.timetable = timetable
             self.contact = contact
             self.address = address
-            self.point = point
         }
     }
 
@@ -75,7 +72,6 @@ public extension Workspace.Responses {
         public var description: String?
         public var logo: URL
         public var address: Address
-        public var point: CoordinatePoint
         public var isActive: Bool
         public var localeId: String
         public var timeZoneId: String
@@ -89,7 +85,6 @@ public extension Workspace.Responses {
             description: String? = nil,
             logo: URL,
             address: Address,
-            point: CoordinatePoint,
             isActive: Bool,
             localeId: String,
             timeZoneId: String,
@@ -102,7 +97,6 @@ public extension Workspace.Responses {
             self.description = description
             self.logo = logo
             self.address = address
-            self.point = point
             self.isActive = isActive
             self.localeId = localeId
             self.timeZoneId = timeZoneId
@@ -117,7 +111,6 @@ public extension Workspace.Responses {
         public var type: SalonType
         public var logo: URL
         public var address: Address
-        public var point: CoordinatePoint
         public var inviteLink: URL?
         
         public init(
@@ -126,7 +119,6 @@ public extension Workspace.Responses {
             type: SalonType,
             logo: URL,
             address: Address,
-            point: CoordinatePoint,
             inviteLink: URL?
         ) {
             self.id = id
@@ -134,7 +126,6 @@ public extension Workspace.Responses {
             self.type = type
             self.logo = logo
             self.address = address
-            self.point = point
             self.inviteLink = inviteLink
         }
     }

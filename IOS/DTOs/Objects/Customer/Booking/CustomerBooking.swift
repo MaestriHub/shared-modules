@@ -103,33 +103,39 @@ public extension CustomerBooking.Responses {
         public let id: UUID
         public let status: BookingStatus
         public let salonId: UUID
-        public let salonName: String?
+        public let salonName: String
+        public let salonLogo: URL
         public let addressId: UUID?
+        public let address: Address?
         public let startTime: Date?
         public let endTime: Date?
         public let currency: String
         public let timezoneId: String
         public let items: [BookingItem]
-        public let createdAt: Date?
+        public let createdAt: Date
         
         public init(
             id: UUID,
             status: BookingStatus,
             salonId: UUID,
-            salonName: String?,
+            salonName: String,
+            salonLogo: URL,
             addressId: UUID?,
+            address: Address?,
             startTime: Date?,
             endTime: Date?,
             currency: String,
             timezoneId: String,
             items: [BookingItem],
-            createdAt: Date?
+            createdAt: Date
         ) {
             self.id = id
             self.status = status
             self.salonId = salonId
             self.salonName = salonName
+            self.salonLogo = salonLogo
             self.addressId = addressId
+            self.address = address
             self.startTime = startTime
             self.endTime = endTime
             self.currency = currency
@@ -143,9 +149,9 @@ public extension CustomerBooking.Responses {
         public let id: UUID
         public let procedureId: UUID
         public let executionId: UUID?
-        public let procedureName: String?
+        public let procedureName: String
         
-        public init(id: UUID, procedureId: UUID, executionId: UUID?, procedureName: String?) {
+        public init(id: UUID, procedureId: UUID, executionId: UUID?, procedureName: String) {
             self.id = id
             self.procedureId = procedureId
             self.executionId = executionId

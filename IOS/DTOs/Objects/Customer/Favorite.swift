@@ -8,13 +8,12 @@ public extension Favorite.Responses {
     typealias Salons = [Salon]
     
     struct Salon: Codable, Sendable {
-        public var id: UUID
-        public var name: String
-        public var type: SalonType
-        public var logo: URL
-        public var isActive: Bool
-        public var address: Address
-        public var point: CoordinatePoint
+        public let id: UUID
+        public let name: String
+        public let type: SalonType
+        public let logo: URL
+        public let isActive: Bool
+        public let address: Address
         
         public init(
             id: UUID,
@@ -22,8 +21,7 @@ public extension Favorite.Responses {
             type: SalonType,
             logo: URL,
             isActive: Bool,
-            address: Address,
-            point: CoordinatePoint
+            address: Address
         ) {
             self.id = id
             self.name = name
@@ -31,7 +29,6 @@ public extension Favorite.Responses {
             self.logo = logo
             self.isActive = isActive
             self.address = address
-            self.point = point
         }
     }
 }

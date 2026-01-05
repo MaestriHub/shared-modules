@@ -86,11 +86,9 @@ public extension EmployeeAppointment.Responses {
         public let currency: String
         public let timezoneId: String
         public let salonId: UUID
-        public let salonName: String?
-        public let salonLogo: URL?
         public let clientId: UUID
-        public let clientName: String?
-        public let clientAvatar: URL?
+        public let clientName: String
+        public let clientAvatar: URL
         public let clientContacts: [Contact.Shared.PrimaryContact]
         public let address: Address
         public let assignments: [Assignment]
@@ -108,11 +106,9 @@ public extension EmployeeAppointment.Responses {
             currency: String,
             timezoneId: String,
             salonId: UUID,
-            salonName: String?,
-            salonLogo: URL?,
             clientId: UUID,
-            clientName: String?,
-            clientAvatar: URL?,
+            clientName: String,
+            clientAvatar: URL,
             clientContacts: [Contact.Shared.PrimaryContact],
             address: Address,
             assignments: [Assignment]
@@ -129,8 +125,6 @@ public extension EmployeeAppointment.Responses {
             self.currency = currency
             self.timezoneId = timezoneId
             self.salonId = salonId
-            self.salonName = salonName
-            self.salonLogo = salonLogo
             self.clientId = clientId
             self.clientName = clientName
             self.clientAvatar = clientAvatar
@@ -149,8 +143,8 @@ public extension EmployeeAppointment.Responses {
         public let endTime: Date
         public let procedureId: UUID?
         public let employeeId: UUID
-        public let employeeName: String?
-        public let employeeAvatar: URL?
+        public let employeeName: String
+        public let employeeAvatar: URL
         public let employeeContacts: [Contact.Shared.PrimaryContact]
         
         public init(
@@ -162,8 +156,8 @@ public extension EmployeeAppointment.Responses {
             endTime: Date,
             procedureId: UUID?,
             employeeId: UUID,
-            employeeName: String?,
-            employeeAvatar: URL?,
+            employeeName: String,
+            employeeAvatar: URL,
             employeeContacts: [Contact.Shared.PrimaryContact]
         ) {
             self.id = id

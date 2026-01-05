@@ -148,10 +148,9 @@ public extension EmployeeBooking.Responses {
         public let id: UUID
         public let status: BookingStatus
         public let salonId: UUID
-        public let salonName: String?
         public let clientId: UUID?
         public let clientName: String?
-        public let addressId: UUID?
+        public let address: Address?
         public let startTime: Date?
         public let endTime: Date?
         public let currency: String
@@ -164,10 +163,9 @@ public extension EmployeeBooking.Responses {
             id: UUID,
             status: BookingStatus,
             salonId: UUID,
-            salonName: String?,
             clientId: UUID?,
             clientName: String?,
-            addressId: UUID?,
+            address: Address?,
             startTime: Date?,
             endTime: Date?,
             currency: String,
@@ -179,10 +177,9 @@ public extension EmployeeBooking.Responses {
             self.id = id
             self.status = status
             self.salonId = salonId
-            self.salonName = salonName
             self.clientId = clientId
             self.clientName = clientName
-            self.addressId = addressId
+            self.address = address
             self.startTime = startTime
             self.endTime = endTime
             self.currency = currency

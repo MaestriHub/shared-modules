@@ -56,13 +56,12 @@ public extension Search.Responses.Helpers {
     }
     
     struct Salon: Codable, Sendable {
-        public var id: UUID
-        public var name: String
-        public var type: SalonType
-        public var logo: URL
-        public var isFavorite: Bool = false
-        public var address: Address
-        public var point: CoordinatePoint
+        public let id: UUID
+        public let name: String
+        public let type: SalonType
+        public let logo: URL
+        public let isFavorite: Bool = false
+        public let address: Address
         
         public init(
             id: UUID,
@@ -70,8 +69,7 @@ public extension Search.Responses.Helpers {
             type: SalonType,
             logo: URL,
             isFavorite: Bool = false,
-            address: Address,
-            point: CoordinatePoint
+            address: Address
         ) {
             self.id = id
             self.name = name
@@ -79,7 +77,6 @@ public extension Search.Responses.Helpers {
             self.logo = logo
             self.isFavorite = isFavorite
             self.address = address
-            self.point = point
         }
     }
 }

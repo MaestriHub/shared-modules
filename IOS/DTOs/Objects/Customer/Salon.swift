@@ -7,18 +7,17 @@ public enum Salon {
 public extension Salon.Responses {
     
     struct Full: Codable, Sendable {
-        public var id: UUID
-        public var name: String
-        public var type: SalonType
-        public var description: String?
-        public var logo: URL
-        public var isActive: Bool
-        public var isFavorite: Bool = false
-        public var localeId: String
-        public var timeZoneId: String
-        public var address: Address
-        public var point: CoordinatePoint
-        public var inviteLink: URL?
+        public let id: UUID
+        public let name: String
+        public let type: SalonType
+        public let description: String?
+        public let logo: URL
+        public let isActive: Bool
+        public let isFavorite: Bool = false
+        public let localeId: String
+        public let timeZoneId: String
+        public let address: Address
+        public let inviteLink: URL?
         
         public init(
             id: UUID,
@@ -31,7 +30,6 @@ public extension Salon.Responses {
             localeId: String,
             timeZoneId: String,
             address: Address,
-            point: CoordinatePoint,
             inviteLink: URL?
         ) {
             self.id = id
@@ -44,7 +42,6 @@ public extension Salon.Responses {
             self.localeId = localeId
             self.timeZoneId = timeZoneId
             self.address = address
-            self.point = point
             self.inviteLink = inviteLink
         }
     }
