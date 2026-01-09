@@ -80,6 +80,7 @@ public extension Workspace.Responses {
         public var timeZoneId: String
         public var employeeToken: Token
         public var inviteLink: URL?
+        public var createdAt: Date
         
         public init(
             id: UUID,
@@ -92,7 +93,8 @@ public extension Workspace.Responses {
             localeId: String,
             timeZoneId: String,
             employeeToken: Token,
-            inviteLink: URL?
+            inviteLink: URL?,
+            createdAt: Date
         ) {
             self.id = id
             self.name = name
@@ -105,6 +107,7 @@ public extension Workspace.Responses {
             self.timeZoneId = timeZoneId
             self.employeeToken = employeeToken
             self.inviteLink = inviteLink
+            self.createdAt = createdAt
         }
     }
     
