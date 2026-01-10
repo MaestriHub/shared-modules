@@ -52,7 +52,7 @@ public extension Complex.Parameters {
         public init(
             alias: String? = nil,
             description: String? = nil,
-            priceShift: Complex.Helpers.PriceShift? = nil,
+            priceShift: Complex.Helpers.PriceShift? = nil
         ) {
             self.alias = alias
             self.description = description

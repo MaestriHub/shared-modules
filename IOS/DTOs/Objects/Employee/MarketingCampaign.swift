@@ -13,7 +13,7 @@ public extension MarketingCampaign.Parameters {
         
         public init(
             name: String,
-            description: String? = nil,
+            description: String? = nil
         ) {
             self.name = name
             self.description = description
