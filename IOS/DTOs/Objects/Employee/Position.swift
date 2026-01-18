@@ -11,7 +11,7 @@ public extension Position.Parameters {
         public var title: String
         public var creds: CredentialsSet
         public var makeOwner: Bool
-        public var salary: Salary.Parameters.Rules.Create
+        public var salary: Salary.Parameters.Rules.Create?
         
         public init(
             title: String,
@@ -53,7 +53,7 @@ public extension Position.Responses {
         public var title: String
         public var creds: CredentialsSet
         public var owner: Bool
-        public var salary: Salary.Responses.Rules.Full
+        public var salary: Salary.Responses.Rules.Full?
         
         public init(
             id: UUID,
