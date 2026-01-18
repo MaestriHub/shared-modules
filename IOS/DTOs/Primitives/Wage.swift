@@ -10,3 +10,4 @@ public struct Wage: Codable, Hashable, Sendable {
         self.period = period
     }
 }
+*/
