@@ -66,7 +66,7 @@ public extension EmployeeBooking.Parameters {
         public let procedureId: UUID?
         public let executionId: UUID?
         public let complexId: UUID?
-        public let items: [EmployeeBooking.Helpers.ComplexItem]
+        public let items: [EmployeeBooking.Helpers.ComplexItem]?
         
         public let startTime: Date?
         public let endTime: Date?

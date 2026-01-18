@@ -201,7 +201,7 @@ public extension CustomerBooking.Responses {
             id: UUID, 
             procedureId: UUID, 
             procedureName: String,
-            executor: Executor?
+            executor: CustomerBooking.Helpers.Executor?
         ) {
             self.id = id
             self.procedureId = procedureId
