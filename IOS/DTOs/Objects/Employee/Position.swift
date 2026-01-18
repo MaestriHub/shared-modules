@@ -25,18 +25,16 @@ public extension Position.Parameters {
         public var title: String?
         public var creds: CredentialsSet?
         public var makeOwner: Bool?
-        public var salary: Salary.Parameters.Rules.Create?
+        // public var salary: Salary.Parameters.Rules.Create?
         
         public init(
             title: String? = nil,
             creds: CredentialsSet? = nil,
-            makeOwner: Bool? = nil,
-            salary: Salary.Parameters.Rules.Create? = nil
+            makeOwner: Bool? = nil
         ) {
             self.title = title
             self.creds = creds
             self.makeOwner = makeOwner
-            self.salary = salary
         }
     }
 }
@@ -48,14 +46,12 @@ public extension Position.Responses {
         public var title: String
         public var creds: CredentialsSet
         public var owner: Bool
-        public var salary: Salary.Responses.Rules.Full
         
-        public init(id: UUID, title: String, creds: CredentialsSet, owner: Bool, salary: Salary.Responses.Rules.Full) {
+        public init(id: UUID, title: String, creds: CredentialsSet, owner: Bool) {
             self.id = id
             self.title = title
             self.creds = creds
             self.owner = owner
-            self.salary = salary
         }
     }
 
