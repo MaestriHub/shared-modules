@@ -11,12 +11,18 @@ public extension Position.Parameters {
         public var title: String
         public var creds: CredentialsSet
         public var makeOwner: Bool
-        // public var salary: Salary.Parameters.Rules.Create
+        public var salary: Salary.Parameters.Rules.Create
         
-        public init(title: String, creds: CredentialsSet, makeOwner: Bool) {
+        public init(
+            title: String,
+            creds: CredentialsSet,
+            makeOwner: Bool,
+            salary: Salary.Parameters.Rules.Create?
+        ) {
             self.title = title
-            self.creds = creds  
+            self.creds = creds
             self.makeOwner = makeOwner
+            self.salary = salary
         }
     }
 
@@ -24,16 +30,18 @@ public extension Position.Parameters {
         public var title: String?
         public var creds: CredentialsSet?
         public var makeOwner: Bool?
-        // public var salary: Salary.Parameters.Rules.Create?
+        public var salary: Salary.Parameters.Rules.Create?
         
         public init(
             title: String? = nil,
             creds: CredentialsSet? = nil,
-            makeOwner: Bool? = nil
+            makeOwner: Bool? = nil,
+            salary: Salary.Parameters.Rules.Create? = nil
         ) {
             self.title = title
             self.creds = creds
             self.makeOwner = makeOwner
+            self.salary = salary
         }
     }
 }
@@ -45,12 +53,20 @@ public extension Position.Responses {
         public var title: String
         public var creds: CredentialsSet
         public var owner: Bool
+        public var salary: Salary.Responses.Rules.Full
         
-        public init(id: UUID, title: String, creds: CredentialsSet, owner: Bool) {
+        public init(
+            id: UUID,
+            title: String,
+            creds: CredentialsSet,
+            owner: Bool,
+            salary: Salary.Responses.Rules.Full?
+        ) {
             self.id = id
             self.title = title
             self.creds = creds
             self.owner = owner
+            self.salary = salary
         }
     }
 
