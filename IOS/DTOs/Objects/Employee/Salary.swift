@@ -1,5 +1,5 @@
 import Foundation
-/*
+
 public enum Salary {
     public enum Parameters {}
     public enum Responses {}
@@ -115,4 +115,3 @@ public extension Salary.Responses.Helpers {
         }
     }
 }
-*/
