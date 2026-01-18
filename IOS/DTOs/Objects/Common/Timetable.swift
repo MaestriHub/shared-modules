@@ -1,7 +1,5 @@
 import Foundation
 
-public typealias ProcedureId = UUID
-
 public enum Timetable {
     public enum Parameters {}
     public enum Responses {}
@@ -9,7 +7,7 @@ public enum Timetable {
 
 public extension Timetable.Parameters {
 
-    struct Create {
+    enum Create {
         public struct Pattern: Codable, Equatable, Sendable {
             public var schedule: Schedule.Pattern
             public var startAt: Date
@@ -32,22 +30,23 @@ public extension Timetable.Parameters {
     }
     
     enum SearchSlot {
-        
-        public struct Procedure: Codable, Sendable {
-            public var id: UUID
-            
-            public init(id: UUID) {
-                self.id = id
-            }
-        }
-        
         public struct Complex: Codable, Sendable {
             public var id: UUID
-            public var chunks: [ComplexChunkId : ProcedureId]
+            public var procedures: [Procedure]
             
-            public init(id: UUID, chunks: [ComplexChunkId : ProcedureId]) {
+            public init(id: UUID, procedures: [Procedure]) {
                 self.id = id
-                self.chunks = chunks
+                self.procedures = procedures
+            }
+        }
+
+        public struct Procedure: Codable, Sendable {
+            public var id: UUID
+            public var executorId: UUID?
+            
+            public init(id: UUID, executorId: UUID? = nil) {
+                self.id = id
+                self.executorId = executorId
             }
         }
     }
@@ -87,21 +86,21 @@ public extension Timetable.Responses {
         
         public struct Slot: Codable, Sendable {
             public var total: SafeDateInterval
-            public var chunks: [Chunk]
+            public var procedures: [Procedure]
             
-            public init(total: SafeDateInterval, chunks: [Chunk]) {
+            public init(total: SafeDateInterval, procedures: [Procedure]) {
                 self.total = total
-                self.chunks = chunks
+                self.procedures = procedures
             }
             
-            public struct Chunk: Codable, Sendable {
+            public struct Procedure: Codable, Sendable {
                 public var id: UUID
-                public var procedureId: UUID
+                public var executorId: UUID
                 public var time: SafeDateInterval
                 
-                public init(id: UUID, procedureId: UUID, time: SafeDateInterval) {
+                public init(id: UUID, executorId: UUID, time: SafeDateInterval) {
                     self.id = id
-                    self.procedureId = procedureId
+                    self.executorId = executorId
                     self.time = time
                 }
             }

@@ -10,34 +10,49 @@ public extension PublicBooking.Parameters {
     struct Create: Codable, Sendable {
         public let clientName: String
         public let clientPhone: String
-        public let procedureId: UUID
+        public let procedureId: UUID?
+        public let executorId: UUID?
+        public let complexId: UUID?
         public let time: SafeDateInterval
         public let trackingId: String?
         
+        // Init для Procedure
         public init(
             clientName: String,
             clientPhone: String,
             procedureId: UUID,
+            executorId: UUID? = nil,
             time: SafeDateInterval,
             trackingId: String? = nil
         ) {
             self.clientName = clientName
             self.clientPhone = clientPhone
             self.procedureId = procedureId
+            self.executorId = executorId
+            self.complexId = nil
+            self.time = time
+            self.trackingId = trackingId
+        }
+        
+        // Init для Complex
+        public init(
+            clientName: String,
+            clientPhone: String,
+            complexId: UUID,
+            time: SafeDateInterval,
+            trackingId: String? = nil
+        ) {
+            self.clientName = clientName
+            self.clientPhone = clientPhone
+            self.procedureId = nil
+            self.executorId = nil
+            self.complexId = complexId
             self.time = time
             self.trackingId = trackingId
         }
     }
     
-    struct SearchSlots: Codable, Sendable {
-        public let procedureId: UUID
-        public let daysAhead: Int?
-        
-        public init(procedureId: UUID, daysAhead: Int? = nil) {
-            self.procedureId = procedureId
-            self.daysAhead = daysAhead
-        }
-    }
+    typealias SearchSlots = Timetable.Parameters.SearchSlot.Procedure
 }
 
 public extension PublicBooking.Responses {

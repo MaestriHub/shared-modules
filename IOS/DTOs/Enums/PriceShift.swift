@@ -1,43 +1,38 @@
 import Foundation
 
-/*
-public enum SalaryPaymentType: Codable, Hashable, Sendable {
+public enum PriceShift: Codable, Sendable {
     case percent(Int)
-    case value(Price)
+    case absolute(Decimal)
     
-    enum CodingKeys: String, CodingKey {
-        case percent = "percent"
-        case value = "value"
+    private enum CodingKeys: String, CodingKey {
+        case percent
+        case absolute
     }
-
-        // Декодирование
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         if let value = try? container.decode(Int.self, forKey: .percent) {
             self = .percent(value)
-        } else if let value = try? container.decode(Price.self, forKey: .value) {
-            self = .value(value)
+        } else if let value = try? container.decode(Decimal.self, forKey: .absolute) {
+            self = .absolute(value)
         } else {
             throw DecodingError.dataCorruptedError(
-                forKey: CodingKeys.percent,
+                forKey: CodingKeys.absolute,
                 in: container,
-                debugDescription: "Unable to decode Foo enum"
+                debugDescription: "Unable to decode PriceShift enum"
             )
         }
     }
 
-    // Кодирование
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
         case .percent(let value):
             try container.encode(value, forKey: .percent)
-        case .value(let value):
-            try container.encode(value, forKey: .value)
+        case .absolute(let value):
+            try container.encode(value, forKey: .absolute)
         }
     }
-
 }
-*/

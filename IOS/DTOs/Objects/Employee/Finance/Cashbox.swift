@@ -1,5 +1,6 @@
 import Foundation
 
+/*
 public enum Cashbox {
     public enum Parameters {}
     public enum Responses {}

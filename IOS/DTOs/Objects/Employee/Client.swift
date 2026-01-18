@@ -19,10 +19,17 @@ public extension Client.Parameters {
     }
     
     struct Retrieve: Codable, Sendable {
-        public let employees: [UUID]?
+        public init() {
+        }
+    }
+    
+    struct Update: Codable, Sendable {
+        public var alias: String?
+        public var contact: Client.Internal.Contact?
         
-        public init(employees: [UUID]? = nil) {
-            self.employees = employees
+        public init(alias: String? = nil, contact: Client.Internal.Contact? = nil) {
+            self.alias = alias
+            self.contact = contact
         }
     }
 }
@@ -32,20 +39,23 @@ public extension Client.Responses {
     
     struct ClientInfo: Codable, Sendable {
         public var id: UUID
-        public var user: Client.Internal.UserInfo?
+        public var name: String
+        public var avatar: URL
         public var alias: String?
         public var contacts: [Contact.Shared.PrimaryContact]
         public var inviteLink: URL?
         
         public init(
             id: UUID,
-            user: Client.Internal.UserInfo? = nil,
+            name: String,
+            avatar: URL,
             alias: String? = nil,
             contacts: [Contact.Shared.PrimaryContact],
             inviteLink: URL? = nil
         ) {
             self.id = id
-            self.user = user
+            self.name = name
+            self.avatar = avatar
             self.alias = alias
             self.contacts = contacts
             self.inviteLink = inviteLink

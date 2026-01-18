@@ -7,8 +7,6 @@ public enum Complex {
     public enum Responses {}
 }
 
-public typealias ComplexChunkId = UUID
-
 // MARK: - Parameters -
 
 public extension Complex.Parameters {
@@ -28,13 +26,13 @@ public extension Complex.Parameters {
     struct Create: Codable, Sendable {
         public let alias: String?
         public let description: String?
-        public let priceShift: Complex.Helpers.PriceShift
+        public let priceShift: PriceShift
         public let procedures: [Complex.Helpers.CreateProcedure]
         
         public init(
             alias: String? = nil,
             description: String? = nil,
-            priceShift: Complex.Helpers.PriceShift,
+            priceShift: PriceShift,
             procedures: [Complex.Helpers.CreateProcedure]
         ) {
             self.alias = alias
@@ -47,12 +45,12 @@ public extension Complex.Parameters {
     struct Update: Codable, Sendable {
         public let alias: String?
         public let description: String?
-        public let priceShift: Complex.Helpers.PriceShift?
+        public let priceShift: PriceShift?
         
         public init(
             alias: String? = nil,
             description: String? = nil,
-            priceShift: Complex.Helpers.PriceShift? = nil
+            priceShift: PriceShift? = nil
         ) {
             self.alias = alias
             self.description = description
@@ -79,11 +77,11 @@ public extension Complex.Helpers {
     struct CreateProcedure: Codable, Sendable {
         public let alias: String?
         public let description: String?
-        public let order: Int
         public let duration: Minutes
         public let price: Price
         public let serviceId: UUID
         public let employeeIds: [UUID]
+        public let order: Int
         
         public init(
             alias: String? = nil,
@@ -197,41 +195,3 @@ public extension Complex.Helpers {
     }
 }
 
-public extension Complex.Helpers {
-    enum PriceShift: Codable, Sendable {
-        case percent(Decimal)
-        case absolute(Decimal)
-        
-        private enum CodingKeys: String, CodingKey {
-            case percent
-            case absolute
-        }
-        
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-
-            if let value = try? container.decode(Decimal.self, forKey: .percent) {
-                self = .percent(value)
-            } else if let value = try? container.decode(Decimal.self, forKey: .absolute) {
-                self = .absolute(value)
-            } else {
-                throw DecodingError.dataCorruptedError(
-                    forKey: CodingKeys.absolute,
-                    in: container,
-                    debugDescription: "Unable to decode Foo enum"
-                )
-            }
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-
-            switch self {
-            case .percent(let value):
-                try container.encode(value, forKey: .percent)
-            case .absolute(let value):
-                try container.encode(value, forKey: .absolute)
-            }
-        }
-    }
-}

@@ -1,5 +1,6 @@
 import Foundation
 
+/*
 public enum Operation {
     public enum Parameters {}
     public enum Responses {}
@@ -88,3 +89,4 @@ public extension Operation.Responses {
         }
     }
 }
+*/

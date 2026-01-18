@@ -11,13 +11,6 @@ public enum ModelProfileStatus: String, Codable, CaseIterable, Sendable {
 
 /// Маска доступности по дням недели
 /// Значения: 1 = будни, 2 = выходные, 3 = все дни (1 | 2)
-///
-/// Примеры использования:
-/// ```swift
-/// let mask: AvailabilityDaysMask = [.weekdays, .weekends]  // все дни
-/// let onlyWeekdays = AvailabilityDaysMask.weekdays        // только будни
-/// if mask.contains(.weekdays) { ... }                     // проверка наличия опции
-/// ```
 public struct AvailabilityDaysMask: OptionSet, Codable, Sendable {
     public let rawValue: Int
     
@@ -49,13 +42,6 @@ public struct AvailabilityDaysMask: OptionSet, Codable, Sendable {
 
 /// Маска доступности по времени суток
 /// Значения: 1 = утро, 2 = день, 4 = вечер, комбинации: 7 = все (1 | 2 | 4)
-///
-/// Примеры использования:
-/// ```swift
-/// let mask: AvailabilityTimesMask = [.morning, .day, .evening]  // все время
-/// let onlyMorning = AvailabilityTimesMask.morning                // только утро
-/// if mask.contains(.day) { ... }                                 // проверка наличия опции
-/// ```
 public struct AvailabilityTimesMask: OptionSet, Codable, Sendable {
     public let rawValue: Int
     

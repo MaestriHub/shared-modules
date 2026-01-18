@@ -26,9 +26,9 @@ public extension Procedure.Parameters {
     struct Create: Codable, Sendable {
         public let alias: String?
         public let description: String?
+        public let serviceId: UUID
         public let duration: Minutes
         public let price: Price
-        public let serviceId: UUID
         public let employeeIds: [UUID]
         
         public init(

@@ -1,6 +1,7 @@
 import Foundation
 
 // TODO: шо то какая-то пизда надо будет потом переделывать операции
+/*
 public struct OperationInfo: Codable, Hashable, Sendable {
     
     public struct AppointmentOperation: Codable, Hashable, Sendable {
@@ -71,3 +72,4 @@ public struct OperationInfo: Codable, Hashable, Sendable {
         value = .other(otherInfo)
     }
 }
+*/

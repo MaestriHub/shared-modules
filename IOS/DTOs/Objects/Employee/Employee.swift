@@ -11,20 +11,17 @@ public extension Employee.Parameters {
     
     struct Invite: Codable, Sendable {
         public var nickname: String?
-        public var salonId: UUID
         public var positionId: UUID
         public var contact: Employee.Internal.Contact?
         public var timetable: Timetable.Parameters.Create.Pattern?
         
         public init(
             nickname: String? = nil,
-            salonId: UUID,
             positionId: UUID,
             contact: Employee.Internal.Contact? = nil,
             timetable: Timetable.Parameters.Create.Pattern? = nil
         ) {
             self.nickname = nickname
-            self.salonId = salonId
             self.positionId = positionId
             self.contact = contact
             self.timetable = timetable
@@ -32,9 +29,11 @@ public extension Employee.Parameters {
     }
     
     struct Patch: Codable, Sendable {
+        public var name: String?
         public var positionId: UUID?
         
-        public init(positionId: UUID? = nil) {
+        public init(name: String? = nil, positionId: UUID? = nil) {
+            self.name = name
             self.positionId = positionId
         }
     }
@@ -44,7 +43,8 @@ public extension Employee.Responses {
 
     struct Full: Codable, Sendable {
         public var id: UUID
-        public var user: Employee.Internal.UserInfo?
+        public var name: String
+        public var avatar: URL
         public var contacts: [Contact.Shared.PrimaryContact]
         public var salonId: UUID
         public var position: Position.Responses.Full
@@ -52,14 +52,16 @@ public extension Employee.Responses {
         
         public init(
             id: UUID,
-            user: Employee.Internal.UserInfo? = nil,
+            name: String,
+            avatar: URL,
             contacts: [Contact.Shared.PrimaryContact],
             salonId: UUID,
             position: Position.Responses.Full,
             inviteLink: URL? = nil
         ) {
             self.id = id
-            self.user = user
+            self.name = name
+            self.avatar = avatar
             self.contacts = contacts
             self.salonId = salonId
             self.position = position

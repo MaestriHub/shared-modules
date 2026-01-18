@@ -81,10 +81,12 @@ public extension EmployeeAppointment.Responses {
         public let description: String?
         public let startTime: Date
         public let endTime: Date
+        public let timezoneId: String
+        
         public let finalPrice: Decimal
         public let discountPrice: Decimal?
         public let currency: String
-        public let timezoneId: String
+        
         public let salonId: UUID
         public let clientId: UUID
         public let clientName: String
