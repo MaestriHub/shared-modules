@@ -248,7 +248,7 @@ public extension EmployeeBooking.Responses {
             id: UUID,
             procedureId: UUID,
             procedureName: String,
-            executor: Executor?
+            executor: EmployeeBooking.Helpers.Executor?
         ) {
             self.id = id
             self.procedureId = procedureId
