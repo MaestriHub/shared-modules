@@ -45,3 +45,4 @@ public extension Cashbox.Responses {
         }
     }
 }
+*/
