@@ -11,13 +11,12 @@ public extension Position.Parameters {
         public var title: String
         public var creds: CredentialsSet
         public var makeOwner: Bool
-        public var salary: Salary.Parameters.Rules.Create
+        // public var salary: Salary.Parameters.Rules.Create
         
-        public init(title: String, creds: CredentialsSet, makeOwner: Bool, salary: Salary.Parameters.Rules.Create) {
+        public init(title: String, creds: CredentialsSet, makeOwner: Bool) {
             self.title = title
-            self.creds = creds
+            self.creds = creds  
             self.makeOwner = makeOwner
-            self.salary = salary
         }
     }
 
