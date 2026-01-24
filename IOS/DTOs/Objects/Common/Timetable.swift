@@ -61,6 +61,16 @@ public extension Timetable.Parameters {
             self.period = period
         }
     }
+    
+    struct SearchSlotQuery: Codable, Sendable {
+        public let salonId: UUID
+        public let date: Date?
+        
+        public init(salonId: UUID, date: Date? = nil) {
+            self.salonId = salonId
+            self.date = date
+        }
+    }
 }
 
 public extension Timetable.Responses {
