@@ -12,3 +12,16 @@ public enum ServiceTags: String, Codable, CaseIterable, Equatable, Sendable {
     case brows
     case lashes
 }
+
+public struct TranslatedServiceTag: Codable, Sendable {
+    public let tag: ServiceTags
+    public let translate: String
+
+    public init(
+        tag: ServiceTags,
+        translate: String
+    ) {
+        self.tag = tag
+        self.translate = translate
+    }
+}
