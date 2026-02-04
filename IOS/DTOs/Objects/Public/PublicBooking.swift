@@ -62,6 +62,8 @@ public extension PublicBooking.Responses {
         public let salonId: UUID
         public let procedureId: UUID
         public let time: SafeDateInterval
+        /// IANA timezone identifier салона — для корректного отображения времени на клиенте (не использовать TimeZone.current).
+        public let timezoneId: String
         public let price: Price
         public let masterId: UUID
         public let masterNickname: String
@@ -75,6 +77,7 @@ public extension PublicBooking.Responses {
             salonId: UUID,
             procedureId: UUID,
             time: SafeDateInterval,
+            timezoneId: String,
             price: Price,
             masterId: UUID,
             masterNickname: String,
@@ -87,6 +90,7 @@ public extension PublicBooking.Responses {
             self.salonId = salonId
             self.procedureId = procedureId
             self.time = time
+            self.timezoneId = timezoneId
             self.price = price
             self.masterId = masterId
             self.masterNickname = masterNickname
