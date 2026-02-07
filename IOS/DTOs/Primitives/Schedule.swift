@@ -53,7 +53,7 @@ public struct Schedule: Sendable {
         }
     }
     
-    public struct Week: Codable, Equatable, Sendable {
+    public struct Week: Codable, Equatable, Hashable, Sendable {
         public var monday: Day?
         public var tuesday: Day?
         public var wednesday: Day?
@@ -93,7 +93,7 @@ public struct Schedule: Sendable {
         }
     }
     
-    public struct Day: Codable, Equatable, Sendable {
+    public struct Day: Codable, Equatable, Hashable, Sendable {
         public var workTime: String
         public var offTime: [String]
         
