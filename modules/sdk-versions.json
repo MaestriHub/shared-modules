@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "0.1.0",
+  "modules": {
+    "swift-dtos": "0.1.0",
+    "kotlin-dtos": "0.1.0",
+    "typescript-dtos": "0.1.0"
+  }
+}

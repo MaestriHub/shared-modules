@@ -1,0 +1,1237 @@
+---
+openapi: 3.1.0
+info:
+  title: Maetry API
+  version: 1.0.0
+  description: Generated from current registered RouteCollection methods and shared
+    DTO schemas.
+paths:
+  "/v1/public/booking/salon/{salonId}":
+    post:
+      operationId: postPublicBookingSalonBysalonIdBy
+      tags:
+      - Public Booking
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostPublicBookingSalonBysalonIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+  "/v1/public/booking/appointment/{appointmentId}":
+    get:
+      operationId: getPublicBookingAppointmentByappointmentIdBy
+      tags:
+      - Public Booking
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetPublicBookingAppointmentByappointmentIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: appointmentId
+        required: true
+        schema:
+          type: string
+  "/v1/wallet/apple/booking/{id}":
+    get:
+      operationId: getWalletAppleBookingByidBy
+      tags:
+      - Wallet Passes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWalletAppleBookingByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/wallet/google/booking/{id}":
+    get:
+      operationId: getWalletGoogleBookingByidBy
+      tags:
+      - Wallet Passes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWalletGoogleBookingByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/bookings":
+    post:
+      operationId: postBookings
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostBookingsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+    get:
+      operationId: getBookings
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetBookingsCursorPageResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+  "/v1/bookings/{id}":
+    get:
+      operationId: getBookingsByidBy
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetBookingsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patchBookingsByidBy
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PatchBookingsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteBookingsByidBy
+      tags:
+      - Bookings для клиентов
+      responses:
+        '204':
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/bookings/{id}/confirm":
+    post:
+      operationId: postBookingsByidByConfirm
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostBookingsByidByConfirmResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/bookings/open":
+    get:
+      operationId: getBookingsOpen
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetBookingsOpenResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/bookings/{id}/accept":
+    post:
+      operationId: postBookingsByidByAccept
+      tags:
+      - Bookings для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostBookingsByidByAcceptResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/appointments":
+    get:
+      operationId: getAppointments
+      tags:
+      - Appointments для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetAppointmentsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/appointments/{id}":
+    get:
+      operationId: getAppointmentsByidBy
+      tags:
+      - Appointments для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetAppointmentsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/appointments/{id}/cancel":
+    post:
+      operationId: postAppointmentsByidByCancel
+      tags:
+      - Appointments для клиентов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostAppointmentsByidByCancelResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/appointments":
+    get:
+      operationId: getWorkspaceAppointments
+      tags:
+      - Appointments для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceAppointmentsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/appointments/{id}":
+    get:
+      operationId: getWorkspaceAppointmentsByidBy
+      tags:
+      - Appointments для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceAppointmentsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patchWorkspaceAppointmentsByidBy
+      tags:
+      - Appointments для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PatchWorkspaceAppointmentsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/appointments/{id}/cancel":
+    post:
+      operationId: postWorkspaceAppointmentsByidByCancel
+      tags:
+      - Appointments для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceAppointmentsByidByCancelResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/bookings":
+    post:
+      operationId: postWorkspaceBookings
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceBookingsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    get:
+      operationId: getWorkspaceBookings
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceBookingsCursorPageResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+  "/v1/workspace/bookings/open":
+    post:
+      operationId: postWorkspaceBookingsOpen
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceBookingsOpenResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/bookings/{id}":
+    get:
+      operationId: getWorkspaceBookingsByidBy
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceBookingsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patchWorkspaceBookingsByidBy
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PatchWorkspaceBookingsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteWorkspaceBookingsByidBy
+      tags:
+      - Bookings для работников
+      responses:
+        '204':
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/bookings/{id}/confirm":
+    post:
+      operationId: postWorkspaceBookingsByidByConfirm
+      tags:
+      - Bookings для работников
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceBookingsByidByConfirmResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    LegacyErrorResponse:
+      type: object
+      deprecated: true
+      description: 'Legacy runtime error payload from ErrorMiddlewareCustom. Deprecated
+        in favor of ApiError. Planned sunset date: 2026-06-30.'
+      required:
+      - error
+      - reason
+      properties:
+        error:
+          type: boolean
+        reason:
+          type: string
+      examples:
+      - error: true
+        reason: Нет bearer токена
+      x-replaced-by: "#/components/schemas/ApiError"
+      x-migration-note: 'Migrate to ApiError: map reason -> message, keep code from
+        HTTP status, move extra data to details.'
+    ApiError:
+      type: object
+      required:
+      - code
+      - message
+      description: Unified error contract for client SDKs.
+      properties:
+        code:
+          type: string
+          description: Application or HTTP status code as string (e.g. "400", "VALIDATION_ERROR").
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional payload for validation fields or debug metadata.
+      examples:
+      - code: '400'
+        message: Bad request
+        details:
+          field: email
+      - code: '401'
+        message: Нет bearer токена
+    ErrorResponse:
+      oneOf:
+      - "$ref": "#/components/schemas/LegacyErrorResponse"
+      - "$ref": "#/components/schemas/ApiError"
+      description: Transition error envelope. During migration clients should support
+        both legacy and new formats.
+      x-migration-note: LegacyErrorResponse is deprecated. Prefer ApiError for new
+        clients and SDK generation.
+    PostPublicBookingSalonBysalonIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/public/booking/salon/{salonId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetPublicBookingAppointmentByappointmentIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/public/booking/appointment/{appointmentId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWalletAppleBookingByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/wallet/apple/booking/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWalletGoogleBookingByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/wallet/google/booking/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostBookingsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/bookings.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetBookingsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/bookings/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PatchBookingsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PATCH /v1/bookings/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostBookingsByidByConfirmResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/bookings/{id}/confirm.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetBookingsOpenResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/bookings/open.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostBookingsByidByAcceptResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/bookings/{id}/accept.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetAppointmentsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/appointments.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetAppointmentsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/appointments/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostAppointmentsByidByCancelResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/appointments/{id}/cancel.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceAppointmentsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/appointments.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceAppointmentsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/appointments/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PatchWorkspaceAppointmentsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PATCH /v1/workspace/appointments/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceAppointmentsByidByCancelResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/appointments/{id}/cancel.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceBookingsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/bookings.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceBookingsOpenResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/bookings/open.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceBookingsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/bookings/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PatchWorkspaceBookingsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PATCH /v1/workspace/bookings/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceBookingsByidByConfirmResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/bookings/{id}/confirm.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    CursorPageMeta:
+      type: object
+      required:
+      - hasMore
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        hasMore:
+          type: boolean
+    GetBookingsCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/GetBookingsByidByResponse"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+    GetWorkspaceBookingsCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/GetWorkspaceBookingsByidByResponse"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+  responses:
+    BadRequest:
+      description: Bad request
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '400'
+                message: Bad request
+            legacyError:
+              value:
+                error: true
+                reason: Bad request
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Unauthorized:
+      description: Unauthorized
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '401'
+                message: Unauthorized
+            legacyError:
+              value:
+                error: true
+                reason: Unauthorized
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Forbidden:
+      description: Forbidden
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '403'
+                message: Forbidden
+            legacyError:
+              value:
+                error: true
+                reason: Forbidden
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    NotFound:
+      description: Not found
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '404'
+                message: Not found
+            legacyError:
+              value:
+                error: true
+                reason: Not found
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Conflict:
+      description: Conflict
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '409'
+                message: Conflict
+            legacyError:
+              value:
+                error: true
+                reason: Conflict
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    ValidationError:
+      description: Validation failed
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '422'
+                message: Validation failed
+            legacyError:
+              value:
+                error: true
+                reason: Validation failed
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    InternalError:
+      description: Internal server error
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '500'
+                message: Internal server error
+            legacyError:
+              value:
+                error: true
+                reason: Internal server error
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: Unique key for safely retrying non-idempotent operations. Reusing
+        the same key should return the same result.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 255
+      examples:
+        uuid:
+          value: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Opaque cursor for the next slice.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Max items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+tags:
+- name: Appointments for customer
+- name: Appointments для работников
+- name: Bookings для клиентов
+- name: Bookings для работников
+- name: Public Booking
+- name: Wallet Passes
+servers:
+- url: https://api.maetry.com/v1
+- url: https://api-dev-601862402938.us-west2.run.app/v1
+- url: https://api-app-601862402938.us-west2.run.app/v1

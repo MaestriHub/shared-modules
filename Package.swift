@@ -19,7 +19,7 @@ let package = Package(
             name: "DTOs",
             dependencies: [
             ],
-            path: "IOS/DTOs",
+            path: "iOS-legacy/DTOs",
             swiftSettings: [
                 .swiftLanguageMode(.v6)
             ]

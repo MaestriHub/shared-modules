@@ -1,0 +1,5295 @@
+---
+openapi: 3.1.0
+info:
+  title: Maetry API
+  version: 1.0.0
+  description: Generated from current registered RouteCollection methods and shared
+    DTO schemas.
+paths:
+  "/v1/timetables/search-slots":
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - "$ref": "#/components/schemas/TimetableParametersSearchSlotComplex"
+              - "$ref": "#/components/schemas/TimetableParametersSearchSlotProcedure"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - "$ref": "#/components/schemas/TimetableResponsesComplexSlots"
+                - "$ref": "#/components/schemas/TimetableResponsesProcedureSlots"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      operationId: postTimetablesSearch-slots
+      tags:
+      - Timetables
+      description: Возвращает свободные слоты времени для записи
+      summary: Search Slots
+      security:
+      - Bearer_unauthorized: []
+  "/v1/timetables/schedules":
+    get:
+      operationId: getTimetablesSchedules
+      description: Возвращает расписания для employee или salon
+      security:
+      - Bearer_unauthorized: []
+      tags:
+      - Timetables
+      summary: Get Schedules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ArrayTimetableResponsesSchedule:
+                  "$ref": "#/components/examples/ArrayTimetableResponsesSchedule"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableResponsesSchedule"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: query
+        schema:
+          items:
+            type: string
+          type: array
+        name: owners
+        required: true
+        examples:
+          default:
+            value:
+            - employee:F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          "$ref": "#/components/schemas/SafeDateInterval"
+        required: true
+        name: period
+        in: query
+        examples:
+          default:
+            value:
+              start: 782151800.9252181
+              end: 782151900.9252181
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+  "/v1/timetables/{owner}/{force}":
+    post:
+      security:
+      - Bearer_employee: []
+      operationId: postTimetablesByOwnerByForce
+      tags:
+      - Timetables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TimetableParametersCreatePattern"
+            examples:
+              TimetableParametersCreatePattern:
+                "$ref": "#/components/examples/TimetableParametersCreatePattern"
+        required: true
+      description: Создает новое распиание
+      parameters:
+      - name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      - schema:
+          type: string
+        required: true
+        name: owner
+        in: path
+      - in: path
+        schema:
+          type: string
+        required: true
+        name: force
+      summary: Сreate Timetable
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/clients":
+    get:
+      summary: All
+      operationId: getWorkspaceClients
+      description: Возвращает клиента по по мастеру
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+      - name: employees
+        required: false
+        in: query
+        schema:
+          items:
+            type: string
+            format: uuid
+          type:
+          - array
+          - 'null'
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      tags:
+      - Client
+      security:
+      - Bearer_employee: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceClientsCursorPageResponse"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      summary: Create
+      security:
+      - Bearer_employee: []
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ClientParametersCreate"
+            examples:
+              ClientParametersCreate:
+                "$ref": "#/components/examples/ClientParametersCreate"
+        required: true
+      tags:
+      - Client
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ClientResponsesClientInfo:
+                  "$ref": "#/components/examples/ClientResponsesClientInfo"
+              schema:
+                "$ref": "#/components/schemas/ClientResponsesClientInfo"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Создание клиента
+      operationId: postWorkspaceClients
+  "/v1/workspace/clients/{id}":
+    get:
+      operationId: getWorkspaceClientsById
+      tags:
+      - Client
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: id
+      summary: Retrieve
+      security:
+      - Bearer_employee: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ClientResponsesClientInfo:
+                  "$ref": "#/components/examples/ClientResponsesClientInfo"
+              schema:
+                "$ref": "#/components/schemas/ClientResponsesClientInfo"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Возвращает клиента
+  "/v1/workspace/employees":
+    get:
+      parameters:
+      - name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      operationId: getWorkspaceEmployees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  "$ref": "#/components/schemas/EmployeeResponsesPartial"
+                type: array
+              examples:
+                ArrayEmployeeResponsesPartial:
+                  "$ref": "#/components/examples/ArrayEmployeeResponsesPartial"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Возвращает всех сотрудников в салоне
+      summary: All
+      security:
+      - Bearer_employee: []
+      tags:
+      - Employee
+  "/v1/workspace/employees/{id}":
+    get:
+      summary: Retrieve
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/EmployeeResponsesFull"
+              examples:
+                EmployeeResponsesFull:
+                  "$ref": "#/components/examples/EmployeeResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      - in: path
+        required: true
+        schema:
+          type: string
+        name: id
+      operationId: getWorkspaceEmployeesById
+      description: Возвращает сотрудника в салоне
+      tags:
+      - Employee
+    put:
+      security:
+      - Bearer_employee: []
+      tags:
+      - Employee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/EmployeeResponsesFull"
+              examples:
+                EmployeeResponsesFull:
+                  "$ref": "#/components/examples/EmployeeResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: putWorkspaceEmployeesById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              EmployeeParametersPatch:
+                "$ref": "#/components/examples/EmployeeParametersPatch"
+            schema:
+              "$ref": "#/components/schemas/EmployeeParametersPatch"
+      summary: Update
+      description: Обновляет информацию о сотруднике
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: true
+        schema:
+          type: string
+        name: id
+        in: path
+    delete:
+      parameters:
+      - name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      - name: id
+        schema:
+          type: string
+        required: true
+        in: path
+      description: Увольняет сотрудника из салона
+      security:
+      - Bearer_employee: []
+      summary: Fire
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      tags:
+      - Employee
+      operationId: deleteWorkspaceEmployeesById
+  "/v1/workspace/employees/credentials":
+    get:
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      tags:
+      - Employee
+      operationId: getWorkspaceEmployeesCredentials
+      description: Возвращает доступы для работников
+      summary: Credentials
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                CredentialsSet:
+                  "$ref": "#/components/examples/CredentialsSet"
+              schema:
+                "$ref": "#/components/schemas/CredentialsSet"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+  "/v1/workspace/employees/invite":
+    post:
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      summary: Invite
+      operationId: postWorkspaceEmployeesInvite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/EmployeeParametersInvite"
+            examples:
+              EmployeeParametersInvite:
+                "$ref": "#/components/examples/EmployeeParametersInvite"
+        required: true
+      description: Создаёт сотрудника без User и возвращает URL для принятия
+      security:
+      - Bearer_employee: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/EmployeeResponsesFull"
+              examples:
+                EmployeeResponsesFull:
+                  "$ref": "#/components/examples/EmployeeResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      tags:
+      - Employee
+  "/v1/workspace/services":
+    get:
+      description: Возвращает список услуг
+      parameters:
+      - name: salonsFilter
+        in: query
+        schema:
+          type:
+          - array
+          - 'null'
+          items:
+            format: uuid
+            type: string
+        required: false
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: employeesFilter
+        in: query
+        schema:
+          items:
+            type: string
+            format: uuid
+          type:
+          - array
+          - 'null'
+        required: false
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: false
+        in: query
+        name: valueFilter
+        schema:
+          type:
+          - string
+          - 'null'
+        examples:
+          default:
+            value: some string
+      - name: pagination
+        in: query
+        required: false
+        schema:
+          "$ref": "#/components/schemas/Pagination"
+        examples:
+          default:
+            value:
+              per: 10
+              page: 1
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      security:
+      - Bearer_employee: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ServiceResponsesAll:
+                  "$ref": "#/components/examples/ServiceResponsesAll"
+              schema:
+                "$ref": "#/components/schemas/ServiceResponsesAll"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: getWorkspaceServices
+      tags:
+      - Service
+      summary: All
+    post:
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      operationId: postWorkspaceServices
+      tags:
+      - Service
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ServiceResponsesCreate"
+              examples:
+                ServiceResponsesCreate:
+                  "$ref": "#/components/examples/ServiceResponsesCreate"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Create
+      security:
+      - Bearer_employee: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ServiceParametersCreate:
+                "$ref": "#/components/examples/ServiceParametersCreate"
+            schema:
+              "$ref": "#/components/schemas/ServiceParametersCreate"
+        required: true
+      description: Создаёт новую услугу
+  "/v1/workspace/services/{id}":
+    get:
+      summary: Retrieve
+      security:
+      - Bearer_employee: []
+      operationId: getWorkspaceServicesById
+      tags:
+      - Service
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ServiceResponsesRetrieve"
+              examples:
+                ServiceResponsesRetrieve:
+                  "$ref": "#/components/examples/ServiceResponsesRetrieve"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - schema:
+          type:
+          - array
+          - 'null'
+          items:
+            format: uuid
+            type: string
+        in: query
+        name: salonsFilter
+        required: false
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: false
+        in: query
+        name: employeesFilter
+        schema:
+          items:
+            type: string
+            format: uuid
+          type:
+          - array
+          - 'null'
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: false
+        schema:
+          type:
+          - string
+          - 'null'
+        in: query
+        name: valueFilter
+        examples:
+          default:
+            value: some string
+      - required: false
+        in: query
+        name: pagination
+        schema:
+          "$ref": "#/components/schemas/Pagination"
+        examples:
+          default:
+            value:
+              per: 10
+              page: 1
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      description: Возвращает конкретную услугу
+    put:
+      operationId: putWorkspaceServicesByidBy
+      tags:
+      - Service
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutWorkspaceServicesByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/procedures":
+    get:
+      operationId: getWorkspaceProcedures
+      tags:
+      - Procedure
+      security:
+      - Bearer_employee: []
+      parameters:
+      - in: query
+        required: false
+        name: salonsFilter
+        schema:
+          items:
+            type: string
+            format: uuid
+          type:
+          - array
+          - 'null'
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: employeesFilter
+        required: false
+        schema:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        in: query
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: false
+        in: query
+        name: pagination
+        schema:
+          "$ref": "#/components/schemas/Pagination"
+        examples:
+          default:
+            value:
+              page: 1
+              per: 10
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      summary: All
+      description: Возвращает процедуры по мастеру или салону
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcedureResponsesAll"
+              examples:
+                ProcedureResponsesAll:
+                  "$ref": "#/components/examples/ProcedureResponsesAll"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      summary: Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ProcedureParametersCreate"
+            examples:
+              ProcedureParametersCreate:
+                "$ref": "#/components/examples/ProcedureParametersCreate"
+      description: Создание процедуры
+      security:
+      - Bearer_employee: []
+      tags:
+      - Procedure
+      operationId: postWorkspaceProcedures
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcedureResponsesCreate"
+              examples:
+                ProcedureResponsesCreate:
+                  "$ref": "#/components/examples/ProcedureResponsesCreate"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+  "/v1/workspace/procedures/{id}":
+    get:
+      summary: Retrieve
+      operationId: getWorkspaceProceduresById
+      description: Возвращает процедуру
+      tags:
+      - Procedure
+      security:
+      - Bearer_employee: []
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      - name: id
+        required: true
+        schema:
+          type: string
+        in: path
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcedureResponsesRetrieve"
+              examples:
+                ProcedureResponsesRetrieve:
+                  "$ref": "#/components/examples/ProcedureResponsesRetrieve"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    put:
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ProcedureParametersUpdate:
+                "$ref": "#/components/examples/ProcedureParametersUpdate"
+            schema:
+              "$ref": "#/components/schemas/ProcedureParametersUpdate"
+        required: true
+      summary: Update
+      operationId: putWorkspaceProceduresById
+      parameters:
+      - in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcedureResponsesUpdate"
+              examples:
+                ProcedureResponsesUpdate:
+                  "$ref": "#/components/examples/ProcedureResponsesUpdate"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      tags:
+      - Procedure
+      security:
+      - Bearer_employee: []
+      description: Обновление процедуры
+    delete:
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      - required: true
+        name: id
+        in: path
+        schema:
+          type: string
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+      summary: Delete
+      tags:
+      - Procedure
+      operationId: deleteWorkspaceProceduresById
+      description: Удаления процедуры
+  "/v1/workspace/complex":
+    get:
+      description: Возвращает комплексы по мастеру или салону
+      summary: All
+      parameters:
+      - required: false
+        name: salonsFilter
+        in: query
+        schema:
+          items:
+            format: uuid
+            type: string
+          type:
+          - array
+          - 'null'
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: query
+        required: false
+        schema:
+          items:
+            type: string
+            format: uuid
+          type:
+          - array
+          - 'null'
+        name: employeesFilter
+        examples:
+          default:
+            value:
+            - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: pagination
+        in: query
+        required: false
+        schema:
+          "$ref": "#/components/schemas/Pagination"
+        examples:
+          default:
+            value:
+              per: 10
+              page: 1
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ComplexResponsesAll"
+              examples:
+                ComplexResponsesAll:
+                  "$ref": "#/components/examples/ComplexResponsesAll"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: getWorkspaceComplex
+      security:
+      - Bearer_employee: []
+      tags:
+      - Complex
+    post:
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              ComplexParametersCreate:
+                "$ref": "#/components/examples/ComplexParametersCreate"
+            schema:
+              "$ref": "#/components/schemas/ComplexParametersCreate"
+      description: Создание комплекса
+      summary: Create
+      tags:
+      - Complex
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ComplexResponsesCreate:
+                  "$ref": "#/components/examples/ComplexResponsesCreate"
+              schema:
+                "$ref": "#/components/schemas/ComplexResponsesCreate"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+      operationId: postWorkspaceComplex
+  "/v1/workspace/complex/{id}":
+    put:
+      tags:
+      - Complex
+      parameters:
+      - name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      - name: id
+        required: true
+        schema:
+          type: string
+        in: path
+      description: Обновление комплекса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ProcedureParametersUpdate"
+            examples:
+              ProcedureParametersUpdate:
+                "$ref": "#/components/examples/ProcedureParametersUpdate"
+        required: true
+      security:
+      - Bearer_employee: []
+      summary: Update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ProcedureResponsesUpdate:
+                  "$ref": "#/components/examples/ProcedureResponsesUpdate"
+              schema:
+                "$ref": "#/components/schemas/ProcedureResponsesUpdate"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: putWorkspaceComplexById
+    get:
+      description: Возвращает комплекс
+      tags:
+      - Complex
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ComplexResponsesRetrieve:
+                  "$ref": "#/components/examples/ComplexResponsesRetrieve"
+              schema:
+                "$ref": "#/components/schemas/ComplexResponsesRetrieve"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Retrieve
+      security:
+      - Bearer_employee: []
+      operationId: getWorkspaceComplexById
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Delete
+      security:
+      - Bearer_employee: []
+      operationId: deleteWorkspaceComplexById
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      tags:
+      - Complex
+      description: Удаление комплекса
+  "/v1/workspace/products":
+    get:
+      operationId: getWorkspaceProducts
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceProductsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      operationId: postWorkspaceProducts
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceProductsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/products/options":
+    get:
+      operationId: getWorkspaceProductsOptions
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceProductsOptionsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/products/{id}":
+    get:
+      operationId: getWorkspaceProductsByidBy
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceProductsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: putWorkspaceProductsByidBy
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutWorkspaceProductsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteWorkspaceProductsByidBy
+      tags:
+      - Product
+      responses:
+        '204':
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/products/{id}/stock-adjustments":
+    get:
+      operationId: getWorkspaceProductsByidByStockAdjustments
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceProductsByidByStockAdjustmentsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: postWorkspaceProductsByidByStockAdjustments
+      tags:
+      - Product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostWorkspaceProductsByidByStockAdjustmentsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/workspace/positions":
+    post:
+      tags:
+      - Position
+      summary: Create
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PositionResponsesFull"
+              examples:
+                PositionResponsesFull:
+                  "$ref": "#/components/examples/PositionResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PositionParametersCreate"
+            examples:
+              PositionParametersCreate:
+                "$ref": "#/components/examples/PositionParametersCreate"
+        required: true
+      security:
+      - Bearer_employee: []
+      operationId: postWorkspacePositions
+      description: Создает должность
+    get:
+      operationId: getWorkspacePositions
+      security:
+      - Bearer_employee: []
+      summary: All
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ArrayPositionResponsesFull:
+                  "$ref": "#/components/examples/ArrayPositionResponsesFull"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/PositionResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Возвращает все должности
+      tags:
+      - Position
+  "/v1/workspace/positions/{id}":
+    get:
+      security:
+      - Bearer_employee: []
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        schema:
+          type: string
+        required: true
+        name: id
+      description: Возвращает должность
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PositionResponsesFull"
+              examples:
+                PositionResponsesFull:
+                  "$ref": "#/components/examples/PositionResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: getWorkspacePositionsById
+      summary: Retrieve
+      tags:
+      - Position
+    put:
+      summary: Update
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        required: true
+        name: id
+        in: path
+      operationId: putWorkspacePositionsById
+      tags:
+      - Position
+      security:
+      - Bearer_employee: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              PositionParametersPatch:
+                "$ref": "#/components/examples/PositionParametersPatch"
+            schema:
+              "$ref": "#/components/schemas/PositionParametersPatch"
+      description: Обновляет должность
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PositionResponsesFull"
+              examples:
+                PositionResponsesFull:
+                  "$ref": "#/components/examples/PositionResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    delete:
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      description: Удаляет должность
+      operationId: deleteWorkspacePositionsById
+      summary: Delete
+      security:
+      - Bearer_employee: []
+      tags:
+      - Position
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/offtime/{owner}":
+    post:
+      operationId: postWorkspaceOfftimeByOwner
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OfftimeResponsesFull"
+              examples:
+                OfftimeResponsesFull:
+                  "$ref": "#/components/examples/OfftimeResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Create
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: true
+        in: path
+        name: owner
+        schema:
+          type: string
+      tags:
+      - Offtime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OfftimeParametersCreate"
+            examples:
+              OfftimeParametersCreate:
+                "$ref": "#/components/examples/OfftimeParametersCreate"
+        required: true
+      description: создает новый offtime
+      security:
+      - Bearer_employee: []
+    get:
+      summary: All
+      operationId: getWorkspaceOfftimeByOwner
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ArrayOfftimeResponsesFull:
+                  "$ref": "#/components/examples/ArrayOfftimeResponsesFull"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/OfftimeResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+      description: возвращает все его offtime по TimetableOwner
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      tags:
+      - Offtime
+  "/v1/workspace/offtime/{id}":
+    delete:
+      description: удаляет offtime, к примеру employee решил выйти из отпуска раньше
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: true
+        name: id
+        schema:
+          type: string
+        in: path
+      tags:
+      - Offtime
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: deleteWorkspaceOfftimeById
+      security:
+      - Bearer_employee: []
+      summary: Delete
+  "/v1/workspace":
+    get:
+      operationId: getWorkspace
+      summary: Workspaces
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ArrayWorkspaceResponsesPartial:
+                  "$ref": "#/components/examples/ArrayWorkspaceResponsesPartial"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/WorkspaceResponsesPartial"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Возвращает салоны где работает работник
+      tags:
+      - Workspace
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      security:
+      - Bearer_authorized: []
+    post:
+      description: Создаёт новый салон
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      summary: Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              WorkspaceParametersCreate:
+                "$ref": "#/components/examples/WorkspaceParametersCreate"
+            schema:
+              "$ref": "#/components/schemas/WorkspaceParametersCreate"
+      tags:
+      - Workspace
+      operationId: postWorkspace
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                WorkspaceResponsesFull:
+                  "$ref": "#/components/examples/WorkspaceResponsesFull"
+              schema:
+                "$ref": "#/components/schemas/WorkspaceResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_authorized: []
+    put:
+      operationId: putWorkspace
+      tags:
+      - Workspace
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/WorkspaceParametersPatch"
+            examples:
+              WorkspaceParametersPatch:
+                "$ref": "#/components/examples/WorkspaceParametersPatch"
+        required: true
+      security:
+      - Bearer_employee: []
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      description: Обновляет салон если есть разрешения
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                WorkspaceResponsesFull:
+                  "$ref": "#/components/examples/WorkspaceResponsesFull"
+              schema:
+                "$ref": "#/components/schemas/WorkspaceResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    delete:
+      tags:
+      - Workspace
+      security:
+      - Bearer_employee: []
+      description: Удаляет салон если есть разрешения
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      summary: Delete
+      operationId: deleteWorkspace
+  "/v1/workspace/{id}":
+    get:
+      description: Возвращает салон
+      tags:
+      - Workspace
+      security:
+      - Bearer_authorized: []
+      operationId: getWorkspaceById
+      summary: Retrieve
+      parameters:
+      - name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                WorkspaceResponsesFull:
+                  "$ref": "#/components/examples/WorkspaceResponsesFull"
+              schema:
+                "$ref": "#/components/schemas/WorkspaceResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/activate":
+    put:
+      tags:
+      - Workspace
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WorkspaceResponsesFull"
+              examples:
+                WorkspaceResponsesFull:
+                  "$ref": "#/components/examples/WorkspaceResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Активирует салон если есть разрешения и соблюдены условия
+      summary: Activate
+      operationId: putWorkspaceActivate
+      security:
+      - Bearer_employee: []
+      parameters:
+      - in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+  "/v1/workspace/deactivate":
+    put:
+      tags:
+      - Workspace
+      operationId: putWorkspaceDeactivate
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                WorkspaceResponsesFull:
+                  "$ref": "#/components/examples/WorkspaceResponsesFull"
+              schema:
+                "$ref": "#/components/schemas/WorkspaceResponsesFull"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      description: Деактивирует салон если есть разрешения
+      summary: Deactivate
+      security:
+      - Bearer_employee: []
+  "/v1/subscriptions":
+    get:
+      tags:
+      - Subscriptions
+      description: Возвращает всевозможные планы подписок
+      summary: Get all subscription plans
+      operationId: getSubscriptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PaymentSubscriptionResponse"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      security:
+      - Bearer_employee: []
+  "/v1/subscriptions/current":
+    get:
+      operationId: getSubscriptionsCurrent
+      tags:
+      - Subscriptions
+      description: Возвращает текущий план салона
+      security:
+      - Bearer_employee: []
+      summary: Get salon current subscription plan
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SubscriptionResponse"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/payments_webhook":
+    post:
+      description: POST /payments_webhook
+      tags:
+      - Subscriptions
+      operationId: postPaymentsWebhook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostPaymentsWebhookResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+  "/v1/payment/redirect":
+    get:
+      operationId: getPaymentRedirect
+      tags:
+      - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetPaymentRedirectResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/marketing/campaigns":
+    get:
+      operationId: getMarketingCampaigns
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetMarketingCampaignsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      operationId: postMarketingCampaigns
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostMarketingCampaignsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/marketing/campaigns/{id}":
+    get:
+      operationId: getMarketingCampaignsByidBy
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetMarketingCampaignsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: putMarketingCampaignsByidBy
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutMarketingCampaignsByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteMarketingCampaignsByidBy
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '204':
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/marketing/campaigns/by-link/{linkId}":
+    get:
+      operationId: getMarketingCampaignsByLinkBylinkIdBy
+      tags:
+      - MarketingRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetMarketingCampaignsByLinkBylinkIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    ContactSharedPrimaryContact:
+      required:
+      - id
+      - type
+      - value
+      type: object
+      properties:
+        id:
+          format: uuid
+          type: string
+        phoneTypes:
+          items:
+            "$ref": "#/components/schemas/PhoneTypes"
+          type:
+          - array
+          - 'null'
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+    ProcedureParametersUpdate:
+      type: object
+      properties:
+        duration:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        description:
+          "$ref": "#/components/schemas/UpdateString"
+        price:
+          "$ref": "#/components/schemas/Price"
+        alias:
+          "$ref": "#/components/schemas/UpdateString"
+    ComplexResponsesAll:
+      type: object
+      properties:
+        complexes:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersComplexResponse"
+      required:
+      - complexes
+    ClientParametersCreate:
+      type: object
+      required:
+      - alias
+      properties:
+        alias:
+          type: string
+        contact:
+          "$ref": "#/components/schemas/ClientInternalContact"
+    SchedulePattern:
+      properties:
+        weekly:
+          "$ref": "#/components/schemas/ScheduleWeek"
+      type: object
+      required:
+      - weekly
+    ScheduleWeek:
+      type: object
+      properties:
+        sunday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        friday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        thursday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        tuesday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        monday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        saturday:
+          "$ref": "#/components/schemas/ScheduleDay"
+        wednesday:
+          "$ref": "#/components/schemas/ScheduleDay"
+    WorkspaceInternalContact:
+      properties:
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+      type: object
+      required:
+      - type
+      - value
+    ScheduleDay:
+      type: object
+      required:
+      - offTime
+      - workTime
+      properties:
+        workTime:
+          type: string
+        offTime:
+          type: array
+          items:
+            type: string
+    ComplexHelpersComplexResponse:
+      required:
+      - chunks
+      - id
+      - priceShift
+      type: object
+      properties:
+        priceShift:
+          "$ref": "#/components/schemas/ComplexHelpersPriceShift"
+        id:
+          format: uuid
+          type: string
+        alias:
+          type:
+          - string
+          - 'null'
+        chunks:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersChunkResponse"
+        description:
+          type:
+          - string
+          - 'null'
+    ProcedureHelpersAllProcedureResponse:
+      type: object
+      properties:
+        price:
+          "$ref": "#/components/schemas/Price"
+        serviceTitle:
+          type: string
+        masterId:
+          format: uuid
+          type: string
+        parameters:
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersParameterResponse"
+          type: array
+        masterNickname:
+          type: string
+        duration:
+          type: integer
+          format: int64
+        alias:
+          type:
+          - string
+          - 'null'
+        serviceTags:
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+          type: array
+        id:
+          format: uuid
+          type: string
+        serviceId:
+          type: string
+          format: uuid
+        masterAvatar:
+          format: uri
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      required:
+      - duration
+      - id
+      - masterAvatar
+      - masterId
+      - masterNickname
+      - parameters
+      - price
+      - serviceId
+      - serviceTags
+      - serviceTitle
+    TimetableResponsesProcedureSlots:
+      required:
+      - intervals
+      - timeZoneId
+      type: object
+      properties:
+        timeZoneId:
+          type: string
+        intervals:
+          items:
+            "$ref": "#/components/schemas/SafeDateInterval"
+          type: array
+    TimetableParametersSearchSlotProcedure:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    EmployeeResponsesPartial:
+      properties:
+        position:
+          "$ref": "#/components/schemas/PositionResponsesPartial"
+        avatar:
+          type: string
+          format: uri
+        id:
+          format: uuid
+          type: string
+        nickname:
+          type: string
+        contacts:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+      type: object
+      required:
+      - avatar
+      - contacts
+      - id
+      - nickname
+      - position
+    WorkspaceParametersPatch:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        logo:
+          type:
+          - string
+          - 'null'
+          format: uri
+        type:
+          "$ref": "#/components/schemas/SalonType"
+      type: object
+    CredentialsSet:
+      properties:
+        salaryCreds:
+          items:
+            type: string
+          type: array
+        statisticCreds:
+          type: array
+          items:
+            type: string
+        employeeCreds:
+          type: array
+          items:
+            type: string
+        clientCreds:
+          items:
+            type: string
+          type: array
+        appointmentCreds:
+          type: array
+          items:
+            type: string
+        positionCreds:
+          items:
+            type: string
+          type: array
+        notifyCreds:
+          type: array
+          items:
+            type: string
+        procedureCreds:
+          items:
+            type: string
+          type: array
+        salonCreds:
+          type: array
+          items:
+            type: string
+        worktimeCreds:
+          type: array
+          items:
+            type: string
+        financeCreds:
+          type: array
+          items:
+            type: string
+      type: object
+      required:
+      - appointmentCreds
+      - clientCreds
+      - employeeCreds
+      - financeCreds
+      - notifyCreds
+      - positionCreds
+      - procedureCreds
+      - salaryCreds
+      - salonCreds
+      - statisticCreds
+      - worktimeCreds
+    SalaryResponsesHelpersService:
+      properties:
+        id:
+          format: uuid
+          type: string
+        title:
+          type: string
+        category:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ServiceTags"
+        description:
+          type: string
+      type: object
+      required:
+      - category
+      - description
+      - id
+      - title
+    EmployeeInternalUserInfo:
+      type: object
+      properties:
+        nickname:
+          type: string
+        avatar:
+          type: string
+          format: uri
+        id:
+          format: uuid
+          type: string
+      required:
+      - avatar
+      - id
+      - nickname
+    TimetableResponsesComplexSlots:
+      required:
+      - slots
+      - timeZoneId
+      type: object
+      properties:
+        timeZoneId:
+          type: string
+        slots:
+          items:
+            "$ref": "#/components/schemas/TimetableResponsesComplexSlotsSlot"
+          type: array
+    ComplexHelpersPriceShift:
+      properties:
+        percent:
+          type: number
+          format: decimal
+      required:
+      - percent
+      type: object
+    PaymentSubscriptionResponse:
+      required:
+      - description
+      - logoURL
+      - monthlyPayURL
+      - monthlyPrice
+      - title
+      - yearlyPayURL
+      - yearlyPrice
+      type: object
+      properties:
+        yearlyPayURL:
+          type: string
+        description:
+          type: string
+        monthlyPrice:
+          format: decimal
+          type: number
+        monthlyPayURL:
+          type: string
+        yearlyPrice:
+          format: decimal
+          type: number
+        logoURL:
+          type: string
+        title:
+          type: string
+    SubscriptionResponse:
+      properties:
+        stripeId:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        price:
+          "$ref": "#/components/schemas/Price"
+        title:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+        endDate:
+          type: string
+          format: date-time
+      type: object
+      required:
+      - endDate
+      - id
+      - price
+      - startDate
+      - title
+    EmployeeParametersInvite:
+      properties:
+        contact:
+          "$ref": "#/components/schemas/EmployeeInternalContact"
+        nickname:
+          type:
+          - string
+          - 'null'
+        salonId:
+          type: string
+          format: uuid
+        timetable:
+          "$ref": "#/components/schemas/TimetableParametersCreatePattern"
+        positionId:
+          format: uuid
+          type: string
+      required:
+      - positionId
+      - salonId
+      type: object
+    ProcedureResponsesCreate:
+      required:
+      - procedures
+      type: object
+      properties:
+        procedures:
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersCreateProcedureResponse"
+          type: array
+    ProcedureHelpersCaseResponse:
+      properties:
+        duration:
+          "$ref": "#/components/schemas/ProcedureHelpersCaseDuration"
+        title:
+          type: string
+        id:
+          type: integer
+          format: int64
+        price:
+          "$ref": "#/components/schemas/ProcedureHelpersCasePrice"
+      type: object
+      required:
+      - id
+      - title
+    ProcedureResponsesUpdate:
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+        serviceTitle:
+          type: string
+        masterNickname:
+          type: string
+        price:
+          "$ref": "#/components/schemas/Price"
+        description:
+          type:
+          - string
+          - 'null'
+        serviceId:
+          type: string
+          format: uuid
+        masterId:
+          type: string
+          format: uuid
+        parameters:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersParameterResponse"
+        id:
+          type: string
+          format: uuid
+        duration:
+          type: integer
+          format: int64
+        serviceTags:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+        masterAvatar:
+          format: uri
+          type: string
+      type: object
+      required:
+      - duration
+      - id
+      - masterAvatar
+      - masterId
+      - masterNickname
+      - parameters
+      - price
+      - serviceId
+      - serviceTags
+      - serviceTitle
+    WorkspaceParametersCreate:
+      properties:
+        timeZoneId:
+          type: string
+        timetable:
+          "$ref": "#/components/schemas/TimetableParametersCreatePattern"
+        localeId:
+          type: string
+        logo:
+          type:
+          - string
+          - 'null'
+          format: uri
+        contact:
+          "$ref": "#/components/schemas/WorkspaceInternalContact"
+        address:
+          "$ref": "#/components/schemas/Address"
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          "$ref": "#/components/schemas/SalonType"
+        point:
+          "$ref": "#/components/schemas/CoordinatePoint"
+      type: object
+      required:
+      - address
+      - localeId
+      - name
+      - point
+      - timeZoneId
+      - type
+    ServiceHelpersServiceResponse:
+      required:
+      - id
+      - tags
+      - title
+      type: object
+      properties:
+        tags:
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+          type: array
+        title:
+          type: string
+        id:
+          type: string
+          format: uuid
+    PositionParametersPatch:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+        makeOwner:
+          type:
+          - boolean
+          - 'null'
+        creds:
+          "$ref": "#/components/schemas/CredentialsSet"
+        salary:
+          "$ref": "#/components/schemas/SalaryParametersRulesCreate"
+    ProcedureHelpersCreateProcedureResponse:
+      properties:
+        serviceTitle:
+          type: string
+        serviceTags:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+        masterNickname:
+          type: string
+        id:
+          format: uuid
+          type: string
+        parameters:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersParameterResponse"
+        duration:
+          format: int64
+          type: integer
+        alias:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        serviceId:
+          type: string
+          format: uuid
+        price:
+          "$ref": "#/components/schemas/Price"
+        masterId:
+          type: string
+          format: uuid
+        masterAvatar:
+          type: string
+          format: uri
+      required:
+      - duration
+      - id
+      - masterAvatar
+      - masterId
+      - masterNickname
+      - parameters
+      - price
+      - serviceId
+      - serviceTags
+      - serviceTitle
+      type: object
+    ServiceParametersCreate:
+      required:
+      - tags
+      - title
+      properties:
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ServiceTags"
+      type: object
+    SalaryResponsesHelpersServiceWithPaymentType:
+      required:
+      - paymentType
+      - service
+      type: object
+      properties:
+        service:
+          "$ref": "#/components/schemas/SalaryResponsesHelpersService"
+        paymentType:
+          "$ref": "#/components/schemas/SalaryPaymentType"
+    ProcedureParametersCreate:
+      properties:
+        price:
+          "$ref": "#/components/schemas/Price"
+        alias:
+          type:
+          - string
+          - 'null'
+        serviceId:
+          format: uuid
+          type: string
+        employeeIds:
+          items:
+            format: uuid
+            type: string
+          type: array
+        duration:
+          type: integer
+          format: int64
+        description:
+          type:
+          - string
+          - 'null'
+        parameters:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersCreateParameterRequest"
+      type: object
+      required:
+      - duration
+      - employeeIds
+      - parameters
+      - price
+      - serviceId
+    ServiceHelpersCase:
+      properties:
+        title:
+          type: string
+        id:
+          type: integer
+          format: int64
+      required:
+      - id
+      - title
+      type: object
+    Pagination:
+      properties:
+        page:
+          format: int64
+          type: integer
+        per:
+          type: integer
+          format: int64
+      required:
+      - page
+      - per
+      type: object
+    ServiceHelpersParameter:
+      properties:
+        title:
+          type: string
+        cases:
+          items:
+            "$ref": "#/components/schemas/ServiceHelpersCase"
+          type: array
+        id:
+          format: uuid
+          type: string
+      type: object
+      required:
+      - cases
+      - id
+      - title
+    EmployeeInternalContact:
+      properties:
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+      type: object
+      required:
+      - type
+      - value
+    Wage:
+      properties:
+        price:
+          "$ref": "#/components/schemas/Price"
+        period:
+          type: string
+      required:
+      - period
+      - price
+      type: object
+    SalaryResponsesRulesFull:
+      type: object
+      properties:
+        wage:
+          "$ref": "#/components/schemas/Wage"
+        percent:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        grid:
+          items:
+            "$ref": "#/components/schemas/SalaryResponsesHelpersServiceWithPaymentType"
+          type:
+          - array
+          - 'null'
+    PositionResponsesFull:
+      properties:
+        owner:
+          type: boolean
+        title:
+          type: string
+        creds:
+          "$ref": "#/components/schemas/CredentialsSet"
+        id:
+          type: string
+          format: uuid
+        salary:
+          "$ref": "#/components/schemas/SalaryResponsesRulesFull"
+      required:
+      - creds
+      - id
+      - owner
+      - salary
+      - title
+      type: object
+    SafeDateInterval:
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
+      type: object
+      required:
+      - end
+      - start
+    Price:
+      required:
+      - amount
+      - currency
+      properties:
+        currency:
+          type: string
+        amount:
+          type: number
+          format: decimal
+      type: object
+    PositionResponsesPartial:
+      type: object
+      properties:
+        title:
+          type: string
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
+      - title
+    OfftimeParametersCreate:
+      required:
+      - coefficient
+      - interval
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+        interval:
+          "$ref": "#/components/schemas/SafeDateInterval"
+        coefficient:
+          format: decimal
+          type: number
+      type: object
+    ProcedureHelpersCaseDuration:
+      properties:
+        fixedValue:
+          type: integer
+          format: int64
+      required:
+      - fixedValue
+      type: object
+    SalaryPaymentType:
+      type: object
+      required:
+      - percent
+      properties:
+        percent:
+          format: int64
+          type: integer
+    ServiceResponsesCreate:
+      type: object
+      required:
+      - id
+      - tags
+      - title
+      properties:
+        id:
+          format: uuid
+          type: string
+        title:
+          type: string
+        tags:
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+          type: array
+    ComplexHelpersChunkResponse:
+      properties:
+        serviceId:
+          type: string
+          format: uuid
+        serviceTags:
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+          type: array
+        id:
+          type: string
+          format: uuid
+        serviceTitle:
+          type: string
+        order:
+          type: integer
+          format: int64
+        procedures:
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersProcedureResponse"
+          type: array
+      required:
+      - id
+      - order
+      - procedures
+      - serviceId
+      - serviceTags
+      - serviceTitle
+      type: object
+    ComplexResponsesCreate:
+      type: object
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        priceShift:
+          "$ref": "#/components/schemas/ComplexHelpersPriceShift"
+        id:
+          type: string
+          format: uuid
+        chunks:
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersChunkResponse"
+          type: array
+      required:
+      - chunks
+      - id
+      - priceShift
+    Token:
+      type: object
+      required:
+      - expiration
+      - value
+      properties:
+        value:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+    ClientInternalContact:
+      properties:
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+      required:
+      - type
+      - value
+      type: object
+    ProcedureHelpersCreateParameterRequest:
+      required:
+      - cases
+      - id
+      - optional
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        optional:
+          type: boolean
+        cases:
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersCreateCaseRequest"
+          type: array
+    TimetableParametersSearchSlotComplex:
+      required:
+      - chunks
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chunks:
+          items:
+            type: string
+            format: uuid
+          type: array
+    TranslatedServiceTag:
+      required:
+      - tag
+      - translate
+      type: object
+      properties:
+        tag:
+          "$ref": "#/components/schemas/ServiceTags"
+        translate:
+          type: string
+    CoordinatePoint:
+      type: object
+      properties:
+        longitude:
+          format: double
+          type: number
+        latitude:
+          type: number
+          format: double
+      required:
+      - latitude
+      - longitude
+    ContactType:
+      type: string
+      enum:
+      - phone
+      - email
+      - telegram
+      - instagram
+    ProcedureHelpersCreateCaseRequest:
+      properties:
+        casePrice:
+          "$ref": "#/components/schemas/ProcedureHelpersCasePrice"
+        caseDuration:
+          "$ref": "#/components/schemas/ProcedureHelpersCaseDuration"
+        id:
+          type: integer
+          format: int64
+      required:
+      - id
+      type: object
+    EmployeeParametersPatch:
+      type: object
+      properties:
+        positionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    SalonType:
+      type: string
+      enum:
+      - individual
+      - chain
+      - master
+    ServiceResponsesRetrieve:
+      properties:
+        title:
+          type: string
+        id:
+          format: uuid
+          type: string
+        tags:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+        parameters:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ServiceHelpersParameter"
+      required:
+      - id
+      - parameters
+      - tags
+      - title
+      type: object
+    ProcedureResponsesAll:
+      required:
+      - procedures
+      properties:
+        procedures:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersAllProcedureResponse"
+      type: object
+    ProcedureHelpersCasePrice:
+      properties:
+        fixedValue:
+          type: number
+          format: decimal
+      required:
+      - fixedValue
+      type: object
+    Address:
+      properties:
+        country:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+      type: object
+      required:
+      - address
+      - city
+      - country
+    ClientInternalUserInfo:
+      required:
+      - avatar
+      - nickname
+      type: object
+      properties:
+        nickname:
+          type: string
+        avatar:
+          type: string
+          format: uri
+    TimetableResponsesComplexSlotsSlotChunk:
+      properties:
+        procedureId:
+          format: uuid
+          type: string
+        time:
+          "$ref": "#/components/schemas/SafeDateInterval"
+        id:
+          type: string
+          format: uuid
+      type: object
+      required:
+      - id
+      - procedureId
+      - time
+    ProcedureHelpersParameterResponse:
+      type: object
+      properties:
+        id:
+          format: uuid
+          type: string
+        optional:
+          type: boolean
+        title:
+          type: string
+        cases:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersCaseResponse"
+      required:
+      - cases
+      - id
+      - optional
+      - title
+    ComplexParametersCreate:
+      type: object
+      required:
+      - chunks
+      - priceShift
+      properties:
+        priceShift:
+          "$ref": "#/components/schemas/ComplexHelpersPriceShift"
+        chunks:
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersCreateChunkRequest"
+          type: array
+        alias:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+    ComplexHelpersCreateChunkRequest:
+      required:
+      - order
+      - proceduresIds
+      type: object
+      properties:
+        proceduresIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        order:
+          format: int64
+          type: integer
+    SalaryParametersRulesCreate:
+      type: object
+      properties:
+        grid:
+          items:
+            "$ref": "#/components/schemas/SalaryPaymentType"
+          type:
+          - array
+          - 'null'
+        percent:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        wage:
+          "$ref": "#/components/schemas/Wage"
+    WorkspaceResponsesFull:
+      required:
+      - address
+      - employeeToken
+      - id
+      - isActive
+      - localeId
+      - logo
+      - name
+      - point
+      - timeZoneId
+      - type
+      type: object
+      properties:
+        address:
+          "$ref": "#/components/schemas/Address"
+        isActive:
+          type: boolean
+        timeZoneId:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        point:
+          "$ref": "#/components/schemas/CoordinatePoint"
+        name:
+          type: string
+        localeId:
+          type: string
+        id:
+          format: uuid
+          type: string
+        employeeToken:
+          "$ref": "#/components/schemas/Token"
+        type:
+          "$ref": "#/components/schemas/SalonType"
+        logo:
+          format: uri
+          type: string
+    TimetableParametersCreatePattern:
+      properties:
+        startAt:
+          type: string
+          format: date-time
+        endAt:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        schedule:
+          "$ref": "#/components/schemas/SchedulePattern"
+      required:
+      - schedule
+      - startAt
+      type: object
+    PositionParametersCreate:
+      type: object
+      properties:
+        salary:
+          "$ref": "#/components/schemas/SalaryParametersRulesCreate"
+        title:
+          type: string
+        creds:
+          "$ref": "#/components/schemas/CredentialsSet"
+        makeOwner:
+          type: boolean
+      required:
+      - creds
+      - makeOwner
+      - salary
+      - title
+    TimetableResponsesSchedule:
+      type: object
+      required:
+      - intervals
+      - owner
+      - timeZoneId
+      properties:
+        timeZoneId:
+          type: string
+        owner:
+          type: string
+        intervals:
+          items:
+            "$ref": "#/components/schemas/SafeDateInterval"
+          type: array
+    PhoneTypes:
+      enum:
+      - whatsapp
+      - message
+      - call
+      type: string
+    TimetableResponsesComplexSlotsSlot:
+      type: object
+      properties:
+        total:
+          "$ref": "#/components/schemas/SafeDateInterval"
+        chunks:
+          items:
+            "$ref": "#/components/schemas/TimetableResponsesComplexSlotsSlotChunk"
+          type: array
+      required:
+      - chunks
+      - total
+    ClientResponsesClientInfo:
+      properties:
+        id:
+          type: string
+          format: uuid
+        user:
+          "$ref": "#/components/schemas/ClientInternalUserInfo"
+        alias:
+          type:
+          - string
+          - 'null'
+        contacts:
+          items:
+            "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+          type: array
+      required:
+      - contacts
+      - id
+      type: object
+    ProcedureResponsesRetrieve:
+      required:
+      - duration
+      - id
+      - masterAvatar
+      - masterId
+      - masterNickname
+      - parameters
+      - price
+      - serviceId
+      - serviceTags
+      - serviceTitle
+      type: object
+      properties:
+        duration:
+          format: int64
+          type: integer
+        alias:
+          type:
+          - string
+          - 'null'
+        masterId:
+          type: string
+          format: uuid
+        masterNickname:
+          type: string
+        price:
+          "$ref": "#/components/schemas/Price"
+        parameters:
+          items:
+            "$ref": "#/components/schemas/ProcedureHelpersParameterResponse"
+          type: array
+        serviceId:
+          format: uuid
+          type: string
+        id:
+          type: string
+          format: uuid
+        serviceTags:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TranslatedServiceTag"
+        serviceTitle:
+          type: string
+        masterAvatar:
+          type: string
+          format: uri
+        description:
+          type:
+          - string
+          - 'null'
+    ServiceTags:
+      enum:
+      - barbershop
+      - nails
+      - massage
+      - spa
+      - cosmetology
+      - hairdressing
+      - epilation
+      - permanent makeup
+      - piercing
+      - makeup
+      - brows
+      - lashes
+      type: string
+      description: |-
+        • barbershop → barbershop
+        • nails → nails
+        • massage → massage
+        • spa → spa
+        • cosmetology → cosmetology
+        • hairdressing → hairdressing
+        • epilation → epilation
+        • permanent makeup → permanentMakeup
+        • piercing → piercing
+        • makeup → makeup
+        • brows → brows
+        • lashes → lashes
+    ComplexResponsesRetrieve:
+      required:
+      - chunks
+      - id
+      - priceShift
+      type: object
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        priceShift:
+          "$ref": "#/components/schemas/ComplexHelpersPriceShift"
+        chunks:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ComplexHelpersChunkResponse"
+        id:
+          type: string
+          format: uuid
+    ServiceResponsesAll:
+      properties:
+        services:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ServiceHelpersServiceResponse"
+      required:
+      - services
+      type: object
+    EmployeeResponsesFull:
+      type: object
+      required:
+      - contacts
+      - id
+      - position
+      - salonId
+      properties:
+        user:
+          "$ref": "#/components/schemas/EmployeeInternalUserInfo"
+        salonId:
+          type: string
+          format: uuid
+        id:
+          type: string
+          format: uuid
+        contacts:
+          items:
+            "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+          type: array
+        position:
+          "$ref": "#/components/schemas/PositionResponsesFull"
+    UpdateString:
+      properties:
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    WorkspaceResponsesPartial:
+      properties:
+        id:
+          format: uuid
+          type: string
+        type:
+          "$ref": "#/components/schemas/SalonType"
+        name:
+          type: string
+        address:
+          "$ref": "#/components/schemas/Address"
+        logo:
+          format: uri
+          type: string
+        point:
+          "$ref": "#/components/schemas/CoordinatePoint"
+      required:
+      - address
+      - id
+      - logo
+      - name
+      - point
+      - type
+      type: object
+    OfftimeResponsesFull:
+      type: object
+      properties:
+        coefficient:
+          format: decimal
+          type: number
+        reason:
+          type:
+          - string
+          - 'null'
+        timeZoneId:
+          type: string
+        id:
+          format: uuid
+          type: string
+        interval:
+          "$ref": "#/components/schemas/SafeDateInterval"
+      required:
+      - coefficient
+      - id
+      - interval
+      - timeZoneId
+    ComplexHelpersProcedureResponse:
+      type: object
+      properties:
+        masterId:
+          type: string
+          format: uuid
+        masterNickname:
+          type: string
+        id:
+          type: string
+          format: uuid
+        description:
+          type:
+          - string
+          - 'null'
+        price:
+          "$ref": "#/components/schemas/Price"
+        duration:
+          format: int64
+          type: integer
+        alias:
+          type:
+          - string
+          - 'null'
+        masterAvatar:
+          type: string
+          format: uri
+      required:
+      - duration
+      - id
+      - masterAvatar
+      - masterId
+      - masterNickname
+      - price
+    LegacyErrorResponse:
+      type: object
+      deprecated: true
+      description: 'Legacy runtime error payload from ErrorMiddlewareCustom. Deprecated
+        in favor of ApiError. Planned sunset date: 2026-06-30.'
+      required:
+      - error
+      - reason
+      properties:
+        error:
+          type: boolean
+        reason:
+          type: string
+      examples:
+      - error: true
+        reason: Нет bearer токена
+      x-replaced-by: "#/components/schemas/ApiError"
+      x-migration-note: 'Migrate to ApiError: map reason -> message, keep code from
+        HTTP status, move extra data to details.'
+    ApiError:
+      type: object
+      required:
+      - code
+      - message
+      description: Unified error contract for client SDKs.
+      properties:
+        code:
+          type: string
+          description: Application or HTTP status code as string (e.g. "400", "VALIDATION_ERROR").
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional payload for validation fields or debug metadata.
+      examples:
+      - code: '400'
+        message: Bad request
+        details:
+          field: email
+      - code: '401'
+        message: Нет bearer токена
+    ErrorResponse:
+      oneOf:
+      - "$ref": "#/components/schemas/LegacyErrorResponse"
+      - "$ref": "#/components/schemas/ApiError"
+      description: Transition error envelope. During migration clients should support
+        both legacy and new formats.
+      x-migration-note: LegacyErrorResponse is deprecated. Prefer ApiError for new
+        clients and SDK generation.
+    PutWorkspaceServicesByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/workspace/services/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceProductsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/products.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceProductsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/products.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceProductsOptionsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/products/options.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceProductsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/products/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PutWorkspaceProductsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/workspace/products/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetWorkspaceProductsByidByStockAdjustmentsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/workspace/products/{id}/stock-adjustments.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostWorkspaceProductsByidByStockAdjustmentsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/workspace/products/{id}/stock-adjustments.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostPaymentsWebhookResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/payments_webhook.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetPaymentRedirectResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/payment/redirect.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetMarketingCampaignsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/marketing/campaigns.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostMarketingCampaignsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/marketing/campaigns.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetMarketingCampaignsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/marketing/campaigns/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PutMarketingCampaignsByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/marketing/campaigns/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetMarketingCampaignsByLinkBylinkIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/marketing/campaigns/by-link/{linkId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    CursorPageMeta:
+      type: object
+      required:
+      - hasMore
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        hasMore:
+          type: boolean
+    GetWorkspaceClientsCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ClientResponsesClientInfo"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+  examples:
+    ServiceParametersCreate:
+      value:
+        tags:
+        - brows
+        title: some string
+    TimetableParametersCreatePattern:
+      value:
+        endAt: '2025-10-14T16:23:20Z'
+        startAt: '2025-10-14T16:23:20Z'
+        schedule:
+          weekly:
+            sunday:
+              workTime: some string
+              offTime:
+              - some string
+            saturday:
+              offTime:
+              - some string
+              workTime: some string
+            friday:
+              workTime: some string
+              offTime:
+              - some string
+            tuesday:
+              workTime: some string
+              offTime:
+              - some string
+            thursday:
+              offTime:
+              - some string
+              workTime: some string
+            wednesday:
+              offTime:
+              - some string
+              workTime: some string
+            monday:
+              offTime:
+              - some string
+              workTime: some string
+    ClientParametersCreate:
+      value:
+        contact:
+          type: email
+          value: hello@email.ru
+        alias: some string
+    PositionParametersPatch:
+      value:
+        creds:
+          appointmentCreds:
+          - all
+          financeCreds:
+          - all
+          notifyCreds:
+          - all
+          salonCreds:
+          - editBaseInfo
+          employeeCreds:
+          - edit
+          - visible
+          positionCreds:
+          - edit
+          worktimeCreds:
+          - otherEdit
+          - ownEdit
+          procedureCreds:
+          - otherEdit
+          - ownEdit
+          clientCreds:
+          - visibleBaseInfo
+          - visibleContacts
+          - edit
+          salaryCreds:
+          - all
+          statisticCreds:
+          - all
+        salary:
+          grid:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          - percent: 1
+          wage:
+            period: day
+            price:
+              currency: USD/RUB/EUR
+              amount: '1'
+          percent: 1
+        title: some string
+    EmployeeParametersInvite:
+      value:
+        nickname: beautiful employee
+        salonId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        positionId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        timetable:
+          schedule:
+            weekly:
+              wednesday:
+                workTime: some string
+                offTime:
+                - some string
+              sunday:
+                workTime: some string
+                offTime:
+                - some string
+              friday:
+                offTime:
+                - some string
+                workTime: some string
+              monday:
+                offTime:
+                - some string
+                workTime: some string
+              saturday:
+                offTime:
+                - some string
+                workTime: some string
+              tuesday:
+                workTime: some string
+                offTime:
+                - some string
+              thursday:
+                offTime:
+                - some string
+                workTime: some string
+          startAt: '2025-10-14T16:23:20Z'
+          endAt: '2025-10-14T16:23:20Z'
+        contact:
+          value: hello@mail.ru
+          type: email
+    ProcedureParametersUpdate:
+      value:
+        alias:
+          value: string for update
+        price:
+          amount: '1'
+          currency: USD/RUB/EUR
+        description:
+          value: string for update
+        duration: 20
+    ComplexResponsesAll:
+      value:
+        complexes:
+        - alias: some string
+          priceShift:
+            absolute: '100'
+          chunks:
+          - serviceTags:
+            - tag: brows
+              translate: это перевод!
+            serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            order: 1
+            serviceTitle: ногти
+            procedures:
+            - description: some string
+              alias: some string
+              duration: 1
+              masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+              id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+              masterAvatar: http://swagger.io
+              masterNickname: some string
+              price:
+                amount: '1'
+                currency: USD/RUB/EUR
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          description: some string
+    ComplexParametersCreate:
+      value:
+        description: some string
+        priceShift:
+          absolute: '100'
+        chunks:
+        - order: 1
+          proceduresIds:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        alias: some string
+    CredentialsSet:
+      value:
+        salaryCreds:
+        - all
+        clientCreds:
+        - visibleBaseInfo
+        - visibleContacts
+        - edit
+        positionCreds:
+        - edit
+        salonCreds:
+        - editBaseInfo
+        procedureCreds:
+        - otherEdit
+        - ownEdit
+        appointmentCreds:
+        - all
+        financeCreds:
+        - all
+        notifyCreds:
+        - all
+        employeeCreds:
+        - edit
+        - visible
+        worktimeCreds:
+        - otherEdit
+        - ownEdit
+        statisticCreds:
+        - all
+    WorkspaceParametersCreate:
+      value:
+        timetable:
+          endAt: '2025-10-14T16:23:20Z'
+          schedule:
+            weekly:
+              monday:
+                workTime: some string
+                offTime:
+                - some string
+              sunday:
+                offTime:
+                - some string
+                workTime: some string
+              thursday:
+                offTime:
+                - some string
+                workTime: some string
+              wednesday:
+                offTime:
+                - some string
+                workTime: some string
+              tuesday:
+                workTime: some string
+                offTime:
+                - some string
+              friday:
+                workTime: some string
+                offTime:
+                - some string
+              saturday:
+                offTime:
+                - some string
+                workTime: some string
+          startAt: '2025-10-14T16:23:20Z'
+        description: some string
+        name: some string
+        logo: http://swagger.io
+        point:
+          latitude: 50
+          longitude: 40
+        address:
+          address: some string
+          city: some string
+          country: some string
+        localeId: some string
+        contact:
+          value: hello@mail.ru
+          type: email
+        type: individual
+        timeZoneId: some string
+    ArrayPositionResponsesFull:
+      value:
+      - creds:
+          statisticCreds:
+          - all
+          appointmentCreds:
+          - all
+          financeCreds:
+          - all
+          procedureCreds:
+          - otherEdit
+          - ownEdit
+          salonCreds:
+          - editBaseInfo
+          clientCreds:
+          - visibleBaseInfo
+          - visibleContacts
+          - edit
+          salaryCreds:
+          - all
+          positionCreds:
+          - edit
+          notifyCreds:
+          - all
+          worktimeCreds:
+          - otherEdit
+          - ownEdit
+          employeeCreds:
+          - edit
+          - visible
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        salary:
+          percent: 1
+          wage:
+            price:
+              amount: '1'
+              currency: USD/RUB/EUR
+            period: day
+          grid:
+          - service:
+              id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+              title: some string
+              description: some string
+              category:
+              - brows
+            paymentType:
+              percent: 1
+        owner: true
+        title: some string
+    ProcedureResponsesUpdate:
+      value:
+        serviceTags:
+        - translate: это перевод!
+          tag: brows
+        masterNickname: some string
+        duration: 1
+        serviceTitle: some string
+        parameters:
+        - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          optional: true
+          cases:
+          - duration:
+              fixedValue: 100
+            price:
+              fixedValue: '100'
+            id: 1
+            title: some string
+          title: some string
+        serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        alias: some string
+        description: some string
+        masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        masterAvatar: http://swagger.io
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        price:
+          amount: '1'
+          currency: USD/RUB/EUR
+    ArrayOfftimeResponsesFull:
+      value:
+      - timeZoneId: some string
+        interval:
+          start: '2025-10-14T16:23:20Z'
+          end: '2025-10-14T16:25:00Z'
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        coefficient: '1'
+        reason: some string
+    PositionParametersCreate:
+      value:
+        makeOwner: true
+        salary:
+          percent: 1
+          wage:
+            period: day
+            price:
+              amount: '1'
+              currency: USD/RUB/EUR
+          grid:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          - percent: 1
+        title: some string
+        creds:
+          financeCreds:
+          - all
+          appointmentCreds:
+          - all
+          worktimeCreds:
+          - otherEdit
+          - ownEdit
+          employeeCreds:
+          - edit
+          - visible
+          clientCreds:
+          - visibleBaseInfo
+          - visibleContacts
+          - edit
+          notifyCreds:
+          - all
+          statisticCreds:
+          - all
+          procedureCreds:
+          - otherEdit
+          - ownEdit
+          salonCreds:
+          - editBaseInfo
+          salaryCreds:
+          - all
+          positionCreds:
+          - edit
+    PositionResponsesFull:
+      value:
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        salary:
+          wage:
+            price:
+              currency: USD/RUB/EUR
+              amount: '1'
+            period: day
+          percent: 1
+          grid:
+          - paymentType:
+              percent: 1
+            service:
+              title: some string
+              category:
+              - brows
+              description: some string
+              id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        title: some string
+        creds:
+          positionCreds:
+          - edit
+          appointmentCreds:
+          - all
+          clientCreds:
+          - visibleBaseInfo
+          - visibleContacts
+          - edit
+          employeeCreds:
+          - edit
+          - visible
+          financeCreds:
+          - all
+          salonCreds:
+          - editBaseInfo
+          notifyCreds:
+          - all
+          worktimeCreds:
+          - otherEdit
+          - ownEdit
+          statisticCreds:
+          - all
+          procedureCreds:
+          - otherEdit
+          - ownEdit
+          salaryCreds:
+          - all
+        owner: true
+    ClientResponsesClientInfo:
+      value:
+        user:
+          avatar: http://swagger.io
+          nickname: some string
+        contacts:
+        - type: email
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          phoneTypes:
+          - call
+          - message
+          value: hello@mail.ru
+        alias: some string
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    OfftimeResponsesFull:
+      value:
+        timeZoneId: some string
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        reason: some string
+        interval:
+          start: '2025-10-14T16:23:20Z'
+          end: '2025-10-14T16:25:00Z'
+        coefficient: '1'
+    OfftimeParametersCreate:
+      value:
+        coefficient: '1'
+        interval:
+          start: '2025-10-14T16:23:20Z'
+          end: '2025-10-14T16:25:00Z'
+        reason: some string
+    ArrayEmployeeResponsesPartial:
+      value:
+      - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        contacts:
+        - type: email
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          phoneTypes:
+          - call
+          - message
+          value: hello@mail.ru
+        nickname: заебыш
+        avatar: http://swagger.io
+        position:
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          title: some string
+    ArrayWorkspaceResponsesPartial:
+      value:
+      - address:
+          city: some string
+          country: some string
+          address: some string
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: some string
+        point:
+          latitude: 50
+          longitude: 40
+        logo: http://swagger.io
+        type: individual
+    WorkspaceParametersPatch:
+      value:
+        type: individual
+        description: some string
+        logo: http://swagger.io
+        name: some string
+    ServiceResponsesAll:
+      value:
+        services:
+        - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          tags:
+          - tag: brows
+            translate: это перевод!
+          title: some string
+    ServiceResponsesCreate:
+      value:
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        title: some string
+        tags:
+        - translate: это перевод!
+          tag: brows
+    ProcedureResponsesCreate:
+      value:
+        procedures:
+        - parameters:
+          - optional: true
+            title: some string
+            id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            cases:
+            - title: some string
+              price:
+                fixedValue: '100'
+              id: 1
+              duration:
+                fixedValue: 100
+          masterAvatar: http://swagger.io
+          masterNickname: some string
+          serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          serviceTags:
+          - translate: это перевод!
+            tag: brows
+          masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          duration: 1
+          description: some string
+          price:
+            currency: USD/RUB/EUR
+            amount: '1'
+          serviceTitle: some string
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          alias: some string
+    ProcedureParametersCreate:
+      value:
+        parameters:
+        - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          cases: {}
+          optional: true
+        price:
+          amount: '1'
+          currency: USD/RUB/EUR
+        serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        employeeIds:
+        - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        duration: 1
+        alias: some string
+        description: some string
+    EmployeeResponsesFull:
+      value:
+        position:
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          creds:
+            financeCreds:
+            - all
+            clientCreds:
+            - visibleBaseInfo
+            - visibleContacts
+            - edit
+            salaryCreds:
+            - all
+            positionCreds:
+            - edit
+            worktimeCreds:
+            - otherEdit
+            - ownEdit
+            employeeCreds:
+            - edit
+            - visible
+            statisticCreds:
+            - all
+            appointmentCreds:
+            - all
+            procedureCreds:
+            - otherEdit
+            - ownEdit
+            salonCreds:
+            - editBaseInfo
+            notifyCreds:
+            - all
+          title: some string
+          owner: true
+          salary:
+            grid:
+            - service:
+                id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+                title: some string
+                description: some string
+                category:
+                - brows
+              paymentType:
+                percent: 1
+            wage:
+              price:
+                amount: '1'
+                currency: USD/RUB/EUR
+              period: day
+            percent: 1
+        contacts:
+        - phoneTypes:
+          - call
+          - message
+          type: email
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          value: hello@mail.ru
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        salonId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    EmployeeParametersPatch:
+      value:
+        positionId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    ComplexResponsesCreate:
+      value:
+        priceShift:
+          absolute: '100'
+        chunks:
+        - procedures:
+          - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            duration: 1
+            description: some string
+            alias: some string
+            masterAvatar: http://swagger.io
+            masterNickname: some string
+            masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            price:
+              currency: USD/RUB/EUR
+              amount: '1'
+          serviceTitle: ногти
+          order: 1
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          serviceTags:
+          - tag: brows
+            translate: это перевод!
+          serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        alias: some string
+        description: some string
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    ProcedureResponsesAll:
+      value:
+        procedures:
+        - serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          parameters:
+          - cases:
+            - title: some string
+              price:
+                fixedValue: '100'
+              id: 1
+              duration:
+                fixedValue: 100
+            title: some string
+            id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            optional: true
+          duration: 1
+          masterNickname: some string
+          price:
+            currency: USD/RUB/EUR
+            amount: '1'
+          serviceTags:
+          - tag: brows
+            translate: это перевод!
+          masterAvatar: http://swagger.io
+          serviceTitle: some string
+          alias: some string
+          masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          description: some string
+    ArrayTimetableResponsesSchedule:
+      value:
+      - timeZoneId: some string
+        intervals:
+        - start: '2025-10-14T16:23:20Z'
+          end: '2025-10-14T16:25:00Z'
+        owner: employee:F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    WorkspaceResponsesFull:
+      value:
+        logo: http://swagger.io
+        type: individual
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        employeeToken:
+          expiration: '2025-10-14T16:23:20Z'
+          value: some string
+        localeId: some string
+        name: some string
+        description: some string
+        point:
+          longitude: 40
+          latitude: 50
+        address:
+          address: some string
+          city: some string
+          country: some string
+        isActive: true
+        timeZoneId: some string
+    ComplexResponsesRetrieve:
+      value:
+        alias: some string
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        description: some string
+        priceShift:
+          absolute: '100'
+        chunks:
+        - serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          serviceTitle: ногти
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          order: 1
+          serviceTags:
+          - tag: brows
+            translate: это перевод!
+          procedures:
+          - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            description: some string
+            masterNickname: some string
+            price:
+              currency: USD/RUB/EUR
+              amount: '1'
+            alias: some string
+            masterAvatar: http://swagger.io
+            masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+            duration: 1
+    ProcedureResponsesRetrieve:
+      value:
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        serviceTitle: some string
+        parameters:
+        - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          optional: true
+          cases:
+          - price:
+              fixedValue: '100'
+            duration:
+              fixedValue: 100
+            id: 1
+            title: some string
+          title: some string
+        serviceId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        duration: 1
+        description: some string
+        price:
+          amount: '1'
+          currency: USD/RUB/EUR
+        serviceTags:
+        - translate: это перевод!
+          tag: brows
+        masterId: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        alias: some string
+        masterAvatar: http://swagger.io
+        masterNickname: some string
+    ServiceResponsesRetrieve:
+      value:
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        title: some string
+        tags:
+        - tag: brows
+          translate: это перевод!
+        parameters:
+        - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          cases:
+          - id: 1
+            title: some string
+          title: some string
+  responses:
+    BadRequest:
+      description: Bad request
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '400'
+                message: Bad request
+            legacyError:
+              value:
+                error: true
+                reason: Bad request
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Unauthorized:
+      description: Unauthorized
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '401'
+                message: Unauthorized
+            legacyError:
+              value:
+                error: true
+                reason: Unauthorized
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Forbidden:
+      description: Forbidden
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '403'
+                message: Forbidden
+            legacyError:
+              value:
+                error: true
+                reason: Forbidden
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    NotFound:
+      description: Not found
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '404'
+                message: Not found
+            legacyError:
+              value:
+                error: true
+                reason: Not found
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Conflict:
+      description: Conflict
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '409'
+                message: Conflict
+            legacyError:
+              value:
+                error: true
+                reason: Conflict
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    ValidationError:
+      description: Validation failed
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '422'
+                message: Validation failed
+            legacyError:
+              value:
+                error: true
+                reason: Validation failed
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    InternalError:
+      description: Internal server error
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '500'
+                message: Internal server error
+            legacyError:
+              value:
+                error: true
+                reason: Internal server error
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: Unique key for safely retrying non-idempotent operations. Reusing
+        the same key should return the same result.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 255
+      examples:
+        uuid:
+          value: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Opaque cursor for the next slice.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Max items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+tags:
+- name: Client
+- name: Complex
+- name: Employee
+- name: MarketingRouterCollection
+- name: Offtime
+- name: Position
+- name: Procedure
+- name: Product
+- name: Service
+- name: Subscriptions
+- name: Timetables
+- name: Workspace
+servers:
+- url: https://api.maetry.com/v1
+- url: https://api-dev-601862402938.us-west2.run.app/v1
+- url: https://api-app-601862402938.us-west2.run.app/v1

@@ -1,0 +1,885 @@
+---
+openapi: 3.1.0
+info:
+  title: Maetry API
+  version: 1.0.0
+  description: Generated from current registered RouteCollection methods and shared
+    DTO schemas.
+paths:
+  "/v1/salon/{salonId}/catalog":
+    get:
+      operationId: getSalonBysalonIdByCatalog
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetSalonBysalonIdByCatalogResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+  "/v1/public/booking/salon/{salonId}/catalog":
+    get:
+      operationId: getPublicBookingSalonBysalonIdByCatalog
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetPublicBookingSalonBysalonIdByCatalogResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+  "/v1/search":
+    get:
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+      - in: query
+        name: value
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+        examples:
+          default:
+            value: some string
+      - in: query
+        name: salonType
+        schema:
+          "$ref": "#/components/schemas/SalonType"
+        required: false
+        examples:
+          default:
+            value: individual
+      - in: query
+        required: false
+        name: latitude
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+        examples:
+          default:
+            value: 1
+      - in: query
+        required: false
+        name: longitude
+        schema:
+          format: double
+          type:
+          - number
+          - 'null'
+        examples:
+          default:
+            value: 1
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/Pagination"
+        in: query
+        name: pagination
+        examples:
+          default:
+            value:
+              page: 1
+              per: 10
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetSearchCursorPageResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_customer: []
+      description: Возвращает найденные салоны
+      operationId: getSearch
+      tags:
+      - Search
+      summary: Search
+  "/v1/salon/{salonId}/profile":
+    get:
+      operationId: getSalonBysalonIdByProfile
+      tags:
+      - Salon
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetSalonBysalonIdByProfileResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+  "/v1/salon/{salonId}/masters":
+    get:
+      operationId: getSalonBysalonIdByMasters
+      tags:
+      - Masters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetSalonBysalonIdByMastersResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+  "/v1/favorites":
+    get:
+      operationId: getFavorites
+      description: Возвращает салоны которые добавлены в избранное у клиента
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      summary: Retrieve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetFavoritesCursorPageResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_customer: []
+      tags:
+      - Favorite
+  "/v1/favorites/{id}/add":
+    put:
+      security:
+      - Bearer_customer: []
+      operationId: putFavoritesByIdAdd
+      description: Добавляет в избранное
+      summary: Add
+      tags:
+      - Favorite
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/v1/favorites/{id}/remove":
+    put:
+      summary: Remove
+      operationId: putFavoritesByIdRemove
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      description: Удаляет из избранного
+      tags:
+      - Favorite
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_customer: []
+  "/v1/client/model-profile":
+    post:
+      operationId: postClientModelProfile
+      tags:
+      - ModelProfile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostClientModelProfileResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    put:
+      operationId: putClientModelProfile
+      tags:
+      - ModelProfile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutClientModelProfileResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    get:
+      operationId: getClientModelProfile
+      tags:
+      - ModelProfile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetClientModelProfileResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+components:
+  schemas:
+    SearchResponsesHelpersSuggest:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    Pagination:
+      properties:
+        page:
+          format: int64
+          type: integer
+        per:
+          type: integer
+          format: int64
+      required:
+      - page
+      - per
+      type: object
+    FavoriteResponsesSalon:
+      type: object
+      properties:
+        address:
+          "$ref": "#/components/schemas/Address"
+        isActive:
+          type: boolean
+        point:
+          "$ref": "#/components/schemas/CoordinatePoint"
+        id:
+          type: string
+          format: uuid
+        logo:
+          format: uri
+          type: string
+        name:
+          type: string
+        type:
+          "$ref": "#/components/schemas/SalonType"
+      required:
+      - address
+      - id
+      - isActive
+      - logo
+      - name
+      - point
+      - type
+    SearchResponsesHelpersSalon:
+      required:
+      - address
+      - id
+      - isFavorite
+      - logo
+      - name
+      - point
+      - type
+      properties:
+        name:
+          type: string
+        point:
+          "$ref": "#/components/schemas/CoordinatePoint"
+        type:
+          "$ref": "#/components/schemas/SalonType"
+        isFavorite:
+          type: boolean
+        address:
+          "$ref": "#/components/schemas/Address"
+        id:
+          format: uuid
+          type: string
+        logo:
+          type: string
+          format: uri
+      type: object
+    CoordinatePoint:
+      type: object
+      properties:
+        longitude:
+          format: double
+          type: number
+        latitude:
+          type: number
+          format: double
+      required:
+      - latitude
+      - longitude
+    SalonType:
+      type: string
+      enum:
+      - individual
+      - chain
+      - master
+    Address:
+      properties:
+        country:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+      type: object
+      required:
+      - address
+      - city
+      - country
+    LegacyErrorResponse:
+      type: object
+      deprecated: true
+      description: 'Legacy runtime error payload from ErrorMiddlewareCustom. Deprecated
+        in favor of ApiError. Planned sunset date: 2026-06-30.'
+      required:
+      - error
+      - reason
+      properties:
+        error:
+          type: boolean
+        reason:
+          type: string
+      examples:
+      - error: true
+        reason: Нет bearer токена
+      x-replaced-by: "#/components/schemas/ApiError"
+      x-migration-note: 'Migrate to ApiError: map reason -> message, keep code from
+        HTTP status, move extra data to details.'
+    ApiError:
+      type: object
+      required:
+      - code
+      - message
+      description: Unified error contract for client SDKs.
+      properties:
+        code:
+          type: string
+          description: Application or HTTP status code as string (e.g. "400", "VALIDATION_ERROR").
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional payload for validation fields or debug metadata.
+      examples:
+      - code: '400'
+        message: Bad request
+        details:
+          field: email
+      - code: '401'
+        message: Нет bearer токена
+    ErrorResponse:
+      oneOf:
+      - "$ref": "#/components/schemas/LegacyErrorResponse"
+      - "$ref": "#/components/schemas/ApiError"
+      description: Transition error envelope. During migration clients should support
+        both legacy and new formats.
+      x-migration-note: LegacyErrorResponse is deprecated. Prefer ApiError for new
+        clients and SDK generation.
+    GetSalonBysalonIdByCatalogResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/salon/{salonId}/catalog.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetPublicBookingSalonBysalonIdByCatalogResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/public/booking/salon/{salonId}/catalog.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetSalonBysalonIdByProfileResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/salon/{salonId}/profile.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetSalonBysalonIdByMastersResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/salon/{salonId}/masters.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostClientModelProfileResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/client/model-profile.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PutClientModelProfileResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/client/model-profile.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetClientModelProfileResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/client/model-profile.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    CursorPageMeta:
+      type: object
+      required:
+      - hasMore
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        hasMore:
+          type: boolean
+    GetSearchCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            oneOf:
+            - "$ref": "#/components/schemas/SearchResponsesHelpersSalon"
+            - "$ref": "#/components/schemas/SearchResponsesHelpersSuggest"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+    GetFavoritesCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/FavoriteResponsesSalon"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+  responses:
+    BadRequest:
+      description: Bad request
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '400'
+                message: Bad request
+            legacyError:
+              value:
+                error: true
+                reason: Bad request
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Unauthorized:
+      description: Unauthorized
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '401'
+                message: Unauthorized
+            legacyError:
+              value:
+                error: true
+                reason: Unauthorized
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Forbidden:
+      description: Forbidden
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '403'
+                message: Forbidden
+            legacyError:
+              value:
+                error: true
+                reason: Forbidden
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    NotFound:
+      description: Not found
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '404'
+                message: Not found
+            legacyError:
+              value:
+                error: true
+                reason: Not found
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Conflict:
+      description: Conflict
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '409'
+                message: Conflict
+            legacyError:
+              value:
+                error: true
+                reason: Conflict
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    ValidationError:
+      description: Validation failed
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '422'
+                message: Validation failed
+            legacyError:
+              value:
+                error: true
+                reason: Validation failed
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    InternalError:
+      description: Internal server error
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '500'
+                message: Internal server error
+            legacyError:
+              value:
+                error: true
+                reason: Internal server error
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Opaque cursor for the next slice.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Max items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+tags:
+- name: Catalog
+- name: Favorite
+- name: Masters
+- name: ModelProfile
+- name: Salon
+- name: Search
+servers:
+- url: https://api.maetry.com/v1
+- url: https://api-dev-601862402938.us-west2.run.app/v1
+- url: https://api-app-601862402938.us-west2.run.app/v1

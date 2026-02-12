@@ -1,0 +1,2649 @@
+---
+openapi: 3.1.0
+info:
+  title: Maetry API
+  version: 1.0.0
+  description: Generated from current registered RouteCollection methods and shared
+    DTO schemas.
+paths:
+  "/v1/devices":
+    post:
+      description: Создаёт новый девайс
+      summary: check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                DeviceResponsesFull:
+                  "$ref": "#/components/examples/DeviceResponsesFull"
+              schema:
+                "$ref": "#/components/schemas/DeviceResponsesFull"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: postDevices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/DeviceParametersSystem"
+            examples:
+              DeviceParametersSystem:
+                "$ref": "#/components/examples/DeviceParametersSystem"
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      security:
+      - Bearer_unauthorized: []
+      tags:
+      - Device
+  "/v1/auth/apple":
+    post:
+      security:
+      - Bearer_unauthorized: []
+      description: Аунтификация с помощью apple
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AuthParametersAppleToken"
+            examples:
+              AuthParametersAppleToken:
+                "$ref": "#/components/examples/AuthParametersAppleToken"
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AuthResponsesSuccessAuth"
+              examples:
+                AuthResponsesSuccessAuth:
+                  "$ref": "#/components/examples/AuthResponsesSuccessAuth"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Apple
+      operationId: postAuthApple
+      tags:
+      - Auth
+  "/v1/auth/google":
+    post:
+      description: Аунтификация с помощью google
+      operationId: postAuthGoogle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AuthParametersGoogleToken"
+            examples:
+              AuthParametersGoogleToken:
+                "$ref": "#/components/examples/AuthParametersGoogleToken"
+        required: true
+      security:
+      - Bearer_unauthorized: []
+      tags:
+      - Auth
+      summary: Google
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AuthResponsesSuccessAuth"
+              examples:
+                AuthResponsesSuccessAuth:
+                  "$ref": "#/components/examples/AuthResponsesSuccessAuth"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/auth/refresh":
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AuthResponsesRefresh"
+              examples:
+                AuthResponsesRefresh:
+                  "$ref": "#/components/examples/AuthResponsesRefresh"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_refresh_token: []
+      operationId: postAuthRefresh
+      summary: Refresh
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            examples:
+              AuthParametersRefreshingToken:
+                "$ref": "#/components/examples/AuthParametersRefreshingToken"
+            schema:
+              "$ref": "#/components/schemas/AuthParametersRefreshingToken"
+        required: true
+      description: Обновления токена доступа
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+  "/v1/auth/logout":
+    post:
+      summary: logout
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_refresh_token: []
+      description: Logout завершает текущую сессию
+      operationId: postAuthLogout
+      tags:
+      - Auth
+  "/v1/contacts/user":
+    post:
+      tags:
+      - Contact
+      description: Создание контакта восстановления для пользователя
+      summary: Create
+      operationId: postContactsUser
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ContactSharedRecoveryContact:
+                  "$ref": "#/components/examples/ContactSharedRecoveryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedRecoveryContact"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersCreateRecovery"
+            examples:
+              ContactParametersCreateRecovery:
+                "$ref": "#/components/examples/ContactParametersCreateRecovery"
+        required: true
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      security:
+      - Bearer_authorized: []
+    get:
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      description: Получение контактов восстановления для пользователя
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ContactSharedRecoveryContact"
+              examples:
+                ArrayContactSharedRecoveryContact:
+                  "$ref": "#/components/examples/ArrayContactSharedRecoveryContact"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_authorized: []
+      summary: Get
+      tags:
+      - Contact
+      operationId: getContactsUser
+  "/v1/contacts/user/{contactId}":
+    delete:
+      operationId: deleteContactsUserByContactId
+      summary: Delete
+      description: Удаление контактов восстановления для пользователя
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Contact
+      security:
+      - Bearer_authorized: []
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/contacts/customer":
+    get:
+      description: Получение контактов для покупателя
+      security:
+      - Bearer_authorized: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ArrayContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ArrayContactSharedPrimaryContact"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Get
+      operationId: getContactsCustomer
+      tags:
+      - Contact
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersCreatePrimary"
+            examples:
+              ContactParametersCreatePrimary:
+                "$ref": "#/components/examples/ContactParametersCreatePrimary"
+        required: true
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      operationId: postContactsCustomer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_customer: []
+      description: Создание контакта для покупателя
+      summary: Create
+      tags:
+      - Contact
+  "/v1/contacts/customer/{contactId}":
+    put:
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        name: contactId
+        schema:
+          type: string
+        required: true
+      security:
+      - Bearer_customer: []
+      description: Обновление контактов для покупателя
+      tags:
+      - Contact
+      operationId: putContactsCustomerByContactId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              ContactParametersUpdateContact:
+                "$ref": "#/components/examples/ContactParametersUpdateContact"
+            schema:
+              "$ref": "#/components/schemas/ContactParametersUpdateContact"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Update
+    delete:
+      operationId: deleteContactsCustomerByContactId
+      tags:
+      - Contact
+      summary: Delete
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_customer: []
+      description: Удаление контактов для покупателя
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - required: true
+        schema:
+          type: string
+        name: contactId
+        in: path
+  "/v1/contacts/employee/{employeeId}":
+    get:
+      description: Получение контактов для работника
+      operationId: getContactsEmployeeByEmployeeId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ArrayContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ArrayContactSharedPrimaryContact"
+              schema:
+                items:
+                  "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+                type: array
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        name: employeeId
+        schema:
+          type: string
+        required: true
+      security:
+      - Bearer_authorized: []
+      summary: Get
+      tags:
+      - Contact
+    post:
+      tags:
+      - Contact
+      operationId: postContactsEmployeeByEmployeeId
+      summary: Create
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        schema:
+          type: string
+        required: true
+        name: employeeId
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ContactParametersCreatePrimary:
+                "$ref": "#/components/examples/ContactParametersCreatePrimary"
+            schema:
+              "$ref": "#/components/schemas/ContactParametersCreatePrimary"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+      description: Создание контакта для работника
+  "/v1/contacts/employee/{employeeId}/{contactId}":
+    put:
+      security:
+      - Bearer_employee: []
+      description: Обновление контактов для работника
+      tags:
+      - Contact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: putContactsEmployeeByEmployeeIdByContactId
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: employeeId
+        required: true
+        schema:
+          type: string
+        in: path
+      - required: true
+        name: contactId
+        in: path
+        schema:
+          type: string
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            examples:
+              ContactParametersUpdateContact:
+                "$ref": "#/components/examples/ContactParametersUpdateContact"
+            schema:
+              "$ref": "#/components/schemas/ContactParametersUpdateContact"
+        required: true
+    delete:
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      - in: path
+        name: employeeId
+        required: true
+        schema:
+          type: string
+      - required: true
+        name: contactId
+        schema:
+          type: string
+        in: path
+      summary: Delete
+      operationId: deleteContactsEmployeeByEmployeeIdByContactId
+      security:
+      - Bearer_employee: []
+      tags:
+      - Contact
+      description: Удаление контактов для работника
+  "/v1/contacts/client/{clientId}":
+    get:
+      security:
+      - Bearer_authorized: []
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - name: clientId
+        required: true
+        schema:
+          type: string
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ArrayContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ArrayContactSharedPrimaryContact"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Получение контактов для клиента
+      operationId: getContactsClientByClientId
+      summary: Get
+      tags:
+      - Contact
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Create
+      operationId: postContactsClientByClientId
+      tags:
+      - Contact
+      security:
+      - Bearer_employee: []
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      - in: path
+        schema:
+          type: string
+        name: clientId
+        required: true
+      description: Создание контакта для клиента
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersCreatePrimary"
+            examples:
+              ContactParametersCreatePrimary:
+                "$ref": "#/components/examples/ContactParametersCreatePrimary"
+        required: true
+  "/v1/contacts/client/{clientId}/{contactId}":
+    put:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      - in: path
+        name: clientId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersUpdateContact"
+            examples:
+              ContactParametersUpdateContact:
+                "$ref": "#/components/examples/ContactParametersUpdateContact"
+      security:
+      - Bearer_employee: []
+      tags:
+      - Contact
+      description: Обновление контактов для клиента
+      summary: Update
+      operationId: putContactsClientByClientIdByContactId
+    delete:
+      security:
+      - Bearer_employee: []
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Delete
+      description: Удаление контактов для клиента
+      tags:
+      - Contact
+      operationId: deleteContactsClientByClientIdByContactId
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        required: true
+        name: clientId
+        in: path
+      - name: contactId
+        required: true
+        in: path
+        schema:
+          type: string
+  "/v1/contacts/salon/{salonId}":
+    get:
+      summary: Get
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+      security:
+      - Bearer_authorized: []
+      operationId: getContactsSalonBySalonId
+      tags:
+      - Contact
+      description: Получение контактов для салона
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ArrayContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ArrayContactSharedPrimaryContact"
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      summary: Create
+      operationId: postContactsSalonBySalonId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersCreatePrimary"
+            examples:
+              ContactParametersCreatePrimary:
+                "$ref": "#/components/examples/ContactParametersCreatePrimary"
+        required: true
+      security:
+      - Bearer_employee: []
+      tags:
+      - Contact
+      description: Создание контакта для салона
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - schema:
+          type: string
+        in: path
+        name: salonId
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/contacts/salon/{salonId}/{contactId}":
+    put:
+      parameters:
+      - in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+      - in: path
+        name: salonId
+        required: true
+        schema:
+          type: string
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      description: Обновление контактов для салона
+      tags:
+      - Contact
+      summary: Update
+      operationId: putContactsSalonBySalonIdByContactId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ContactParametersUpdateContact"
+            examples:
+              ContactParametersUpdateContact:
+                "$ref": "#/components/examples/ContactParametersUpdateContact"
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ContactSharedPrimaryContact"
+              examples:
+                ContactSharedPrimaryContact:
+                  "$ref": "#/components/examples/ContactSharedPrimaryContact"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_employee: []
+    delete:
+      summary: Delete
+      tags:
+      - Contact
+      description: Удаление контактов для салона
+      security:
+      - Bearer_employee: []
+      operationId: deleteContactsSalonBySalonIdByContactId
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      - in: path
+        required: true
+        schema:
+          type: string
+        name: salonId
+      - schema:
+          type: string
+        name: contactId
+        in: path
+        required: true
+  "/v1/invites/employee/{linkId}":
+    put:
+      operationId: putInvitesEmployeeBylinkIdBy
+      tags:
+      - InviteRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutInvitesEmployeeBylinkIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+  "/v1/invites/client/{linkId}/contacts":
+    get:
+      operationId: getInvitesClientBylinkIdByContacts
+      tags:
+      - InviteRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetInvitesClientBylinkIdByContactsResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+  "/v1/invites/client/{linkId}/merge":
+    post:
+      operationId: postInvitesClientBylinkIdByMerge
+      tags:
+      - InviteRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostInvitesClientBylinkIdByMergeResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+  "/v1/clicks/{linkId}":
+    post:
+      operationId: postClicksBylinkIdBy
+      tags:
+      - ClickRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostClicksBylinkIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+  "/v1/clicks/find/{linkId}":
+    post:
+      operationId: postClicksFindBylinkIdBy
+      tags:
+      - ClickRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostClicksFindBylinkIdByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+  "/v1/clicks/find":
+    post:
+      operationId: postClicksFind
+      tags:
+      - ClickRouterCollection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PostClicksFindResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/upload/thumb":
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uri
+              examples:
+                URL:
+                  "$ref": "#/components/examples/URL"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_authorized: []
+      description: Загружает на CloudStorage изображение
+      operationId: postUploadThumb
+      tags:
+      - Upload
+      summary: Thumb
+      parameters:
+      - "$ref": "#/components/parameters/IdempotencyKey"
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UploadRouterV1Input"
+  "/v1/users/customer":
+    post:
+      security:
+      - Bearer_authorized: []
+      tags:
+      - User
+      parameters:
+      - name: Device-ID
+        in: header
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      description: Создаёт Customer линию у пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CustomerParametersRegistration"
+            examples:
+              CustomerParametersRegistration:
+                "$ref": "#/components/examples/CustomerParametersRegistration"
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomerResponsesRegistration"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: Create Customer
+      operationId: postUsersCustomer
+  "/v1/users":
+    get:
+      tags:
+      - User
+      description: Возвращает пользователя с полным описанием
+      operationId: getUsers
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                UserResponsesUserInfo:
+                  "$ref": "#/components/examples/UserResponsesUserInfo"
+              schema:
+                "$ref": "#/components/schemas/UserResponsesUserInfo"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      security:
+      - Bearer_authorized: []
+      summary: Retrieve
+      parameters:
+      - in: header
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+    put:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponsesUserInfo"
+              examples:
+                UserResponsesUserInfo:
+                  "$ref": "#/components/examples/UserResponsesUserInfo"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Обновляет пользовательскую информацию
+      tags:
+      - User
+      summary: Update
+      security:
+      - Bearer_authorized: []
+      operationId: putUsers
+      parameters:
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UserParametersPatch"
+            examples:
+              UserParametersPatch:
+                "$ref": "#/components/examples/UserParametersPatch"
+    delete:
+      tags:
+      - User
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: No Content
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      operationId: deleteUsers
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+        name: Device-ID
+      security:
+      - Bearer_authorized: []
+      summary: Delete
+      description: ''
+  "/v1/notifications":
+    get:
+      tags:
+      - Notification
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+      - name: Device-ID
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        in: header
+      security:
+      - Bearer_authorized: []
+      operationId: getNotifications
+      description: Возвращает уведомления
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetNotificationsCursorPageResponse"
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      summary: All
+  "/v1/notifications/readed":
+    put:
+      security:
+      - Bearer_authorized: []
+      tags:
+      - Notification
+      parameters:
+      - in: header
+        name: Device-ID
+        schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+          description: OK
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      description: Помечает прочитанным уведомления
+      operationId: putNotificationsReaded
+      summary: Read Many
+  "/v1/notifications/readed/{id}":
+    put:
+      tags:
+      - Notification
+      description: Помечает прочитанным уведомление
+      summary: Rean One
+      operationId: putNotificationsReadedById
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+          examples:
+          - F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        name: Device-ID
+        in: header
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - Bearer_authorized: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/notifications":
+    get:
+      operationId: getWorkspaceNotifications
+      tags:
+      - Console Notification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetWorkspaceNotificationsCursorPageResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - "$ref": "#/components/parameters/Limit"
+      - "$ref": "#/components/parameters/Cursor"
+  "/v1/workspace/notifications/readed":
+    put:
+      operationId: putWorkspaceNotificationsReaded
+      tags:
+      - Console Notification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutWorkspaceNotificationsReadedResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/workspace/notifications/readed/{id}":
+    put:
+      operationId: putWorkspaceNotificationsReadedByidBy
+      tags:
+      - Console Notification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PutWorkspaceNotificationsReadedByidByResponse"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '404':
+          "$ref": "#/components/responses/NotFound"
+        '409':
+          "$ref": "#/components/responses/Conflict"
+        '422':
+          "$ref": "#/components/responses/ValidationError"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    ContactSharedPrimaryContact:
+      required:
+      - id
+      - type
+      - value
+      type: object
+      properties:
+        id:
+          format: uuid
+          type: string
+        phoneTypes:
+          items:
+            "$ref": "#/components/schemas/PhoneTypes"
+          type:
+          - array
+          - 'null'
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+    UserResponsesUserInfo:
+      type: object
+      properties:
+        avatar:
+          type: string
+          format: uri
+        haveCustomer:
+          type: boolean
+        haveEmployee:
+          type: boolean
+        nickname:
+          type: string
+        id:
+          type: string
+          format: uuid
+      required:
+      - avatar
+      - haveCustomer
+      - haveEmployee
+      - id
+      - nickname
+    AuthResponsesSuccessAuth:
+      type: object
+      properties:
+        user:
+          "$ref": "#/components/schemas/AuthInternalUserInfo"
+        accessToken:
+          "$ref": "#/components/schemas/Token"
+        refreshToken:
+          "$ref": "#/components/schemas/Token"
+      required:
+      - accessToken
+      - refreshToken
+      - user
+    ContactParametersCreateRecovery:
+      type: object
+      properties:
+        value:
+          type: string
+        type:
+          "$ref": "#/components/schemas/ContactType"
+      required:
+      - type
+      - value
+    ContactParametersUpdateContact:
+      properties:
+        phoneTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            "$ref": "#/components/schemas/PhoneTypes"
+      type: object
+    VersionType:
+      type: string
+      enum:
+      - latest
+      - stable
+      - unsupported
+    ContactParametersCreatePrimary:
+      type: object
+      properties:
+        phoneTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            "$ref": "#/components/schemas/PhoneTypes"
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+      required:
+      - type
+      - value
+    CustomerInternalContact:
+      type: object
+      properties:
+        type:
+          "$ref": "#/components/schemas/ContactType"
+        value:
+          type: string
+      required:
+      - type
+      - value
+    CustomerResponsesRegistration:
+      required:
+      - accessToken
+      type: object
+      properties:
+        accessToken:
+          "$ref": "#/components/schemas/Token"
+    AuthParametersAppleToken:
+      properties:
+        token:
+          type: string
+        email:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        emailVerified:
+          type:
+          - boolean
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - token
+    AuthParametersRefreshingToken:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    CustomerParametersRegistration:
+      type: object
+      properties:
+        contact:
+          "$ref": "#/components/schemas/CustomerInternalContact"
+    ContactSharedRecoveryContact:
+      required:
+      - id
+      - type
+      - value
+      properties:
+        id:
+          format: uuid
+          type: string
+        value:
+          type: string
+        type:
+          "$ref": "#/components/schemas/ContactType"
+      type: object
+    AuthParametersGoogleToken:
+      type: object
+      properties:
+        lastName:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+        firstName:
+          type:
+          - string
+          - 'null'
+      required:
+      - token
+    AuthInternalUserInfo:
+      properties:
+        id:
+          format: uuid
+          type: string
+        haveCustomer:
+          type: boolean
+        haveEmployee:
+          type: boolean
+        haveContact:
+          type: boolean
+        nickname:
+          type:
+          - string
+          - 'null'
+        avatar:
+          format: uri
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - haveContact
+      - haveCustomer
+      - haveEmployee
+      - id
+    Token:
+      type: object
+      required:
+      - expiration
+      - value
+      properties:
+        value:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+    UserParametersPatch:
+      properties:
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+        nickname:
+          type:
+          - string
+          - 'null'
+      type: object
+    ContactType:
+      type: string
+      enum:
+      - phone
+      - email
+      - telegram
+      - instagram
+    NoticeResponsesFull:
+      properties:
+        date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        messageKey:
+          type: string
+        titleKey:
+          type: string
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        id:
+          format: uuid
+          type: string
+        isRead:
+          type: boolean
+        category:
+          type: string
+      required:
+      - category
+      - id
+      - isRead
+      - messageKey
+      - parameters
+      - titleKey
+      type: object
+    File:
+      type: object
+      properties:
+        data:
+          format: byte
+          type: string
+        filename:
+          type: string
+      required:
+      - data
+      - filename
+    UploadRouterV1Input:
+      required:
+      - image
+      type: object
+      properties:
+        image:
+          "$ref": "#/components/schemas/File"
+    AuthResponsesRefresh:
+      type: object
+      properties:
+        accessToken:
+          "$ref": "#/components/schemas/Token"
+        refreshToken:
+          "$ref": "#/components/schemas/Token"
+      required:
+      - accessToken
+    DeviceResponsesFull:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          "$ref": "#/components/schemas/VersionType"
+    PhoneTypes:
+      enum:
+      - whatsapp
+      - message
+      - call
+      type: string
+    DeviceParametersSystem:
+      properties:
+        manufacturer:
+          type:
+          - string
+          - 'null'
+        system:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            "$ref": "#/components/schemas/Any"
+        appVersion:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        fcmToken:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+      type: object
+    Any:
+      type: object
+      required:
+      - version
+      properties:
+        version:
+          type: string
+    LegacyErrorResponse:
+      type: object
+      deprecated: true
+      description: 'Legacy runtime error payload from ErrorMiddlewareCustom. Deprecated
+        in favor of ApiError. Planned sunset date: 2026-06-30.'
+      required:
+      - error
+      - reason
+      properties:
+        error:
+          type: boolean
+        reason:
+          type: string
+      examples:
+      - error: true
+        reason: Нет bearer токена
+      x-replaced-by: "#/components/schemas/ApiError"
+      x-migration-note: 'Migrate to ApiError: map reason -> message, keep code from
+        HTTP status, move extra data to details.'
+    ApiError:
+      type: object
+      required:
+      - code
+      - message
+      description: Unified error contract for client SDKs.
+      properties:
+        code:
+          type: string
+          description: Application or HTTP status code as string (e.g. "400", "VALIDATION_ERROR").
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional payload for validation fields or debug metadata.
+      examples:
+      - code: '400'
+        message: Bad request
+        details:
+          field: email
+      - code: '401'
+        message: Нет bearer токена
+    ErrorResponse:
+      oneOf:
+      - "$ref": "#/components/schemas/LegacyErrorResponse"
+      - "$ref": "#/components/schemas/ApiError"
+      description: Transition error envelope. During migration clients should support
+        both legacy and new formats.
+      x-migration-note: LegacyErrorResponse is deprecated. Prefer ApiError for new
+        clients and SDK generation.
+    PutInvitesEmployeeBylinkIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/invites/employee/{linkId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    GetInvitesClientBylinkIdByContactsResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for GET /v1/invites/client/{linkId}/contacts.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostInvitesClientBylinkIdByMergeResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/invites/client/{linkId}/merge.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostClicksBylinkIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/clicks/{linkId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostClicksFindBylinkIdByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/clicks/find/{linkId}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PostClicksFindResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for POST /v1/clicks/find.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PutWorkspaceNotificationsReadedResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/workspace/notifications/readed.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    PutWorkspaceNotificationsReadedByidByResponse:
+      type: object
+      additionalProperties: false
+      description: 'Auto-generated placeholder response schema for PUT /v1/workspace/notifications/readed/{id}.
+        Replace with explicit DTO schema from route `.openAPI(response: .type(...))`.'
+      properties: {}
+    CursorPageMeta:
+      type: object
+      required:
+      - hasMore
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        hasMore:
+          type: boolean
+    GetWorkspaceNotificationsCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/NoticeResponsesFull"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+    GetNotificationsCursorPageResponse:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/NoticeResponsesFull"
+        meta:
+          "$ref": "#/components/schemas/CursorPageMeta"
+  examples:
+    CustomerParametersRegistration:
+      value:
+        contact:
+          type: email
+          value: hello@email.ru
+    UserResponsesUserInfo:
+      value:
+        nickname: some string
+        haveCustomer: true
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        haveEmployee: true
+        avatar: http://swagger.io
+    ArrayContactSharedRecoveryContact:
+      value:
+      - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        type: email
+        value: hello@mail.ru
+    ContactSharedRecoveryContact:
+      value:
+        value: hello@mail.ru
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        type: email
+    AuthResponsesSuccessAuth:
+      value:
+        user:
+          id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+          haveCustomer: true
+          haveEmployee: true
+          avatar: http://swagger.io
+          haveContact: true
+          nickname: some string
+        refreshToken:
+          value: some string
+          expiration: '2025-10-14T16:23:20Z'
+        accessToken:
+          expiration: '2025-10-14T16:23:20Z'
+          value: some string
+    AuthParametersGoogleToken:
+      value:
+        token: some string
+        lastName: some string
+        firstName: some string
+    ContactParametersUpdateContact:
+      value:
+        phoneTypes:
+        - message
+        - call
+    ContactSharedPrimaryContact:
+      value:
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        value: hello@mail.ru
+        type: email
+        phoneTypes:
+        - call
+        - message
+    URL:
+      value: http://swagger.io
+    ContactParametersCreateRecovery:
+      value:
+        type: email
+        value: hello@mail.ru
+    ContactParametersCreatePrimary:
+      value:
+        type: email
+        value: hello@mail.ru
+    AuthParametersAppleToken:
+      value:
+        email: some string
+        emailVerified: true
+        lastName: some string
+        token: some string
+        firstName: some string
+    DeviceResponsesFull:
+      value:
+        version: stable
+        id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+    DeviceParametersSystem:
+      value:
+        country: america
+        fcmToken: 12345token
+        appVersion: 1.0.0
+        manufacturer: russia
+        system:
+          android:
+            version: version
+        model: pixel 9
+    AuthResponsesRefresh:
+      value:
+        accessToken:
+          expiration: '2025-10-14T16:23:20Z'
+          value: some string
+        refreshToken:
+          expiration: '2025-10-14T16:23:20Z'
+          value: some string
+    UserParametersPatch:
+      value:
+        avatar: http://swagger.io
+        nickname: some string
+    AuthParametersRefreshingToken:
+      value:
+        token: some string
+    ArrayContactSharedPrimaryContact:
+      value:
+      - id: F3947DAF-51F0-4310-BDDF-5A1A4131CEDE
+        value: hello@mail.ru
+        phoneTypes:
+        - call
+        - message
+        type: email
+  responses:
+    BadRequest:
+      description: Bad request
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '400'
+                message: Bad request
+            legacyError:
+              value:
+                error: true
+                reason: Bad request
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Unauthorized:
+      description: Unauthorized
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '401'
+                message: Unauthorized
+            legacyError:
+              value:
+                error: true
+                reason: Unauthorized
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Forbidden:
+      description: Forbidden
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '403'
+                message: Forbidden
+            legacyError:
+              value:
+                error: true
+                reason: Forbidden
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    NotFound:
+      description: Not found
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '404'
+                message: Not found
+            legacyError:
+              value:
+                error: true
+                reason: Not found
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    Conflict:
+      description: Conflict
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '409'
+                message: Conflict
+            legacyError:
+              value:
+                error: true
+                reason: Conflict
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    ValidationError:
+      description: Validation failed
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '422'
+                message: Validation failed
+            legacyError:
+              value:
+                error: true
+                reason: Validation failed
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+    InternalError:
+      description: Internal server error
+      headers:
+        Deprecation:
+          schema:
+            type: string
+          description: Present when legacy error payload is returned. RFC 8594 style
+            date or boolean.
+        Sunset:
+          schema:
+            type: string
+          description: 'LegacyErrorResponse planned sunset date: 2026-06-30.'
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          examples:
+            apiError:
+              value:
+                code: '500'
+                message: Internal server error
+            legacyError:
+              value:
+                error: true
+                reason: Internal server error
+      x-migration-note: Error responses are in transition. Support both LegacyErrorResponse
+        and ApiError until 2026-06-30.
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: Unique key for safely retrying non-idempotent operations. Reusing
+        the same key should return the same result.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 255
+      examples:
+        uuid:
+          value: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Opaque cursor for the next slice.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Max items per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+tags:
+- name: Auth
+- name: ClickRouterCollection
+- name: Console Notification
+- name: Contact
+- name: Device
+- name: InviteRouterCollection
+- name: Notification
+- name: Upload
+- name: User
+servers:
+- url: https://api.maetry.com/v1
+- url: https://api-dev-601862402938.us-west2.run.app/v1
+- url: https://api-app-601862402938.us-west2.run.app/v1
